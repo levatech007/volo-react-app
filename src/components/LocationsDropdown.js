@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 
 class LocationsDropdown extends Component {
 
+
   render() {
     return (
-        <div class="btn-group">
-          <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div className="btn-group">
+          <button className="btn btn-light btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Select location
           </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Millbrae @ SFO</a>
-            <a class="dropdown-item" href="#">Lincoln Ave @ LAX</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+          <div className="dropdown-menu">
+            { this.props.locations.map(location => {
+              return(
+                <a key={location._id} className="dropdown-item" href="...">{location.name} @ {location.airport}</a>
+                )
+              })
+            }
           </div>
         </div>
     )
