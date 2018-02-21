@@ -5,19 +5,14 @@ class LocationsDropdown extends Component {
 
   render() {
     return (
-        <div className="btn-group">
-          <button className="btn btn-light btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Select location
-          </button>
-          <div className="dropdown-menu">
-            { this.props.locations.map(location => {
+          <select className="form-control form-control-lg">
+            { this.props.locations.map((location, idx) => {
               return(
-                <a key={location._id} className="dropdown-item" href="...">{location.name} @ {location.airport}</a>
+                <option value={location.name} key={idx}>{location.name} @ {location.airport}</option>
                 )
               })
             }
-          </div>
-        </div>
+          </select>
     )
   }
 }
