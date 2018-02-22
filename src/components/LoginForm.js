@@ -1,6 +1,48 @@
 import React, { Component } from 'react';
 
 class LoginForm extends Component {
+  constructor() {
+      super();
+      this.state = {
+        user: {
+          email: "",
+          password: ""
+        }
+      }
+      this.onEmailInputChange = this.onEmailInputChange.bind(this);
+      this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
+      this.onFormSubmit = this.onFormSubmit.bind(this);
+    }
+
+    onEmailInputChange(e) {
+      this.setState({
+        user: {
+          email: e.target.value,
+          password: this.state.user.password
+        }
+      })
+    }
+
+    onPasswordInputChange(e) {
+      this.setState({
+        user: {
+          email: this.state.user.email,
+          password: e.target.value
+        }
+      })
+    }
+
+    onFormSubmit(e) {
+      e.preventDefault();
+      let user = this.state.user
+      this.props.processLoginForm(user)
+      this.setState({
+        user: {
+          email: "",
+          password: ""
+        }
+      })
+    }
 
   render() {
     return (
@@ -9,14 +51,14 @@ class LoginForm extends Component {
           <h2>Log In</h2>
         </div>
         <div className="row justify-content-md-center">
-          <form className="forms">
+          <form onSubmit={ this.onFormSubmit } className="forms">
             <div className="form-group">
               <input
                 type="email"
                 name="email"
                 className="form-control"
                 placeholder="Enter email"
-                onChange={this.handleChange}
+                onChange={this.onEmailInputChange}
               />
             </div>
             <div className="form-group">
@@ -24,7 +66,7 @@ class LoginForm extends Component {
                 type="password"
                 className="form-control"
                 placeholder="Password"
-                onChange={this.handleChange}
+                onChange={this.onPasswordInputChange}
               />
             </div>
             <div className="row justify-content-md-center">

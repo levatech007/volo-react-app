@@ -8,7 +8,7 @@ class LocationsDropdown extends Component {
           <select className="form-control form-control-lg">
             { this.props.locations.map((location, idx) => {
               return(
-                <option value={location.name} key={idx}>{location.name} @ {location.airport}</option>
+                <option value={location.airport} key={idx}>{location.name} @ {location.airport}</option>
                 )
               })
             }
