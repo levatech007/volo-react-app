@@ -11,7 +11,6 @@ class Locations extends Component {
   }
 
   componentDidMount() {
-
     fetch('http://localhost:8000/locations')
         .then((res) => {
           return res.json();
@@ -20,8 +19,6 @@ class Locations extends Component {
           this.setState({ locations: locations })
     });
   }
-
-
 
   render() {
     return (
