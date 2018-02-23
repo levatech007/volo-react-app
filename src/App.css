@@ -17,3 +17,7 @@
 #accordion {
   color: gray;
 }
+
+ul {
+  list-style: none;
+}

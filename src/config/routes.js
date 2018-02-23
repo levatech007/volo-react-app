@@ -13,7 +13,7 @@ export default (
   <Switch>
       <Route exact path="/" component={ Home }/>
       <Route exact path="/login" component={ Login }/>
-      <Route exact path="/user/:id" component={Profile}/>
+      <Route exact path="/user" component={Profile}/>
       <Route exact path="/locations" component={ Locations }/>
       <Route exact path="/locations/:id" component={ SingleLocation }/>
       <Route exact path="/calendars" component={ Calendars }/>

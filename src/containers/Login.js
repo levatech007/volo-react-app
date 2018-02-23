@@ -25,7 +25,7 @@ class Login extends Component {
       }).then((response) => {
         console.log(response)
       })
-      }
+    }
 
     processSignupForm(user) {
       console.log('name:', user.name);

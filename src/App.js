@@ -4,7 +4,13 @@ import MyRoutes from './config/routes.js'
 import Header from './components/Header.js';
 
 class App extends Component {
-
+  constructor() {
+    super();
+    this.state = {
+      airport: "SFO",
+      locationId: "",
+    }
+  }
 
   render() {
     return (
