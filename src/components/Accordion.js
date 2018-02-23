@@ -6,6 +6,7 @@ class Accordion extends Component {
 
   render() {
     return (
+      <div className="row">
           <div id="accordion">
             {
               this.props.forecast.map((oneDay, idx) => {
@@ -17,6 +18,7 @@ class Accordion extends Component {
               })
             }
         </div>
+      </div>
     )
   }
 }

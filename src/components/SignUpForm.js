@@ -54,11 +54,10 @@ class SignupForm extends Component {
         user: {
           name: "",
           email: "",
-          password: ""
+          password: "",
         }
       })
     }
-
 
   render() {
     return (

@@ -6,6 +6,8 @@ class ReviewsAccordion extends Component {
 
   render() {
     return (
+      <div className="row">
+        <div className="col-md-12">
           <div id="accordion">
             {
               this.props.allReviews.map((oneReview, idx) => {
@@ -16,7 +18,9 @@ class ReviewsAccordion extends Component {
                 )
               })
             }
+          </div>
         </div>
+      </div>
     )
   }
 }

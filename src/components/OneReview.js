@@ -10,8 +10,12 @@ class OneReview extends Component {
               <div className="col-6">
                 <h4>{this.props.oneReview.author}</h4>
               </div>
-              <div className="col-1">
-                { this.props.oneReview.rating}
+              <div className="col-2">
+                {
+                  Array.from({length: this.props.oneReview.rating}, (_, i) => i ).map(num => {
+                  return (<i className="far fa-star"></i>)
+                  })
+                }
               </div>
             </div>
         </div>

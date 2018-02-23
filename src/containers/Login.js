@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import LoginForm from '../components/LoginForm.js'
-import SignupForm from '../components/SignUpForm.js'
+import React, { Component } from "react";
+import Auth from "j-toker";
+import LoginForm from "../components/LoginForm.js"
+import SignupForm from "../components/SignUpForm.js"
 
 class Login extends Component {
   constructor(props) {
@@ -10,42 +11,25 @@ class Login extends Component {
     };
 
     processLoginForm(user) {
-      fetch('http://localhost:8000/auth/sign_in', {
-      method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: user.email,
-          password: user.password
-        })
-      }).then((res) => {
-        return res.json();
-      }).then((response) => {
-        console.log(response)
-      })
+      Auth.emailSignIn({
+        email:    user.email,
+        password: user.password,
+      }).then((resp) => {
+        console.log(resp)
+      }).fail((resp) => {
+        console.log(resp)
+      });
     }
 
     processSignupForm(user) {
-      console.log('name:', user.name);
-      console.log('email:', user.email);
-      console.log('password:', user.password);
-      fetch('http://localhost:8000/auth', {
-      method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          password: user.password
-        })
-      }).then((res) => {
-        return res.json();
-      }).then((response) => {
-        console.log(response)
+      Auth.emailSignUp({
+        email: user.email,
+        password: user.password,
+        name: user.name,
+      }).then((resp) => {
+        console.log(resp)
+      }).fail((resp) => {
+        console.log(resp)
       })
     }
 
