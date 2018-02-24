@@ -15,7 +15,7 @@ class Login extends Component {
         email:    user.email,
         password: user.password,
       }).then((resp) => {
-        console.log(resp)
+        this.props.history.push(`/user/${resp.data.id}`)
       }).fail((resp) => {
         console.log(resp)
       });
@@ -27,7 +27,7 @@ class Login extends Component {
         password: user.password,
         name: user.name,
       }).then((resp) => {
-        console.log(resp)
+
       }).fail((resp) => {
         console.log(resp)
       })
@@ -37,11 +37,11 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row background">
+        <div className="row align-items-center background">
           <LoginForm processLoginForm={ this.processLoginForm }/>
           <SignupForm processSignupForm={ this.processSignupForm } />
-          </div>
         </div>
+      </div>
     );
   }
 }

@@ -39,14 +39,23 @@ class Locations extends Component {
   }
 
   onSubmitReviewForm(review) {
-    console.log(review);
-    $.ajaxSetup({
+    $.post({
+      url: "http://localhost:8000/reviews",
+      data: {
+        author: review.author,
+        content: review.content,
+        rating: review.rating,
+        location_id: review.location,
+      },
       beforeSend(xhr, settings) {
         $.auth.appendAuthHeaders(xhr, settings);
-        
-        // now do whatever you want
+      },
+      success: function(data) {
+        console.log(data);
       }
     });
+
+    this.setState({ showForm: false})
   }
 
   render() {

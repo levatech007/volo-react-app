@@ -12,8 +12,8 @@ class Calendars extends Component {
   }
 
   componentDidMount() {
-    let location = this.state.selectedLocation
-    fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/${location}.json`)
+    let airportCode = this.props.match.params.airportCode
+    fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/${airportCode}.json`)
       .then((res) => {
         return res.json();
       }).then((forecast) => {

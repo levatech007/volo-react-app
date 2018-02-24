@@ -1,7 +1,7 @@
 .gradient {
-    height: 800px;
-    background: #33ccff; /* For browsers that do not support gradients */
-    background: linear-gradient(#000099, #000099, #ff9966); /* Standard syntax (must be last) */
+    height: 1000px;
+    background: #33ccff;
+    background: linear-gradient(#000099, #000099, #ff9966);
 }
 
 .background {
@@ -10,14 +10,26 @@
   padding: 40px;
 }
 
+.nav-bar {
+  color: white;
+}
+
 .button-margin {
   margin-top: 40px;
 }
 
 #accordion {
-  color: gray;
+  color: white;
 }
 
 ul {
   list-style: none;
+}
+
+.card-header .card-body {
+  background-color: #000066;
+}
+
+.border {
+  border-left: 1px solid white;
 }

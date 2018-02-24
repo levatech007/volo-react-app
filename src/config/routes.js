@@ -7,15 +7,13 @@ import Locations from "../containers/Locations.js"
 import Calendars from "../containers/Calendars.js"
 import SingleLocation from "../containers/SingleLocation.js"
 
-
-
 export default (
   <Switch>
       <Route exact path="/" component={ Home }/>
       <Route exact path="/login" component={ Login }/>
-      <Route exact path="/user" component={Profile}/>
+      <Route exact path="/users/:id" component={ Profile }/>
       <Route exact path="/locations" component={ Locations }/>
       <Route exact path="/locations/:id" component={ SingleLocation }/>
-      <Route exact path="/calendars" component={ Calendars }/>
+      <Route exact path="/calendars/:id" component={ Calendars }/>
     </Switch>
 )

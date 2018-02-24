@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import LocationsDropdown from "../components/LocationsDropdown.js"
-
 
 class Locations extends Component {
   constructor() {
     super();
     this.state = {
       locations: [],
+      selectedLocationId: 0,
+      selectedAirportCode: ""
     }
+    this.onClickAboutLocations = this.onClickAboutLocations.bind(this);
+    this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.onSelectCalendarEntry = this.onSelectCalendarEntry.bind(this);
   }
 
   componentDidMount() {
@@ -20,21 +23,46 @@ class Locations extends Component {
     });
   }
 
+  handleLocationChange(e) {
+    this.setState({
+      locations: this.state.locations,
+      selectedLocationId: e.target.value,
+      selectedAirportCode: e.target.airportValue,
+    });
+  }
+
+  onClickAboutLocations() {
+    this.props.history.push(`/locations/${this.state.selectedLocationId}`)
+  }
+
+  onSelectCalendarEntry(e) {
+    e.preventDefault();
+    console.log(this.state.selectedAirportCode)
+    // this.props.history.push(`/calendars/${this.state.selectedAirportCode}`)
+  }
+
   render() {
     return (
       <div className="container">
         <div className="row background">
           <div className="col-12">
-            <LocationsDropdown locations={ this.state.locations }/>
+            <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
+              { this.state.locations.map((location, idx) => {
+                return(
+                  <option value={location.id} airportValue={ location.airport } key={idx}>{location.name} @ {location.airport}</option>
+                  )
+                })
+              }
+            </select>
             <div className="row">
               <div className="col-6">
                 <div className="row justify-content-center">
-                  <button className="btn btn-light button-margin">About Location</button>
+                  <button onClick={ this.onClickAboutLocations } className="btn btn-light button-margin">About Location</button>
                 </div>
               </div>
               <div className="col-6">
                 <div className="row justify-content-center">
-                  <button className="btn btn-light button-margin">Select entry</button>
+                  <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Select entry</button>
                 </div>
               </div>
             </div>
