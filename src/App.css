@@ -1,7 +1,16 @@
 .gradient {
-    height: 1000px;
+    height: 100vh;
     background: #33ccff;
-    background: linear-gradient(#000099, #000099, #ff9966);
+    background: linear-gradient(#ff4e50, #f9d423);
+}
+
+.logo {
+  height: 50vh;
+  margin-top: 10vh;
+}
+
+.skyline {
+  width: 100vw;
 }
 
 .background {
@@ -10,7 +19,7 @@
   padding: 40px;
 }
 
-.nav-bar {
+.nav-item {
   color: white;
 }
 
@@ -20,6 +29,7 @@
 
 #accordion {
   color: white;
+  margin-top: 40px;
 }
 
 ul {
@@ -32,4 +42,8 @@ ul {
 
 .border {
   border-left: 1px solid white;
+}
+
+.review {
+  margin-top: 40px;
 }

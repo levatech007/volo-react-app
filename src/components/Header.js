@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 class Header extends Component {
+
   render() {
     return (
       <div className="row justify-content-center">
         <nav className="navbar navbar-expand-lg navbar-light">
-            <a className="navbar-brand" href="...">VOLO</a>
+            <Link to={ '/' } className="navbar-brand" >VOLO</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
-                <li className="nav-item active">
-                  <a className="nav-link" href="...">Locations</a>
+                <li className="nav-item">
+                  <Link to={ '/locations' } className="nav-link" >Locations</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="...">Sign Up</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="...">Log In</a>
+                  <Link to={ '/login' } className="nav-link" >Sign Up | Log In</Link>
                 </li>
               </ul>
             </div>

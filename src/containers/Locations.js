@@ -44,8 +44,9 @@ class Locations extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row background">
-          <div className="col-12">
+        <div className="row justify-content-center background">
+          <div className="col-6">
+            <h2>Where do you want to go?</h2>
             <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
               { this.state.locations.map((location, idx) => {
                 return(

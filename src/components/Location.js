@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-stars'
+import SimpleMap from "../components/SimpleMap.js"
 
 class Location extends Component {
 
@@ -16,7 +17,11 @@ class Location extends Component {
             </ul>
           </div>
         </div>
-        <div className="col-6">MAP/IMG</div>
+        <div className="col-6">
+          <div style={{width: '100%', height: '200px'}}>
+            <SimpleMap/>
+          </div>
+        </div>
       </div>
     )
   }

@@ -20,7 +20,6 @@ class Locations extends Component {
 
   componentWillMount() {
     let locationId = this.props.match.params.id;
-    console.log(locationId)
     fetch(`http://localhost:8000/locations/${locationId}.json`)
     .then((res) => {
       return res.json();
@@ -66,7 +65,7 @@ class Locations extends Component {
           <div className="col-md-12">
             <LocationInfo location={ this.state.location } reviewCount={ this.state.reviewCount}/>
             { showReviewForm ?
-              <CreateReviewForm onSubmitReviewForm={ this.onSubmitReviewForm } />
+              <CreateReviewForm onSubmitReviewForm={ this.onSubmitReviewForm } locationId={ this.state.location.id } />
               :
               (<div><ReviewsAccordion allReviews={ this.state.reviews }/><button onClick={ this.showReviewForm } className="btn btn-primary">Add review</button></div>)
             }

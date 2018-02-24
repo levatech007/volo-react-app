@@ -62,7 +62,7 @@ class SignupForm extends Component {
   render() {
     return (
       <div className="col-6 border">
-        <div className="row justify-content-md-center">
+        <div className="row justify-content-center">
           <h2>Sign Up!</h2>
         </div>
         <div className="row justify-content-md-center">

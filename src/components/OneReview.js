@@ -12,11 +12,6 @@ class OneReview extends Component {
                 <h4>{this.props.oneReview.author}</h4>
               </div>
               <div className="col-3">
-                {/* {
-                  Array.from({length: this.props.oneReview.rating}, (_, i) => i ).map(num => {
-                  return (<i className="far fa-star"></i>)
-                  })
-                } */}
                 <ReactStars count={5} value={ this.props.oneReview.rating } edit={ false } size={24} color2={'#ffd700'} />
               </div>
             </div>
