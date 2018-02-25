@@ -3,7 +3,6 @@ import OneReview from "../components/OneReview.js"
 
 class ReviewsAccordion extends Component {
 
-
   render() {
     return (
       <div className="row">

@@ -47,3 +47,10 @@ ul {
 .review {
   margin-top: 40px;
 }
+
+.marker {
+  background-image: url("images/locationmarker.svg");
+  background-repeat: no-repeat;
+  height: 60px;
+  width: 60px;
+}
