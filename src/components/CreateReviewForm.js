@@ -42,7 +42,7 @@ class CreateReviewForm extends Component {
         author: this.state.review.author,
         title: e.target.value,
         content: this.state.review.content,
-        rating: this.state.review.rating,
+        rating: e,
         locationId: this.state.review.locationId,
       }
     })
@@ -54,13 +54,14 @@ class CreateReviewForm extends Component {
         author: this.state.review.author,
         title: this.state.review.title,
         content: e.target.value,
-        rating: this.state.review.rating,
+        rating: e,
         location: this.state.review.locationId,
       }
     })
   }
 
   onRatingInputChange(e) {
+    console.log(e)
     this.setState({
       review: {
         author:this.state.review.author,
@@ -74,7 +75,6 @@ class CreateReviewForm extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    // get location id from params
     let review = this.state.review
     console.log(review)
     this.props.onSubmitReviewForm(review);
@@ -125,6 +125,7 @@ class CreateReviewForm extends Component {
             count={ 5 }
             size={ 36 }
             color2={ '#ffd700' }
+            value={ this.state.review.rating }
             onChange={ this.onRatingInputChange }
           />
           <div className="row justify-content-md-center">

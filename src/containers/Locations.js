@@ -39,7 +39,6 @@ class Locations extends Component {
     e.preventDefault();
     console.log(this.state.selectedAirportCode)
     this.props.history.push(`/calendars/${this.state.selectedLocationId}`)
-    // this.props.history.push(`/calendars/${this.state.selectedAirportCode}`)
   }
 
   render() {
@@ -49,7 +48,7 @@ class Locations extends Component {
           <div className="col-6">
             <h2>Where do you want to go planespotting?</h2>
             <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
-              <option value="" defaultValue selected disabled hidden>Choose your location</option>
+              <option defaultValue selected disabled>Choose your location</option>
               { this.state.locations.map((location, idx) => {
                 return(
                   <option value={location.id} key={idx}>{location.name} @ {location.airport}</option>
@@ -58,12 +57,12 @@ class Locations extends Component {
               }
             </select>
             <div className="row">
-              <div className="col-6">
+              <div className="col-sm-6">
                 <div className="row justify-content-center">
                   <button onClick={ this.onClickAboutLocations } className="btn btn-light button-margin">About Location</button>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-sm-6">
                 <div className="row justify-content-center">
                   <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Weather report</button>
                 </div>

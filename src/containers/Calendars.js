@@ -33,9 +33,6 @@ class Calendars extends Component {
   }
 
   createCalendarEntry(entry, notes, weather) {
-    console.log(entry)
-    console.log(notes)
-    console.log(weather)
     $.ajaxSetup({
       beforeSend(xhr, settings) {
         Auth.appendAuthHeaders(xhr, settings);

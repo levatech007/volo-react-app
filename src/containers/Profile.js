@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import Auth from "j-toker"
-// import UserProfile from "../components/UserProfile.js";
-// import UserCalendar from "../components/UserCalendar.js";
+import UserCalendar from "../components/UserCalendar.js";
 
 class Profile extends Component {
   constructor() {
@@ -24,7 +23,7 @@ class Profile extends Component {
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
         console.log(data);
-        // this.setState({ calendar: ___ })
+        this.setState({ calendar: data.calendars })
       },
       error: (data) => {
         console.log(data);
@@ -34,10 +33,13 @@ class Profile extends Component {
 
   render(){
     return(
-      <div>
-        <h2>Welcome { Auth.user.name }</h2>
-        {/* <UserProfile /> */}
-        {/* <UserCalendar /> */}
+      <div className="container">
+        <div className="row background">
+          <h2>Welcome { Auth.user.name }</h2>
+          <div className="col-12">
+          <UserCalendar userCalendar={ this.state.calendar }/>
+        </div>
+        </div>
       </div>
     )
   }
