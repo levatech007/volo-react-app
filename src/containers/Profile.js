@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import Auth from "j-toker"
-import UserCalendar from "../components/UserCalendar.js";
+import UserCalendarEntries from "../components/userCalendarEntries.js";
 
 class Profile extends Component {
   constructor() {
@@ -13,7 +13,6 @@ class Profile extends Component {
 
   componentDidMount() {
     let userId = this.props.match.params.id
-    console.log(userId)
     $.ajaxSetup({
       beforeSend(xhr, settings) {
         Auth.appendAuthHeaders(xhr, settings);
@@ -37,7 +36,7 @@ class Profile extends Component {
         <div className="row background">
           <h2>Welcome { Auth.user.name }</h2>
           <div className="col-12">
-          <UserCalendar userCalendar={ this.state.calendar }/>
+          <UserCalendarEntries userCalendar={ this.state.calendar }/>
         </div>
         </div>
       </div>
