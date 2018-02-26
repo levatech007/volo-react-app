@@ -14,7 +14,7 @@ class Locations extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8000/locations')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations`)
         .then((res) => {
           return res.json();
         }).then((locations) => {

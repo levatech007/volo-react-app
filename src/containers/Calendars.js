@@ -13,7 +13,7 @@ class Calendars extends Component {
   }
   componentDidMount() {
     let locationId = this.props.match.params.id;
-    fetch(`http://localhost:8000/locations/${locationId}.json`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
     .then((res) => {
       return res.json();
     }).then((location) => {

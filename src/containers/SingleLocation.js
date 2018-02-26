@@ -50,7 +50,7 @@ class Locations extends Component {
       }
       });
     $.post({
-      url: "http://localhost:8000/reviews",
+      url: `${process.env.REACT_APP_BACKEND_URL}/reviews`,
       data: {
         author: review.author,
         content: review.content,

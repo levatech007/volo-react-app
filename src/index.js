@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Auth from "j-toker";
 
 $.auth.configure({
-  apiUrl: 'http://localhost:8000'
+  apiUrl: `${process.env.REACT_APP_BACKEND_URL}`
 });
 
 ReactDOM.render(

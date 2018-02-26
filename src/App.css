@@ -37,6 +37,10 @@ ul {
   background-color: #000066;
 }
 
+.border {
+  border-left: 1px solid white;
+}
+
 .review {
   margin-top: 40px;
 }
