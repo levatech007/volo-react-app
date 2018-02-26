@@ -9,7 +9,7 @@ class Locations extends Component {
   constructor() {
     super();
     this.state = {
-      location: {},
+      location: {latitude: null, longitude: null},
       reviews: [],
       reviewCount: "",
       showForm: false,
@@ -59,27 +59,23 @@ class Locations extends Component {
         location_id: this.state.location.id,
       },
       success: (data) => {
-        console.log(data.review);
         this.setState({
           reviews: currentReviews.concat([data.review]),
           showForm: false,
         })
       },
-      error: (data) => {
-        console.log(data);
-      }
     });
     this.setState({ showForm: false})
-    console.log(this.state.reviews)
   }
 
   render() {
     let showReviewForm = this.state.showForm
+    console.log(this.state.location)
     return(
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
-            <LocationInfo location={ this.state.location } reviewCount={ this.state.reviewCount} latitude={ this.state.latitude } longitude={ this.state.longitude }/>
+            { this.state.location.latitude && <LocationInfo location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
             {/* { this.state.errors? <div className="alert alert-danger" role="alert">{this.state.errors}</div> : null } */}
             { showReviewForm ?
               <CreateReviewForm onSubmitReviewForm={ this.onSubmitReviewForm } locationId={ this.state.location.id } />

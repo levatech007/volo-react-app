@@ -56,3 +56,8 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+.marker-lg {
+  height: 250px;
+  margin-bottom: 40px;
+}

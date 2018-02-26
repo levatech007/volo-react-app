@@ -1,17 +1,19 @@
-import React, { Component } from "react"
-import GoogleMapReact from 'google-map-react'
+import React, { Component } from "react";
+import GoogleMapReact from "google-map-react";
 
 class LocationMap extends Component {
   constructor() {
     super();
     this.state = {
-      center: [33.9531115, -118.3968193],
+      center: [],
       zoom: 11,
     }
   }
 
   componentDidMount() {
-    console.log([this.props.long, this.props.lat]);
+    let lat = parseFloat(this.props.lat)
+    let long = parseFloat(this.props.long)
+    this.setState({ center: [lat, long] })
   }
 
   render() {
