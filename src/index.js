@@ -6,7 +6,6 @@ import $ from 'jquery'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import Auth from "j-toker";
 
 $.auth.configure({
   apiUrl: `${process.env.REACT_APP_BACKEND_URL}`

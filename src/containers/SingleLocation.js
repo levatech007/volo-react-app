@@ -43,30 +43,34 @@ class Locations extends Component {
   }
 
   onSubmitReviewForm(review) {
-
+    let currentReviews = this.state.reviews
     $.ajaxSetup({
       beforeSend(xhr, settings) {
         Auth.appendAuthHeaders(xhr, settings);
       }
-      });
+    });
     $.post({
       url: `${process.env.REACT_APP_BACKEND_URL}/reviews`,
       data: {
         author: review.author,
+        title: review.title,
         content: review.content,
         rating: review.rating,
         location_id: this.state.location.id,
       },
-      success: function(data) {
-        console.log(data);
-        // this.setState({ reviews: [data].concat(this.state.reviews) })
+      success: (data) => {
+        console.log(data.review);
+        this.setState({
+          reviews: currentReviews.concat([data.review]),
+          showForm: false,
+        })
       },
-      error: function(data) {
+      error: (data) => {
         console.log(data);
       }
     });
-
     this.setState({ showForm: false})
+    console.log(this.state.reviews)
   }
 
   render() {

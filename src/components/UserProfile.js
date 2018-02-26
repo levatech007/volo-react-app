@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Auth from "j-toker";
 
 class UserProfile extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class UserProfile extends Component {
 
   render() {
     return(
-      <div><h2>Hello User </h2></div>
+      <div><h2>Hello { Auth.user.name } </h2></div>
     )
   }
 }

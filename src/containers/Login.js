@@ -10,6 +10,7 @@ class Login extends Component {
       errors: ""
     }
     this.processLoginForm = this.processLoginForm.bind(this);
+    this.processSignupForm = this.processSignupForm.bind(this);
     };
 
     processLoginForm(user) {
@@ -18,11 +19,11 @@ class Login extends Component {
         password: user.password,
       }).then((resp) => {
         console.log(resp);
-        this.props.history.push(`/user/${resp.data.id}`)
+        this.props.history.push(`/users/${resp.data.id}`)
       }).fail((resp) => {
         console.log(resp)
         this.setState({ errors: resp.data.errors })
-      });
+      })
     }
 
     processSignupForm(user) {
@@ -31,11 +32,10 @@ class Login extends Component {
         password: user.password,
         name: user.name,
       }).then((resp) => {
-        console.log(resp);
-        this.props.history.push(`/user/${resp.data.id}`)
+        console.log(resp.data.id);
+        this.props.history.push(`/users/${resp.data.id}`)
       }).fail((resp) => {
         console.log(resp)
-        this.setState({ errors: resp.data.errors })
       })
     }
 

@@ -7,7 +7,7 @@ class OneCalendarOption extends Component {
   }
 
   onSubmitEntry() {
-    this.props.createCalendarEntry(this.props.oneDay, this.refs.notes.value)
+    this.props.createCalendarEntry(this.props.oneDay, this.refs.notes.value, this.props.oneDay)
     this.refs.notes.value = ""
   }
 
