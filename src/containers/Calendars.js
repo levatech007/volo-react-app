@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Accordion from "../components/Accordion.js"
+import $ from "jquery";
+import Accordion from "../components/Accordion.js";
 
 class Calendars extends Component {
   constructor(){
@@ -10,43 +11,37 @@ class Calendars extends Component {
     }
     this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }
-
   componentDidMount() {
-    let airportCode = this.props.match.params.airportCode
-    fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/${airportCode}.json`)
-      .then((res) => {
-        return res.json();
-      }).then((forecast) => {
-        let fourDayForecast = forecast.forecast.simpleforecast.forecastday;
-        console.log(fourDayForecast)
-        this.setState({ weatherForecast: fourDayForecast })
-      });
-  }
+    let locationId = this.props.match.params.id;
+    fetch(`http://localhost:8000/locations/${locationId}.json`)
+    .then((res) => {
+      return res.json();
+    }).then((location) => {
+      let airportCode = location.airport
+      // fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/${airportCode}.json`)
+      fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/SFO.json`)
+      // fetch("http://api.wunderground.com/api/562b8535169e745a/geolookup/q/SFO.json")
+        .then((res) => {
+          return res.json();
+        }).then((forecast) => {
+          console.log(forecast)
+          let fourDayForecast = forecast.forecast.simpleforecast.forecastday;
+
+          this.setState({ weatherForecast: fourDayForecast })
+        });
+  })
+}
 
   createCalendarEntry(entry, notes) {
     console.log(entry)
     console.log(notes)
-    // fetch("http://localhost:8000/calendars", {
-    //   method: "POST",
-    //   headers: {
-    //     "Accept": "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     // add entry here
-    //   })
-    // }).then((res) => {
-    //   return res.json()
-    // }).then((json) => {
-      //go to profile page?
-    // })
+    //Post to db with user_id
   }
 
   render() {
     return (
       <div className="container">
         <div className="row background">
-          {/* location.js */}
           <Accordion createCalendarEntry={ this.createCalendarEntry } forecast={ this.state.weatherForecast}/>
         </div>
       </div>

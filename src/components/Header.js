@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Auth from 'j-toker';
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.onUserLogOut = this.onUserLogOut.bind(this);
+  }
+
+  onUserLogOut(e) {
+    Auth.signOut()
+    .then((resp) => {
+      console.log(resp)
+
+    })
+    .fail((resp) => {
+      console.log(resp)
+    });
+  }
 
   render() {
     return (
@@ -18,6 +34,9 @@ class Header extends Component {
                 </li>
                 <li className="nav-item">
                   <Link to={ '/login' } className="nav-link" >Sign Up | Log In</Link>
+                </li>
+                <li className="nav-item">
+                  <button onClick={ this.onUserLogOut } className="nav-link">Log Out</button>
                 </li>
               </ul>
             </div>

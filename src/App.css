@@ -1,16 +1,13 @@
 .gradient {
     height: 100vh;
+    width: 100vw;
     background: #33ccff;
-    background: linear-gradient(#ff4e50, #f9d423);
+    background: linear-gradient(#0575e6, #00f260);
 }
 
 .logo {
-  height: 50vh;
-  margin-top: 10vh;
-}
-
-.skyline {
-  width: 100vw;
+  margin-top: 50px;
+  width: 100%;
 }
 
 .background {
@@ -36,12 +33,8 @@ ul {
   list-style: none;
 }
 
-.card-header .card-body {
+.card-body, .card-header {
   background-color: #000066;
-}
-
-.border {
-  border-left: 1px solid white;
 }
 
 .review {
@@ -53,4 +46,9 @@ ul {
   background-repeat: no-repeat;
   height: 60px;
   width: 60px;
+}
+
+.zero-margin {
+  margin: 0;
+  padding: 0;
 }

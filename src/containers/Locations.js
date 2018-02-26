@@ -27,7 +27,7 @@ class Locations extends Component {
     this.setState({
       locations: this.state.locations,
       selectedLocationId: e.target.value,
-      selectedAirportCode: e.target.airportValue,
+      selectedAirportCode: e.target.value,
     });
   }
 
@@ -38,6 +38,7 @@ class Locations extends Component {
   onSelectCalendarEntry(e) {
     e.preventDefault();
     console.log(this.state.selectedAirportCode)
+    this.props.history.push(`/calendars/${this.state.selectedLocationId}`)
     // this.props.history.push(`/calendars/${this.state.selectedAirportCode}`)
   }
 
@@ -46,11 +47,12 @@ class Locations extends Component {
       <div className="container">
         <div className="row justify-content-center background">
           <div className="col-6">
-            <h2>Where do you want to go?</h2>
+            <h2>Where do you want to go planespotting?</h2>
             <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
+              <option value="" selected disabled hidden>Choose your location</option>
               { this.state.locations.map((location, idx) => {
                 return(
-                  <option value={location.id} airportValue={ location.airport } key={idx}>{location.name} @ {location.airport}</option>
+                  <option value={location.id} key={idx}>{location.name} @ {location.airport}</option>
                   )
                 })
               }
@@ -63,7 +65,7 @@ class Locations extends Component {
               </div>
               <div className="col-6">
                 <div className="row justify-content-center">
-                  <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Select entry</button>
+                  <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Weather report</button>
                 </div>
               </div>
             </div>

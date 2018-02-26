@@ -13,6 +13,9 @@ class Locations extends Component {
       reviews: [],
       reviewCount: "",
       showForm: false,
+      latitude: 0,
+      longitude: 0,
+      errors: "",
     }
     this.showReviewForm = this.showReviewForm.bind(this);
     this.onSubmitReviewForm = this.onSubmitReviewForm.bind(this);
@@ -27,7 +30,9 @@ class Locations extends Component {
       this.setState({
         location: location,
         reviewCount: location.reviews.length,
-        reviews: location.reviews
+        reviews: location.reviews,
+        latitude: location.latitude,
+        longitude: location.longitude,
       })
     });
   }
@@ -38,18 +43,25 @@ class Locations extends Component {
   }
 
   onSubmitReviewForm(review) {
+
+    $.ajaxSetup({
+      beforeSend(xhr, settings) {
+        Auth.appendAuthHeaders(xhr, settings);
+      }
+      });
     $.post({
       url: "http://localhost:8000/reviews",
       data: {
         author: review.author,
         content: review.content,
         rating: review.rating,
-        location_id: review.location,
-      },
-      beforeSend(xhr, settings) {
-        $.auth.appendAuthHeaders(xhr, settings);
+        location_id: this.state.location.id,
       },
       success: function(data) {
+        console.log(data);
+        // this.setState({ reviews: [data].concat(this.state.reviews) })
+      },
+      error: function(data) {
         console.log(data);
       }
     });
@@ -63,11 +75,17 @@ class Locations extends Component {
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
-            <LocationInfo location={ this.state.location } reviewCount={ this.state.reviewCount}/>
+            <LocationInfo location={ this.state.location } reviewCount={ this.state.reviewCount} latitude={ this.state.latitude } longitude={ this.state.longitude }/>
+            {/* { this.state.errors? <div className="alert alert-danger" role="alert">{this.state.errors}</div> : null } */}
             { showReviewForm ?
               <CreateReviewForm onSubmitReviewForm={ this.onSubmitReviewForm } locationId={ this.state.location.id } />
               :
-              (<div><ReviewsAccordion allReviews={ this.state.reviews }/><button onClick={ this.showReviewForm } className="btn btn-primary">Add review</button></div>)
+              (<div>
+                <ReviewsAccordion allReviews={ this.state.reviews }/>
+                <div className="row justify-content-center">
+                  <button onClick={ this.showReviewForm } className="btn btn-light button-margin">Add review</button>
+              </div>
+              </div>)
             }
           </div>
         </div>

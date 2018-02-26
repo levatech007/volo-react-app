@@ -7,6 +7,7 @@ class CreateReviewForm extends Component {
     this.state = {
       review: {
         author: "",
+        title: "",
         content: "",
         rating: "",
         locationId: 0,
@@ -15,6 +16,7 @@ class CreateReviewForm extends Component {
     this.onAuthorInputChange = this.onAuthorInputChange.bind(this);
     this.onContentInputChange = this.onContentInputChange.bind(this);
     this.onRatingInputChange = this.onRatingInputChange.bind(this);
+    this.onTitleInputChange = this.onTitleInputChange.bind(this);
     this.onFormSubmit= this.onFormSubmit.bind(this);
   }
 
@@ -26,6 +28,19 @@ class CreateReviewForm extends Component {
     this.setState({
       review: {
         author: e.target.value,
+        title: this.state.review.title,
+        content: this.state.review.content,
+        rating: this.state.review.rating,
+        locationId: this.state.review.locationId,
+      }
+    })
+  }
+
+  onTitleInputChange(e) {
+    this.setState({
+      review: {
+        author: this.state.review.author,
+        title: e.target.value,
         content: this.state.review.content,
         rating: this.state.review.rating,
         locationId: this.state.review.locationId,
@@ -36,7 +51,8 @@ class CreateReviewForm extends Component {
   onContentInputChange(e) {
     this.setState({
       review: {
-        author:this.state.review.author,
+        author: this.state.review.author,
+        title: this.state.review.title,
         content: e.target.value,
         rating: this.state.review.rating,
         location: this.state.review.locationId,
@@ -48,6 +64,7 @@ class CreateReviewForm extends Component {
     this.setState({
       review: {
         author:this.state.review.author,
+        title: this.state.review.title,
         content: this.state.review.content,
         rating:  e,
         location: this.state.review.locationId,
@@ -64,6 +81,7 @@ class CreateReviewForm extends Component {
     this.setState({
       review: {
         author: "",
+        title: "",
         content: "",
         rating: 0,
         locationId: 0,
@@ -82,6 +100,15 @@ class CreateReviewForm extends Component {
               className="form-control"
               placeholder="Enter your name"
               onChange={this.onAuthorInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="title"
+              className="form-control"
+              placeholder="Enter a title for your review"
+              onChange={this.onTitleInputChange}
             />
           </div>
           <div className="form-group">

@@ -9,7 +9,7 @@ class OneReview extends Component {
         <div className="card-header" id={"heading" + (this.props.number)}>
           <div className="row justify-content-between" data-toggle="collapse" data-target={"#collapse" + (this.props.number)} aria-expanded="true" aria-controls="collapseOne">
               <div className="col-6">
-                <h4>{this.props.oneReview.author}</h4>
+                <h4>{ this.props.oneReview.title } by {this.props.oneReview.author}</h4>
               </div>
               <div className="col-3">
                 <ReactStars count={5} value={ this.props.oneReview.rating } edit={ false } size={24} color2={'#ffd700'} />

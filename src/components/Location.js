@@ -10,15 +10,16 @@ class Location extends Component {
         <div className="col-6">
           <div className="row">
             <ul>
-              <li><h3>{ this.props.location.name }</h3></li>
-              <li><h4>{ this.props.location.airport }</h4></li>
-              <li><h4><ReactStars count={5} value={ this.props.location.rating } edit={ false } size={24} color2={'#ffd700'} /></h4></li>
+              <li><h4>{ this.props.location.name }</h4></li>
+              <li><p>{ this.props.location.airport_name } ({ this.props.location.airport })</p></li>
+              <li><p>{ this.props.location.description }</p></li>
+              <li><ReactStars count={5} value={ this.props.location.rating } edit={ false } size={24} color2={'#ffd700'} /></li>
               <li><p>REVIEWS ({ this.props.reviewCount})</p></li>
             </ul>
           </div>
         </div>
         <div className="col-6">
-          <LocationMap/>
+          <LocationMap lat={ this.props.location.latitude } long={this.props.location.longitude}/>
         </div>
       </div>
     )
