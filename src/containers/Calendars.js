@@ -60,9 +60,7 @@ class Calendars extends Component {
         icon_url: weather.icon_url,
       },
       success: (response) => {
-        console.log(response)
           this.props.history.push(`/users/${this.state.userId}`)
-          // this.props.history.push(`/calendars/${this.state.selectedLocationId}`)
       },
     })
   }
