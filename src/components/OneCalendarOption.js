@@ -12,6 +12,7 @@ class OneCalendarOption extends Component {
   }
 
   render() {
+    console.log(this.props.oneDay)
     return(
       <div>
         <div className="card-header" id={"heading" + (this.props.number)}>
@@ -26,10 +27,21 @@ class OneCalendarOption extends Component {
         </div>
         <div id={"collapse" + (this.props.number)} className="collapse" aria-labelledby={"heading" + (this.props.number)} data-parent="#accordion">
           <div className="card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life sustainable VHS.
-            <input type="textarea" ref="notes"/>
+            <div className="row">
+              <div className="col-sm-6">
+                <p>Weather conditions: </p>
+                <ul>
+                  <li>High: { this.props.oneDay.high.fahrenheit }F/ Low: { this.props.oneDay.low.fahrenheit }F</li>
+                  <li>Winds: { this.props.oneDay.avewind.mph }mph</li>
+                </ul>
+              </div>
+              <div className="col-sm-6">
+                {/* <input type="textarea" ref="notes"/> */}
+                <textarea class="form-control" ref="notes"rows="3"></textarea>
+                <button onClick={ this.onSubmitEntry } className="btn btn-primary"> + </button>
+              </div>
+            </div>
           </div>
-          <button onClick={ this.onSubmitEntry } className="btn btn-primary"> + </button>
         </div>
       </div>
     )

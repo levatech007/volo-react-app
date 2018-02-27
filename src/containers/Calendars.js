@@ -10,9 +10,20 @@ class Calendars extends Component {
     this.state = {
       location: {},
       weatherForecast: [],
+      userId: 0,
     }
     this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }
+
+  componentWillMount() {
+    Auth.validateToken()
+    .then((user) => {
+      this.setState({
+        userId: user.id,
+      })
+    })
+  }
+
   componentDidMount() {
     let locationId = this.props.match.params.id;
     fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
@@ -20,6 +31,7 @@ class Calendars extends Component {
       return res.json();
     }).then((location) => {
       this.setState({ location: location })
+      console.log(location)
       fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/SFO.json`)
       .then((res) => {
         return res.json();
@@ -49,6 +61,8 @@ class Calendars extends Component {
       },
       success: (response) => {
         console.log(response)
+          this.props.history.push(`/users/${this.state.userId}`)
+          // this.props.history.push(`/calendars/${this.state.selectedLocationId}`)
       },
     })
   }
@@ -57,7 +71,7 @@ class Calendars extends Component {
     return (
       <div className="container">
         <div className="row background">
-          <Location location={ this.state.location } />
+          { this.state.location.latitude && <Location location={ this.state.location } /> }
           <Accordion createCalendarEntry={ this.createCalendarEntry } forecast={ this.state.weatherForecast}/>
         </div>
       </div>

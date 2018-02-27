@@ -47,33 +47,28 @@ class Locations extends Component {
       <div className="container">
         <div className="row justify-content-center background">
           <div className="row justify-content-center">
-            <div className="col-6">
-              <img className="marker-lg" src={ LocationMarkerLg }/>
+            <img className="marker-lg" src={ LocationMarkerLg }/>
+            <div className="col-12">
               <h2>Where do you want to go planespotting?</h2>
               <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
                 <option defaultValue selected disabled>Choose your location</option>
-                { this.state.locations.map((location, idx) => {
-                  return(
-                    <option value={location.id} key={idx}>{location.name} @ {location.airport}</option>
-                    )
-                  })
-                }
-              </select>
+                  { this.state.locations.map((location, idx) => {
+                    return(
+                      <option value={location.id} key={idx}>{location.name} @ {location.airport}</option>
+                      )
+                    })
+                  }
+                </select>
+              </div>
               <div className="row">
                 <div className="col-sm-6">
-                  <div className="row justify-content-center">
-                    <button onClick={ this.onClickAboutLocations } className="btn btn-light button-margin">About Location</button>
-                  </div>
+                  <button onClick={ this.onClickAboutLocations } className="btn btn-light button-margin">About Location</button>
                 </div>
                 <div className="col-sm-6">
-                  <div className="row justify-content-center">
-                    <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Weather report</button>
-                  </div>
+                  <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Weather report</button>
                 </div>
               </div>
             </div>
-          </div>
-
         </div>
       </div>
     );

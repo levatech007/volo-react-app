@@ -23,7 +23,7 @@ class Locations extends Component {
 
   componentWillMount() {
     let locationId = this.props.match.params.id;
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/${locationId}.json`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
     .then((res) => {
       return res.json();
     }).then((location) => {
@@ -51,7 +51,7 @@ class Locations extends Component {
       }
     });
     $.post({
-      url: `${process.env.REACT_APP_BACKEND_URL}/reviews.json`,
+      url: `${process.env.REACT_APP_BACKEND_URL}/reviews`,
       data: {
         author: review.author,
         title: review.title,
