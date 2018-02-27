@@ -49,7 +49,7 @@ class Locations extends Component {
           <div className="row justify-content-center">
             <img className="marker-lg" src={ LocationMarkerLg }/>
             <div className="col-12">
-              <h2>Where do you want to go planespotting?</h2>
+              <h2>Where do you want to go plane spotting?</h2>
               <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
                 <option defaultValue selected disabled>Choose your location</option>
                   { this.state.locations.map((location, idx) => {
