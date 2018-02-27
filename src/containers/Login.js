@@ -18,10 +18,8 @@ class Login extends Component {
         email:    user.email,
         password: user.password,
       }).then((resp) => {
-        console.log(resp);
         this.props.history.push(`/users/${resp.data.id}`)
       }).fail((resp) => {
-        console.log(resp)
         this.setState({ errors: resp.data.errors })
       })
     }
@@ -32,10 +30,8 @@ class Login extends Component {
         password: user.password,
         name: user.name,
       }).then((resp) => {
-        console.log(resp.data.id);
         this.props.history.push(`/users/${resp.data.id}`)
       }).fail((resp) => {
-        console.log(resp)
       })
     }
 

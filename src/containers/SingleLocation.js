@@ -23,10 +23,11 @@ class Locations extends Component {
 
   componentWillMount() {
     let locationId = this.props.match.params.id;
-    fetch(`http://localhost:8000/locations/${locationId}.json`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/${locationId}.json`)
     .then((res) => {
       return res.json();
     }).then((location) => {
+      console.log(location)
       this.setState({
         location: location,
         reviewCount: location.reviews.length,
@@ -50,7 +51,7 @@ class Locations extends Component {
       }
     });
     $.post({
-      url: `${process.env.REACT_APP_BACKEND_URL}/reviews`,
+      url: `${process.env.REACT_APP_BACKEND_URL}/reviews.json`,
       data: {
         author: review.author,
         title: review.title,
@@ -70,13 +71,11 @@ class Locations extends Component {
 
   render() {
     let showReviewForm = this.state.showForm
-    console.log(this.state.location)
     return(
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
             { this.state.location.latitude && <LocationInfo location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
-            {/* { this.state.errors? <div className="alert alert-danger" role="alert">{this.state.errors}</div> : null } */}
             { showReviewForm ?
               <CreateReviewForm onSubmitReviewForm={ this.onSubmitReviewForm } locationId={ this.state.location.id } />
               :

@@ -11,6 +11,7 @@ class LocationMap extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     let lat = parseFloat(this.props.lat)
     let long = parseFloat(this.props.long)
     this.setState({ center: [lat, long] })

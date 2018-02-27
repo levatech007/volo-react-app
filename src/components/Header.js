@@ -6,7 +6,9 @@ class Header extends Component {
   constructor() {
     super();
     this.state = {
-      userSignedIn: false
+      userSignedIn: false,
+      userName: "",
+      userId: 0,
     }
     this.onUserLogOut = this.onUserLogOut.bind(this);
   }
@@ -15,7 +17,9 @@ class Header extends Component {
     Auth.validateToken()
     .then((user) => {
       this.setState({
-        userSignedIn: user.signedIn
+        userSignedIn: user.signedIn,
+        userName: user.name,
+        userId: user.id,
       })
     })
   }
@@ -23,7 +27,11 @@ class Header extends Component {
   onUserLogOut(e) {
     Auth.signOut()
     .then((resp) => {
-      // redirect to home page
+      this.setState({
+        userSignedIn: false,
+        userName: "",
+        userId: 0,
+      })
     })
     .fail((resp) => {
       console.log(resp)
@@ -45,10 +53,10 @@ class Header extends Component {
                   <Link to={ '/locations' } className="nav-link" >Locations</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={ '/login' } className="nav-link" >Profile</Link>
+                  <Link to={ `/users/${ this.state.userId }` } className="nav-link" >Profile</Link>
                 </li>
                 <li className="nav-item">
-                  <button onClick={ this.onUserLogOut } className="nav-link">Log Out</button>
+                  <button onClick={ this.onUserLogOut } className="nav-link btn btn-outline-dark">Log Out, { this.state.userName }</button>
                 </li>
               </ul>) : (
                 <ul className="navbar-nav">

@@ -10,7 +10,6 @@ class Calendars extends Component {
     this.state = {
       location: {},
       weatherForecast: [],
-      selectedLocation: "SFO"
     }
     this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }

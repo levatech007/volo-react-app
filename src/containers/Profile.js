@@ -21,11 +21,9 @@ class Profile extends Component {
     $.get({
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
-        console.log(data);
         this.setState({ calendar: data.calendars })
       },
       error: (data) => {
-        console.log(data);
       }
     });
   }
@@ -34,7 +32,7 @@ class Profile extends Component {
     return(
       <div className="container">
         <div className="row background">
-          <h2>Welcome { Auth.user.name }</h2>
+          <h2>Welcome, { Auth.user.name }!</h2>
           <div className="col-12">
           <UserCalendarEntries userCalendar={ this.state.calendar }/>
         </div>
