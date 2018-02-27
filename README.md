@@ -44,7 +44,7 @@ To install dependencies on the back end, run:
 
 ## Wireframes
 
-![Wireframes](/src/images/wireframes.png)
+![Wireframes](/src/images/wireframes.JPG)
 
 ## ERD
 
