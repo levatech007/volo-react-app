@@ -32,6 +32,7 @@ class Login extends Component {
       }).then((resp) => {
         this.props.history.push(`/users/${resp.data.id}`)
       }).fail((resp) => {
+        this.setState({ errors: resp.data.errors })
       })
     }
 
