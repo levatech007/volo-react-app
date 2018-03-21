@@ -38,14 +38,20 @@ To install dependencies on the back end, run:
 
 ## User Stories:
 - Users can create an account and login.
+
 ![Wireframes](/src/images/login-page.png)
+
 - Users can select a plane spotting location and see information about that locations, including a map.
 - Users can read other users reviews of the location as well as post their own review.
+
 ![Wireframes](/src/images/locations-menu-page.png)
+
 ![Wireframes](/src/images/location-page.png)
+
 ![Wireframes](/src/images/location-review-page.png)
 - Users can select a location and see weather forecast for the next 4 days.
 - Users can add a day to their calendar with weather information as well as add notes prior to saving their selection.
+
 ![Wireframes](/src/images/calendar-page.png)
 
 
