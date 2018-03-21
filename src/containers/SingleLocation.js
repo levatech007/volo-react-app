@@ -2,8 +2,15 @@ import React, { Component } from "react";
 import Auth from "j-toker";
 import $ from "jquery";
 import LocationInfo from "../components/Location.js";
-import ReviewsAccordion from "../components/ReviewsAccordion.js";
 import CreateReviewForm from "../components/CreateReviewForm.js";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemTitle,
+    AccordionItemBody,
+} from "react-accessible-accordion";
+import "react-accessible-accordion/dist/minimal-example.css";
+import ReactStars from "react-stars";
 
 class Locations extends Component {
   constructor() {
@@ -80,7 +87,20 @@ class Locations extends Component {
               <CreateReviewForm onSubmitReviewForm={ this.onSubmitReviewForm } locationId={ this.state.location.id } />
               :
               (<div>
-                <ReviewsAccordion allReviews={ this.state.reviews }/>
+                <Accordion>
+                  {this.state.reviews.map(oneReview => {
+                      return(<AccordionItem>
+                              <AccordionItemTitle>
+                                <h4>{ oneReview.title }</h4><p>by {oneReview.author}</p>
+                                <ReactStars count={5} value={ oneReview.rating } edit={ false } size={24} color2={"#ffd700"} />
+                              </AccordionItemTitle>
+                              <AccordionItemBody>
+                                <p>{ oneReview.content }</p>
+                              </AccordionItemBody>
+                            </AccordionItem>)
+                        })
+                      }
+                    </Accordion>
                 <div className="row justify-content-center">
                   <button onClick={ this.showReviewForm } className="btn btn-light button-margin">Add review</button>
               </div>

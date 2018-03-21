@@ -54,7 +54,6 @@ To install dependencies on the back end, run:
 
 ![Wireframes](/src/images/calendar-page.png)
 
-
 ## Wireframes
 
 ![Wireframes](/src/images/wireframes.JPG)
