@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import $ from "jquery";
 import Auth from "j-toker"
 import UserCalendarEntries from "../components/userCalendarEntries.js";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemTitle,
+    AccordionItemBody,
+} from "react-accessible-accordion";
+import "react-accessible-accordion/dist/minimal-example.css";
 
 class Profile extends Component {
   constructor() {
@@ -35,6 +42,8 @@ class Profile extends Component {
           <h2>Welcome, { Auth.user.name }!</h2>
           <div className="col-12">
           <UserCalendarEntries userCalendar={ this.state.calendar }/>
+          
+
         </div>
         </div>
       </div>
