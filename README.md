@@ -1,11 +1,8 @@
 # VOLO - the app for plane spotters
 
 Volo (Italian for flight) is an app for plane spotters. You can find information about plane spotting locations around the world with user reviews of each location. The app also lets you create an account, check weather forecast for chosen location as well as add a select day to your calendar.
-<<<<<<< HEAD
 
 ![Wireframes](/src/images/volo-homepage.png)
-=======
->>>>>>> d819a09607b1fd8412ef32315dbc87079c5d215c
 
 ### Technologies:
 The following technologies made it possible:
@@ -22,10 +19,6 @@ Back end:
 - Ruby on Rails
 - PostgresQL
 - Devise Token Auth
-<<<<<<< HEAD
-=======
-
->>>>>>> d819a09607b1fd8412ef32315dbc87079c5d215c
 
 ### Links:
 
@@ -43,7 +36,6 @@ To install dependencies on the front end, run:
 To install dependencies on the back end, run:
 `bundle install`
 
-<<<<<<< HEAD
 ## User Stories:
 - Users can create an account and login.
 ![Wireframes](/src/images/login-page.png)
@@ -52,12 +44,6 @@ To install dependencies on the back end, run:
 ![Wireframes](/src/images/locations-menu-page.png)
 ![Wireframes](/src/images/location-page.png)
 ![Wireframes](/src/images/location-review-page.png)
-=======
-## User Stories: 
-- Users can create an account and login.
-- Users can select a plane spotting location and see information about that locations, including a map. 
-- Users can read other users reviews of the location as well as post their own review. 
->>>>>>> d819a09607b1fd8412ef32315dbc87079c5d215c
 - Users can select a location and see weather forecast for the next 4 days.
 - Users can add a day to their calendar with weather information as well as add notes prior to saving their selection.
 ![Wireframes](/src/images/calendar-page.png)
@@ -66,27 +52,16 @@ To install dependencies on the back end, run:
 ## Wireframes
 
 ![Wireframes](/src/images/wireframes.JPG)
-<<<<<<< HEAD
-
-=======
->>>>>>> d819a09607b1fd8412ef32315dbc87079c5d215c
 
 ## ERD
 ![Wireframes](/src/images/ERD.png)
 
-<<<<<<< HEAD
+![ERD](/src/images/ERD.png)
+
 ## Unsolved Problems:
 - Header does not update at login, refresh needed to display Profile and Log out button.
 - If no selection is made at locations menu, submitting will generate error as page is redirected to ‘/locations/0’ that does not exist.
 - Routes don’t have any authorization.
-=======
-![ERD](/src/images/ERD.png)
-
-## Unsolved Problems: 
-- Header does not update at login, refresh needed to display Profile and Log out button.
-- If no selection is made at locations menu, submitting will generate error as page is redirected to ‘/locations/0’ that does not exist. 
-- Routes don’t have any authorization. 
->>>>>>> d819a09607b1fd8412ef32315dbc87079c5d215c
 - Certain features should only be visible to registered users.
 - Rating for a location is static, needs to be average of user ratings.
 - Weather API does not seems to want to work on Heroku.

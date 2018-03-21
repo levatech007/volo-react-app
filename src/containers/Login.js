@@ -25,6 +25,7 @@ class Login extends Component {
     }
 
     processSignupForm(user) {
+      console.log(this.props.history)
       Auth.emailSignUp({
         email: user.email,
         password: user.password,
