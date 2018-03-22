@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import Auth from "j-toker"
-import UserCalendarEntries from "../components/userCalendarEntries.js";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemTitle,
+    AccordionItemBody,
+} from "react-accessible-accordion";
+import "react-accessible-accordion/dist/minimal-example.css";
 
 class Profile extends Component {
   constructor() {
@@ -32,10 +38,30 @@ class Profile extends Component {
     return(
       <div className="container">
         <div className="row background">
-          <h2>Welcome, { Auth.user.name }!</h2>
+          {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
           <div className="col-12">
-          <UserCalendarEntries userCalendar={ this.state.calendar }/>
-        </div>
+            { this.state.calendar.notes &&
+            <Accordion>
+              {this.state.calendar.map(oneEntry => {
+                  return(<AccordionItem>
+                          <AccordionItemTitle>
+                            <h4>{ oneEntry.date.weekday }, { oneEntry.date.day } { oneEntry.date.monthname }</h4>
+                            <img src={ oneEntry.icon_url } alt = "" />
+                          </AccordionItemTitle>
+                          <AccordionItemBody>
+                            <p>Weather conditions: </p>
+                            <ul>
+                              <li>High: { oneEntry.high.fahrenheit }F/ Low: { oneEntry.low.fahrenheit }F</li>
+                              <li>Winds: { oneEntry.avewind.mph }mph</li>
+                            </ul>
+                            <p>{ oneEntry.notes }</p>
+                          </AccordionItemBody>
+                        </AccordionItem>)
+                  })
+                }
+              </Accordion>
+            }
+            </div>
         </div>
       </div>
     )

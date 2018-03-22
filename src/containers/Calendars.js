@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import $ from "jquery";
 import Auth from "j-toker";
-import Accordion from "../components/Accordion.js";
 import Location from "../components/Location.js";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemTitle,
+    AccordionItemBody,
+} from "react-accessible-accordion";
+import "react-accessible-accordion/dist/minimal-example.css";
 
 class Calendars extends Component {
   constructor(){
@@ -70,7 +76,26 @@ class Calendars extends Component {
       <div className="container">
         <div className="row background">
           { this.state.location.latitude && <Location location={ this.state.location } /> }
-          <Accordion createCalendarEntry={ this.createCalendarEntry } forecast={ this.state.weatherForecast}/>
+          <Accordion>
+            {this.state.weatherForecast.map(oneDay => {
+                return(<AccordionItem>
+                        <AccordionItemTitle>
+                          <h4>{ oneDay.date.weekday }, { oneDay.date.day } { oneDay.date.monthname }</h4>
+                          <img src={ oneDay.icon_url} alt = "" />
+                        </AccordionItemTitle>
+                        <AccordionItemBody>
+                          <p>Weather conditions: </p>
+                          <ul>
+                            <li>High: { oneDay.high.fahrenheit }F/ Low: { oneDay.low.fahrenheit }F</li>
+                            <li>Winds: { oneDay.avewind.mph }mph</li>
+                          </ul>
+                          <textarea class="form-control" ref="notes"rows="3"></textarea>
+                          <button onClick={ this.onSubmitEntry } className="btn btn-primary"> + </button>
+                        </AccordionItemBody>
+                      </AccordionItem>)
+                  })
+                }
+              </Accordion>
         </div>
       </div>
     )

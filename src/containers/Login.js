@@ -20,22 +20,32 @@ class Login extends Component {
       }).then((resp) => {
         this.props.history.push(`/users/${resp.data.id}`)
       }).fail((resp) => {
+        console.log(resp.data.errors)
         this.setState({ errors: resp.data.errors })
       })
     }
 
     processSignupForm(user) {
-      console.log(this.props.history)
       Auth.emailSignUp({
         email: user.email,
         password: user.password,
         name: user.name,
-      }).then((resp) => {
-        this.props.history.push(`/users/${resp.data.id}`)
-      }).fail((resp) => {
-        this.setState({ errors: resp.data.errors })
       })
-    }
+        .then((resp) => {
+          Auth.emailSignIn({
+            email:    user.email,
+            password: user.password,
+          })
+          .then((resp) => {
+            this.props.history.push(`/users/${resp.data.id}`)
+          }).fail((resp) => {
+            this.setState({ errors: resp.data.errors.full_messages })
+          })
+        }).fail((resp) => {
+          this.setState({ errors: resp.data.errors.full_messages })
+        })
+      }
+
 
   render() {
     return (

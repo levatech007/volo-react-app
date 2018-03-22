@@ -49,7 +49,6 @@ class SignupForm extends Component {
     onFormSubmit(e) {
       e.preventDefault();
       let user = this.state.user
-      this.props.processSignupForm(user)
       this.setState({
         user: {
           name: "",
@@ -57,6 +56,7 @@ class SignupForm extends Component {
           password: "",
         }
       })
+      this.props.processSignupForm(user)
     }
 
   render() {
