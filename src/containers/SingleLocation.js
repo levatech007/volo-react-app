@@ -3,13 +3,8 @@ import Auth from "j-toker";
 import $ from "jquery";
 import LocationInfo from "../components/Location.js";
 import CreateReviewForm from "../components/CreateReviewForm.js";
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
-} from "react-accessible-accordion";
-import "react-accessible-accordion/dist/minimal-example.css";
+import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody } from "react-accessible-accordion";
+import "react-accessible-accordion/dist/fancy-example.css";
 import ReactStars from "react-stars";
 
 class Locations extends Component {
@@ -91,8 +86,14 @@ class Locations extends Component {
                   {this.state.reviews.map(oneReview => {
                       return(<AccordionItem>
                               <AccordionItemTitle>
-                                <h4>{ oneReview.title }</h4><p>by {oneReview.author}</p>
-                                <ReactStars count={5} value={ oneReview.rating } edit={ false } size={24} color2={"#ffd700"} />
+                                <div className="row">
+                                  <div className="col-8">
+                                    <h4>{ oneReview.title }</h4><p>by {oneReview.author}</p>
+                                  </div>
+                                  <div className="col-4">
+                                    <ReactStars count={5} value={ oneReview.rating } edit={ false } size={24} color2={"#ffd700"} />
+                                  </div>
+                                </div>
                               </AccordionItemTitle>
                               <AccordionItemBody>
                                 <p>{ oneReview.content }</p>

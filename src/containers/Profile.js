@@ -38,7 +38,7 @@ class Profile extends Component {
     return(
       <div className="container">
         <div className="row background">
-          <h2>Welcome, { Auth.user.name }!</h2>
+          {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
           <div className="col-12">
             { this.state.calendar.notes &&
             <Accordion>
