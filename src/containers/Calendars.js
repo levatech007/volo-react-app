@@ -3,12 +3,7 @@ import $ from "jquery";
 import Auth from "j-toker";
 // import Accordion from "../components/Accordion.js";
 import Location from "../components/Location.js";
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
-} from "react-accessible-accordion";
+import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/minimal-example.css";
 
 class Calendars extends Component {

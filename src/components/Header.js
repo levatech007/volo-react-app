@@ -5,33 +5,13 @@ import Auth from "j-toker";
 class Header extends Component {
   constructor() {
     super();
-    this.state = {
-      userSignedIn: false,
-      userName: "",
-      userId: 0,
-    }
     this.onUserLogOut = this.onUserLogOut.bind(this);
-  }
-
-  componentDidMount() {
-    Auth.validateToken()
-    .then((user) => {
-      this.setState({
-        userSignedIn: user.signedIn,
-        userName: user.name,
-        userId: user.id,
-      })
-    })
   }
 
   onUserLogOut(e) {
     Auth.signOut()
     .then((resp) => {
-      this.setState({
-        userSignedIn: false,
-        userName: "",
-        userId: 0,
-      })
+      this.props.history.push("/");
     })
     .fail((resp) => {
       console.log(resp)
@@ -39,6 +19,7 @@ class Header extends Component {
   }
 
   render() {
+    console.log(Auth.user)
     return (
       <div className="row justify-content-center">
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -47,16 +28,16 @@ class Header extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            { this.state.userSignedIn ?
+            { Auth.user.id ?
               (<ul className="navbar-nav">
                 <li className="nav-item">
                   <Link to={ '/locations' } className="nav-link" >Locations</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={ `/users/${ this.state.userId }` } className="nav-link" >Profile</Link>
+                  <Link to={ `/users/${ Auth.user.id }` } className="nav-link" >Profile</Link>
                 </li>
                 <li className="nav-item">
-                  <button onClick={ this.onUserLogOut } className="nav-link btn btn-outline-dark">Log Out, { this.state.userName }</button>
+                  <button onClick={ this.onUserLogOut } className="nav-link btn btn-outline-dark">Log Out, { Auth.user.name }</button>
                 </li>
               </ul>) : (
                 <ul className="navbar-nav">
@@ -71,7 +52,7 @@ class Header extends Component {
                   </li>
                 </ul>
               )
-          }
+            }
           </div>
         </nav>
       </div>
