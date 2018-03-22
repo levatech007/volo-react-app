@@ -47,7 +47,7 @@ class Locations extends Component {
       <div className="container">
         <div className="row justify-content-center background">
           <div className="row justify-content-center">
-            <img className="marker-lg" src={ LocationMarkerLg }/>
+            <img className="marker-lg" src={ LocationMarkerLg } alt = ""/>
             <div className="col-12">
               <h2>Where do you want to go plane spotting?</h2>
               <select onChange={ this.handleLocationChange } className="form-control form-control-lg">

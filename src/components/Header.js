@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Auth from "j-toker";
 
@@ -11,10 +12,10 @@ class Header extends Component {
   onUserLogOut(e) {
     Auth.signOut()
     .then((resp) => {
-      this.props.history.push("/");
+      this.props.history.push("/login")
     })
     .fail((resp) => {
-      console.log(resp)
+      console.log(resp) // give error msg
     });
   }
 
@@ -60,4 +61,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

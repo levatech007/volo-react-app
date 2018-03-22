@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import $ from "jquery";
 import Auth from "j-toker";
-// import Accordion from "../components/Accordion.js";
 import Location from "../components/Location.js";
-import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody } from "react-accessible-accordion";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemTitle,
+    AccordionItemBody,
+} from "react-accessible-accordion";
 import "react-accessible-accordion/dist/minimal-example.css";
 
 class Calendars extends Component {
@@ -77,7 +81,7 @@ class Calendars extends Component {
                 return(<AccordionItem>
                         <AccordionItemTitle>
                           <h4>{ oneDay.date.weekday }, { oneDay.date.day } { oneDay.date.monthname }</h4>
-                          <img src={ oneDay.icon_url } />
+                          <img src={ oneDay.icon_url} alt = "" />
                         </AccordionItemTitle>
                         <AccordionItemBody>
                           <p>Weather conditions: </p>

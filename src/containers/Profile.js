@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import Auth from "j-toker"
-import UserCalendarEntries from "../components/userCalendarEntries.js";
 import {
     Accordion,
     AccordionItem,
@@ -47,7 +46,7 @@ class Profile extends Component {
                   return(<AccordionItem>
                           <AccordionItemTitle>
                             <h4>{ oneEntry.date.weekday }, { oneEntry.date.day } { oneEntry.date.monthname }</h4>
-                            <img src={ oneEntry.icon_url } />
+                            <img src={ oneEntry.icon_url } alt = "" />
                           </AccordionItemTitle>
                           <AccordionItemBody>
                             <p>Weather conditions: </p>
