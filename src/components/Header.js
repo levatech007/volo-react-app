@@ -20,7 +20,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log(Auth.user)
     return (
       <div className="row justify-content-center">
         <nav className="navbar navbar-expand-lg navbar-light">

@@ -19,7 +19,6 @@ class Locations extends Component {
         .then((res) => {
           return res.json();
         }).then((locations) => {
-          console.log(locations)
           this.setState({ locations: locations })
     });
   }
@@ -38,7 +37,6 @@ class Locations extends Component {
 
   onSelectCalendarEntry(e) {
     e.preventDefault();
-    console.log(this.state.selectedAirportCode)
     this.props.history.push(`/calendars/${this.state.selectedLocationId}`)
   }
 

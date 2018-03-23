@@ -37,12 +37,10 @@ class Calendars extends Component {
       return res.json();
     }).then((location) => {
       this.setState({ location: location })
-      console.log(location)
       fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/SFO.json`)
       .then((res) => {
         return res.json();
       }).then((forecast) => {
-        console.log(forecast)
         let fourDayForecast = forecast.forecast.simpleforecast.forecastday;
         this.setState({ weatherForecast: fourDayForecast })
       })
