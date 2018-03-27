@@ -34,6 +34,9 @@ class Header extends Component {
                   <Link to={ '/locations' } className="nav-link" >Locations</Link>
                 </li>
                 <li className="nav-item">
+                  <Link to={ '/about' } className="nav-link" >About</Link>
+                </li>
+                <li className="nav-item">
                   <Link to={ `/users/${ Auth.user.id }` } className="nav-link" >Profile</Link>
                 </li>
                 <li className="nav-item">
@@ -43,6 +46,9 @@ class Header extends Component {
                 <ul className="navbar-nav">
                   <li className="nav-item">
                     <Link to={ '/locations' } className="nav-link" >Locations</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to={ '/about' } className="nav-link" >About</Link>
                   </li>
                   <li className="nav-item">
                     <Link to={ '/login' } className="nav-link" >Log In</Link>
