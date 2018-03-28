@@ -19,6 +19,7 @@ class Locations extends Component {
         .then((res) => {
           return res.json();
         }).then((locations) => {
+          console.log(locations)
           this.setState({ locations: locations })
     });
   }
@@ -37,6 +38,7 @@ class Locations extends Component {
 
   onSelectCalendarEntry(e) {
     e.preventDefault();
+    console.log(this.state.selectedAirportCode)
     this.props.history.push(`/calendars/${this.state.selectedLocationId}`)
   }
 
@@ -45,7 +47,7 @@ class Locations extends Component {
       <div className="container">
         <div className="row justify-content-center background">
           <div className="row justify-content-center">
-            <img className="marker-lg" src={ LocationMarkerLg } alt = ""/>
+            <img className="marker-lg" src={ LocationMarkerLg }/>
             <div className="col-12">
               <h2>Where do you want to go plane spotting?</h2>
               <select onChange={ this.handleLocationChange } className="form-control form-control-lg">

@@ -32,18 +32,21 @@ class Calendars extends Component {
 
   componentDidMount() {
     let locationId = this.props.match.params.id;
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
+    // fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}/weather.json`)
     .then((res) => {
+      console.log(res)
       return res.json();
-    }).then((location) => {
-      this.setState({ location: location })
-      fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/SFO.json`)
-      .then((res) => {
-        return res.json();
-      }).then((forecast) => {
-        let fourDayForecast = forecast.forecast.simpleforecast.forecastday;
-        this.setState({ weatherForecast: fourDayForecast })
-      })
+    }).then((forecast) => {
+      console.log(forecast)
+      // this.setState({ location: location })
+      // fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/SFO.json`)
+      // .then((res) => {
+        // return res.json();
+      // }).then((forecast) => {
+        // let fourDayForecast = forecast.forecast.simpleforecast.forecastday;
+        // this.setState({ weatherForecast: fourDayForecast })
+      // })
     })
   }
 
