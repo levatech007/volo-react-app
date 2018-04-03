@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import $ from "jquery";
 import Auth from "j-toker";
 import Location from "../components/Location.js";
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
-} from "react-accessible-accordion";
+import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody, } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/minimal-example.css";
 
 class Calendars extends Component {
@@ -32,10 +27,14 @@ class Calendars extends Component {
 
   componentDidMount() {
     let locationId = this.props.match.params.id;
-    // fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
+    .then((res) => {
+      return res.json();
+    }).then ((location) => {
+      this.setState({ location: location })
+    })
     fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}/weather.json`)
     .then((res) => {
-      console.log(res)
       return res.json();
     }).then((forecast) => {
       console.log(forecast)
@@ -69,28 +68,38 @@ class Calendars extends Component {
     return (
       <div className="container">
         <div className="row background">
-          { this.state.location.latitude && <Location location={ this.state.location } /> }
-          <Accordion>
-            {this.state.weatherForecast.map(oneDay => {
-                return(<AccordionItem>
-                        <AccordionItemTitle>
-                          <h4>{ oneDay.day_of_week }, { oneDay.day } { oneDay.month }</h4>
-                          {/* <img src={ oneDay.icon_url create function to select img? } alt = "" /> */}
-                        </AccordionItemTitle>
-                        <AccordionItemBody>
-                          <p>Weather conditions: </p>
-                          <ul>
-                            <li>High: { oneDay.temp}F/ Low: { oneDay.temp }F</li>
-                            <li>Winds: { oneDay.wind_dir } { oneDay.wind_speed }mph</li>
-                          </ul>
-                          <textarea class="form-control" ref="notes"rows="3"></textarea>
-                          <button onClick={ this.onSubmitEntry } className="btn btn-primary"> + </button>
-                        </AccordionItemBody>
-                      </AccordionItem>)
-                  })
-                }
-              </Accordion>
-        </div>
+          <div className="col-md-12">
+            <div className="row">
+              { this.state.location.latitude && <Location location={ this.state.location } /> }
+            </div>
+            <Accordion>
+              {this.state.weatherForecast.map(oneDay => {
+                  return(<AccordionItem>
+                          <AccordionItemTitle>
+                            <div className="row">
+                              <div className="col-md-6">
+                                <h4>{ oneDay.day_of_week }, { oneDay.day } { oneDay.month }</h4>
+                              </div>
+                              <div className="col-md-6">
+                                <img src={ require(`../images/weather-icons/${oneDay.conditions_icon}.svg`)} alt = "" />
+                              </div>
+                            </div>
+                          </AccordionItemTitle>
+                          <AccordionItemBody>
+                            <p>Weather conditions: </p>
+                            <ul>
+                              <li>High: { oneDay.temp}F/ Low: { oneDay.temp }F</li>
+                              <li>Winds: { oneDay.wind_dir } { oneDay.wind_speed }mph</li>
+                            </ul>
+                            <textarea className="form-control" ref="notes"rows="3"></textarea>
+                            <button onClick={ this.onSubmitEntry } className="btn btn-primary"> + </button>
+                          </AccordionItemBody>
+                        </AccordionItem>)
+                    })
+                  }
+                </Accordion>
+            </div>
+          </div>
       </div>
     )
   }
