@@ -39,14 +39,7 @@ class Calendars extends Component {
       return res.json();
     }).then((forecast) => {
       console.log(forecast)
-      // this.setState({ location: location })
-      // fetch(`http://api.wunderground.com/api/562b8535169e745a/forecast/q/SFO.json`)
-      // .then((res) => {
-        // return res.json();
-      // }).then((forecast) => {
-        // let fourDayForecast = forecast.forecast.simpleforecast.forecastday;
-        // this.setState({ weatherForecast: fourDayForecast })
-      // })
+      this.setState({ weatherForecast: forecast })
     })
   }
 
@@ -81,14 +74,14 @@ class Calendars extends Component {
             {this.state.weatherForecast.map(oneDay => {
                 return(<AccordionItem>
                         <AccordionItemTitle>
-                          <h4>{ oneDay.date.weekday }, { oneDay.date.day } { oneDay.date.monthname }</h4>
-                          <img src={ oneDay.icon_url} alt = "" />
+                          <h4>{ oneDay.day_of_week }, { oneDay.day } { oneDay.month }</h4>
+                          {/* <img src={ oneDay.icon_url create function to select img? } alt = "" /> */}
                         </AccordionItemTitle>
                         <AccordionItemBody>
                           <p>Weather conditions: </p>
                           <ul>
-                            <li>High: { oneDay.high.fahrenheit }F/ Low: { oneDay.low.fahrenheit }F</li>
-                            <li>Winds: { oneDay.avewind.mph }mph</li>
+                            <li>High: { oneDay.temp}F/ Low: { oneDay.temp }F</li>
+                            <li>Winds: { oneDay.wind_dir } { oneDay.wind_speed }mph</li>
                           </ul>
                           <textarea class="form-control" ref="notes"rows="3"></textarea>
                           <button onClick={ this.onSubmitEntry } className="btn btn-primary"> + </button>
