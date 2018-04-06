@@ -102,9 +102,11 @@ class Locations extends Component {
                         })
                       }
                     </Accordion>
-                <div className="row justify-content-center">
-                  <button onClick={ this.showReviewForm } className="btn btn-light button-margin">Add review</button>
-              </div>
+                    { Auth.user.id ?
+                      (<div className="row justify-content-center">
+                        <button onClick={ this.showReviewForm } className="btn btn-light button-margin">Add review</button>
+                      </div>) : null
+                    }
               </div>)
             }
           </div>

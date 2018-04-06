@@ -80,8 +80,8 @@ class Calendars extends Component {
                               <div className="col-md-6">
                                 <h4>{ oneDay.day_of_week }, { oneDay.month } { oneDay.day }</h4>
                               </div>
-                              <div className="col-md-1 offset-md-5">
-                                <img src={ require(`../images/weather-icons/${oneDay.conditions_icon}.svg`)} alt = "" />
+                              <div className="col-md-2 offset-md-4">
+                                <img className="weather-icon" src={ require(`../images/weather-icons/${oneDay.conditions_icon}.svg`)} alt = "" />
                               </div>
                             </div>
                           </AccordionItemTitle>
