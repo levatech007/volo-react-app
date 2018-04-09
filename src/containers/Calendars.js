@@ -48,7 +48,7 @@ class Calendars extends Component {
         Auth.appendAuthHeaders(xhr, settings);
       }
     });
-    $.post({
+    $.post({ // still need be set up
       url: `${process.env.REACT_APP_BACKEND_URL}/calendars`,
       data: {
         location: this.state.location.name,
@@ -69,10 +69,10 @@ class Calendars extends Component {
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
-            <div className="row">
+            {/* <div className="row"> */}
               { this.state.location.latitude && <Location location={ this.state.location } /> }
-            </div>
-            <Accordion>
+            {/* </div> */}
+            {this.state.weatherForecast[0] && <Accordion>
               {this.state.weatherForecast.map(oneDay => {
                   return(<AccordionItem>
                           <AccordionItemTitle>
@@ -98,6 +98,7 @@ class Calendars extends Component {
                     })
                   }
                 </Accordion>
+              }
             </div>
           </div>
       </div>

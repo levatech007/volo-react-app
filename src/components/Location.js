@@ -9,7 +9,6 @@ class Location extends Component {
     return(
       <div className="row">
         <div className="col-6">
-          <div className="row">
             <ul>
               <li><h4>{ this.props.location.name }</h4></li>
               <li><p>{ this.props.location.airport_name } ({ this.props.location.airport })</p></li>
@@ -18,7 +17,6 @@ class Location extends Component {
               <li><p>REVIEWS ({ this.props.reviewCount })</p></li>
             </ul>
           </div>
-        </div>
         <div className="col-6">
           <LocationMap lat={ this.props.location.latitude } long={this.props.location.longitude }/>
         </div>
