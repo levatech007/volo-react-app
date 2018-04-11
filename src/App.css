@@ -69,6 +69,11 @@ ul {
 button {
   margin: 10px;
 }
+
+.down-arrow {
+  height: 15px;
+}
+
 .u-position-absolute {
   position: absolute;
 }

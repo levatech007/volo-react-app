@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Auth from "j-toker";
 import $ from "jquery";
+import Arrow from "../images/arrow-dn.svg";
 import LocationInfo from "../components/Location.js";
 import CreateReviewForm from "../components/CreateReviewForm.js";
 import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody } from "react-accessible-accordion";
@@ -89,9 +90,12 @@ class Locations extends Component {
                                   <div className="col-9">
                                     <h4>{ oneReview.title }</h4><p>by {oneReview.author}</p>
                                   </div>
-                                  <div className="col-3 align-content-md-end">
+                                  <div className="col-3">
                                     <ReactStars count={5} value={ oneReview.rating } edit={ false } size={24} color2={"#ffd700"} />
                                   </div>
+                                </div>
+                                <div className="row justify-content-center">
+                                  <img src={ Arrow } className="down-arrow" />
                                 </div>
                               </AccordionItemTitle>
                               <AccordionItemBody>
