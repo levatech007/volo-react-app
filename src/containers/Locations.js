@@ -51,12 +51,15 @@ class Locations extends Component {
   render() {
     return (
       <div className="container">
-        {/* { this.state.errors? <div className="alert alert-danger" role="alert">{this.state.errors}</div> : null } */}
         { this.state.errors? <Errors errors={ this.state.errors }/> : null }
         <div className="row justify-content-center background">
+          <div className="col-12">
           <div className="row justify-content-center">
-            <img className="marker-lg" src={ LocationMarkerLg }/>
-            <div className="col-12">
+              <img className="marker-lg" src={ LocationMarkerLg }/>
+          </div>
+
+          <div className="row justify-content-center">
+            <div className="col-sm-12 col-md-8">
               <h2>Where do you want to go plane spotting?</h2>
               <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
                 <option defaultValue selected disabled>Choose your location</option>
@@ -68,15 +71,13 @@ class Locations extends Component {
                   }
                 </select>
               </div>
-              <div className="row">
-                <div className="col-sm-6">
-                  <button onClick={ this.onClickAboutLocations } className="btn btn-light button-margin">About Location</button>
-                </div>
-                <div className="col-sm-6">
-                  <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Weather report</button>
-                </div>
-              </div>
             </div>
+
+            <div className="row justify-content-center">
+              <button onClick={ this.onClickAboutLocations } className="btn btn-light button-margin">About Location</button>
+              <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Weather report</button>
+            </div>
+          </div>
         </div>
       </div>
     );

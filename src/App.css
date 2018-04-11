@@ -65,3 +65,7 @@ ul {
 .weather-icon {
   height: 50px;
 }
+
+button {
+  margin: 10px;
+}
