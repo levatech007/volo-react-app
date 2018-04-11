@@ -7,7 +7,8 @@ class Locations extends Component {
     this.state = {
       locations: [],
       selectedLocationId: 0,
-      selectedAirportCode: ""
+      selectedAirportCode: "",
+      errors: ""
     }
     this.onClickAboutLocations = this.onClickAboutLocations.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
@@ -33,7 +34,12 @@ class Locations extends Component {
   }
 
   onClickAboutLocations() {
-    this.props.history.push(`/locations/${this.state.selectedLocationId}`)
+    if(this.state.selectedLocationId) {
+      this.props.history.push(`/locations/${this.state.selectedLocationId}`)
+    } else {
+      this.setState({errors: "Please select a location"})
+      //add error msg
+    }
   }
 
   onSelectCalendarEntry(e) {
@@ -45,6 +51,7 @@ class Locations extends Component {
   render() {
     return (
       <div className="container">
+        { this.state.errors? <div className="alert alert-danger" role="alert">{this.state.errors}</div> : null }
         <div className="row justify-content-center background">
           <div className="row justify-content-center">
             <img className="marker-lg" src={ LocationMarkerLg }/>
