@@ -39,7 +39,6 @@ class Locations extends Component {
       this.props.history.push(`/locations/${this.state.selectedLocationId}`)
     } else {
       this.setState({errors: "Please select a location"})
-      //add error msg
     }
   }
 
@@ -57,7 +56,6 @@ class Locations extends Component {
           <div className="row justify-content-center">
               <img className="marker-lg" src={ LocationMarkerLg }/>
           </div>
-
           <div className="row justify-content-center">
             <div className="col-sm-12 col-md-8">
               <h2>Where do you want to go plane spotting?</h2>
@@ -72,7 +70,6 @@ class Locations extends Component {
                 </select>
               </div>
             </div>
-
             <div className="row justify-content-center">
               <button onClick={ this.onClickAboutLocations } className="btn btn-light button-margin">About Location</button>
               <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Weather report</button>

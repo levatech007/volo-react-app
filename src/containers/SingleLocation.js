@@ -4,7 +4,6 @@ import $ from "jquery";
 import LocationInfo from "../components/Location.js";
 import CreateReviewForm from "../components/CreateReviewForm.js";
 import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody } from "react-accessible-accordion";
-import "react-accessible-accordion/dist/fancy-example.css";
 import ReactStars from "react-stars";
 
 class Locations extends Component {
@@ -87,10 +86,10 @@ class Locations extends Component {
                       return(<AccordionItem>
                               <AccordionItemTitle>
                                 <div className="row">
-                                  <div className="col-8">
+                                  <div className="col-9">
                                     <h4>{ oneReview.title }</h4><p>by {oneReview.author}</p>
                                   </div>
-                                  <div className="col-4">
+                                  <div className="col-3 align-content-md-end">
                                     <ReactStars count={5} value={ oneReview.rating } edit={ false } size={24} color2={"#ffd700"} />
                                   </div>
                                 </div>
