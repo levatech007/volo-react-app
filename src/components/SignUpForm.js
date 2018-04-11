@@ -8,11 +8,13 @@ class SignupForm extends Component {
           name: "",
           email: "",
           password: "",
+          password_confirmation: ""
         }
       }
       this.onNameInputChange = this.onNameInputChange.bind(this);
       this.onEmailInputChange = this.onEmailInputChange.bind(this);
       this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
+      this.onConfirmPasswordInputChange = this.onConfirmPasswordInputChange.bind(this);
       this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
@@ -22,6 +24,7 @@ class SignupForm extends Component {
           name: e.target.value,
           email: this.state.user.name,
           password: this.state.user.password,
+          password_confirmation: this.state.user.password_confirmation,
         }
       })
     }
@@ -32,6 +35,7 @@ class SignupForm extends Component {
           name: this.state.user.name,
           email: e.target.value,
           password: this.state.user.password,
+          password_confirmation: this.state.user.password_confirmation,
         }
       })
     }
@@ -41,7 +45,19 @@ class SignupForm extends Component {
         user: {
           name: this.state.user.name,
           email: this.state.user.email,
-          password: e.target.value
+          password: e.target.value,
+          password_confirmation: this.state.user.password_confirmation,
+        }
+      })
+    }
+
+    onConfirmPasswordInputChange(e) {
+      this.setState({
+        user: {
+          name: this.state.user.name,
+          email: this.state.user.email,
+          password: this.state.user.password,
+          password_confirmation: e.target.value,
         }
       })
     }
@@ -54,6 +70,7 @@ class SignupForm extends Component {
           name: "",
           email: "",
           password: "",
+          password_confirmation: ""
         }
       })
       this.props.processSignupForm(user)
@@ -91,6 +108,14 @@ class SignupForm extends Component {
                 className="form-control"
                 placeholder="Password"
                 onChange={this.onPasswordInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Confirm password"
+                onChange={this.onConfirmPasswordInputChange}
               />
             </div>
             <div className="row justify-content-md-center">

@@ -30,6 +30,7 @@ class Login extends Component {
         email: user.email,
         password: user.password,
         name: user.name,
+        password_confirmation: user.password_confirmation,
       })
         .then((resp) => {
           Auth.emailSignIn({
