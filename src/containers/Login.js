@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Auth from "j-toker";
 import LoginForm from "../components/LoginForm.js"
 import SignupForm from "../components/SignUpForm.js"
+import Errors from "../components/Errors.js"
 
 class Login extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.errors? <div className="alert alert-danger" role="alert">{this.state.errors}</div> : null }
+        { this.state.errors? <Errors errors={ this.state.errors } /> : null }
         <div className="row align-items-center background">
           <LoginForm processLoginForm={ this.processLoginForm }/>
           <SignupForm processSignupForm={ this.processSignupForm } />

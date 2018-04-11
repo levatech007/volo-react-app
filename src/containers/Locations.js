@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import LocationMarkerLg from "../images/location-marker-lg.svg";
+import Errors from "../components/Errors.js"
 
 class Locations extends Component {
   constructor() {
@@ -44,14 +45,14 @@ class Locations extends Component {
 
   onSelectCalendarEntry(e) {
     e.preventDefault();
-    console.log(this.state.selectedAirportCode)
     this.props.history.push(`/calendars/${this.state.selectedLocationId}`)
   }
 
   render() {
     return (
       <div className="container">
-        { this.state.errors? <div className="alert alert-danger" role="alert">{this.state.errors}</div> : null }
+        {/* { this.state.errors? <div className="alert alert-danger" role="alert">{this.state.errors}</div> : null } */}
+        { this.state.errors? <Errors errors={ this.state.errors }/> : null }
         <div className="row justify-content-center background">
           <div className="row justify-content-center">
             <img className="marker-lg" src={ LocationMarkerLg }/>
