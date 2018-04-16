@@ -69,9 +69,7 @@ class Calendars extends Component {
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
-            {/* <div className="row"> */}
-              { this.state.location.latitude && <Location location={ this.state.location } /> }
-            {/* </div> */}
+            { this.state.location.latitude && <Location location={ this.state.location } /> }
             {this.state.weatherForecast[0] && <Accordion>
               {this.state.weatherForecast.map(oneDay => {
                   return(<AccordionItem>
@@ -88,7 +86,7 @@ class Calendars extends Component {
                           <AccordionItemBody>
                             <p>Weather conditions: </p>
                             <ul>
-                              <li>High: { oneDay.temp}F/ Low: { oneDay.temp }F</li>
+                              <li>High: { oneDay.high_temp}F/ Low: { oneDay.low_temp }F</li>
                               <li>Winds: { oneDay.wind_dir } { oneDay.wind_speed }mph</li>
                             </ul>
                             <textarea className="form-control" ref="notes"rows="3"></textarea>

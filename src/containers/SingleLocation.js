@@ -33,7 +33,7 @@ class Locations extends Component {
       this.setState({
         location: location,
         reviewCount: location.reviews.length,
-        reviews: location.reviews,
+        reviews: location.reviews.reverse(),
         latitude: location.latitude,
         longitude: location.longitude,
       })
@@ -62,8 +62,9 @@ class Locations extends Component {
         location_id: this.state.location.id,
       },
       success: (data) => {
+        let newReview = [data.review]
         this.setState({
-          reviews: currentReviews.concat([data.review]),
+          reviews: newReview.concat(currentReviews),
           showForm: false,
         })
       },
