@@ -96,7 +96,7 @@ class Locations extends Component {
                                   </div>
                                 </div>
                                 <div className="row justify-content-center">
-                                  <img src={ Arrow } className="down-arrow" />
+                                  <img src={ Arrow } className="down-arrow" alt="down-arrow"/>
                                 </div>
                               </AccordionItemTitle>
                               <AccordionItemBody>

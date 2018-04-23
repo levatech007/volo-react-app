@@ -54,7 +54,7 @@ class Locations extends Component {
         <div className="row justify-content-center background">
           <div className="col-12">
           <div className="row justify-content-center">
-              <img className="marker-lg" src={ LocationMarkerLg }/>
+              <img className="marker-lg" src={ LocationMarkerLg } alt="location-marker"/>
           </div>
           <div className="row justify-content-center">
             <div className="col-sm-12 col-md-8">

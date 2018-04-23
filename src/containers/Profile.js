@@ -12,6 +12,7 @@ class Profile extends Component {
       calendar: [],
       date: null,
     }
+    this.onDeleteAccount = this.onDeleteAccount.bind(this);
   }
 
   componentDidMount() {
@@ -34,10 +35,18 @@ class Profile extends Component {
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
     var yyyy = today.getFullYear();
-    if(dd<10) { dd = '0'+dd}
-    if(mm<10) {mm = '0'+mm}
+    if(dd<10) { dd = "0"+dd}
+    if(mm<10) {mm = "0"+mm}
     today = `${ mm }/${ dd }/${ yyyy }`
     this.setState({ date: today})
+  }
+
+  onDeleteAccount() {
+    if (window.confirm("Are you sure you wish to delete your account?")) {
+      Auth.destroyAccount();
+      Auth.signOut();
+      this.props.history.push("/")
+    }
   }
 
   render(){
@@ -45,14 +54,17 @@ class Profile extends Component {
       <div className="container">
         <div className="row background">
           <div className="col-4">
-          <img src={ Profileimg }/>
+          <img src={ Profileimg } alt="profile"/>
         </div>
           <div className="col-8">
             {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
             <p> Today is { this.state.date }</p>
-            {this.state.calendar.notes ? null : <p>You have no calendar entries yet!</p>}
+            <button className="btn btn-outline-light" onClick={ this.onDeleteAccount }>
+              <i className="far fa-trash-alt" onClick={ this.onDeleteAccount }></i>
+            </button>
           </div>
           <div className="col-12">
+            {this.state.calendar.notes ? null : <p>You have no calendar entries yet!</p>}
             { this.state.calendar.notes &&
             <Accordion>
               {this.state.calendar.map(oneEntry => {
