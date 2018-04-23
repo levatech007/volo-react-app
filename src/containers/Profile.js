@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import Auth from "j-toker"
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
-} from "react-accessible-accordion";
-import "react-accessible-accordion/dist/minimal-example.css";
+import { Accordion,AccordionItem,AccordionItemTitle,AccordionItemBody,} from "react-accessible-accordion";
+import Profileimg from "../images/profile-img.png"
+
 
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
       calendar: [],
+      date: null,
     }
   }
 
@@ -32,13 +29,29 @@ class Profile extends Component {
       error: (data) => {
       }
     });
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10) { dd = '0'+dd}
+    if(mm<10) {mm = '0'+mm}
+    today = `${ mm }/${ dd }/${ yyyy }`
+    this.setState({ date: today})
   }
 
   render(){
     return(
       <div className="container">
         <div className="row background">
-          {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
+          <div className="col-4">
+          <img src={ Profileimg }/>
+        </div>
+          <div className="col-8">
+            {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
+            <p> Today is { this.state.date }</p>
+            {this.state.calendar.notes ? null : <p>You have no calendar entries yet!</p>}
+          </div>
           <div className="col-12">
             { this.state.calendar.notes &&
             <Accordion>

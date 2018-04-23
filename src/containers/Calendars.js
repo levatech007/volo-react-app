@@ -12,6 +12,7 @@ class Calendars extends Component {
       location: {},
       weatherForecast: [],
       userId: 0,
+      reviewCount: 0,
     }
     this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }
@@ -31,7 +32,10 @@ class Calendars extends Component {
     .then((res) => {
       return res.json();
     }).then ((location) => {
-      this.setState({ location: location })
+      this.setState({
+        location: location,
+        reviewCount: location.reviews.length,
+       })
     })
     fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}/weather.json`)
     .then((res) => {
@@ -42,26 +46,28 @@ class Calendars extends Component {
     })
   }
 
-  createCalendarEntry(entry, notes, weather) {
-    $.ajaxSetup({
-      beforeSend(xhr, settings) {
-        Auth.appendAuthHeaders(xhr, settings);
-      }
-    });
-    $.post({ // still need be set up
-      url: `${process.env.REACT_APP_BACKEND_URL}/calendars`,
-      data: {
-        location: this.state.location.name,
-        weekday: weather.date.weekday,
-        day: weather.date.day,
-        month: weather.date.monthname,
-        notes: notes,
-        icon_url: weather.icon_url,
-      },
-      success: (response) => {
-          this.props.history.push(`/users/${this.state.userId}`)
-      },
-    })
+  createCalendarEntry(id) {
+    console.log(id)
+
+    // $.ajaxSetup({
+    //   beforeSend(xhr, settings) {
+    //     Auth.appendAuthHeaders(xhr, settings);
+    //   }
+    // });
+    // $.post({ // still need be set up
+    //   url: `${process.env.REACT_APP_BACKEND_URL}/calendars`,
+    //   data: {
+    //     location: this.state.location.name,
+    //     weekday: weather.date.weekday,
+    //     day: weather.date.day,
+    //     month: weather.date.monthname,
+    //     notes: notes,
+    //     icon_url: weather.icon_url,
+    //   },
+    //   success: (response) => {
+    //       this.props.history.push(`/users/${this.state.userId}`)
+    //   },
+    // })
   }
 
   render() {
@@ -69,7 +75,7 @@ class Calendars extends Component {
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
-            { this.state.location.latitude && <Location location={ this.state.location } /> }
+            { this.state.location.latitude && <Location location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
             {this.state.weatherForecast[0] && <Accordion>
               {this.state.weatherForecast.map(oneDay => {
                   return(<AccordionItem>
@@ -90,7 +96,7 @@ class Calendars extends Component {
                               <li>Winds: { oneDay.wind_dir } { oneDay.wind_speed }mph</li>
                             </ul>
                             <textarea className="form-control" ref="notes"rows="3"></textarea>
-                            <button onClick={ this.onSubmitEntry } className="btn btn-primary"> + </button>
+                            <button onClick={ this.createCalendarEntry(oneDay.id) } className="btn btn-primary"> + </button>
                           </AccordionItemBody>
                         </AccordionItem>)
                     })

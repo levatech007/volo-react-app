@@ -64,12 +64,9 @@ To install dependencies on the back end, run:
 ![ERD](/src/images/ERD.png)
 
 ## Unsolved Problems:
-- Header does not update at login, refresh needed to display Profile and Log out button.
-- If no selection is made at locations menu, submitting will generate error as page is redirected to ‘/locations/0’ that does not exist.
-- Routes don’t have any authorization.
-- Certain features should only be visible to registered users.
-- Rating for a location is static, needs to be average of user ratings.
-- Weather API does not seems to want to work on Heroku.
+- Routes don’t have any authorization yet.
+- Weather API does not work on Heroku.
+
 
 ## Future Features:
 - Airport information with flight schedules.
