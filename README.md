@@ -16,7 +16,9 @@ Front end:
 - React Google Map
 
 Back end:
-- Ruby on Rails
+- Rails
+- Redis
+- Sidekiq
 - PostgresQL
 - Devise Token Auth
 
@@ -64,8 +66,8 @@ To install dependencies on the back end, run:
 ![ERD](/src/images/ERD.png)
 
 ## Unsolved Problems:
-- Routes don’t have any authorization yet.
-- Weather API does not work on Heroku.
+- Routes don’t have any authorization.
+- Weather API does not work on Heroku yet.
 
 
 ## Future Features:
