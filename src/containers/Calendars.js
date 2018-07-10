@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from "jquery";
 import Auth from "j-toker";
 import Location from "../components/Location.js";
 import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody, } from "react-accessible-accordion";

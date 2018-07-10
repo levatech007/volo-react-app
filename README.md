@@ -19,7 +19,8 @@ Back end:
 - Rails
 - Redis
 - Sidekiq
-- PostgresQL
+- RestClient
+- PostgreSQL
 - Devise Token Auth
 
 ### Links:
@@ -66,8 +67,8 @@ To install dependencies on the back end, run:
 ![ERD](/src/images/ERD.png)
 
 ## Unsolved Problems:
-- Routes don’t have any authorization.
-- Weather API does not work on Heroku yet.
+- Routes don’t have authorization.
+- Weather API worker does not save data on Heroku.
 
 
 ## Future Features:
