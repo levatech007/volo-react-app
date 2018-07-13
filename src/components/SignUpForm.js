@@ -18,6 +18,7 @@ class SignupForm extends Component {
       this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
       this.onConfirmPasswordInputChange = this.onConfirmPasswordInputChange.bind(this);
       this.onFormSubmit = this.onFormSubmit.bind(this);
+      this.onChange = this.onChange.bind(this);
     }
 
     onNameInputChange(e) {
@@ -129,11 +130,11 @@ class SignupForm extends Component {
               />
             </div>
             <div className="row justify-content-center">
-                    <ReCAPTCHA
-                      ref="recaptcha"
-                      sitekey= process.env.SITE_KEY
-                      onChange={ this.onChange }/>
-                  </div>
+              <ReCAPTCHA
+                ref="recaptcha"
+                sitekey={ process.env.REACT_APP_SITE_KEY }
+                onChange={ this.onChange }/>
+            </div>
             <div className="row justify-content-md-center">
               <input
                 type="submit"
