@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
 
 class SignupForm extends Component {
   constructor() {
@@ -8,7 +9,8 @@ class SignupForm extends Component {
           name: "",
           email: "",
           password: "",
-          password_confirmation: ""
+          password_confirmation: "",
+          recaptchaResponse: "",
         }
       }
       this.onNameInputChange = this.onNameInputChange.bind(this);
@@ -64,17 +66,25 @@ class SignupForm extends Component {
 
     onFormSubmit(e) {
       e.preventDefault();
-      let user = this.state.user
-      this.setState({
-        user: {
-          name: "",
-          email: "",
-          password: "",
-          password_confirmation: ""
-        }
-      })
-      this.props.processSignupForm(user)
+      if (this.state.recaptchaResponse) {
+        let user = this.state.user
+        this.setState({
+          user: {
+            name: "",
+            email: "",
+            password: "",
+            password_confirmation: ""
+          }
+        })
+        this.props.processSignupForm(user)
+      }
     }
+
+    onChange(response) {
+      this.setState({
+      recaptchaResponse: response
+    });
+  }
 
   render() {
     return (
@@ -118,6 +128,12 @@ class SignupForm extends Component {
                 onChange={this.onConfirmPasswordInputChange}
               />
             </div>
+            <div className="row justify-content-center">
+                    <ReCAPTCHA
+                      ref="recaptcha"
+                      sitekey= process.env.SITE_KEY
+                      onChange={ this.onChange }/>
+                  </div>
             <div className="row justify-content-md-center">
               <input
                 type="submit"

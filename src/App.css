@@ -47,10 +47,10 @@ ul {
 }
 
 .marker {
-  background-image: url("images/locationmarker-01.png");
+  background-image: url("images/locationmarker.svg");
   background-repeat: no-repeat;
-  height: 100px;
-  width: 100px;
+  height: 60px;
+  width: 60px;
 }
 
 .zero-margin {
