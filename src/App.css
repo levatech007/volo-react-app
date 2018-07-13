@@ -47,10 +47,10 @@ ul {
 }
 
 .marker {
-  background-image: url("images/locationmarker.svg");
+  background-image: url("images/locationmarker-01.png");
   background-repeat: no-repeat;
-  height: 60px;
-  width: 60px;
+  height: 100px;
+  width: 100px;
 }
 
 .zero-margin {
@@ -92,7 +92,6 @@ ul {
 }
 
 .accordion__title {
-    /* background-color: #f4f4f4; */
     color: #FFFFFF;
     cursor: pointer;
     padding: 18px;

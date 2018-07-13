@@ -69,6 +69,7 @@ To install dependencies on the back end, run:
 ## Unsolved Problems:
 - Routes don’t have authorization.
 - Weather API worker does not save data on Heroku.
+- Location marker on map is centered at coordinates, pointer is offset.
 
 
 ## Future Features:

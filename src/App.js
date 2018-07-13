@@ -4,6 +4,7 @@ import "./App.css";
 import Auth from "j-toker";
 import MyRoutes from "./config/routes.js"
 import Header from "./components/Header.js";
+import Footer from "./components/Footer.js";
 
 class App extends Component {
   constructor() {
@@ -33,6 +34,7 @@ class App extends Component {
       <div className="gradient">
         <Header />
         { MyRoutes }
+        <Footer />
       </div>
     );
   }
