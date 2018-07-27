@@ -71,6 +71,15 @@ ul {
   height: 15px;
 }
 
+.footer-background {
+  background: #00f260;
+  background: linear-gradient(#0575e6, #00f260);
+  padding: 30px 0;
+}
+
+
+/* ACCORDION */
+
 .u-position-absolute {
   position: absolute;
 }
