@@ -74,9 +74,16 @@ ul {
 .footer-background {
   background: #0575e6;
   background: linear-gradient(#0575e6, #00f260);
-  padding: 50px 0;
+  padding: 75px 0 25px 0;
 }
 
+.footer-link {
+  color: #FFFFFF;
+}
+
+.copyright {
+  padding-top: 75px;
+}
 
 /* ACCORDION */
 
