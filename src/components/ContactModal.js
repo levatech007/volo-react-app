@@ -61,7 +61,8 @@ class ContactModal extends Component {
           name: "",
           email: "",
           text: "",
-          submitted: true
+          error: false,
+          submitted: true,
         }
       })
     } else {
@@ -72,6 +73,7 @@ class ContactModal extends Component {
           text: "",
           recaptchaResponse: "",
           error: true,
+          submitted: false,
         }
       })
     }
@@ -103,13 +105,14 @@ class ContactModal extends Component {
                     }
                   </div>
                 </div>
-                <div className="row justify-content-center">
-                  <div className="col-md-12">
-                    {
-                      this.state.message.submitted ? <div className="alert alert-success" role="alert">Thank you for your submission</div> : null
-                    }
+                {
+                  this.state.message.submitted ?
+                  <div className="row justify-content-center">
+                    <div className="col-md-12">
+                        <div className="alert alert-success" role="alert">Thank you for your submission</div>
+                    </div>
                   </div>
-                </div>
+                : (
                 <div className="row justify-content-center">
                   <div className="col-md-12 contact-form">
                     <form onSubmit={ this.onFormSubmit } className="forms">
@@ -120,8 +123,8 @@ class ContactModal extends Component {
                             type="text"
                             name="name"
                             className="form-control"
-                            placeholder="Your last name"
-                            onChange={this.onLastNameInputChange}
+                            placeholder="Your name"
+                            onChange={this.onNameInputChange}
                           />
                         </div>
                       </div>
@@ -161,16 +164,15 @@ class ContactModal extends Component {
                           <input
                             type="submit"
                             className="btn btn-primary"
-                            value="Submit your request"
+                            value="Submit"
                           />
+                          <button type="button" className="btn" onClick={ this.props.close }>Cancel</button>
                         </div>
                       </div>
                     </form>
                   </div>
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={ this.props.close }>Close</button>
+                </div> )
+              }
               </div>
             </div>
           </div>

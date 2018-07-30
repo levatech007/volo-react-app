@@ -21,7 +21,6 @@ class Locations extends Component {
         .then((res) => {
           return res.json();
         }).then((locations) => {
-          console.log(locations)
           this.setState({ locations: locations })
     });
   }
