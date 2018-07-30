@@ -152,7 +152,7 @@ class ContactModal extends Component {
                         <div className="col-md-9 offset-md-3">
                         <ReCAPTCHA
                           ref="recaptcha"
-                          sitekey="6LcEkV0UAAAAAESH0bsrhEvys2MIK2aE3yhWeHTi" //sample, not correct
+                          sitekey={ process.env.REACT_APP_SITE_KEY }
                           onChange={ this.onChange }/>
                         </div>
                       </div>
