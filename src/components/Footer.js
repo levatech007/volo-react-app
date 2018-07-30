@@ -3,12 +3,46 @@ import { Link } from "react-router-dom";
 import Instagram from "../images/social_icons/instagram-logo.png";
 import Twitter from "../images/social_icons/twitter-logo.png";
 import Facebook from "../images/social_icons/facebook-logo.png";
+import ContactModal from "./ContactModal.js";
 
 class Footer extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showContactModal: false
+    }
+    this.showContactModal = this.showContactModal.bind(this);
+    this.closeContactModal = this.closeContactModal.bind(this);
+  }
+
+  showAboutModal() {
+    this.setState({
+      showAboutModal: true
+    });
+  }
+
+  showContactModal() {
+    this.setState({
+      showContactModal: true
+    });
+  }
+
+  closeAboutModal() {
+    this.setState({
+      showAboutModal: false
+    });
+  }
+
+  closeContactModal() {
+    this.setState({
+      showContactModal: false
+    });
+  }
   render() {
     return(
       <div className="row justify-content-center footer-background">
         <div className="container">
+          { this.state.showContactModal ? <ContactModal close={ this.closeContactModal }/> : null }
           <div className="row justify-content-center">
             <div className="col-sm-2">
               <ul>
@@ -25,13 +59,13 @@ class Footer extends Component {
               <br></br>
               <div className="row">
                 <div className="col-3">
-                  <a href="..."><img src={ Instagram }></img></a>
+                  <a href="..."><img src={ Instagram } alt="instagram-icon"></img></a>
                 </div>
                 <div className="col-3">
-                  <a href="..."><img src={ Twitter }></img></a>
+                  <a href="..."><img src={ Twitter } alt="twitter-icon"></img></a>
                 </div>
                 <div className="col-3">
-                  <img src={ Facebook }></img>
+                  <img src={ Facebook } alt="facebook-icon"></img>
                 </div>
               </div>
             </div>
@@ -49,11 +83,9 @@ class Footer extends Component {
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="col-sm-3">
-              <ul>
-                <li>CONTACT</li>
+                <p>CONTACT</p>
                 <br></br>
-                <li>Contact Us</li>
-              </ul>
+                <a onClick={ this.showContactModal } >Contact Us</a>
             </div>
           </div>
           <div className="row justify-content-center copyright">

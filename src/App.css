@@ -81,8 +81,16 @@ ul {
   color: #FFFFFF;
 }
 
+.red-text {
+  color: red;
+}
+
 .copyright {
   padding-top: 75px;
+}
+
+.modal {
+  color: #666666;
 }
 
 /* ACCORDION */
