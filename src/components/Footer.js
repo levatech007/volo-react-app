@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import $ from "jquery";
 import Instagram from "../images/social_icons/instagram-logo.png";
 import Twitter from "../images/social_icons/twitter-logo.png";
 import Facebook from "../images/social_icons/facebook-logo.png";
@@ -9,16 +10,13 @@ class Footer extends Component {
   constructor() {
     super();
     this.state = {
-      showContactModal: false
+      showContactModal: false,
+      email: "",
     }
     this.showContactModal = this.showContactModal.bind(this);
     this.closeContactModal = this.closeContactModal.bind(this);
-  }
-
-  showAboutModal() {
-    this.setState({
-      showAboutModal: true
-    });
+    this.onEmailInputChange = this.onEmailInputChange.bind(this);
+    this.onEmailListSubmit = this.onEmailListSubmit.bind(this);
   }
 
   showContactModal() {
@@ -27,17 +25,41 @@ class Footer extends Component {
     });
   }
 
-  closeAboutModal() {
-    this.setState({
-      showAboutModal: false
-    });
-  }
-
   closeContactModal() {
     this.setState({
       showContactModal: false
     });
   }
+
+  onEmailInputChange(e) {
+    this.setState({
+        showContactModal: this.state.showContactModal,
+        email: e.target.value,
+    })
+  }
+
+  onEmailListSubmit(e) {
+    e.preventDefault();
+    console.log(this.state.email)
+    let email = this.state.email
+    this.setState({
+      showContactModal: this.state.showContactModal,
+      email: "",
+    })
+    $.post({
+      url: `${process.env.REACT_APP_BACKEND_URL}/subscribe`,
+      data: {
+        email: email
+      },
+      success: (data) => {
+        console.log(data)
+      },
+      error: (error) => {
+        console.log("there was an error")
+      }
+    })
+  }
+
   render() {
     return(
       <div className="row justify-content-center footer-background">
@@ -74,10 +96,19 @@ class Footer extends Component {
               <br></br>
               <div className="row">
                 <div className="col-8">
-                  <input type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter your email ..."/>
+                  <input
+                    type="email"
+                    className="form-control"
+                    onChange={this.onEmailInputChange}
+                    aria-describedby="emailHelp"
+                    placeholder="Enter your email ..."
+                  />
                 </div>
                 <div className="col-4">
-                  <button type="submit" className="btn btn-primary">Submit</button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    onClick={ this.onEmailListSubmit }>Submit</button>
                 </div>
               </div>
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
