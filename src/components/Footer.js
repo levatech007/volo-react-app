@@ -107,11 +107,18 @@ class Footer extends Component {
               <br></br>
               <div className="row">
                 <div className="col-8">
+                  <p>Join our mailing list</p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-12">
                   { this.state.alert ?
                   <div className={ this.state.alertClass } role="alert">{ this.state.alertMsg }
                   </div> : null
                   }
                 </div>
+              </div>
+              <div className="row">
                 <div className="col-8">
                   <input
                     type="email"
