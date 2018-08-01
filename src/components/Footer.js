@@ -12,6 +12,9 @@ class Footer extends Component {
     this.state = {
       showContactModal: false,
       email: "",
+      alert: false,
+      alertClass: "",
+      alertMsg: "",
     }
     this.showContactModal = this.showContactModal.bind(this);
     this.closeContactModal = this.closeContactModal.bind(this);
@@ -52,10 +55,18 @@ class Footer extends Component {
         email: email
       },
       success: (data) => {
-        console.log(data)
+        this.setState({
+          alert: true,
+          alertClass: "alert alert-success",
+          alertMsg: "Thank you!",
+        })
       },
       error: (error) => {
-        console.log("there was an error")
+        this.setState({
+          alert: true,
+          alertClass: "alert alert-danger",
+          alertMsg: "Oops...",
+        })
       }
     })
   }
@@ -95,6 +106,12 @@ class Footer extends Component {
               <p>STAY TUNED</p>
               <br></br>
               <div className="row">
+                <div className="col-8">
+                  { this.state.alert ?
+                  <div className={ this.state.alertClass } role="alert">{ this.state.alertMsg }
+                  </div> : null
+                  }
+                </div>
                 <div className="col-8">
                   <input
                     type="email"
