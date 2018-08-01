@@ -23,6 +23,8 @@ class Locations extends Component {
         }).then((locations) => {
           this.setState({ locations: locations })
     });
+
+    window.scrollTo(0, 0)
   }
 
   handleLocationChange(e) {

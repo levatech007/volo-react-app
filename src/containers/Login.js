@@ -14,6 +14,10 @@ class Login extends Component {
     this.processSignupForm = this.processSignupForm.bind(this);
     };
 
+    componentDidMount() {
+      window.scrollTo(0, 0)
+    }
+
     processLoginForm(user) {
       Auth.emailSignIn({
         email:    user.email,
