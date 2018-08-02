@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ReactStars from "react-stars";
-import LocationMap from "../components/LocationMap.js";
+// import LocationMap from "../components/LocationMap.js";
+import GoogleMaps from "./GoogleMapsAPI.js"
 
 class Location extends Component {
 
@@ -18,7 +19,8 @@ class Location extends Component {
             </ul>
           </div>
         <div className="col-6">
-          <LocationMap lat={ this.props.location.latitude } long={this.props.location.longitude }/>
+          {/* <LocationMap lat={ this.props.location.latitude } long={this.props.location.longitude }/> */}
+          <GoogleMaps />
         </div>
       </div>
     )
