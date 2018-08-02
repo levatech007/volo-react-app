@@ -78,14 +78,16 @@ class Footer extends Component {
           { this.state.showContactModal ? <ContactModal close={ this.closeContactModal }/> : null }
           <div className="row justify-content-center">
             <div className="col-sm-2">
-              <ul>
-                <li>VOLO</li>
-                <br></br>
-                <li><Link to={ '/locations' } className="footer-link" >Locations</Link></li>
-                <li><Link to={ '/about' } className="footer-link" >About</Link></li>
-                <li><Link to={ '/login' } className="footer-link" >Log In</Link></li>
-                <li><Link to={ '/login' } className="footer-link" >Sign Up</Link></li>
-              </ul>
+              <p>VOLO</p>
+              <br></br>
+              <div className="row">
+                <ul>
+                  <li><Link to={ '/locations' } className="footer-link" >Locations</Link></li>
+                  <li><Link to={ '/about' } className="footer-link" >About</Link></li>
+                  <li><Link to={ '/login' } className="footer-link" >Log In</Link></li>
+                  <li><Link to={ '/login' } className="footer-link" >Sign Up</Link></li>
+                </ul>
+              </div>
             </div>
             <div className="col-sm-2">
               <p>CONNECT</p>
