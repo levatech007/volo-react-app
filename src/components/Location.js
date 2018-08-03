@@ -20,7 +20,7 @@ class Location extends Component {
           </div>
         <div className="col-6">
           {/* <LocationMap lat={ this.props.location.latitude } long={this.props.location.longitude }/> */}
-          <GoogleMaps />
+          <GoogleMaps lat={ this.props.location.latitude } long={this.props.location.longitude } />
         </div>
       </div>
     )
