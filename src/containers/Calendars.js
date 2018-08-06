@@ -40,7 +40,6 @@ class Calendars extends Component {
     .then((res) => {
       return res.json();
     }).then((forecast) => {
-      console.log(forecast)
       this.setState({ weatherForecast: forecast })
     })
   }
@@ -95,7 +94,7 @@ class Calendars extends Component {
                               <li>Winds: { oneDay.wind_dir } { oneDay.wind_speed }mph</li>
                             </ul>
                             <textarea className="form-control" ref="notes"rows="3"></textarea>
-                            <button onClick={ this.createCalendarEntry(oneDay.id) } className="btn btn-primary"> + </button>
+                            <button onClick={ this.createCalendarEntry } className="btn btn-primary"> + </button>
                           </AccordionItemBody>
                         </AccordionItem>)
                     })

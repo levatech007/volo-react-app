@@ -108,11 +108,6 @@ class Footer extends Component {
               <p>STAY TUNED</p>
               <br></br>
               <div className="row">
-                <div className="col-8">
-                  <p>Join our mailing list</p>
-                </div>
-              </div>
-              <div className="row">
                 <div className="col-12">
                   { this.state.alert ?
                   <div className={ this.state.alertClass } role="alert">{ this.state.alertMsg }
@@ -127,7 +122,7 @@ class Footer extends Component {
                     className="form-control"
                     onChange={this.onEmailInputChange}
                     aria-describedby="emailHelp"
-                    placeholder="Enter your email ..."
+                    placeholder="Join our email list"
                   />
                 </div>
                 <div className="col-4">

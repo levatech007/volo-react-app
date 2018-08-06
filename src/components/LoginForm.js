@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import ChangePasswordModal from "./ChangePasswordModal.js";
 
 class LoginForm extends Component {
   constructor() {
@@ -6,13 +7,16 @@ class LoginForm extends Component {
       this.state = {
         user: {
           email: "",
-          password: ""
+          password: "",
+          changePasswordModal: false,
         }
       }
       this.onEmailInputChange = this.onEmailInputChange.bind(this);
       this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
       this.onFormSubmit = this.onFormSubmit.bind(this);
-    }
+      this.showChangePasswordModal = this.showChangePasswordModal.bind(this);
+      this.closeChangePasswordModal = this.closeChangePasswordModal.bind(this);
+     }
 
     onEmailInputChange(e) {
       this.setState({
@@ -42,6 +46,18 @@ class LoginForm extends Component {
           password: ""
         }
       })
+    }
+
+    showChangePasswordModal() {
+      this.setState({
+        changePasswordModal: true
+      });
+    }
+
+    closeChangePasswordModal() {
+      this.setState({
+        changePasswordModal: false
+      });
     }
 
   render() {
@@ -77,6 +93,10 @@ class LoginForm extends Component {
               />
             </div>
           </form>
+        </div>
+        <div className="row justify-content-md-center">
+          <a onClick={ this.showChangePasswordModal }><small>Forgot your password?</small></a>
+          { this.state.changePasswordModal ? <ChangePasswordModal close={ this.closeChangePasswordModal} /> : null }
         </div>
       </div>
     )
