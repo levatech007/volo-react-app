@@ -95,7 +95,7 @@ class LoginForm extends Component {
           </form>
         </div>
         <div className="row justify-content-md-center">
-          <a onClick={ this.showChangePasswordModal }><small>Forgot your password?</small></a>
+          <button className="plain-button" onClick={ this.showChangePasswordModal }><small>Forgot your password?</small></button>
           { this.state.changePasswordModal ? <ChangePasswordModal close={ this.closeChangePasswordModal} /> : null }
         </div>
       </div>

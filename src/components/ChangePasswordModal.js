@@ -61,7 +61,7 @@ class ChangePasswordModal extends Component {
                 <div className="col-md-12 contact-form">
                   <form onSubmit={ this.onFormSubmit } className="forms">
                     <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Name<span className="red-text">*</span></label>
+                      <label className="col-sm-3 col-form-label">Email<span className="red-text">*</span></label>
                       <div className="col-sm-9">
                         <input
                           type="email"

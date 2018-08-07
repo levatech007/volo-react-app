@@ -94,6 +94,20 @@ ul {
   color: #666666;
 }
 
+.plain-button {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 25px;
+}
+
+.plain-button:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
 /* ACCORDION */
 
 .u-position-absolute {
