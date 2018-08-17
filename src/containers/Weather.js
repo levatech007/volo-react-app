@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Auth from "j-toker";
 import Location from "../components/Location.js";
-import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody, } from "react-accessible-accordion";
+import { Accordion } from "react-accessible-accordion";
+import SingleDayWeather from "../components/SingleDayWeather.js"
 import "react-accessible-accordion/dist/minimal-example.css";
 
-class Calendars extends Component {
+class Weather extends Component {
   constructor(){
     super();
     this.state = {
@@ -13,7 +14,7 @@ class Calendars extends Component {
       userId: 0,
       reviewCount: 0,
     }
-    this.createCalendarEntry = this.createCalendarEntry.bind(this);
+    // this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }
 
   componentWillMount() {
@@ -44,8 +45,8 @@ class Calendars extends Component {
     })
   }
 
-  createCalendarEntry(id) {
-    console.log(id)
+  // createCalendarEntry(oneDay) {
+  //   console.log(oneDay)
 
     // $.ajaxSetup({
     //   beforeSend(xhr, settings) {
@@ -66,7 +67,7 @@ class Calendars extends Component {
     //       this.props.history.push(`/users/${this.state.userId}`)
     //   },
     // })
-  }
+  // }
 
   render() {
     return (
@@ -74,29 +75,10 @@ class Calendars extends Component {
         <div className="row background">
           <div className="col-md-12">
             { this.state.location.latitude && <Location location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
-            {this.state.weatherForecast[0] && <Accordion>
-              {this.state.weatherForecast.map(oneDay => {
-                  return(<AccordionItem>
-                          <AccordionItemTitle>
-                            <div className="row">
-                              <div className="col-md-6">
-                                <h4>{ oneDay.day_of_week }, { oneDay.month } { oneDay.day }</h4>
-                              </div>
-                              <div className="col-md-2 offset-md-4">
-                                <img className="weather-icon" src={ require(`../images/weather-icons/${oneDay.conditions_icon}.svg`)} alt = "" />
-                              </div>
-                            </div>
-                          </AccordionItemTitle>
-                          <AccordionItemBody>
-                            <p>Weather conditions: </p>
-                            <ul>
-                              <li>High: { oneDay.high_temp}F/ Low: { oneDay.low_temp }F</li>
-                              <li>Winds: { oneDay.wind_dir } { oneDay.wind_speed }mph</li>
-                            </ul>
-                            <textarea className="form-control" ref="notes"rows="3"></textarea>
-                            <button onClick={ this.createCalendarEntry } className="btn btn-primary"> + </button>
-                          </AccordionItemBody>
-                        </AccordionItem>)
+            { this.state.weatherForecast[0] &&
+              <Accordion>
+                {this.state.weatherForecast.map(oneDay => {
+                  return ( <SingleDayWeather oneDay={ oneDay } /> )
                     })
                   }
                 </Accordion>
@@ -108,4 +90,4 @@ class Calendars extends Component {
   }
 }
 
-export default Calendars;
+export default Weather;

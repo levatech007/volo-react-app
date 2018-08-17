@@ -45,7 +45,7 @@ class Locations extends Component {
 
   onSelectCalendarEntry(e) {
     e.preventDefault();
-    this.props.history.push(`/calendars/${this.state.selectedLocationId}`)
+    this.props.history.push(`/weather/${this.state.selectedLocationId}`)
   }
 
   render() {

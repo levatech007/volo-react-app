@@ -5,7 +5,7 @@ import About from "../containers/About.js";
 import Login from "../containers/Login.js";
 import Profile from "../containers/Profile.js";
 import Locations from "../containers/Locations.js";
-import Calendars from "../containers/Calendars.js";
+import Weather from "../containers/Weather.js";
 import SingleLocation from "../containers/SingleLocation.js";
 
 export default (
@@ -16,6 +16,6 @@ export default (
       <Route exact path="/users/:id" component={ Profile }/>
       <Route exact path="/locations" component={ Locations }/>
       <Route exact path="/locations/:id" component={ SingleLocation }/>
-      <Route exact path="/calendars/:id" component={ Calendars }/>
+      <Route exact path="/weather/:id" component={ Weather }/>
     </Switch>
 )
