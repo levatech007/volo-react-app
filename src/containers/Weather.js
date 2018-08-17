@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from "jquery";
 import Auth from "j-toker";
 import Location from "../components/Location.js";
 import { Accordion } from "react-accessible-accordion";
@@ -14,7 +15,7 @@ class Weather extends Component {
       userId: 0,
       reviewCount: 0,
     }
-    // this.createCalendarEntry = this.createCalendarEntry.bind(this);
+    this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }
 
   componentWillMount() {
@@ -45,29 +46,32 @@ class Weather extends Component {
     })
   }
 
-  // createCalendarEntry(oneDay) {
-  //   console.log(oneDay)
+  createCalendarEntry(oneDay, notes) {
+    console.log(oneDay)
+    console.log(notes)
 
-    // $.ajaxSetup({
-    //   beforeSend(xhr, settings) {
-    //     Auth.appendAuthHeaders(xhr, settings);
-    //   }
-    // });
-    // $.post({ // still need be set up
-    //   url: `${process.env.REACT_APP_BACKEND_URL}/calendars`,
-    //   data: {
-    //     location: this.state.location.name,
-    //     weekday: weather.date.weekday,
-    //     day: weather.date.day,
-    //     month: weather.date.monthname,
-    //     notes: notes,
-    //     icon_url: weather.icon_url,
-    //   },
-    //   success: (response) => {
-    //       this.props.history.push(`/users/${this.state.userId}`)
-    //   },
-    // })
-  // }
+    $.ajaxSetup({
+      beforeSend(xhr, settings) {
+        Auth.appendAuthHeaders(xhr, settings);
+      }
+    });
+    $.post({ // still need be set up
+      url: `${process.env.REACT_APP_BACKEND_URL}/calendars`,
+      data: {
+        location: this.state.location.name,
+        weekday: oneDay.day_of_week,
+        day: oneDay.day,
+        month: oneDay.month,
+        notes: notes,
+      },
+      success: (response) => {
+          this.props.history.push(`/users/${this.state.userId}`)
+      },
+      error: (response) => {
+        console.log("error")
+      }
+    })
+  }
 
   render() {
     return (
@@ -77,8 +81,8 @@ class Weather extends Component {
             { this.state.location.latitude && <Location location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
             { this.state.weatherForecast[0] &&
               <Accordion>
-                {this.state.weatherForecast.map(oneDay => {
-                  return ( <SingleDayWeather oneDay={ oneDay } /> )
+                {this.state.weatherForecast.map((oneDay, idx) => {
+                  return ( <SingleDayWeather oneDay={ oneDay } idx={ idx } createCalendarEntry={ this.createCalendarEntry }/> )
                     })
                   }
                 </Accordion>

@@ -2,16 +2,29 @@ import React, { Component } from "react";
 import { AccordionItem, AccordionItemTitle, AccordionItemBody, } from "react-accessible-accordion";
 
 class SingleDayWeather extends Component {
-  // constructor() {
-  //   super();
-  // }
+  constructor() {
+    super();
+    this.state = {
+      notes: "",
+    }
+    this.onNotesInputChange = this.onNotesInputChange.bind(this);
+    this.addCalendarEntry = this.addCalendarEntry.bind(this);
+  }
 
-  // addCalendarEntry() {
-  //   this.props.
-  // }
-  //
+  onNotesInputChange(e) {
+      this.setState({
+        notes: e.target.value
+      })
+  }
+
+  addCalendarEntry(e) {
+    e.preventDefault();
+    let oneDay =  this.props.oneDay;
+    let notes = this.state.notes;
+    this.props.createCalendarEntry(oneDay, notes);
+  }
+
   render() {
-    console.log(this.props.oneDay)
     return(
             <AccordionItem>
               <AccordionItemTitle>
@@ -30,8 +43,13 @@ class SingleDayWeather extends Component {
                   <li>High: { this.props.oneDay.high_temp}F/ Low: { this.props.oneDay.low_temp }F</li>
                   <li>Winds: { this.props.oneDay.wind_dir } { this.props.oneDay.wind_speed }mph</li>
                 </ul>
-                <textarea className="form-control" ref="notes"rows="3"></textarea>
-                {/* <button onClick={ this.addCalendarEntry} className="btn btn-primary"> + </button> */}
+                <textarea
+                  className="form-control"
+                  ref="notes"
+                  rows="3"
+                  onChange={this.onNotesInputChange}
+                  />
+                <button onClick={ this.addCalendarEntry } className="btn btn-primary"> + </button>
               </AccordionItemBody>
             </AccordionItem>
     )
