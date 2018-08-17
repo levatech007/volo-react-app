@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Auth from "j-toker";
+import Errors from "../components/Errors.js"
 
 class ChangePasswordModal extends Component {
   constructor(){
@@ -7,9 +8,10 @@ class ChangePasswordModal extends Component {
     this.state = {
         email: "",
         sentEmail: "",
-        error: false,
-        errorMsg: "",
-        submitted: false
+        alert: false,
+        alertMessage: "",
+        submitted: false,
+        alertStyle: "",
     }
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
     this.onFormSubmit= this.onFormSubmit.bind(this);
@@ -28,19 +30,21 @@ class ChangePasswordModal extends Component {
    })
      .then((resp) => {
        this.setState({
-         sent_email: this.state.email,
+         sentEmail: this.state.email,
          email: "",
          submitted: true,
-         error: false,
-         errorMsg: "",
+         alert: true,
+         alertStyle: "alert alert-success",
+         alertMessage: "Success!",
        });
      }).fail((resp) => {
        this.setState({
-         sent_email: "",
+         sentEmail: "",
          email: "",
          submitted: false,
-         error: true,
-         errorMsg: resp.data.errors,
+         alert: true,
+         alertStyle: "alert alert-danger",
+         alertMessage: resp.data.errors,
        });
      })
    }
@@ -56,6 +60,7 @@ class ChangePasswordModal extends Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+            { this.state.alert ? <Errors style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
             <div className="modal-body">
               <div className="row justify-content-center">
                 <div className="col-md-12 contact-form">
