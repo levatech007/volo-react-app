@@ -85,7 +85,6 @@ class ContactModal extends Component {
   });
 }
 
-
   render() {
     return (
         <div className="modal fade show" style={{display: 'block'}}>

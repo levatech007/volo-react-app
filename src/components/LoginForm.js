@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ChangePasswordModal from "./ChangePasswordModal.js";
+import RequestPasswordChangeModal from "./RequestPasswordChangeModal.js";
 
 class LoginForm extends Component {
   constructor() {
@@ -8,14 +8,14 @@ class LoginForm extends Component {
         user: {
           email: "",
           password: "",
-          changePasswordModal: false,
+          requestPasswordChangeModal: false,
         }
       }
       this.onEmailInputChange = this.onEmailInputChange.bind(this);
       this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
       this.onFormSubmit = this.onFormSubmit.bind(this);
-      this.showChangePasswordModal = this.showChangePasswordModal.bind(this);
-      this.closeChangePasswordModal = this.closeChangePasswordModal.bind(this);
+      this.showRequestPasswordChangeModal = this.showRequestPasswordChangeModal.bind(this);
+      this.closeRequestPasswordChangeModal = this.closeRequestPasswordChangeModal.bind(this);
      }
 
     onEmailInputChange(e) {
@@ -48,15 +48,15 @@ class LoginForm extends Component {
       })
     }
 
-    showChangePasswordModal() {
+    showRequestPasswordChangeModal() {
       this.setState({
-        changePasswordModal: true
+        requestPasswordChangeModal: true
       });
     }
 
-    closeChangePasswordModal() {
+    closeRequestPasswordChangeModal() {
       this.setState({
-        changePasswordModal: false
+        requestPasswordChangeModal: false
       });
     }
 
@@ -95,8 +95,8 @@ class LoginForm extends Component {
           </form>
         </div>
         <div className="row justify-content-md-center">
-          <button className="plain-button" onClick={ this.showChangePasswordModal }><small>Forgot your password?</small></button>
-          { this.state.changePasswordModal ? <ChangePasswordModal close={ this.closeChangePasswordModal} /> : null }
+          <button className="plain-button" onClick={ this.showRequestPasswordChangeModal }><small>Forgot your password?</small></button>
+          { this.state.requestPasswordChangeModal ? <RequestPasswordChangeModal close={ this.closeRequestPasswordChangeModal} /> : null }
         </div>
       </div>
     )

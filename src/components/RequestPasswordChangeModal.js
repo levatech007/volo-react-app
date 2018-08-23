@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Auth from "j-toker";
 import Errors from "../components/Errors.js"
 
-class ChangePasswordModal extends Component {
+class RequestPasswordChangeModal extends Component {
   constructor(){
     super();
     this.state = {
@@ -97,4 +97,4 @@ class ChangePasswordModal extends Component {
   }
 }
 
-export default ChangePasswordModal;
+export default RequestPasswordChangeModal;
