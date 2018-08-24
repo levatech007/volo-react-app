@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import Auth from "j-toker";
 import LoginForm from "../components/LoginForm.js"
 import SignupForm from "../components/SignUpForm.js"
-import Errors from "../components/Errors.js"
+import Alerts from "../components/Alerts.js"
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errors: ""
+      errors: "",
+      alertStyle: "alert alert-danger",
     }
     this.processLoginForm = this.processLoginForm.bind(this);
     this.processSignupForm = this.processSignupForm.bind(this);
@@ -55,7 +56,7 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Errors errors={ this.state.errors } /> : null }
+        { this.state.errors? <Alerts errors={ this.state.errors } style={ this.state.alertStyle } /> : null }
         <div className="row align-items-center background">
           <LoginForm processLoginForm={ this.processLoginForm }/>
           <SignupForm processSignupForm={ this.processSignupForm } />

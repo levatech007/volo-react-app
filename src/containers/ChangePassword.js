@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Errors from "../components/Errors.js"
+import Alerts from "../components/Alerts.js"
 import ReCAPTCHA from "react-google-recaptcha";
 
 class ChangePassword extends Component {
@@ -49,7 +49,7 @@ class ChangePassword extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Errors errors={ this.state.errors } /> : null }
+        { this.state.errors? <Alerts errors={ this.state.errors } /> : null }
         <div className="row align-items-center background">
           <div className="row justify-content-md-center">
             <form onSubmit={ this.onNewPasswordSubmit } className="forms">

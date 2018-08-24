@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LocationMarkerLg from "../images/location-marker-lg.svg";
-import Errors from "../components/Errors.js"
+import Alerts from "../components/Alerts.js"
 
 class Locations extends Component {
   constructor() {
@@ -9,7 +9,8 @@ class Locations extends Component {
       locations: [],
       selectedLocationId: 0,
       selectedAirportCode: "",
-      errors: ""
+      errors: "",
+      alertStyle: "alert alert-danger",
     }
     this.onClickAboutLocations = this.onClickAboutLocations.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
@@ -51,7 +52,7 @@ class Locations extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Errors errors={ this.state.errors }/> : null }
+        { this.state.errors? <Alerts errors={ this.state.errors } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
           <div className="col-12">
           <div className="row justify-content-center">

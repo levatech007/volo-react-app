@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Auth from "j-toker";
-import Errors from "../components/Errors.js"
+import Alerts from "../components/Alerts.js"
 
 class RequestPasswordChangeModal extends Component {
   constructor(){
@@ -60,7 +60,7 @@ class RequestPasswordChangeModal extends Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            { this.state.alert ? <Errors style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
+            { this.state.alert ? <Alerts style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
             <div className="modal-body">
               <div className="row justify-content-center">
                 <div className="col-md-12 contact-form">
