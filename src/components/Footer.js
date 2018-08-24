@@ -5,6 +5,7 @@ import Instagram from "../images/social_icons/instagram-logo.png";
 import Twitter from "../images/social_icons/twitter-logo.png";
 import Facebook from "../images/social_icons/facebook-logo.png";
 import ContactModal from "./ContactModal.js";
+import Alerts from "./Alerts.js"
 
 class Footer extends Component {
   constructor() {
@@ -13,7 +14,7 @@ class Footer extends Component {
       showContactModal: false,
       email: "",
       alert: false,
-      alertClass: "",
+      alertStyle: "",
       alertMsg: "",
     }
     this.showContactModal = this.showContactModal.bind(this);
@@ -57,14 +58,14 @@ class Footer extends Component {
       success: (data) => {
         this.setState({
           alert: true,
-          alertClass: "alert alert-success",
+          alertStyle: "alert alert-success",
           alertMsg: "Thank you!",
         })
       },
       error: (error) => {
         this.setState({
           alert: true,
-          alertClass: "alert alert-danger",
+          alertStyle: "alert alert-danger",
           alertMsg: "Oops...",
         })
       }
@@ -89,7 +90,7 @@ class Footer extends Component {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-2 col-md-6">
+            <div className="col-lg-3 col-md-6">
               <p>CONNECT</p>
               <br></br>
               <div className="row">
@@ -110,8 +111,7 @@ class Footer extends Component {
               <div className="row">
                 <div className="col-12">
                   { this.state.alert ?
-                  <div className={ this.state.alertClass } role="alert">{ this.state.alertMsg }
-                  </div> : null
+                  <Alerts style={ this.state.alertStyle } alert={ this.state.alertMsg } /> : null
                   }
                 </div>
               </div>
@@ -121,7 +121,6 @@ class Footer extends Component {
                     type="email"
                     className="form-control"
                     onChange={this.onEmailInputChange}
-                    aria-describedby="emailHelp"
                     placeholder="Join our email list"
                   />
                 </div>
@@ -134,7 +133,7 @@ class Footer extends Component {
               </div>
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-2 col-md-6 offset-md-1">
                 <p>CONTACT</p>
                 <br></br>
                 <a onClick={ this.showContactModal } >Contact Us</a>

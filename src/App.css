@@ -33,6 +33,7 @@
 
 ul {
   list-style: none;
+  padding: 15px;
 }
 
 .card-body, .card-header {
