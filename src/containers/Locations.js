@@ -52,7 +52,7 @@ class Locations extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Alerts errors={ this.state.errors } style={ this.state.alertStyle } /> : null }
+        { this.state.errors? <Alerts alert={ this.state.errors } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
           <div className="col-12">
           <div className="row justify-content-center">

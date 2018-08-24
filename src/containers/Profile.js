@@ -25,6 +25,7 @@ class Profile extends Component {
     $.get({
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
+        console.log(data)
         this.setState({ calendar: data.calendars })
       },
       error: (data) => {

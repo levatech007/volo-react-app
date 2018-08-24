@@ -10,6 +10,7 @@ class ChangePassword extends Component {
       confirmPassword: "",
       errors: "",
       recaptchaResponse: "",
+      alertStyle: "alert alert-danger",
     }
     this.onNewPasswordInputChange = this.onNewPasswordInputChange.bind(this);
     this.onConfirmPasswordInputChange = this.onConfirmPasswordInputChange.bind(this);
@@ -49,7 +50,7 @@ class ChangePassword extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Alerts errors={ this.state.errors } /> : null }
+        { this.state.errors? <Alerts alert={ this.state.errors } style={ this.state.alertStyle } /> : null }
         <div className="row align-items-center background">
           <div className="row justify-content-md-center">
             <form onSubmit={ this.onNewPasswordSubmit } className="forms">

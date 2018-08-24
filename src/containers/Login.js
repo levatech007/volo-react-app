@@ -26,7 +26,7 @@ class Login extends Component {
       }).then((resp) => {
         this.props.history.push(`/users/${resp.data.id}`)
       }).fail((resp) => {
-        this.setState({ errors: resp.data.errors })
+        this.setState({ errors: resp.reason })
       })
     }
 
@@ -56,7 +56,7 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Alerts errors={ this.state.errors } style={ this.state.alertStyle } /> : null }
+        { this.state.errors? <Alerts alert={ this.state.errors } style={ this.state.alertStyle } /> : null }
         <div className="row align-items-center background">
           <LoginForm processLoginForm={ this.processLoginForm }/>
           <SignupForm processSignupForm={ this.processSignupForm } />
