@@ -69,6 +69,7 @@ class Weather extends Component {
       },
       error: (response) => {
         console.log("error")
+        // ADD ALERT that user must be logged in
       }
     })
   }
@@ -82,7 +83,7 @@ class Weather extends Component {
             { this.state.weatherForecast[0] &&
               <Accordion>
                 {this.state.weatherForecast.map((oneDay, idx) => {
-                  return ( <SingleDayWeather oneDay={ oneDay } idx={ idx } createCalendarEntry={ this.createCalendarEntry }/> )
+                  return ( <SingleDayWeather userId={this.state.userId} oneDay={ oneDay } idx={ idx } createCalendarEntry={ this.createCalendarEntry }/> )
                     })
                   }
                 </Accordion>

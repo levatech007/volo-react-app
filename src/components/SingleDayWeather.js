@@ -43,13 +43,21 @@ class SingleDayWeather extends Component {
                   <li>High: { this.props.oneDay.high_temp}F/ Low: { this.props.oneDay.low_temp }F</li>
                   <li>Winds: { this.props.oneDay.wind_dir } { this.props.oneDay.wind_speed }mph</li>
                 </ul>
-                <textarea
-                  className="form-control"
-                  ref="notes"
-                  rows="3"
-                  onChange={this.onNotesInputChange}
-                  />
-                <button onClick={ this.addCalendarEntry } className="btn btn-primary"> + </button>
+                { this.props.userId ?
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <textarea
+                        className="form-control"
+                        ref="notes"
+                        rows="3"
+                        onChange={this.onNotesInputChange}
+                        />
+                      <button onClick={ this.addCalendarEntry } className="btn btn-primary"> + </button>
+                    </div>
+                  </div>
+                  :
+                  null
+                }
               </AccordionItemBody>
             </AccordionItem>
     )
