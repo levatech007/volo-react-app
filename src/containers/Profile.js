@@ -51,6 +51,7 @@ class Profile extends Component {
   }
 
   render(){
+    console.log(this.state.calendar)
     return(
       <div className="container">
         <div className="row background">
@@ -65,27 +66,29 @@ class Profile extends Component {
             </button>
           </div>
           <div className="col-12">
-            {this.state.calendar.notes ? null : <p>You have no calendar entries yet!</p>}
-            { this.state.calendar.notes &&
+            <h3>Upcoming events:</h3>
+            {this.state.calendar[0] ?
             <Accordion>
-              {this.state.calendar.map(oneEntry => {
-                  return(<AccordionItem>
+              {this.state.calendar.map((oneEntry, idx) => {
+                  return(<AccordionItem key={ idx }>
                           <AccordionItemTitle>
-                            <h4>{ oneEntry.date.weekday }, { oneEntry.date.day } { oneEntry.date.monthname }</h4>
-                            <img src={ oneEntry.icon_url } alt = "" />
+                            <h4>{ oneEntry.weekday }, { oneEntry.day } { oneEntry.month } @ { oneEntry.location }</h4>
+                            {/* <img src={ oneEntry.icon_url } alt = "" /> */}
                           </AccordionItemTitle>
                           <AccordionItemBody>
                             <p>Weather conditions: </p>
-                            <ul>
+                            {/* <ul>
                               <li>High: { oneEntry.high.fahrenheit }F/ Low: { oneEntry.low.fahrenheit }F</li>
                               <li>Winds: { oneEntry.avewind.mph }mph</li>
-                            </ul>
+                            </ul> */}
                             <p>{ oneEntry.notes }</p>
                           </AccordionItemBody>
                         </AccordionItem>)
                   })
                 }
               </Accordion>
+              :
+              <p>You have no calendar entries yet!</p>
             }
             </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import Auth from "j-toker";
 import { AccordionItem, AccordionItemTitle, AccordionItemBody, } from "react-accessible-accordion";
 
 class SingleDayWeather extends Component {
@@ -43,6 +44,7 @@ class SingleDayWeather extends Component {
                   <li>High: { this.props.oneDay.high_temp}F/ Low: { this.props.oneDay.low_temp }F</li>
                   <li>Winds: { this.props.oneDay.wind_dir } { this.props.oneDay.wind_speed }mph</li>
                 </ul>
+                {/* { Auth.user ? */}
                 { this.props.userId ?
                   <div className="row">
                     <div className="col-sm-6">
