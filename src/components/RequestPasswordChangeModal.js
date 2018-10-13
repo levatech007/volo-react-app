@@ -15,6 +15,8 @@ class RequestPasswordChangeModal extends Component {
     }
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
     this.onFormSubmit= this.onFormSubmit.bind(this);
+    this.showPasswordChangeForm = this.showPasswordChangeForm.bind(this);
+    this.showSentConfirmation = this.showSentConfirmation.bind(this);
   }
 
   onEmailInputChange(e) {
@@ -27,6 +29,7 @@ class RequestPasswordChangeModal extends Component {
     e.preventDefault();
     Auth.requestPasswordReset({
      email: this.state.email,
+     redirect_url: `${process.env.REACT_APP_REDIRECT_URL}`,
    })
      .then((resp) => {
        this.setState({
@@ -49,6 +52,48 @@ class RequestPasswordChangeModal extends Component {
      })
    }
 
+   showPasswordChangeForm() {
+     return(
+       <div className="row justify-content-center">
+         <div className="col-md-12 contact-form">
+           <form onSubmit={ this.onFormSubmit } className="forms">
+             <div className="form-group row">
+               <label className="col-sm-3 col-form-label">Email<span className="red-text">*</span></label>
+               <div className="col-sm-9">
+                 <input
+                   type="email"
+                   className="form-control"
+                   placeholder="Your email"
+                   onChange={this.onEmailInputChange}
+                 />
+               </div>
+             </div>
+             <div className="row justify-content-center submit-btn">
+               <div className="col-md-9 offset-md-3">
+                 <input
+                   type="submit"
+                   className="btn btn-primary"
+                   value="Submit"
+                 />
+                 <button type="button" className="btn" onClick={ this.props.close }>Cancel</button>
+               </div>
+             </div>
+           </form>
+         </div>
+       </div>
+     )
+   }
+
+   showSentConfirmation() {
+     return(
+       <div className="row justify-content-center">
+         <div className="col-sm-10">
+           <p>Please check you email for further instructions on how you can change your password.</p>
+        </div>
+       </div>
+     )
+   }
+
   render() {
     return(
       <div className="modal fade show" style={{display: 'block'}}>
@@ -62,33 +107,7 @@ class RequestPasswordChangeModal extends Component {
             </div>
             { this.state.alert ? <Alerts style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
             <div className="modal-body">
-              <div className="row justify-content-center">
-                <div className="col-md-12 contact-form">
-                  <form onSubmit={ this.onFormSubmit } className="forms">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Email<span className="red-text">*</span></label>
-                      <div className="col-sm-9">
-                        <input
-                          type="email"
-                          className="form-control"
-                          placeholder="Your email"
-                          onChange={this.onEmailInputChange}
-                        />
-                      </div>
-                    </div>
-                    <div className="row justify-content-center submit-btn">
-                      <div className="col-md-9 offset-md-3">
-                        <input
-                          type="submit"
-                          className="btn btn-primary"
-                          value="Submit"
-                        />
-                        <button type="button" className="btn" onClick={ this.props.close }>Cancel</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
+              { this.state.submitted ? this.showSentConfirmation() : this.showPasswordChangeForm()}
             </div>
           </div>
         </div>
