@@ -13,10 +13,24 @@ class ChangePassword extends Component {
       recaptchaResponse: "",
       alertStyle: "",
       alertMessage: "",
+      userSignedIn: false,
+      userName: "",
+      userId: "",
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onUpdatePassword = this.onUpdatePassword.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentWillMount() {
+    Auth.validateToken()
+    .then((user) => {
+      this.setState({
+        userSignedIn: user.signedIn,
+        userName: user.name,
+        userId: user.id,
+      })
+    })
   }
 
   handleInputChange(e) {
@@ -28,8 +42,6 @@ class ChangePassword extends Component {
       [name]: value
     })
   }
-
-
 
   onUpdatePassword(e) {
     e.preventDefault();
@@ -79,6 +91,7 @@ class ChangePassword extends Component {
 }
 
   render() {
+    console.log(this.state.userName)
     return (
       <div className="container">
         { this.state.alert? <Alerts alert={ this.state.alertMessage } style={ this.state.alertStyle } /> : null }
