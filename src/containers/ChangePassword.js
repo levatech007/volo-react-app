@@ -14,27 +14,24 @@ class ChangePassword extends Component {
       alertStyle: "",
       alertMessage: "",
     }
-    this.onNewPasswordInputChange = this.onNewPasswordInputChange.bind(this);
-    this.onConfirmPasswordInputChange = this.onConfirmPasswordInputChange.bind(this);
-    this.onNewPasswordSubmit = this.onNewPasswordSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onUpdatePassword = this.onUpdatePassword.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
-  onNewPasswordInputChange(e) {
+  handleInputChange(e) {
+    e.preventDefault()
+    const target = e.target
+    const name = target.name
+    const value = target.value
     this.setState({
-      newPassword: e.target.value,
-      confirmPassword: this.state.confirmPassword,
+      [name]: value
     })
   }
 
-  onConfirmPasswordInputChange(e) {
-    this.setState({
-      newPassword: this.state.newPassword,
-      confirmPassword: e.target.value,
-    })
-  }
 
-  onNewPasswordSubmit(e) {
+
+  onUpdatePassword(e) {
     e.preventDefault();
     if (this.state.recaptchaResponse) {
       Auth.updatePassword({
@@ -87,21 +84,25 @@ class ChangePassword extends Component {
         { this.state.alert? <Alerts alert={ this.state.alertMessage } style={ this.state.alertStyle } /> : null }
         <div className="row align-items-center background">
           <div className="row justify-content-md-center">
-            <form onSubmit={ this.onNewPasswordSubmit } className="forms">
+            <form onSubmit={ this.onUpdatePassword } className="forms">
               <div className="form-group">
                 <input
+                  name="newPassword"
                   type="password"
                   className="form-control"
                   placeholder="Password"
-                  onChange={ this.onNewPasswordInputChange }
+                  onChange={ this.handleInputChange }
+                  value={ this.state.newPassword }
                 />
               </div>
               <div className="form-group">
                 <input
+                  name="confirmPassword"
                   type="password"
                   className="form-control"
                   placeholder="Confirm password"
-                  onChange={ this.onConfirmPasswordInputChange }
+                  onChange={ this.handleInputChange }
+                  value={ this.state.confirmPassword }
                 />
               </div>
               <div className="row justify-content-center">
