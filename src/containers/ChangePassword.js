@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Alerts from "../components/Alerts.js"
+import Auth from "j-toker";
+import Alerts from "../components/Alerts.js";
 import ReCAPTCHA from "react-google-recaptcha";
 
 class ChangePassword extends Component {
@@ -8,9 +9,10 @@ class ChangePassword extends Component {
     this.state = {
       newPassword: "",
       confirmPassword: "",
-      errors: "",
+      alert: false,
       recaptchaResponse: "",
-      alertStyle: "alert alert-danger",
+      alertStyle: "",
+      alertMessage: "",
     }
     this.onNewPasswordInputChange = this.onNewPasswordInputChange.bind(this);
     this.onConfirmPasswordInputChange = this.onConfirmPasswordInputChange.bind(this);
@@ -35,9 +37,41 @@ class ChangePassword extends Component {
   onNewPasswordSubmit(e) {
     e.preventDefault();
     if (this.state.recaptchaResponse) {
-      console.log("OK!")
+      Auth.updatePassword({
+        password: this.state.newPassword,
+        password_confirmation: this.state.confirmPassword,
+      })
+      .then((resp) => {
+        console.log(resp)
+        this.setState({
+          newPassword: "",
+          confirmPassword: "",
+          alert: true,
+          recaptchaResponse: "",
+          alertStyle: "alert alert-success",
+          alertMessage: "Success!",
+        });
+      }).fail((resp) => {
+        console.log(resp)
+        this.setState({
+          newPassword: "",
+          confirmPassword: "",
+          alert: true,
+          recaptchaResponse: "",
+          alertStyle: "alert alert-danger",
+          alertMessage: resp.reason,
+        });
+      })
     } else {
-      console.log("try again")
+      console.log("Recaptcha not ok!")
+      this.setState({
+        newPassword: "",
+        confirmPassword: "",
+        alert: true,
+        recaptchaResponse: "",
+        alertStyle: "alert alert-danger",
+        alertMessage: "Please try again",
+      });
     }
   }
 
@@ -50,7 +84,7 @@ class ChangePassword extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Alerts alert={ this.state.errors } style={ this.state.alertStyle } /> : null }
+        { this.state.alert? <Alerts alert={ this.state.alertMessage } style={ this.state.alertStyle } /> : null }
         <div className="row align-items-center background">
           <div className="row justify-content-md-center">
             <form onSubmit={ this.onNewPasswordSubmit } className="forms">
