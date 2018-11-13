@@ -18,6 +18,6 @@ export default (
       <Route exact path="/locations" component={ Locations }/>
       <Route exact path="/locations/:id" component={ SingleLocation }/>
       <Route exact path="/weather/:id" component={ Weather }/>
-      <Route exact path="/password" component={ ChangePassword } />
+      <Route path="/password" component={ ChangePassword } />
     </Switch>
 )

@@ -8,7 +8,10 @@ import registerServiceWorker from "./registerServiceWorker";
 import { BrowserRouter } from "react-router-dom";
 
 $.auth.configure({
-  apiUrl: `${process.env.REACT_APP_BACKEND_URL}`
+  apiUrl: `${process.env.REACT_APP_BACKEND_URL}`,
+  passwordResetSuccessUrl: function() {
+    return "http://localhost:3000/password";
+  },
 });
 
 ReactDOM.render(

@@ -29,7 +29,6 @@ class RequestPasswordChangeModal extends Component {
     e.preventDefault();
     Auth.requestPasswordReset({
      email: this.state.email,
-     redirect_url: `${process.env.REACT_APP_REDIRECT_URL}`,
    })
      .then((resp) => {
        this.setState({
