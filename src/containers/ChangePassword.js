@@ -10,9 +10,9 @@ class ChangePassword extends Component {
       newPassword: "",
       confirmPassword: "",
       alert: false,
-      recaptchaResponse: "",
       alertStyle: "",
       alertMessage: "",
+      recaptchaResponse: "",
       userSignedIn: false,
       userName: "",
       userId: "",
@@ -22,7 +22,7 @@ class ChangePassword extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     Auth.validateToken()
     .then((user) => {
       this.setState({
@@ -51,17 +51,16 @@ class ChangePassword extends Component {
         password_confirmation: this.state.confirmPassword,
       })
       .then((resp) => {
-        console.log(resp)
         this.setState({
           newPassword: "",
           confirmPassword: "",
           alert: true,
           recaptchaResponse: "",
           alertStyle: "alert alert-success",
-          alertMessage: "Success!",
+          alertMessage: resp.message,
         });
+        //redirect user to login page? or profile? after a set time?
       }).fail((resp) => {
-        console.log(resp)
         this.setState({
           newPassword: "",
           confirmPassword: "",
@@ -70,9 +69,9 @@ class ChangePassword extends Component {
           alertStyle: "alert alert-danger",
           alertMessage: resp.reason,
         });
+        //redirect user to login page?
       })
     } else {
-      console.log("Recaptcha not ok!")
       this.setState({
         newPassword: "",
         confirmPassword: "",
@@ -84,6 +83,10 @@ class ChangePassword extends Component {
     }
   }
 
+  componentWillUnmount() {
+    //log user out
+  }
+
   onChange(response) {
     this.setState({
     recaptchaResponse: response
@@ -91,7 +94,6 @@ class ChangePassword extends Component {
 }
 
   render() {
-    console.log(this.state.userName)
     return (
       <div className="container">
         { this.state.alert? <Alerts alert={ this.state.alertMessage } style={ this.state.alertStyle } /> : null }

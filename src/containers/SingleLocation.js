@@ -13,7 +13,7 @@ class Locations extends Component {
     this.state = {
       location: {latitude: null, longitude: null},
       reviews: [],
-      reviewCount: "",
+      reviewCount: 0,
       showForm: false,
       latitude: 0,
       longitude: 0,
@@ -66,6 +66,7 @@ class Locations extends Component {
         this.setState({
           reviews: newReview.concat(currentReviews),
           showForm: false,
+          reviewCount: this.state.reviewCount + 1
         })
       },
     });
