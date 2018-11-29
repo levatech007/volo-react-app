@@ -29,7 +29,6 @@ class Locations extends Component {
     .then((res) => {
       return res.json();
     }).then((location) => {
-      console.log(location)
       this.setState({
         location: location,
         reviewCount: location.reviews.length,

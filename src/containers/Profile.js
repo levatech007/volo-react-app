@@ -10,7 +10,9 @@ class Profile extends Component {
     super();
     this.state = {
       calendar: [],
+      reviews: [],
       date: null,
+      menuTabs: ["Upcoming events", "Past events", "My reviews"]
     }
     this.onDeleteAccount = this.onDeleteAccount.bind(this);
   }
@@ -26,9 +28,13 @@ class Profile extends Component {
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
         console.log(data)
-        this.setState({ calendar: data.calendars })
+        this.setState({
+          calendar: data.calendars,
+          reviews: data.reviews
+        })
       },
       error: (data) => {
+        console.log(data)
       }
     });
 
@@ -51,7 +57,6 @@ class Profile extends Component {
   }
 
   render(){
-    console.log(this.state.calendar)
     return(
       <div className="container">
         <div className="row background">
@@ -66,7 +71,14 @@ class Profile extends Component {
             </button>
           </div>
           <div className="col-12">
-            <h3>Upcoming events:</h3>
+            <div className="row">
+              {
+                this.state.menuTabs.map((tab, idx) => {
+                  return( <div className="col-md-4"><h3>{ tab }</h3></div> )
+                })
+              }
+            </div>
+
             {this.state.calendar[0] ?
             <Accordion>
               {this.state.calendar.map((oneEntry, idx) => {
