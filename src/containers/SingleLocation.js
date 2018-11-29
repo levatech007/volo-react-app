@@ -84,15 +84,15 @@ class Locations extends Component {
               :
               (<div>
                 <Accordion>
-                  {this.state.reviews.map(oneReview => {
-                      return(<AccordionItem>
+                  {this.state.reviews.map((oneReview, idx) => {
+                      return(<AccordionItem key={ idx }>
                               <AccordionItemTitle>
                                 <div className="row">
                                   <div className="col-9">
                                     <h4>{ oneReview.title }</h4><p>by {oneReview.author}</p>
                                   </div>
                                   <div className="col-3">
-                                    <ReactStars count={5} value={ oneReview.rating } edit={ false } size={24} color2={"#ffd700"} />
+                                    <ReactStars count={5} value={ parseFloat(oneReview.rating) } edit={ false } size={24} color2={"#ffd700"} />
                                   </div>
                                 </div>
                                 <div className="row justify-content-center">

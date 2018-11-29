@@ -62,7 +62,7 @@ class Locations extends Component {
             <div className="col-sm-12 col-md-8">
               <h2>Where do you want to go plane spotting?</h2>
               <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
-                <option defaultValue selected disabled>Choose your location</option>
+                <option defaultValue disabled>Choose your location</option>
                   { this.state.locations.map((location, idx) => {
                     return(
                       <option value={location.id} key={idx}>{location.name} @ {location.airport}</option>
