@@ -42,7 +42,8 @@ class Weather extends Component {
     .then((res) => {
       return res.json();
     }).then((forecast) => {
-      this.setState({ weatherForecast: forecast })
+      console.log(forecast)
+      this.setState({ weatherForecast: forecast.forecast })
     })
   }
 
@@ -75,6 +76,7 @@ class Weather extends Component {
   }
 
   render() {
+    console.log(this.state.weatherForecast)
     return (
       <div className="container">
         <div className="row background">
