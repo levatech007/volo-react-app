@@ -101,7 +101,7 @@ ul {
     color: #FFFFFF;
     text-decoration: none;
     display: inline-block;
-    margin-top: 25px;
+    padding: 0;
 }
 
 .plain-button:hover {

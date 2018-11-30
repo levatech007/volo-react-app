@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import $ from "jquery";
 import ReCAPTCHA from "react-google-recaptcha";
 
 class ContactModal extends Component {
@@ -8,15 +9,15 @@ class ContactModal extends Component {
       message: {
         name: "",
         email: "",
-        text: "",
-        recaptchaResponse: "",
-        error: false,
-        submitted: false
-      }
+        body: "",
+      },
+      recaptchaResponse: "",
+      error: false,
+      submitted: false
     }
     this.onNameInputChange = this.onNameInputChange.bind(this);
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
-    this.onTextInputChange = this.onTextInputChange.bind(this);
+    this.onBodyInputChange = this.onBodyInputChange.bind(this);
     this.onFormSubmit= this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -26,7 +27,7 @@ class ContactModal extends Component {
       message: {
         name: e.target.value,
         email: this.state.message.email,
-        text: this.state.message.text,
+        body: this.state.message.body,
       }
     })
   }
@@ -36,46 +37,60 @@ class ContactModal extends Component {
       message: {
         name: this.state.message.name,
         email: e.target.value,
-        text: this.state.message.text,
+        body: this.state.message.body,
       }
     })
   }
 
-  onTextInputChange(e) {
+  onBodyInputChange(e) {
     this.setState({
       message: {
         name: this.state.message.name,
         email: this.state.message.email,
-        text: e.target.value
+        body: e.target.value
       }
     })
   }
 
+  // add validations
+
   onFormSubmit(e) {
     e.preventDefault();
     if (this.state.recaptchaResponse) {
-      let message = this.state.message
-      console.log(message)
-      this.setState({
-        message: {
-          name: "",
-          email: "",
-          text: "",
-          error: false,
-          submitted: true,
+      $.post({
+        url: `${process.env.REACT_APP_BACKEND_URL}/message`,
+        data: {
+          message: this.state.message
+        },
+        success: (response) => {
+          console.log(response)
+          this.setState({
+            message: {
+              name: "",
+              email: "",
+              body: ""
+            },
+            recaptchaResponse: "",
+            error: false,
+            submitted: true,
+          })
+        },
+        error: (error) => {
+          console.log(error)
+          this.setState({
+            message: {
+              name: "",
+              email: "",
+              body: "",
+            },
+            recaptchaResponse: "",
+            error: true,
+            submitted: false,
+          })
         }
       })
     } else {
-      this.setState({
-        message: {
-          name: "",
-          email: "",
-          text: "",
-          recaptchaResponse: "",
-          error: true,
-          submitted: false,
-        }
-      })
+
     }
   }
 
@@ -124,6 +139,7 @@ class ContactModal extends Component {
                             className="form-control"
                             placeholder="Your name"
                             onChange={this.onNameInputChange}
+                            value= { this.state.message.name }
                           />
                         </div>
                       </div>
@@ -136,6 +152,7 @@ class ContactModal extends Component {
                             className="form-control"
                             placeholder="Your email"
                             onChange={this.onEmailInputChange}
+                            value={ this.state.message.email }
                           />
                         </div>
                       </div>
@@ -144,8 +161,10 @@ class ContactModal extends Component {
                         <div className="col-sm-9">
                           <textarea
                             rows="4"
+                            name="body"
                             placeholder="Your message here"
-                            onChange={this.onTextInputChange}
+                            onChange={this.onBodyInputChange}
+                            value={ this.state.message.body }
                             >
                             </textarea>
                         </div>

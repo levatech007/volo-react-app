@@ -80,7 +80,6 @@ class Footer extends Component {
           <div className="row justify-content-center">
             <div className="col-lg-2 col-md-6">
               <p>VOLO</p>
-              <br></br>
               <div className="row">
                 <ul>
                   <li><Link to={ '/locations' } className="footer-link" >Locations</Link></li>
@@ -127,7 +126,7 @@ class Footer extends Component {
                 <div className="col-4">
                   <button
                     type="submit"
-                    className="btn btn-primary"
+                    className="btn btn-light"
                     onClick={ this.onEmailListSubmit }>Submit</button>
                 </div>
               </div>
@@ -136,7 +135,7 @@ class Footer extends Component {
             <div className="col-lg-2 col-md-6 offset-md-1">
                 <p>CONTACT</p>
                 <br></br>
-                <a onClick={ this.showContactModal } >Contact Us</a>
+                <button className="plain-button" onClick={ this.showContactModal }>Contact Us</button>
             </div>
           </div>
           <div className="row justify-content-center copyright">
