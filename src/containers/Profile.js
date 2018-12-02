@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import Auth from "j-toker"
+import Auth from "j-toker";
 import { Accordion,AccordionItem,AccordionItemTitle,AccordionItemBody,} from "react-accessible-accordion";
-import Profileimg from "../images/profile-img.png"
+import UpdateProfileModal from "../components/UpdateProfileModal.js";
+import Profileimg from "../images/profile-img.png";
 
 
 class Profile extends Component {
@@ -12,8 +13,12 @@ class Profile extends Component {
       calendar: [],
       reviews: [],
       date: null,
-      menuTabs: ["Upcoming events", "Past events", "My reviews"]
+      menuTabs: ["Upcoming events", "Past events", "My reviews"],
+      updateProfileModalOpen: false,
     }
+    this.openUpdateProfileModal = this.openUpdateProfileModal.bind(this);
+    this.closeUpdateProfileModal = this.closeUpdateProfileModal.bind(this);
+    this.onUpdateAccount = this.onUpdateAccount.bind(this);
     this.onDeleteAccount = this.onDeleteAccount.bind(this);
   }
 
@@ -48,6 +53,27 @@ class Profile extends Component {
     this.setState({ date: today})
   }
 
+  openUpdateProfileModal() {
+    this.setState({
+      updateProfileModalOpen: true
+    });
+
+  }
+
+  closeUpdateProfileModal() {
+    this.setState({
+      updateProfileModalOpen: false
+    });
+
+  }
+
+  onUpdateAccount(newData) {
+    Auth.updateAccount({
+      name: newData.name,
+      image: newData.image
+    })
+  }
+
   onDeleteAccount() {
     if (window.confirm("Are you sure you wish to delete your account?")) {
       Auth.destroyAccount();
@@ -62,12 +88,16 @@ class Profile extends Component {
         <div className="row background">
           <div className="col-4">
           <img src={ Profileimg } alt="profile"/>
-        </div>
+          </div>
+          { this.state.updateProfileModalOpen ? <UpdateProfileModal close={ this.closeUpdateProfileModal}  /> : null }
           <div className="col-8">
             {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
             <p> Today is { this.state.date }</p>
             <button className="btn btn-outline-light" onClick={ this.onDeleteAccount }>
-              <i className="far fa-trash-alt" onClick={ this.onDeleteAccount }></i>
+              <i className="far fa-trash-alt"></i>
+            </button>
+            <button className="btn btn-outline-light" onClick={ this.openUpdateProfileModal }>
+              <i className="far fa-edit"></i>
             </button>
           </div>
           <div className="col-12">

@@ -84,7 +84,7 @@ class ChangePassword extends Component {
   }
 
   componentWillUnmount() {
-    //log user out
+    //log user out?
   }
 
   onChange(response) {
