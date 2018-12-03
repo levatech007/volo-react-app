@@ -1,90 +1,135 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import ReCAPTCHA from "react-google-recaptcha";
+import Alert from "./Alerts"
 
 class ContactModal extends Component {
   constructor(){
     super();
     this.state = {
-      message: {
-        name: "",
-        email: "",
-        body: "",
-      },
+      name: "",
+      email: "",
+      body: "",
       recaptchaResponse: "",
-      error: false,
-      submitted: false
+      alert: false,
+      alertMessage: "",
+      alertStyle: "",
+      submitted: false,
+      inputFields: ["name", "email"]
     }
-    this.onNameInputChange = this.onNameInputChange.bind(this);
-    this.onEmailInputChange = this.onEmailInputChange.bind(this);
-    this.onBodyInputChange = this.onBodyInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.renderContactForm = this.renderContactForm.bind(this);
     this.onFormSubmit= this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
-  onNameInputChange(e) {
+  handleInputChange(e) {
+    e.preventDefault()
+    const target = e.target
+    const name = target.name
+    const value = target.value
     this.setState({
-      message: {
-        name: e.target.value,
-        email: this.state.message.email,
-        body: this.state.message.body,
-      }
+      [name]: value
     })
   }
-
-  onEmailInputChange(e) {
-    this.setState({
-      message: {
-        name: this.state.message.name,
-        email: e.target.value,
-        body: this.state.message.body,
-      }
-    })
-  }
-
-  onBodyInputChange(e) {
-    this.setState({
-      message: {
-        name: this.state.message.name,
-        email: this.state.message.email,
-        body: e.target.value
-      }
-    })
-  }
-
   // add validations
+
+  renderContactForm() {
+    return(
+        <form onSubmit={ this.onFormSubmit } className="forms">
+          {
+            this.state.inputFields.map((field, idx) => {
+              let labelName = `${field.charAt(0).toUpperCase()}${field.slice(1)}`
+              return(
+                <div className="form-group row" key={ idx }>
+                  <label className="col-sm-3 col-form-label">{ labelName }<span className="red-text">*</span></label>
+                  <div className="col-sm-9">
+                    <input
+                      type={ (field === 'email') ? "email" : "text" }
+                      name={ field }
+                      className="form-control"
+                      placeholder={ `Your ${ field }` }
+                      onChange={ this.handleInputChange }
+                      value={ this.state[field] }
+                    />
+                  </div>
+                </div>
+              )
+            })
+          }
+          <div className="form-group row">
+            <label className="col-sm-3 col-form-label">Message<span className="red-text">*</span></label>
+            <div className="col-sm-9">
+              <textarea
+                className="form-control"
+                rows="4"
+                name="body"
+                placeholder="Your message here"
+                onChange={this.handleInputChange}
+                value={ this.state.body }
+              >
+              </textarea>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-md-9 offset-md-3">
+            <ReCAPTCHA
+              ref="recaptcha"
+              sitekey={ process.env.REACT_APP_SITE_KEY }
+              onChange={ this.onChange }/>
+            </div>
+          </div>
+          <div className="row justify-content-center submit-btn">
+            <div className="col-md-9 offset-md-3">
+              <input
+                type="submit"
+                className="btn btn-primary"
+                value="Submit"
+              />
+              <button type="button" className="btn" onClick={ this.props.close }>Cancel</button>
+            </div>
+          </div>
+        </form>
+    )
+  }
 
   onFormSubmit(e) {
     e.preventDefault();
+    let message = {
+      name: this.state.name,
+      email: this.state.email,
+      body: this.state.body
+    }
+    console.log(message)
     if (this.state.recaptchaResponse) {
       $.post({
         url: `${process.env.REACT_APP_BACKEND_URL}/message`,
         data: {
-          message: this.state.message
+          message: message
         },
         success: (response) => {
           console.log(response)
           this.setState({
-            message: {
-              name: "",
-              email: "",
-              body: ""
-            },
+            name: "",
+            email: "",
+            body: "",
             recaptchaResponse: "",
-            error: false,
+            alert: true,
+            alertMessage: response.result,
+            alertStyle: "alert alert-success",
             submitted: true,
           })
         },
         error: (error) => {
           console.log(error)
           this.setState({
-            message: {
-              name: "",
-              email: "",
-              body: "",
-            },
+            name: "",
+            email: "",
+            body: "",
             recaptchaResponse: "",
-            error: true,
+            alert: true,
+            alertMessage: "Oops...",
+            alertStyle: "alert alert-danger",
             submitted: false,
           })
         }
@@ -114,83 +159,14 @@ class ContactModal extends Component {
               <div className="modal-body">
                 <div className="row justify-content-center">
                   <div className="col-md-12">
-                    {
-                      this.state.message.error ? <div className="alert alert-danger" role="alert">Please fill in all the required fields</div> : null
-                    }
+                    { this.state.alert ? <Alert style={ this.state.alertStyle } alert={ this.state.alertMessage } /> : null }
                   </div>
                 </div>
-                {
-                  this.state.message.submitted ?
-                  <div className="row justify-content-center">
-                    <div className="col-md-12">
-                        <div className="alert alert-success" role="alert">Thank you for your submission</div>
-                    </div>
-                  </div>
-                : (
                 <div className="row justify-content-center">
-                  <div className="col-md-12 contact-form">
-                    <form onSubmit={ this.onFormSubmit } className="forms">
-                      <div className="form-group row">
-                        <label className="col-sm-3 col-form-label">Name<span className="red-text">*</span></label>
-                        <div className="col-sm-9">
-                          <input
-                            type="text"
-                            name="name"
-                            className="form-control"
-                            placeholder="Your name"
-                            onChange={this.onNameInputChange}
-                            value= { this.state.message.name }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-sm-3 col-form-label">Email<span className="red-text">*</span></label>
-                        <div className="col-sm-9">
-                          <input
-                            type="email"
-                            name="email"
-                            className="form-control"
-                            placeholder="Your email"
-                            onChange={this.onEmailInputChange}
-                            value={ this.state.message.email }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-sm-3 col-form-label">Message<span className="red-text">*</span></label>
-                        <div className="col-sm-9">
-                          <textarea
-                            rows="4"
-                            name="body"
-                            placeholder="Your message here"
-                            onChange={this.onBodyInputChange}
-                            value={ this.state.message.body }
-                            >
-                            </textarea>
-                        </div>
-                      </div>
-                      <div className="row justify-content-center">
-                        <div className="col-md-9 offset-md-3">
-                        <ReCAPTCHA
-                          ref="recaptcha"
-                          sitekey={ process.env.REACT_APP_SITE_KEY }
-                          onChange={ this.onChange }/>
-                        </div>
-                      </div>
-                      <div className="row justify-content-center submit-btn">
-                        <div className="col-md-9 offset-md-3">
-                          <input
-                            type="submit"
-                            className="btn btn-primary"
-                            value="Submit"
-                          />
-                          <button type="button" className="btn" onClick={ this.props.close }>Cancel</button>
-                        </div>
-                      </div>
-                    </form>
+                  <div className="col-md-12">
+                    { this.state.submitted ? null : this.renderContactForm() }
                   </div>
-                </div> )
-              }
+                </div>
               </div>
             </div>
           </div>

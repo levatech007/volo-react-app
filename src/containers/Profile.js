@@ -104,7 +104,7 @@ class Profile extends Component {
             <div className="row">
               {
                 this.state.menuTabs.map((tab, idx) => {
-                  return( <div className="col-md-4"><h3>{ tab }</h3></div> )
+                  return( <div className="col-md-4" key={ idx }><h3>{ tab }</h3></div> )
                 })
               }
             </div>
