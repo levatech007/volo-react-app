@@ -3,8 +3,8 @@ import $ from "jquery";
 import Auth from "j-toker";
 import { Accordion,AccordionItem,AccordionItemTitle,AccordionItemBody,} from "react-accessible-accordion";
 import UpdateProfileModal from "../components/UpdateProfileModal.js";
+import ImageUploadModal from "../components/ImageUploadModal.js";
 import Profileimg from "../images/profile-img.png";
-
 
 class Profile extends Component {
   constructor() {
@@ -15,9 +15,12 @@ class Profile extends Component {
       date: null,
       menuTabs: ["Upcoming events", "Past events", "My reviews"],
       updateProfileModalOpen: false,
+      imageUploadModalOpen: false
     }
     this.openUpdateProfileModal = this.openUpdateProfileModal.bind(this);
     this.closeUpdateProfileModal = this.closeUpdateProfileModal.bind(this);
+    this.openImageUploadModal = this.openImageUploadModal.bind(this);
+    this.closeImageUploadModal = this.closeImageUploadModal.bind(this);
     this.onUpdateAccount = this.onUpdateAccount.bind(this);
     this.onDeleteAccount = this.onDeleteAccount.bind(this);
   }
@@ -54,17 +57,19 @@ class Profile extends Component {
   }
 
   openUpdateProfileModal() {
-    this.setState({
-      updateProfileModalOpen: true
-    });
-
+    this.setState({ updateProfileModalOpen: true });
   }
 
   closeUpdateProfileModal() {
-    this.setState({
-      updateProfileModalOpen: false
-    });
+    this.setState({ updateProfileModalOpen: false });
+  }
 
+  openImageUploadModal() {
+    this.setState({ imageUploadModalOpen: true })
+  }
+
+  closeImageUploadModal() {
+    this.setState({ imageUploadModalOpen: false })
   }
 
   onUpdateAccount(newData) {
@@ -86,8 +91,9 @@ class Profile extends Component {
     return(
       <div className="container">
         <div className="row background">
+          { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.closeImageUploadModal}  /> : null }
           <div className="col-4">
-          <img src={ Profileimg } alt="profile"/>
+            <button onClick={ this.openImageUploadModal }><img src={ Profileimg } alt="profile"/></button>
           </div>
           { this.state.updateProfileModalOpen ? <UpdateProfileModal close={ this.closeUpdateProfileModal}  /> : null }
           <div className="col-8">

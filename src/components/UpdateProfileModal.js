@@ -85,7 +85,6 @@ class UpdateProfileModal extends Component {
         alertMessage: "Successfully updated account"
         // msg: `Updated info to ${ resp.data.email } ${ resp.data.name }`
       });
-      //redirect user to login page? or profile? after a set time?
     }).fail((resp) => {
       console.log(resp)
       this.setState({
@@ -95,7 +94,7 @@ class UpdateProfileModal extends Component {
         alertStyle: "alert alert-danger",
         alertMessage: resp.data.errors.full_messages
       })
-    })
+    });
   }
 
   render() {
