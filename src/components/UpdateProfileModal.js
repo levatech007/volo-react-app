@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Auth from "j-toker";
 import Alert from "./Alerts.js";
 
 class UpdateProfileModal extends Component {
@@ -8,10 +9,9 @@ class UpdateProfileModal extends Component {
       inputFields: ["email", "name"],
       email: "",
       name: "",
-      image: "",
       showAlert: false,
       alertStyle: "",
-      alertMsg: ""
+      alertMessage: ""
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.showUpdateProfileForm = this.showUpdateProfileForm.bind(this);
@@ -53,12 +53,6 @@ class UpdateProfileModal extends Component {
               )
             })
           }
-          <div className="form-group row">
-            <label className="col-sm-3 col-form-label">Image</label>
-            <div className="col-sm-9">
-              <input type="file" className="form-control-file" onChange={ this.handleInputChange }/>
-            </div>
-          </div>
             <div className="row justify-content-center submit-btn">
               <div className="col-md-9 offset-md-3">
                 <input
@@ -77,12 +71,31 @@ class UpdateProfileModal extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    let data = {
+    Auth.updateAccount({
       name: this.state.name,
       email: this.state.email,
-      image: this.state.image
-    }
-    console.log(data);
+    })
+    .then((resp) => {
+      console.log(resp)
+      this.setState({
+        name: "",
+        email: "",
+        showAlert: true,
+        alertStyle: "alert alert-success",
+        alertMessage: "Successfully updated account"
+        // msg: `Updated info to ${ resp.data.email } ${ resp.data.name }`
+      });
+      //redirect user to login page? or profile? after a set time?
+    }).fail((resp) => {
+      console.log(resp)
+      this.setState({
+        name: "",
+        email: "",
+        showAlert: true,
+        alertStyle: "alert alert-danger",
+        alertMessage: resp.data.errors.full_messages
+      })
+    })
   }
 
   render() {
