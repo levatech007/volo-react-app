@@ -34,7 +34,7 @@ class ImageUploadModal extends Component {
       }
     });
     $.post({
-      url: `${process.env.REACT_APP_BACKEND_URL}/image_upload`,
+      url: `${process.env.REACT_APP_BACKEND_URL}/images`,
       processData: false,
       contentType: false,
       data: formPayLoad,

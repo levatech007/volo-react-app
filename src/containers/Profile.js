@@ -12,6 +12,7 @@ class Profile extends Component {
     this.state = {
       calendar: [],
       reviews: [],
+      profileImageUrl: "",
       date: null,
       menuTabs: ["Upcoming events", "Past events", "My reviews"],
       updateProfileModalOpen: false,
@@ -35,15 +36,28 @@ class Profile extends Component {
     $.get({
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
+        console.log(data)
+        let images = data.images //array
+        let avatar = images[images.length - 1].avatar.url
         this.setState({
           calendar: data.calendars,
-          reviews: data.reviews
+          reviews: data.reviews,
+          profileImageUrl: avatar, // currently selecting the last image added
         })
       },
       error: (data) => {
         // show error msg
       }
     });
+    $.get({
+      url: `${process.env.REACT_APP_BACKEND_URL}/image`, //retrieve only images
+      success: (data) => {
+        console.log(data)
+      },
+      error: (data) => {
+        console.log(data)
+      }
+    })
 
     var today = new Date();
     var dd = today.getDate();
@@ -93,7 +107,11 @@ class Profile extends Component {
         <div className="row background">
           { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.closeImageUploadModal}  /> : null }
           <div className="col-4">
-            <button onClick={ this.openImageUploadModal }><img src={ Profileimg } alt="profile"/></button>
+            <button onClick={ this.openImageUploadModal }>
+              <img
+                src={ this.state.profileImageUrl ? this.state.profileImageUrl : Profileimg }
+                alt="profile"/>
+            </button>
           </div>
           { this.state.updateProfileModalOpen ? <UpdateProfileModal close={ this.closeUpdateProfileModal}  /> : null }
           <div className="col-8">
