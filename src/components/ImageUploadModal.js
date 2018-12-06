@@ -25,9 +25,9 @@ class ImageUploadModal extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    // validate file ?
     let formPayLoad = new FormData();
-    formPayLoad.append('image', this.state.selectedImage);
+    formPayLoad.append('avatar', this.state.selectedImage);
+
     $.ajaxSetup({
       beforeSend(xhr, settings) {
         Auth.appendAuthHeaders(xhr, settings);
@@ -40,9 +40,21 @@ class ImageUploadModal extends Component {
       data: formPayLoad,
       success: (resp) => {
         console.log(resp)
+        this.setState({
+          selectedImage: null,
+          showAlert: true,
+          alertStyle: "alert alert-success",
+          alertMessage: "Photo uploaded successfully!"
+        })
       },
       error: (resp) => {
         console.log(resp)
+        this.setState({
+          selectedImage: null,
+          showAlert: true,
+          alertStyle: "alert alert-danger",
+          alertMessage: "Oops...something went wrong!"
+        })
       }
     });
   }

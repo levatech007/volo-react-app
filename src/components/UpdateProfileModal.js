@@ -76,7 +76,6 @@ class UpdateProfileModal extends Component {
       email: this.state.email,
     })
     .then((resp) => {
-      console.log(resp)
       this.setState({
         name: "",
         email: "",
@@ -86,13 +85,12 @@ class UpdateProfileModal extends Component {
         // msg: `Updated info to ${ resp.data.email } ${ resp.data.name }`
       });
     }).fail((resp) => {
-      console.log(resp)
       this.setState({
         name: "",
         email: "",
         showAlert: true,
         alertStyle: "alert alert-danger",
-        alertMessage: resp.data.errors.full_messages
+        alertMessage: "Something went wrong"
       })
     });
   }

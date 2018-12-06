@@ -35,14 +35,13 @@ class Profile extends Component {
     $.get({
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
-        console.log(data)
         this.setState({
           calendar: data.calendars,
           reviews: data.reviews
         })
       },
       error: (data) => {
-        console.log(data)
+        // show error msg
       }
     });
 
@@ -56,6 +55,7 @@ class Profile extends Component {
     this.setState({ date: today})
   }
 
+  // replace with toggle modal on/off updateProfileModalOpen: !this.state.updateProfileModalOpen
   openUpdateProfileModal() {
     this.setState({ updateProfileModalOpen: true });
   }

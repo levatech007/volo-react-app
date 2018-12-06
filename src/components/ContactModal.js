@@ -32,7 +32,7 @@ class ContactModal extends Component {
       [name]: value
     })
   }
-  // add validations
+  // add FE validations
 
   renderContactForm() {
     return(
