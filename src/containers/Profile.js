@@ -18,10 +18,8 @@ class Profile extends Component {
       updateProfileModalOpen: false,
       imageUploadModalOpen: false
     }
-    this.openUpdateProfileModal = this.openUpdateProfileModal.bind(this);
-    this.closeUpdateProfileModal = this.closeUpdateProfileModal.bind(this);
-    this.openImageUploadModal = this.openImageUploadModal.bind(this);
-    this.closeImageUploadModal = this.closeImageUploadModal.bind(this);
+    this.toggleUpdateProfileModal = this.toggleUpdateProfileModal.bind(this);
+    this.toggleImageUploadModal = this.toggleImageUploadModal.bind(this);
     this.onUpdateAccount = this.onUpdateAccount.bind(this);
     this.onDeleteAccount = this.onDeleteAccount.bind(this);
   }
@@ -69,21 +67,12 @@ class Profile extends Component {
     this.setState({ date: today})
   }
 
-  // replace with toggle modal on/off updateProfileModalOpen: !this.state.updateProfileModalOpen
-  openUpdateProfileModal() {
-    this.setState({ updateProfileModalOpen: true });
+  toggleUpdateProfileModal() {
+    this.setState({ updateProfileModalOpen: !this.state.updateProfileModalOpen });
   }
 
-  closeUpdateProfileModal() {
-    this.setState({ updateProfileModalOpen: false });
-  }
-
-  openImageUploadModal() {
-    this.setState({ imageUploadModalOpen: true })
-  }
-
-  closeImageUploadModal() {
-    this.setState({ imageUploadModalOpen: false })
+  toggleImageUploadModal() {
+    this.setState({ imageUploadModalOpen: !this.state.imageUploadModalOpen });
   }
 
   onUpdateAccount(newData) {
@@ -105,22 +94,22 @@ class Profile extends Component {
     return(
       <div className="container">
         <div className="row background">
-          { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.closeImageUploadModal}  /> : null }
+          { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.toggleImageUploadModal}  /> : null }
           <div className="col-4">
-            <button onClick={ this.openImageUploadModal }>
+            <button onClick={ this.toggleImageUploadModal }>
               <img
                 src={ this.state.profileImageUrl ? this.state.profileImageUrl : Profileimg }
                 alt="profile"/>
             </button>
           </div>
-          { this.state.updateProfileModalOpen ? <UpdateProfileModal close={ this.closeUpdateProfileModal}  /> : null }
+          { this.state.updateProfileModalOpen ? <UpdateProfileModal close={ this.toggleUpdateProfileModal}  /> : null }
           <div className="col-8">
             {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
             <p> Today is { this.state.date }</p>
             <button className="btn btn-outline-light" onClick={ this.onDeleteAccount }>
               <i className="far fa-trash-alt"></i>
             </button>
-            <button className="btn btn-outline-light" onClick={ this.openUpdateProfileModal }>
+            <button className="btn btn-outline-light" onClick={ this.toggleUpdateProfileModal }>
               <i className="far fa-edit"></i>
             </button>
           </div>
