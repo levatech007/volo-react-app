@@ -76,12 +76,11 @@ To install dependencies on the back end, run:
 ![ERD](/src/images/ERD.png)
 
 ## Unsolved Problems:
-- Routes don’t have authorization.
-- Weather API worker does not save data on Heroku.
-- Location marker on map is centered at coordinates, pointer is offset.
-
+- There may be routes that don’t have authorization.
+- Weather info gets duplicated in Heroku.
 
 ## Future Features:
+- Enable OAuth login
 - Airport information with flight schedules.
 - Nearby flights on map, real time.
 - Selecting locations based on type of plane user wants to see as well as by busiest times at given airport.
