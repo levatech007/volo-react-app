@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import RequestPasswordChangeModal from "./RequestPasswordChangeModal.js";
+import OauthLogin from "../components/OauthLogin.js";
+
 
 class LoginForm extends Component {
   constructor() {
@@ -98,6 +100,8 @@ class LoginForm extends Component {
           <button className="plain-button" onClick={ this.showRequestPasswordChangeModal }><small>Forgot your password?</small></button>
           { this.state.requestPasswordChangeModal ? <RequestPasswordChangeModal close={ this.closeRequestPasswordChangeModal} /> : null }
         </div>
+        <hr></hr>
+        <OauthLogin />
       </div>
     )
   }

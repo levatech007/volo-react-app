@@ -12,7 +12,15 @@ class OauthLogin extends Component {
 
   render() {
     return(
-      <div>Oauth Login</div>
+      <div>
+        {
+          this.state.providers.map((provider, idx) => {
+            return(
+              <OauthProviderButton provider={ provider } key={ idx }/>
+            )
+          })
+        }
+      </div>
     )
   }
 }
