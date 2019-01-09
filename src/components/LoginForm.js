@@ -12,7 +12,7 @@ class LoginForm extends Component {
           password: "",
         },
         showRequestPasswordChangeModal: false,
-        oAuthLoginProviders: ["Facebook", "Google"]
+        oAuthLoginProviders: ["Facebook", "Google", "Github"]
       }
       this.onEmailInputChange = this.onEmailInputChange.bind(this);
       this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
@@ -52,7 +52,6 @@ class LoginForm extends Component {
     }
 
     onOauthLogin(provider) {
-      console.log(`${provider} clicked!`);
       this.props.processOauthLogin(provider)
     }
 
