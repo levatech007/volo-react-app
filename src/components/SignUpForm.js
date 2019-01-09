@@ -91,7 +91,7 @@ class SignupForm extends Component {
     return (
       <div className="col-6">
         <div className="row justify-content-center">
-          <h2>Sign Up!</h2>
+          <h2 className="section-title">Sign Up!</h2>
         </div>
         <div className="row justify-content-md-center">
           <form onSubmit={ this.onFormSubmit } className="forms">

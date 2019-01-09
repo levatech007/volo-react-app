@@ -52,12 +52,24 @@ class Login extends Component {
         })
       }
 
+      processOauthLogin(provider) {
+        Auth.oAuthSignIn({
+          provider: provider
+        })
+        .then((user) => {
+          alert('Welcome ' + user.name + '!');
+        })
+        .fail((resp) => {
+          alert('Authentication failure: ' + resp.errors.join(' '));
+        });
+      }
+
   render() {
     return (
       <div className="container">
         { this.state.errors? <Alerts alert={ this.state.errors } style={ this.state.alertStyle } /> : null }
         <div className="row background">
-          <LoginForm processLoginForm={ this.processLoginForm }/>
+          <LoginForm processLoginForm={ this.processLoginForm } processOauthLogin={ this.processOauthLogin }/>
           <SignupForm processSignupForm={ this.processSignupForm } />
         </div>
       </div>

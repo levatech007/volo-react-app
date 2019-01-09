@@ -104,9 +104,22 @@ ul {
     padding: 0;
 }
 
+hr {
+  border-color: white;
+}
+
 .plain-button:hover {
   text-decoration: underline;
   color: blue;
+}
+
+.section-title {
+  margin: 40px 0;
+}
+
+.oauth-button {
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 /* ACCORDION */

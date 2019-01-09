@@ -5,7 +5,9 @@ class OauthProviderButton extends Component {
   render() {
     return(
       <div className="row justify-content-center">
-        <button type="button" class="btn btn-light">Sign in with { this.props.provider }</button>
+        <div className="col-md-6">
+          <button type="button" className="btn btn-light oauth-button">Sign in with { this.props.provider }</button>
+        </div>
       </div>
     )
   }
