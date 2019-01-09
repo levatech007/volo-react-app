@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import Auth from "j-toker";
-import LoginForm from "../components/LoginForm.js"
-import SignupForm from "../components/SignUpForm.js"
-import Alerts from "../components/Alerts.js"
+import LoginForm from "../components/LoginForm.js";
+import SignupForm from "../components/SignUpForm.js";
+import Alerts from "../components/Alerts.js";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errors: "",
-      alertStyle: "alert alert-danger",
+      showAlert: false,
+      alerts: "",
+      alertStyle: "",
     }
     this.processLoginForm = this.processLoginForm.bind(this);
     this.processSignupForm = this.processSignupForm.bind(this);
@@ -45,19 +46,47 @@ class Login extends Component {
           .then((resp) => {
             this.props.history.push(`/users/${resp.data.id}`)
           }).fail((resp) => {
-            this.setState({ errors: resp.data.errors.full_messages })
+            this.setState({
+              showAlert: true,
+              alerts: resp.data.errors.full_messages,
+              alertStyle: "alert alert-danger"
+            })
           })
         }).fail((resp) => {
-          this.setState({ errors: resp.data.errors.full_messages })
+          this.setState({
+            showAlert: true,
+            alerts: resp.data.errors.full_messages,
+            alertStyle: "alert alert-danger"
+          })
         })
+      }
+
+      processOauthLogin(provider) {
+        Auth.oAuthSignIn({
+          provider: provider
+        })
+        .then((user) => {
+          this.setState({
+            showAlert: true,
+            alerts: `Welcome ${ user.name }`,
+            alertStyle: "alert alert-danger"
+          })
+        })
+        .fail((resp) => {
+          this.setState({
+            showAlert: true,
+            alerts: `Auth failure: ${resp.errors}`,
+            alertStyle: "alert alert-danger"
+          })
+        });
       }
 
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Alerts alert={ this.state.errors } style={ this.state.alertStyle } /> : null }
-        <div className="row align-items-center background">
-          <LoginForm processLoginForm={ this.processLoginForm }/>
+        { this.state.showAlert? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
+        <div className="row background">
+          <LoginForm processLoginForm={ this.processLoginForm } processOauthLogin={ this.processOauthLogin }/>
           <SignupForm processSignupForm={ this.processSignupForm } />
         </div>
       </div>

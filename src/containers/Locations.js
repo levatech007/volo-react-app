@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LocationMarkerLg from "../images/location-marker-lg.svg";
-import Alerts from "../components/Alerts.js"
+import Alerts from "../components/Alerts.js";
 
 class Locations extends Component {
   constructor() {

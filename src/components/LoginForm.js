@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import RequestPasswordChangeModal from "./RequestPasswordChangeModal.js";
+import OauthProviderButton from "../components/OauthProviderButton.js";
+
 
 class LoginForm extends Component {
   constructor() {
@@ -8,14 +10,15 @@ class LoginForm extends Component {
         user: {
           email: "",
           password: "",
-          requestPasswordChangeModal: false,
-        }
+        },
+        showRequestPasswordChangeModal: false,
+        oAuthLoginProviders: ["Facebook", "Google", "Github"]
       }
       this.onEmailInputChange = this.onEmailInputChange.bind(this);
       this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
       this.onFormSubmit = this.onFormSubmit.bind(this);
-      this.showRequestPasswordChangeModal = this.showRequestPasswordChangeModal.bind(this);
-      this.closeRequestPasswordChangeModal = this.closeRequestPasswordChangeModal.bind(this);
+      this.toggleRequestPasswordChangeModal = this.toggleRequestPasswordChangeModal.bind(this);
+      this.onOauthLogin = this.onOauthLogin.bind(this);
      }
 
     onEmailInputChange(e) {
@@ -48,15 +51,13 @@ class LoginForm extends Component {
       })
     }
 
-    showRequestPasswordChangeModal() {
-      this.setState({
-        requestPasswordChangeModal: true
-      });
+    onOauthLogin(provider) {
+      this.props.processOauthLogin(provider)
     }
 
-    closeRequestPasswordChangeModal() {
+    toggleRequestPasswordChangeModal() {
       this.setState({
-        requestPasswordChangeModal: false
+        showRequestPasswordChangeModal: !this.state.showRequestPasswordChangeModal
       });
     }
 
@@ -64,7 +65,7 @@ class LoginForm extends Component {
     return (
       <div className="col-6">
         <div className="row justify-content-md-center">
-          <h2>Log In</h2>
+          <h2 className="section-title">Log In</h2>
         </div>
         <div className="row justify-content-md-center">
           <form onSubmit={ this.onFormSubmit } className="forms">
@@ -95,9 +96,23 @@ class LoginForm extends Component {
           </form>
         </div>
         <div className="row justify-content-md-center">
-          <button className="plain-button" onClick={ this.showRequestPasswordChangeModal }><small>Forgot your password?</small></button>
-          { this.state.requestPasswordChangeModal ? <RequestPasswordChangeModal close={ this.closeRequestPasswordChangeModal} /> : null }
+          <button className="plain-button" onClick={ this.toggleRequestPasswordChangeModal }><small>Forgot your password?</small></button>
+          { this.state.showRequestPasswordChangeModal ? <RequestPasswordChangeModal close={ this.toggleRequestPasswordChangeModal} /> : null }
         </div>
+
+        <div className="row justify-content-center hr-rule">
+          <div className="col-md-3"><hr></hr></div>
+          <div className="col-md-1"><p>or</p></div>
+          <div className="col-md-3"><hr></hr></div>
+        </div>
+
+        {
+          this.state.oAuthLoginProviders.map((provider, idx) => {
+            return(
+              <OauthProviderButton provider={ provider } key={ idx } onOauthLogin={ this.onOauthLogin }/>
+            )
+          })
+        }
       </div>
     )
   }
