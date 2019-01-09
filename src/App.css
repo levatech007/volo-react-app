@@ -108,6 +108,10 @@ hr {
   border-color: white;
 }
 
+.hr-rule {
+  margin: 30px 0;
+}
+
 .plain-button:hover {
   text-decoration: underline;
   color: blue;

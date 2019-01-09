@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RequestPasswordChangeModal from "./RequestPasswordChangeModal.js";
-import OauthLogin from "../components/OauthLogin.js";
+import OauthProviderButton from "../components/OauthProviderButton.js";
 
 
 class LoginForm extends Component {
@@ -10,13 +10,15 @@ class LoginForm extends Component {
         user: {
           email: "",
           password: "",
-          showRequestPasswordChangeModal: false,
-        }
+        },
+        showRequestPasswordChangeModal: false,
+        oAuthLoginProviders: ["Facebook", "Google"]
       }
       this.onEmailInputChange = this.onEmailInputChange.bind(this);
       this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
       this.onFormSubmit = this.onFormSubmit.bind(this);
       this.toggleRequestPasswordChangeModal = this.toggleRequestPasswordChangeModal.bind(this);
+      this.onOauthLogin = this.onOauthLogin.bind(this);
      }
 
     onEmailInputChange(e) {
@@ -47,6 +49,11 @@ class LoginForm extends Component {
           password: ""
         }
       })
+    }
+
+    onOauthLogin(provider) {
+      console.log(`${provider} clicked!`);
+      this.props.processOauthLogin(provider)
     }
 
     toggleRequestPasswordChangeModal() {
@@ -93,8 +100,20 @@ class LoginForm extends Component {
           <button className="plain-button" onClick={ this.toggleRequestPasswordChangeModal }><small>Forgot your password?</small></button>
           { this.state.showRequestPasswordChangeModal ? <RequestPasswordChangeModal close={ this.toggleRequestPasswordChangeModal} /> : null }
         </div>
-        <hr></hr>
-        <OauthLogin />
+
+        <div className="row justify-content-center hr-rule">
+          <div className="col-md-3"><hr></hr></div>
+          <div className="col-md-1"><p>or</p></div>
+          <div className="col-md-3"><hr></hr></div>
+        </div>
+
+        {
+          this.state.oAuthLoginProviders.map((provider, idx) => {
+            return(
+              <OauthProviderButton provider={ provider } key={ idx } onOauthLogin={ this.onOauthLogin }/>
+            )
+          })
+        }
       </div>
     )
   }
