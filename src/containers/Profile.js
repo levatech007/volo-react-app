@@ -47,15 +47,6 @@ class Profile extends Component {
         // show error msg
       }
     });
-    $.get({
-      url: `${process.env.REACT_APP_BACKEND_URL}/image`, //retrieve only images
-      success: (data) => {
-        console.log(data)
-      },
-      error: (data) => {
-        console.log(data)
-      }
-    })
 
     var today = new Date();
     var dd = today.getDate();
