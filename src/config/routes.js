@@ -8,6 +8,7 @@ import Locations from "../containers/Locations.js";
 import Weather from "../containers/Weather.js";
 import SingleLocation from "../containers/SingleLocation.js";
 import ChangePassword from "../containers/ChangePassword.js";
+import Api from "../containers/Api.js";
 import PageNotFound from "../containers/PageNotFound.js";
 
 export default (
@@ -20,6 +21,7 @@ export default (
       <Route exact path="/locations/:id" component={ SingleLocation }/>
       <Route exact path="/weather/:id" component={ Weather }/>
       <Route exact path="/password" component={ ChangePassword } />
+      <Route exact path="/api" component={ Api } />
       <Route path="*" component={ PageNotFound } />
     </Switch>
 )
