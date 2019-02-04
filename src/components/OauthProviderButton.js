@@ -18,7 +18,6 @@ class OauthProviderButton extends Component {
             type="button"
             className="btn btn-light oauth-button"
             onClick={ this.onOauthButtonSubmit }
-            disabled
           >
             Sign in with { this.props.provider }
           </button>

@@ -63,9 +63,11 @@ class Login extends Component {
 
       processOauthLogin(provider) {
         Auth.oAuthSignIn({
-          provider: provider
+          provider: provider,
+          config: 'default'
         })
         .then((user) => {
+          console.log(user)
           this.setState({
             showAlert: true,
             alerts: `Welcome ${ user.name }`,
@@ -73,6 +75,7 @@ class Login extends Component {
           })
         })
         .fail((resp) => {
+          console.log(resp)
           this.setState({
             showAlert: true,
             alerts: `Auth failure: ${resp.errors}`,
