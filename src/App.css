@@ -37,8 +37,17 @@ ul {
   padding: 15px;
 }
 
+table {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 td, th {
-  padding-right: 40px;
+  padding: 10px 40px 10px 10px;
+  border: 1px solid #999999;
 }
 
 .card-body, .card-header {

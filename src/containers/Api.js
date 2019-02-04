@@ -10,11 +10,11 @@ class Api extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0)
     fetch(`${process.env.REACT_APP_BACKEND_URL}/documentation`)
         .then((res) => {
           return res.json();
         }).then((json_data) => {
-          // console.log(documentation)
           this.setState({ documentation: json_data.documentation })
     })
   }
