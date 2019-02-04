@@ -12,7 +12,7 @@ class LoginForm extends Component {
           password: "",
         },
         showRequestPasswordChangeModal: false,
-        oAuthLoginProviders: ["Facebook", "Google", "Github"]
+        oAuthLoginProviders: ["Facebook", "Google"]
       }
       this.onEmailInputChange = this.onEmailInputChange.bind(this);
       this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
@@ -105,7 +105,9 @@ class LoginForm extends Component {
           <div className="col-md-1"><p>or</p></div>
           <div className="col-md-3"><hr></hr></div>
         </div>
-
+        <div className="row justify-content-center">
+          <p>Coming soon...</p>
+        </div>
         {
           this.state.oAuthLoginProviders.map((provider, idx) => {
             return(
