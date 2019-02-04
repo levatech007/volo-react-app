@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Auth from "j-toker";
 import { AccordionItem, AccordionItemTitle, AccordionItemBody, } from "react-accessible-accordion";
 
 class SingleDayWeather extends Component {

@@ -37,6 +37,10 @@ ul {
   padding: 15px;
 }
 
+td, th {
+  padding-right: 40px;
+}
+
 .card-body, .card-header {
   background-color: #000066;
 }

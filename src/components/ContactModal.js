@@ -135,7 +135,7 @@ class ContactModal extends Component {
         }
       })
     } else {
-
+      // handle ReCAPTCHA error 
     }
   }
 
@@ -144,7 +144,6 @@ class ContactModal extends Component {
     recaptchaResponse: response
   });
 }
-
   render() {
     return (
         <div className="modal fade show" style={{display: 'block'}}>

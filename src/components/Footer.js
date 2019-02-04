@@ -45,26 +45,20 @@ class Footer extends Component {
 
   onEmailInputChange(e) {
     this.setState({
-        showContactModal: this.state.showContactModal,
         email: e.target.value,
     })
   }
 
   onEmailListSubmit(e) {
     e.preventDefault();
-    console.log(this.state.email)
-    let email = this.state.email
-    this.setState({
-      showContactModal: this.state.showContactModal,
-      email: "",
-    })
     $.post({
       url: `${process.env.REACT_APP_BACKEND_URL}/subscribe`,
       data: {
-        email: email
+        email: this.state.email
       },
       success: (data) => {
         this.setState({
+          email: "",
           alert: true,
           alertStyle: "alert alert-success",
           alertMsg: "Thank you!",
@@ -72,6 +66,7 @@ class Footer extends Component {
       },
       error: (error) => {
         this.setState({
+          email: "",
           alert: true,
           alertStyle: "alert alert-danger",
           alertMsg: "Oops...",
@@ -83,7 +78,6 @@ class Footer extends Component {
   render() {
     // dynamic image loading with webpack & require, step 2:
     const images = importAll(require.context('../images/social_icons', false, /\.(png|jpe?g|svg)$/));
-    console.log(images)
     return(
       <div className="row justify-content-center footer-background">
         <div className="container">
@@ -116,7 +110,6 @@ class Footer extends Component {
                     )
                   })
                 }
-
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
