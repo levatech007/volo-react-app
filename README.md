@@ -35,10 +35,12 @@ Back end:
 
 - Front end app [Github](https://github.com/levatech007/volo-react-app)
 - Front end app [Heroku](https://volo-app.herokuapp.com)
-- Front end mobile app [Github](https://github.com/levatech007/volo-react-native)
+- Front end mobile app [Github](https://github.com/levatech007/volo-react-native)(W.I.P)
 
 - Back end app [Github](https://github.com/levatech007/volo_rails_api)
 - Back end app [Heroku](https://volo-rails-api.herokuapp.com)
+
+- Volo Public API [Github](https://github.com/levatech007/aviation-api)
 
 ## Installation:
 
@@ -80,7 +82,7 @@ To install dependencies on the back end, run:
 - Weather info gets duplicated in Heroku.
 
 ## Future Features:
-- Enable OAuth login
+- Enable OAuth login (BE functionality not yet working)
 - Airport information with flight schedules.
 - Nearby flights on map, real time.
 - Selecting locations based on type of plane user wants to see as well as by busiest times at given airport.
