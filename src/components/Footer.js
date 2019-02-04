@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
-import Instagram from "../images/social_icons/instagram-logo.png";
-import Twitter from "../images/social_icons/twitter-logo.png";
-import Facebook from "../images/social_icons/facebook-logo.png";
 import ContactModal from "./ContactModal.js";
 import Alerts from "./Alerts.js"
+// dynamic image loading with webpack & require, step 1:
+function importAll(r) {
+  let images = {}
+  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item) })
+  return images
+}
 
 class Footer extends Component {
   constructor() {
@@ -16,6 +19,18 @@ class Footer extends Component {
       alert: false,
       alertStyle: "",
       alertMsg: "",
+      footerLinks: [
+                    {page: "Locations", route: "locations"},
+                    {page: "About", route: "about"},
+                    {page: "Log In", route: "login"},
+                    {page: "Sign Up", route: "signup"},
+                    {page: "API", route: "api"}
+                  ],
+      socialMedia: [
+                    {accountName: "instagram", url: "http://instagram.com"},
+                    {accountName: "twitter", url: "http://twitter.com"},
+                    {accountName: "facebook", url: "http://facebook.com"}
+                  ]
     }
     this.showContactModal = this.showContactModal.bind(this);
     this.closeContactModal = this.closeContactModal.bind(this);
@@ -73,6 +88,9 @@ class Footer extends Component {
   }
 
   render() {
+    // dynamic image loading with webpack & require, step 2:
+    const images = importAll(require.context('../images/social_icons', false, /\.(png|jpe?g|svg)$/));
+    console.log(images)
     return(
       <div className="row justify-content-center footer-background">
         <div className="container">
@@ -82,10 +100,13 @@ class Footer extends Component {
               <p>VOLO</p>
               <div className="row">
                 <ul>
-                  <li><Link to={ '/locations' } className="footer-link" >Locations</Link></li>
-                  <li><Link to={ '/about' } className="footer-link" >About</Link></li>
-                  <li><Link to={ '/login' } className="footer-link" >Log In</Link></li>
-                  <li><Link to={ '/login' } className="footer-link" >Sign Up</Link></li>
+                  {
+                    this.state.footerLinks.map((link, idx) => {
+                      return(
+                        <li key={ idx }><Link to={ `/${ link.route }` } className="footer-link">{ link.page }</Link></li>
+                      )
+                    })
+                  }
                 </ul>
               </div>
             </div>
@@ -93,15 +114,16 @@ class Footer extends Component {
               <p>CONNECT</p>
               <br></br>
               <div className="row">
-                <div className="col-3">
-                  <a href="..."><img src={ Instagram } alt="instagram-icon"></img></a>
-                </div>
-                <div className="col-3">
-                  <a href="..."><img src={ Twitter } alt="twitter-icon"></img></a>
-                </div>
-                <div className="col-3">
-                  <img src={ Facebook } alt="facebook-icon"></img>
-                </div>
+                {
+                  this.state.socialMedia.map((account, idx) => {
+                    return(
+                      <div className="col-3" key={ idx }>
+                        <a href={ account.url }><img src={ images[`${ account.accountName }-logo.png`] } alt={ `${ account.accountName }-icon` }></img></a>
+                      </div>
+                    )
+                  })
+                }
+
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
@@ -130,7 +152,7 @@ class Footer extends Component {
                     onClick={ this.onEmailListSubmit }>Submit</button>
                 </div>
               </div>
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              <small className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="col-lg-2 col-md-6 offset-md-1">
                 <p>CONTACT</p>
@@ -139,7 +161,7 @@ class Footer extends Component {
             </div>
           </div>
           <div className="row justify-content-center copyright">
-            <small>&copy; 2018 VOLO All rights reserved</small>
+            <small>&copy; {(new Date()).getFullYear()} VOLO All rights reserved</small>
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@
   min-height: 600px;
   padding: 40px;
   margin-bottom: 50px;
+  border-radius: 5px;
 }
 
 .nav-item {
@@ -96,12 +97,12 @@ ul {
 }
 
 .plain-button {
-    background: none;
-    border: none;
-    color: #FFFFFF;
-    text-decoration: none;
-    display: inline-block;
-    padding: 0;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0;
 }
 
 hr {

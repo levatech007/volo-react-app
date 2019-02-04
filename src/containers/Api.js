@@ -20,7 +20,14 @@ class Api extends Component {
 
   render() {
     return(
-      <div>API Documentation here:</div>
+      <div className="container">
+        <div className="row justify-content-center background">
+          <h3>VOLO API:</h3>
+          <div className="col-12">
+            
+          </div>
+        </div>
+      </div>
     )
   }
 }
