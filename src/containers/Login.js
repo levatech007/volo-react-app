@@ -27,7 +27,12 @@ class Login extends Component {
       }).then((resp) => {
         this.props.history.push(`/users/${resp.data.id}`)
       }).fail((resp) => {
-        this.setState({ errors: resp.reason })
+        console.log(resp)
+        this.setState({
+          showAlert: true,
+          alerts: resp.reason,
+          alertStyle: "alert alert-danger"
+        })
       })
     }
 
@@ -53,6 +58,7 @@ class Login extends Component {
             })
           })
         }).fail((resp) => {
+
           this.setState({
             showAlert: true,
             alerts: resp.data.errors.full_messages,
