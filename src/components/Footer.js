@@ -32,22 +32,15 @@ class Footer extends Component {
                     {accountName: "facebook", url: "http://facebook.com"}
                   ]
     }
-    this.showContactModal = this.showContactModal.bind(this);
-    this.closeContactModal = this.closeContactModal.bind(this);
+    this.toggleContactModal = this.toggleContactModal.bind(this);
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
     this.onEmailListSubmit = this.onEmailListSubmit.bind(this);
   }
 
-  showContactModal() {
+  toggleContactModal() {
     this.setState({
-      showContactModal: true
-    });
-  }
-
-  closeContactModal() {
-    this.setState({
-      showContactModal: false
-    });
+      showContactModal: !this.state.showContactModal
+    })
   }
 
   onEmailInputChange(e) {
@@ -94,7 +87,7 @@ class Footer extends Component {
     return(
       <div className="row justify-content-center footer-background">
         <div className="container">
-          { this.state.showContactModal ? <ContactModal close={ this.closeContactModal }/> : null }
+          { this.state.showContactModal ? <ContactModal toggleContactModal={ this.toggleContactModal }/> : null }
           <div className="row justify-content-center">
             <div className="col-lg-2 col-md-6">
               <p>VOLO</p>
@@ -157,7 +150,7 @@ class Footer extends Component {
             <div className="col-lg-2 col-md-6 offset-md-1">
                 <p>CONTACT</p>
                 <br></br>
-                <button className="plain-button" onClick={ this.showContactModal }>Contact Us</button>
+                <button className="plain-button" onClick={ this.toggleContactModal }>Contact Us</button>
             </div>
           </div>
           <div className="row justify-content-center copyright">

@@ -86,7 +86,7 @@ class ContactModal extends Component {
                 className="btn btn-primary"
                 value="Submit"
               />
-              <button type="button" className="btn" onClick={ this.props.close }>Cancel</button>
+              <button type="button" className="btn" onClick={ this.props.toggleContactModal }>Cancel</button>
             </div>
           </div>
         </form>
@@ -152,7 +152,7 @@ class ContactModal extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Contact Us</h5>
-                <button type="button" className="close" onClick={ this.props.close }>
+                <button type="button" className="close" onClick={ this.props.toggleContactModal }>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
