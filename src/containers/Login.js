@@ -70,7 +70,8 @@ class Login extends Component {
       processOauthLogin(provider) {
         Auth.oAuthSignIn({
           provider: provider,
-          config: 'default'
+          config: "default",
+          origin: "https://volo-app.herokuapp.com"
         })
         .then((user) => {
           console.log(user)
@@ -91,6 +92,7 @@ class Login extends Component {
       }
 
   render() {
+    console.log(Auth.user)
     return (
       <div className="container">
         { this.state.showAlert? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
