@@ -43,22 +43,24 @@ class Api extends Component {
                             <p>{route.route_description}</p>
                             <h5>Required parameters:</h5>
                             <table>
-                              <tr>
-                                <th>Parameter</th>
-                                <th>Type</th>
-                                <th>Description</th>
-                              </tr>
-                              {
-                                route.required_params.map((param, idx) => {
-                                  return (
-                                    <tr>
-                                      <td>{ param.param }</td>
-                                      <td>{ param.type }</td>
-                                      <td>{ param.message }</td>
-                                    </tr>
-                                  )
-                                })
-                              }
+                              <tbody>
+                                <tr>
+                                  <th>Parameter</th>
+                                  <th>Type</th>
+                                  <th>Description</th>
+                                </tr>
+                                {
+                                  route.required_params.map((param, idx) => {
+                                    return (
+                                      <tr>
+                                        <td>{ param.param }</td>
+                                        <td>{ param.type }</td>
+                                        <td>{ param.message }</td>
+                                      </tr>
+                                    )
+                                  })
+                                }
+                              </tbody>
                             </table>
                             <br></br>
                             <p>{ route.notes }</p>
