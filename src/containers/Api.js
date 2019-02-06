@@ -22,12 +22,14 @@ class Api extends Component {
   render() {
     return(
       <div className="container">
-        { this.state.documentation.current_routes &&
-          <div className="row justify-content-center background">
-            <h3>VOLO API:</h3>
-            <p>{ this.state.documentation.intro }</p>
-            <p>Base url for this api is { this.state.documentation.base_URL }</p>
+        <div className="row justify-content-center background">
+          <h3>VOLO API:</h3>
+
+            { this.state.documentation.current_routes &&
             <div className="col-12">
+              <p>{ this.state.documentation.intro }</p>
+              <p>Base url for this api is { this.state.documentation.base_URL }</p>
+
                 <Accordion>
                   {
                     this.state.documentation.current_routes.map((route, idx) => {
@@ -52,7 +54,7 @@ class Api extends Component {
                                 {
                                   route.required_params.map((param, idx) => {
                                     return (
-                                      <tr>
+                                      <tr key={ idx }>
                                         <td>{ param.param }</td>
                                         <td>{ param.type }</td>
                                         <td>{ param.message }</td>
@@ -70,9 +72,11 @@ class Api extends Component {
                     })
                   }
                 </Accordion>
+
+
             </div>
-          </div>
-        }
+          }
+        </div>
       </div>
     )
   }
