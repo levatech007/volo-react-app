@@ -85,7 +85,11 @@ class Weather extends Component {
             { this.state.weatherForecast[0] &&
               <Accordion>
                 {this.state.weatherForecast.map((oneDay, idx) => {
-                  return ( <SingleDayWeather userId={this.state.userId} oneDay={ oneDay } idx={ idx } createCalendarEntry={ this.createCalendarEntry } key={ idx }/> )
+                  if (idx < 5) {
+                    return (
+                       <SingleDayWeather userId={this.state.userId} oneDay={ oneDay } idx={ idx } createCalendarEntry={ this.createCalendarEntry } key={ idx }/>
+                     )
+                   }
                     })
                   }
                 </Accordion>
