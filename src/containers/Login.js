@@ -71,7 +71,6 @@ class Login extends Component {
         Auth.oAuthSignIn({
           provider: provider,
           config: "default",
-          origin: "https://volo-app.herokuapp.com"
         })
         .then((user) => {
           console.log(user)

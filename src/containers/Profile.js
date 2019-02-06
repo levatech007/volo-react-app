@@ -35,12 +35,12 @@ class Profile extends Component {
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
         console.log(data)
-        let images = data.images //array
-        let avatar = images[images.length - 1].avatar.url
+        //let images = data.images //array
+        //let avatar = images[images.length - 1].avatar.url
         this.setState({
           calendar: data.calendars,
           reviews: data.reviews,
-          profileImageUrl: avatar, // currently selecting the last image added
+          //profileImageUrl: avatar, // currently selecting the last image added
         })
       },
       error: (data) => {
