@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import LocationMarkerLg from "../images/location-marker-lg.svg";
+import SelectionButton from "../components/SelectionButton.js";
 import Alerts from "../components/Alerts.js";
 
 class Locations extends Component {
@@ -9,12 +10,16 @@ class Locations extends Component {
       locations: [],
       selectedLocationId: 0,
       selectedAirportCode: "",
-      errors: "",
+      alerts: "",
       alertStyle: "alert alert-danger",
+      selectionButtons: [
+        {buttonName: "info", buttonTitle: "About location"},
+        {buttonName: "aircraft", buttonTitle: "Select aircraft"},
+        {buttonName: "weather", buttonTitle: "Location weather"},
+      ],
     }
-    this.onClickAboutLocations = this.onClickAboutLocations.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
-    this.onSelectCalendarEntry = this.onSelectCalendarEntry.bind(this);
+    this.handleSelectButtonClick = this.handleSelectButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -36,23 +41,26 @@ class Locations extends Component {
     });
   }
 
-  onClickAboutLocations() {
-    if(this.state.selectedLocationId) {
-      this.props.history.push(`/locations/${this.state.selectedLocationId}`)
+  handleSelectButtonClick(name) {
+    if(this.state.selectedLocationId){
+      if(name === 'info') {
+        this.props.history.push(`/locations/${this.state.selectedLocationId}`)
+      } else if(name === 'aircraft'){
+        this.props.history.push(`/locations/${this.state.selectedLocationId}/aircrafts`)
+      } else if(name === 'weather') {
+        this.props.history.push(`/weather/${this.state.selectedLocationId}`)
+      } else {
+        this.setState({alerts: "There was an error."})
+      }
     } else {
-      this.setState({errors: "Please select a location"})
+      this.setState({alerts: "Please select a location"})
     }
-  }
-
-  onSelectCalendarEntry(e) {
-    e.preventDefault();
-    this.props.history.push(`/weather/${this.state.selectedLocationId}`)
   }
 
   render() {
     return (
       <div className="container">
-        { this.state.errors? <Alerts alert={ this.state.errors } style={ this.state.alertStyle } /> : null }
+        { this.state.alerts ? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
           <div className="col-12">
           <div className="row justify-content-center">
@@ -60,7 +68,7 @@ class Locations extends Component {
           </div>
           <div className="row justify-content-center">
             <div className="col-sm-12 col-md-8">
-              <h2>Where do you want to go plane spotting?</h2>
+              <h3>Step 1: Select your spotting location:</h3>
               <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
                 <option defaultValue disabled>Choose your location</option>
                   { this.state.locations.map((location, idx) => {
@@ -72,9 +80,14 @@ class Locations extends Component {
                 </select>
               </div>
             </div>
-            <div className="row justify-content-center">
-              <button onClick={ this.onClickAboutLocations } className="btn btn-light button-margin">About Location</button>
-              <button onClick={ this.onSelectCalendarEntry } className="btn btn-light button-margin">Weather report</button>
+            <div className="row">
+              {
+                this.state.selectionButtons.map((btn, idx) => {
+                  return(
+                      <SelectionButton click={ this.handleSelectButtonClick } name={ btn.buttonName } title={ btn.buttonTitle } key={ idx } />
+                  )
+                })
+              }
             </div>
           </div>
         </div>
