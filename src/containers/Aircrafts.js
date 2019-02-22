@@ -4,6 +4,7 @@ import Alerts from "../components/Alerts.js";
 import AircraftInfo from "../components/AircraftInfo.js";
 import DropdownMenu from "../components/DropdownMenu.js";
 import FlightDisplayTable from "../components/FlightDisplayTable.js";
+import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
 
 class Aircrafts extends Component {
   constructor() {
@@ -41,6 +42,7 @@ class Aircrafts extends Component {
         locationId: locationId,
         availableDateRange: this.generateCalendarDateRange(),
         selectedMonth: new Date().getMonth(),
+        aircraftSchedule: SampleFlightSchedule.sampleFlights
        })
     });
 
@@ -88,7 +90,7 @@ class Aircrafts extends Component {
 
   handleAircraftSelection(e) {
       this.setState({
-        aircraftId: e.target.value,
+        aircraftId: parseInt(e.target.value),
       });
   }
 
@@ -120,10 +122,10 @@ class Aircrafts extends Component {
         { this.state.alerts ? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
 
-              <div className="col-sm-12 col-md-8">
+              <div className="col-sm-12 col-md-10">
                 { this.state.displayFlightSchedule ?
                   <AircraftInfo
-                    imageName={ this.state.aircrafts.find(aircraft => aircraft.id === parseInt(this.state.aircraftId)).name }
+                    imageName={ this.state.aircrafts.find(aircraft => aircraft.id === this.state.aircraftId).name }
                   />
                   :
                   null
@@ -163,7 +165,7 @@ class Aircrafts extends Component {
                   {
                     this.state.displayFlightSchedule ?
                     <FlightDisplayTable
-                      aircraftSchedule={ this.state.aircraftSchedule }
+                      aircraftSchedule={ this.state.aircraftSchedule.filter(aircraft => aircraft.aircraft === this.state.aircraftId) }
                     />
                     :
                     null

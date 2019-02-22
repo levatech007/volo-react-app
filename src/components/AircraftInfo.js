@@ -4,9 +4,8 @@ class AircraftInfo extends Component {
   constructor() {
     super();
   }
-  
+
   render() {
-    console.log(this.props.test)
     return(
       <div className="row">
         <div className="col-6">

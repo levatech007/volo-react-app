@@ -1,0 +1,29 @@
+{
+  "sampleFlights":
+  [
+    {"aircraft": 1, "type": "Arrival",  "time": "12:30pm", "airline": "Lufthansa", "route": "FRA to SFO"},
+    {"aircraft": 1, "type": "Departure",  "time": "2:45pm", "airline": "Lufthansa", "route": "SFO to FRA"},
+    {"aircraft": 1, "type": "Arrival",  "time": "1:30pm", "airline": "British Airways", "route": "LHR to SFO"},
+    {"aircraft": 1, "type": "Departure",  "time": "4:30pm", "airline": "British Airways", "route": "SFO to LHR"},
+    {"aircraft": 1, "type": "Arrival",  "time": "3:15pm", "airline": "Air France", "route": "CDG to SFO"},
+    {"aircraft": 1, "type": "Departure",  "time": "8:00pm", "airline": "Air France", "route": "SFO to CDG"},
+    {"aircraft": 3, "type": "Arrival",  "time": "8:30am", "airline": "KLM", "route": "AMS to SFO"},
+    {"aircraft": 3, "type": "Departure",  "time": "10:00am", "airline": "KLM", "route": "SFO to AMS"},
+    {"aircraft": 3, "type": "Arrival",  "time": "3:30pm", "airline": "Quantas", "route": "SYD to SFO"},
+    {"aircraft": 3, "type": "Departure",  "time": "6:30pm", "airline": "Quantas", "route": "SFO to SYD"},
+    {"aircraft": 3, "type": "Arrival",  "time": "10:55am", "airline": "Lufthansa", "route": "MUC to SFO"},
+    {"aircraft": 3, "type": "Departure",  "time": "9:45pm", "airline": "Lufthansa", "route": "SFO to MUC"},
+    {"aircraft": 4, "type": "Arrival",  "time": "10:00am", "airline": "United Airlines", "route": "HND to SFO"},
+    {"aircraft": 4, "type": "Departure",  "time": "11:55am", "airline": "United Airlines", "route": "SFO to IAD"},
+    {"aircraft": 4, "type": "Arrival",  "time": "12:30pm", "airline": "Singapore Airlines", "route": "SIN to SFO"},
+    {"aircraft": 4, "type": "Departure",  "time": "4:05am", "airline": "Singapore Airlines", "route": "SFO to SIN"},
+    {"aircraft": 4, "type": "Arrival",  "time": "12:00pm", "airline": "Virgin Atlantic", "route": "LHR to SFO"},
+    {"aircraft": 4, "type": "Departure",  "time": "3:45pm", "airline": "Virgin Atlantic", "route": "SFO to LHR"},
+    {"aircraft": 2, "type": "Arrival",  "time": "11:35pm", "airline": "United Airlines", "route": "SFO to EWR"},
+    {"aircraft": 2, "type": "Departure",  "time": "10:30am", "airline": "United Airlines", "route": "SFO to NRT"},
+    {"aircraft": 2, "type": "Arrival",  "time": "11:20am", "airline": "All Nippon Airways", "route": "NRT to SFO"},
+    {"aircraft": 2, "type": "Departure",  "time": "2:15pm", "airline": "All Nippon Airways", "route": "SFO to NRT"},
+    {"aircraft": 2, "type": "Arrival",  "time": "1:40pm", "airline": "Air Canada", "route": "YYZ to SFO"},
+    {"aircraft": 2, "type": "Departure",  "time": "3:30pm", "airline": "Air Canada", "route": "SFO to YYZ"}
+  ]
+}
