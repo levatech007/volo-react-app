@@ -27,7 +27,11 @@ class Locations extends Component {
         .then((res) => {
           return res.json();
         }).then((locations) => {
-          this.setState({ locations: locations })
+          this.setState({
+            locations: locations,
+            // set default location to the first location in array
+            selectedLocationId: locations[0].id
+           })
     });
 
     window.scrollTo(0, 0)

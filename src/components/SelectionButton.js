@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-function importAll(r) {
-  let images = {}
-  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item) })
-  return images
-}
 
 class SelectionButton extends Component {
   constructor() {
@@ -16,12 +11,11 @@ class SelectionButton extends Component {
   }
 
   render() {
-    const buttonIcons = importAll(require.context('../images/button-icons', false, /\.(png|jpe?g|svg)$/));
     return(
-      <div className="col-md-4">
+      <div className="col-4 center-col-content">
         <button type="button" className="btn btn-light selection-button" onClick={ this.handleClick }>
-          <img src={ buttonIcons[`${ this.props.name }-icon.svg`] } alt={ `${ this.props.name }-icon` } />
-          <h4>{ this.props.title }</h4>
+          <img className="img-fluid" src={ require(`../images/button-icons/${ this.props.name }-icon.svg`) } alt={ `${ this.props.name }-icon` } />
+          <p>{ this.props.title }</p>
         </button>
       </div>
     )
