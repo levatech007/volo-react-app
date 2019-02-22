@@ -14,7 +14,7 @@ class Aircrafts extends Component {
       monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
       availableDateRange: [],
       selectedMonth: null,
-      selectedDate: null,
+      selectedFullDate: null,
       showCalendar: false,
       alerts: "",
       alertStyle: "",
@@ -24,6 +24,7 @@ class Aircrafts extends Component {
     }
     this.handleAircraftSelection = this.handleAircraftSelection.bind(this);
     this.handleMonthSelection = this.handleMonthSelection.bind(this);
+    this.handleDateSelection = this.handleDateSelection.bind(this);
     this.generateCalendarDateRange = this.generateCalendarDateRange.bind(this);
     this.formatCalendarActiveStartDate = this.formatCalendarActiveStartDate.bind(this);
   }
@@ -67,18 +68,20 @@ class Aircrafts extends Component {
   }
 
   formatCalendarActiveStartDate() {
-      let month = this.state.selectedMonth
-      let year  = this.state.availableDateRange.find(mnth => mnth.id === month).year;
-      let date  = new Date(year, month, 1)
-      return date
+    let month = this.state.selectedMonth
+    let year  = this.state.availableDateRange.find(mnth => mnth.id === month).year;
+    let date  = new Date(year, month, 1)
+    return date
   }
 
   formatCalendarMaxDate() {
-      let lastAvailableMonth = this.state.availableDateRange[11] // there are always 12 objects in this array
-      let month = lastAvailableMonth.id
-      let year = lastAvailableMonth.year
-      let date =  new Date(year, month, 1)
-      return date
+    // getting todays's date is duplicated, should be separate function
+    let today = new Date()
+    let thisDay = today.getDay();
+    let thisMonth = today.getMonth();
+    let thisYear = today.getFullYear();
+    let date =  new Date(thisYear+1, thisMonth, thisDay)
+    return date
   }
 
   handleAircraftSelection(e) {
@@ -96,29 +99,38 @@ class Aircrafts extends Component {
     })
   }
 
+  handleDateSelection(date) {
+    // date is a js Date object
+    console.log(date)
+    this.setState({
+      selectedFullDate: date,
+      showCalendar: false,
+    });
+  }
+
   render() {
     return (
       <div className="container">
         { this.state.alerts ? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
-          <h3>Selected airport: { this.state.airportName }</h3>
+
               <div className="col-sm-12 col-md-8">
+                <h3>Selected airport: { this.state.airportName }</h3>
                 <div className="row">
                   <div className="col-md-6">
                     <h3>Select aircraft:</h3>
                     <DropdownMenu
                       onchange={ this.handleAircraftSelection }
                       dataArray={ this.state.aircrafts }
-                      defaultValue="Select date"
+                      defaultValue="Select aircraft"
                     />
-
                     </div>
                     <div className="col-md-6">
                       <h3>Select date:</h3>
                       <DropdownMenu
                         onchange={ this.handleMonthSelection }
                         dataArray={ this.state.availableDateRange }
-                        defaultValue="Select aircraft"
+                        defaultValue="Select date"
                       />
                       { this.state.showCalendar ?
                         <Calendar
@@ -126,8 +138,8 @@ class Aircrafts extends Component {
                           activeStartDate={ this.formatCalendarActiveStartDate() }
                           maxDate={ this.formatCalendarMaxDate() }
                           minDate={ new Date() }
-                          onChange={this.handleDateSelection}
-                          value={this.state.selectedDate}
+                          onChange={ date => this.handleDateSelection(date) }
+                          value={ this.state.date }
                         />
                         :
                         null
