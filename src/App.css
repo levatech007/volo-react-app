@@ -79,6 +79,10 @@ td, th {
   margin-bottom: 40px;
 }
 
+select {
+  margin-bottom: 30px;
+}
+
 .selection-button {
   font-size: 2vw;
   margin-top: 50px;

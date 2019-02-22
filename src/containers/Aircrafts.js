@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import Alerts from "../components/Alerts.js";
 import AircraftInfo from "../components/AircraftInfo.js";
 import DropdownMenu from "../components/DropdownMenu.js";
+import FlightDisplayTable from "../components/FlightDisplayTable.js";
 
 class Aircrafts extends Component {
   constructor() {
@@ -18,9 +19,9 @@ class Aircrafts extends Component {
       showCalendar: false,
       alerts: "",
       alertStyle: "",
-      aircraftSelectionMade: false,
-      aircrafts: [{id: 1, name: "A380"}, {id: 2, name: "A350"}, {id: 3, name: "B747"}, {id: 4, name: "B777"}],
-      aircraftSchedule: [],
+      aircrafts: [{id: 1, name: "A380"}, {id: 2, name: "B787"}, {id: 3, name: "B747"}, {id: 4, name: "B777"}],
+      aircraftSchedule: [{type: "Arrival", time: "10:30am", airline: "American Airlines"},{type: "Departure", time: "12:30pm", airline: "United Airlines"},{type: "Arrival", time: "1:15pm", airline: "Lufthansa"},{type: "Departure", time: "5:10pm", airline: "Southwest" }],
+      displayFlightSchedule: false,
     }
     this.handleAircraftSelection = this.handleAircraftSelection.bind(this);
     this.handleMonthSelection = this.handleMonthSelection.bind(this);
@@ -42,6 +43,7 @@ class Aircrafts extends Component {
         selectedMonth: new Date().getMonth(),
        })
     });
+
   }
 
   generateCalendarDateRange() {
@@ -61,7 +63,7 @@ class Aircrafts extends Component {
 
   formatCalendar(months, year) {
     let result = months.map(month => {
-      // id will be the month's actual index in javascript Date, ex: April => 3
+      // id will be the month's actual index in javascript Date, ex: January => 0, April => 3
       return { id: this.state.monthNames.indexOf(month), name: `${ month } ${ year }`, year: year }
     })
     return result
@@ -77,17 +79,16 @@ class Aircrafts extends Component {
   formatCalendarMaxDate() {
     // getting todays's date is duplicated, should be separate function
     let today = new Date()
-    let thisDay = today.getDay();
+    let thisDay = today.getDate();
     let thisMonth = today.getMonth();
     let thisYear = today.getFullYear();
-    let date =  new Date(thisYear+1, thisMonth, thisDay)
+    let date =  new Date(thisYear+1, thisMonth, thisDay-1)
     return date
   }
 
   handleAircraftSelection(e) {
       this.setState({
         aircraftId: e.target.value,
-        aircraftSelectionMade: true,
       });
   }
 
@@ -100,22 +101,34 @@ class Aircrafts extends Component {
   }
 
   handleDateSelection(date) {
-    // date is a js Date object
-    console.log(date)
+    // date is a JS Date object
+    // if there is an aircraftId && locationId:
     this.setState({
       selectedFullDate: date,
       showCalendar: false,
+      displayFlightSchedule: true,
     });
+
+    // get aircraft schedules from backend
+    // display aircraft info + schedule
   }
 
   render() {
+
     return (
       <div className="container">
         { this.state.alerts ? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
 
               <div className="col-sm-12 col-md-8">
-                <h3>Selected airport: { this.state.airportName }</h3>
+                { this.state.displayFlightSchedule ?
+                  <AircraftInfo
+                    imageName={ this.state.aircrafts.find(aircraft => aircraft.id === parseInt(this.state.aircraftId)).name }
+                  />
+                  :
+                  null
+                }
+                <h3>Airport: { this.state.airportName }</h3>
                 <div className="row">
                   <div className="col-md-6">
                     <h3>Select aircraft:</h3>
@@ -146,8 +159,15 @@ class Aircrafts extends Component {
                       }
                     </div>
                   </div>
-                <div className="row">
-                  { this.state.aircraftSelectionMade ? <p>Selection made for { this.state.aircraftId }</p> : null }
+                <div className="row justify-content-center">
+                  {
+                    this.state.displayFlightSchedule ?
+                    <FlightDisplayTable
+                      aircraftSchedule={ this.state.aircraftSchedule }
+                    />
+                    :
+                    null
+                  }
                 </div>
             </div>
           </div>

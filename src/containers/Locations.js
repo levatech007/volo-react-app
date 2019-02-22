@@ -46,6 +46,7 @@ class Locations extends Component {
   }
 
   handleSelectButtonClick(name) {
+    // this should be scaled down
     if(this.state.selectedLocationId){
       if(name === 'info') {
         this.props.history.push(`/locations/${this.state.selectedLocationId}`)

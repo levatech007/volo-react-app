@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 
 class AircraftInfo extends Component {
+  constructor() {
+    super();
+  }
+  
   render() {
+    console.log(this.props.test)
     return(
       <div className="row">
         <div className="col-6">
             <ul>
-              <li><p>Stats</p></li>
-              <li><p>will go</p></li>
-              <li><p>here</p></li>
+              <li><p>Airplane introduction will be written here</p></li>
+              <li><p>Some stats here</p></li>
+              <li><p>... and here</p></li>
             </ul>
           </div>
         <div className="col-6">
-          Aircraft pic here
+          <img className="img-fluid" src={ require(`../images/aircraft-images/${ this.props.imageName }.jpg`) }/>
         </div>
       </div>
     )
