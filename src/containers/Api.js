@@ -66,14 +66,30 @@ class Api extends Component {
                             </table>
                             <br></br>
                             <p>{ route.notes }</p>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <th>Status Code</th>
+                                  <th>Error Message</th>
+                                </tr>
+                                {
+                                  route.errors.map((error, idx) => {
+                                    return (
+                                      <tr key={ idx }>
+                                        <td>{ error.status_code }</td>
+                                        <td>{ error.error_message }</td>
+                                      </tr>
+                                    )
+                                  })
+                                }
+                              </tbody>
+                            </table>
                           </AccordionItemBody>
                         </AccordionItem>
                       )
                     })
                   }
                 </Accordion>
-
-
             </div>
           }
         </div>

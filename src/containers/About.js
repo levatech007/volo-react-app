@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 class About extends Component {
-  
+
   componentDidMount() {
     window.scrollTo(0, 0)
   }
@@ -22,6 +22,7 @@ class About extends Component {
               <ul>
                 <li><a href="https://github.com/levatech007/volo-react-app" target="_blank" rel="noopener noreferrer">React front-end app</a></li>
                 <li><a href="https://github.com/levatech007/volo_rails_api" target="_blank" rel="noopener noreferrer">Rails back-end app</a></li>
+                <li><a href="https://github.com/levatech007/aviation-api" target="_blank" rel="noopener noreferrer">Rack API</a></li>
               </ul>
               <p>This app is under constant improvement. In the future, users will be able to see more detailed information regarding spotting location (parking, ameneties, etc.),
               select what type of plane they are interested in seeing as well as see calendars for airshows.</p>

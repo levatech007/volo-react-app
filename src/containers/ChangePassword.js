@@ -83,10 +83,6 @@ class ChangePassword extends Component {
     }
   }
 
-  componentWillUnmount() {
-    //log user out?
-  }
-
   onChange(response) {
     this.setState({
     recaptchaResponse: response
