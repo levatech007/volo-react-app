@@ -7,7 +7,7 @@ class AircraftInfo extends Component {
 
   render() {
     return(
-      <div className="row">
+      <div className="row aircraft-info">
         <div className="col-6">
             <ul>
               <li><p>Airplane introduction will be written here</p></li>

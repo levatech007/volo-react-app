@@ -21,7 +21,7 @@ class Aircrafts extends Component {
       alerts: "",
       alertStyle: "",
       aircrafts: [{id: 1, name: "A380"}, {id: 2, name: "B787"}, {id: 3, name: "B747"}, {id: 4, name: "B777"}],
-      aircraftSchedule: [{type: "Arrival", time: "10:30am", airline: "American Airlines"},{type: "Departure", time: "12:30pm", airline: "United Airlines"},{type: "Arrival", time: "1:15pm", airline: "Lufthansa"},{type: "Departure", time: "5:10pm", airline: "Southwest" }],
+      aircraftSchedule: [],
       displayFlightSchedule: false,
     }
     this.handleAircraftSelection = this.handleAircraftSelection.bind(this);
@@ -59,8 +59,8 @@ class Aircrafts extends Component {
     // format to object necessary for DropdownMenu component
     let formattedThisYear = this.formatCalendar(availableMonthsThisYear, thisYear);
     let formattedNextYear = this.formatCalendar(availableMonthsNextYear, thisYear + 1)
-
-    return formattedThisYear.concat(formattedNextYear)
+    // concat the 2 arrays
+    return [...formattedThisYear, ...formattedNextYear]
   }
 
   formatCalendar(months, year) {
@@ -80,23 +80,23 @@ class Aircrafts extends Component {
 
   formatCalendarMaxDate() {
     // getting todays's date is duplicated, should be separate function
-    let today = new Date()
-    let thisDay = today.getDate();
+    let today     = new Date()
+    let thisDay   = today.getDate();
     let thisMonth = today.getMonth();
-    let thisYear = today.getFullYear();
-    let date =  new Date(thisYear+1, thisMonth, thisDay-1)
+    let thisYear  = today.getFullYear();
+    let date      = new Date(thisYear+1, thisMonth, thisDay-1)
     return date
   }
 
   handleAircraftSelection(e) {
       this.setState({
+        // e.target.value returns a sting, aircraftId must be Integer!
         aircraftId: parseInt(e.target.value),
       });
   }
 
   handleMonthSelection(e) {
     this.setState({
-      // e.target.value comes through as string, convert to int!
       selectedMonth: parseInt(e.target.value),
       showCalendar: true,
     })
@@ -109,10 +109,11 @@ class Aircrafts extends Component {
       selectedFullDate: date,
       showCalendar: false,
       displayFlightSchedule: true,
+      alerts: "This is an upcoming feature that is currently under development. The information contained here is for testing purposes only",
+      alertStyle: "alert alert-danger"
     });
 
     // get aircraft schedules from backend
-    // display aircraft info + schedule
   }
 
   render() {
@@ -165,7 +166,7 @@ class Aircrafts extends Component {
                   {
                     this.state.displayFlightSchedule ?
                     <FlightDisplayTable
-                      aircraftSchedule={ this.state.aircraftSchedule.filter(aircraft => aircraft.aircraft === this.state.aircraftId) }
+                      aircraftSchedule={ this.state.aircraftSchedule.filter(schedule => schedule.aircraft === this.state.aircraftId) }
                     />
                     :
                     null

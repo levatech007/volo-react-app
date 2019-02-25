@@ -47,8 +47,7 @@ tr:nth-child(even) {
 }
 
 td, th {
-  padding: 10px 40px 10px 10px;
-  border: 1px solid #999999;
+  padding: 5px 40px 5px 10px;
 }
 
 .card-body, .card-header {
@@ -106,6 +105,10 @@ select {
 
 .down-arrow {
   height: 15px;
+}
+
+.aircraft-info {
+  margin-bottom: 30px;
 }
 
 .footer-background {
