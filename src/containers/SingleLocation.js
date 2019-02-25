@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Auth from "j-toker";
 import $ from "jquery";
-import Arrow from "../images/arrow-dn.svg";
+import ArrowDn from "../images/arrow-dn.svg";
+import ArrowUp from "../images/arrow-up.svg";
 import LocationInfo from "../components/Location.js";
 import CreateReviewForm from "../components/CreateReviewForm.js";
 import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody } from "react-accessible-accordion";
@@ -18,9 +19,11 @@ class Locations extends Component {
       latitude: 0,
       longitude: 0,
       errors: "",
+      changeArrowDirction: false,
     }
     this.showReviewForm = this.showReviewForm.bind(this);
     this.onSubmitReviewForm = this.onSubmitReviewForm.bind(this);
+    this.handleArrowDirectionChange = this.handleArrowDirectionChange.bind(this);
   }
 
   componentWillMount() {
@@ -72,6 +75,14 @@ class Locations extends Component {
     this.setState({ showForm: false})
   }
 
+  handleArrowDirectionChange() {
+    console.log("Change arrow")
+    this.setState({
+      changeArrowDirction: !this.state.changeArrowDirction
+    })
+
+  }
+
   render() {
     let showReviewForm = this.state.showForm
     return(
@@ -87,16 +98,18 @@ class Locations extends Component {
                   {this.state.reviews.map((oneReview, idx) => {
                       return(<AccordionItem key={ idx }>
                               <AccordionItemTitle>
-                                <div className="row">
-                                  <div className="col-9">
-                                    <h4>{ oneReview.title }</h4><p>by {oneReview.author}</p>
+                                <div onClick={ this.handleArrowDirectionChange }>
+                                  <div className="row" >
+                                    <div className="col-9">
+                                      <h4>{ oneReview.title }</h4><p>by {oneReview.author}</p>
+                                    </div>
+                                    <div className="col-3">
+                                      <ReactStars count={5} value={ parseFloat(oneReview.rating) } edit={ false } size={24} color2={"#ffd700"} />
+                                    </div>
                                   </div>
-                                  <div className="col-3">
-                                    <ReactStars count={5} value={ parseFloat(oneReview.rating) } edit={ false } size={24} color2={"#ffd700"} />
+                                  <div className="row justify-content-center">
+                                    <img src={ this.state.changeArrowDirction ? ArrowUp : ArrowDn } className="down-arrow" alt="down-arrow"/>
                                   </div>
-                                </div>
-                                <div className="row justify-content-center">
-                                  <img src={ Arrow } className="down-arrow" alt="down-arrow"/>
                                 </div>
                               </AccordionItemTitle>
                               <AccordionItemBody>
