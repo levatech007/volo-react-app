@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Auth from "j-toker";
+import { withRouter }       from "react-router-dom";
+import { Link }             from "react-router-dom";
+import Auth                 from "j-toker";
 
 class Header extends Component {
   constructor() {

@@ -1,12 +1,17 @@
 import React, { Component } from "react";
-import { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody } from "react-accessible-accordion";
+import {
+          Accordion,
+          AccordionItem,
+          AccordionItemTitle,
+          AccordionItemBody
+        } from "react-accessible-accordion";
 
 class Api extends Component {
   constructor() {
     super();
     this.state = {
-      documentation: {}
-    }
+                    documentation: {}
+                  }
   }
 
   componentDidMount() {
@@ -15,8 +20,10 @@ class Api extends Component {
         .then((res) => {
           return res.json();
         }).then((json_data) => {
-          this.setState({ documentation: json_data.documentation })
-    })
+          this.setState({
+                          documentation: json_data.documentation
+                        });
+    });
   }
 
   render() {
@@ -24,7 +31,6 @@ class Api extends Component {
       <div className="container">
         <div className="row justify-content-center background">
           <h3>VOLO API:</h3>
-
             { this.state.documentation.current_routes &&
             <div className="col-12">
               <p>{ this.state.documentation.intro }</p>

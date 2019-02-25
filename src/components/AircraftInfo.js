@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 
 class AircraftInfo extends Component {
-  constructor() {
-    super();
-  }
 
   render() {
     return(
@@ -15,11 +12,11 @@ class AircraftInfo extends Component {
               <li><p>... and here</p></li>
             </ul>
           </div>
-        <div className="col-6">
-          <img className="img-fluid" src={ require(`../images/aircraft-images/${ this.props.imageName }.jpg`) }/>
+          <div className="col-6">
+            <img className="img-fluid" src={ require(`../images/aircraft-images/${ this.props.imageName }.jpg`) }/>
+          </div>
         </div>
-      </div>
-    )
+      )
   }
 }
 

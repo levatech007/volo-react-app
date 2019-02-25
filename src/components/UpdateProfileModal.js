@@ -1,31 +1,30 @@
 import React, { Component } from "react";
-import Auth from "j-toker";
-import Alert from "./Alerts.js";
+import Auth                 from "j-toker";
+import Alert                from "./Alerts.js";
 
 class UpdateProfileModal extends Component {
   constructor() {
     super();
     this.state = {
-      inputFields: ["email", "name"],
-      email: "",
-      name: "",
-      showAlert: false,
-      alertStyle: "",
-      alertMessage: ""
-    }
-    this.handleInputChange = this.handleInputChange.bind(this);
+                    inputFields:  ["email", "name"],
+                    email:        "",
+                    name:         "",
+                    showAlert:    false,
+                    alertStyle:   "",
+                    alertMessage: ""
+                  }
+    this.handleInputChange     = this.handleInputChange.bind(this);
     this.showUpdateProfileForm = this.showUpdateProfileForm.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onFormSubmit          = this.onFormSubmit.bind(this);
   }
 
   handleInputChange(e) {
     e.preventDefault()
-    const target = e.target
-    const name = target.name
-    const value = target.value
-    this.setState({
-      [name]: value
-    })
+    const target  = e.target
+    const name    = target.name
+    const value   = target.value
+
+    this.setState({ [name]: value })
   }
 
   showUpdateProfileForm() {
@@ -41,12 +40,12 @@ class UpdateProfileModal extends Component {
                   <label className="col-sm-3 col-form-label">{ labelName }</label>
                   <div className="col-sm-9">
                     <input
-                      type={ (field === 'email') ? "email" : "text" }
-                      name={ field }
-                      className="form-control"
-                      placeholder={ `Your ${ field }` }
-                      onChange={ this.handleInputChange }
-                      value={ this.state[field] }
+                      type       = { (field === 'email') ? "email" : "text" }
+                      name       = { field }
+                      className  = "form-control"
+                      placeholder= { `Your ${ field }` }
+                      onChange   = { this.handleInputChange }
+                      value      = { this.state[field] }
                     />
                   </div>
                 </div>
@@ -56,11 +55,16 @@ class UpdateProfileModal extends Component {
             <div className="row justify-content-center submit-btn">
               <div className="col-md-9 offset-md-3">
                 <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Submit"
+                  type     = "submit"
+                  className= "btn btn-primary"
+                  value    = "Submit"
                 />
-                <button type="button" className="btn" onClick={ this.props.close }>Cancel</button>
+                <button
+                  type     = "button"
+                  className= "btn"
+                  onClick  = { this.props.close }
+                  >Cancel
+                </button>
               </div>
             </div>
           </form>

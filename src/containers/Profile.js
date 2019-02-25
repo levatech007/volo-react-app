@@ -1,27 +1,32 @@
 import React, { Component } from "react";
-import $ from "jquery";
-import Auth from "j-toker";
-import { Accordion,AccordionItem,AccordionItemTitle,AccordionItemBody,} from "react-accessible-accordion";
-import UpdateProfileModal from "../components/UpdateProfileModal.js";
-import ImageUploadModal from "../components/ImageUploadModal.js";
-import Profileimg from "../images/profile-img.png";
+import $                    from "jquery";
+import Auth                 from "j-toker";
+import {
+          Accordion,
+          AccordionItem,
+          AccordionItemTitle,
+          AccordionItemBody,
+        }                   from "react-accessible-accordion";
+import UpdateProfileModal   from "../components/UpdateProfileModal.js";
+import ImageUploadModal     from "../components/ImageUploadModal.js";
+import Profileimg           from "../images/profile-img.png";
 
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
-      calendar: [],
-      reviews: [],
-      profileImageUrl: "",
-      date: null,
-      menuTabs: ["Upcoming events", "Past events", "My reviews"],
-      updateProfileModalOpen: false,
-      imageUploadModalOpen: false
-    }
+                    calendar:               [],
+                    reviews:                [],
+                    profileImageUrl:        "",
+                    date:                   null,
+                    menuTabs:               ["Upcoming events", "Past events", "My reviews"],
+                    updateProfileModalOpen: false,
+                    imageUploadModalOpen:   false
+                  }
     this.toggleUpdateProfileModal = this.toggleUpdateProfileModal.bind(this);
-    this.toggleImageUploadModal = this.toggleImageUploadModal.bind(this);
-    this.onUpdateAccount = this.onUpdateAccount.bind(this);
-    this.onDeleteAccount = this.onDeleteAccount.bind(this);
+    this.toggleImageUploadModal   = this.toggleImageUploadModal.bind(this);
+    this.onUpdateAccount          = this.onUpdateAccount.bind(this);
+    this.onDeleteAccount          = this.onDeleteAccount.bind(this);
   }
 
   componentDidMount() {
@@ -34,14 +39,13 @@ class Profile extends Component {
     $.get({
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
-        console.log(data)
         //let images = data.images //array
         //let avatar = images[images.length - 1].avatar.url
         this.setState({
-          calendar: data.calendars,
-          reviews: data.reviews,
-          //profileImageUrl: avatar, // currently selecting the last image added
-        })
+                        calendar: data.calendars,
+                        reviews:  data.reviews,
+                        //profileImageUrl: avatar, // currently selecting the last image added
+                      })
       },
       error: (data) => {
         // show error msg
@@ -49,14 +53,16 @@ class Profile extends Component {
     });
 
     var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-    var yyyy = today.getFullYear();
+    var dd    = today.getDate();
+    var mm    = today.getMonth()+1; //January is 0!
+    var yyyy  = today.getFullYear();
     if(dd<10) { dd = "0"+dd}
     if(mm<10) {mm = "0"+mm}
     today = `${ mm }/${ dd }/${ yyyy }`
     this.setState({ date: today})
   }
+
+
 
   toggleUpdateProfileModal() {
     this.setState({ updateProfileModalOpen: !this.state.updateProfileModalOpen });
@@ -68,8 +74,8 @@ class Profile extends Component {
 
   onUpdateAccount(newData) {
     Auth.updateAccount({
-      name: newData.name,
-      image: newData.image
+      name:   newData.name,
+      image:  newData.image
     })
   }
 
@@ -136,7 +142,7 @@ class Profile extends Component {
               :
               <p>You have no calendar entries yet!</p>
             }
-            </div>
+          </div>
         </div>
       </div>
     )

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class UserOneCalendarEntry extends Component {
 
-
   render() {
     return(
       <div>

@@ -1,33 +1,33 @@
 import React, { Component } from "react";
-import Calendar from "react-calendar";
-import Alerts from "../components/Alerts.js";
-import AircraftInfo from "../components/AircraftInfo.js";
-import DropdownMenu from "../components/DropdownMenu.js";
-import FlightDisplayTable from "../components/FlightDisplayTable.js";
+import Calendar             from "react-calendar";
+import Alerts               from "../components/Alerts.js";
+import AircraftInfo         from "../components/AircraftInfo.js";
+import DropdownMenu         from "../components/DropdownMenu.js";
+import FlightDisplayTable   from "../components/FlightDisplayTable.js";
 import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
 
 class Aircrafts extends Component {
   constructor() {
     super();
     this.state = {
-      aircraftId: 0,
-      locationId: 0,
-      airportName: "",
-      monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-      availableDateRange: [],
-      selectedMonth: null,
-      selectedFullDate: null,
-      showCalendar: false,
-      alerts: "",
-      alertStyle: "",
-      aircrafts: [{id: 1, name: "A380"}, {id: 2, name: "B787"}, {id: 3, name: "B747"}, {id: 4, name: "B777"}],
-      aircraftSchedule: [],
-      displayFlightSchedule: false,
-    }
-    this.handleAircraftSelection = this.handleAircraftSelection.bind(this);
-    this.handleMonthSelection = this.handleMonthSelection.bind(this);
-    this.handleDateSelection = this.handleDateSelection.bind(this);
-    this.generateCalendarDateRange = this.generateCalendarDateRange.bind(this);
+                    aircraftId:             0,
+                    locationId:             0,
+                    airportName:            "",
+                    monthNames:             ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    availableDateRange:     [],
+                    selectedMonth:          null,
+                    selectedFullDate:       null,
+                    showCalendar:           false,
+                    alerts:                 "",
+                    alertStyle:             "",
+                    aircrafts:              [{id: 1, name: "A380"}, {id: 2, name: "B787"}, {id: 3, name: "B747"}, {id: 4, name: "B777"}],
+                    aircraftSchedule:       [],
+                    displayFlightSchedule:  false,
+                  }
+    this.handleAircraftSelection       = this.handleAircraftSelection.bind(this);
+    this.handleMonthSelection          = this.handleMonthSelection.bind(this);
+    this.handleDateSelection           = this.handleDateSelection.bind(this);
+    this.generateCalendarDateRange     = this.generateCalendarDateRange.bind(this);
     this.formatCalendarActiveStartDate = this.formatCalendarActiveStartDate.bind(this);
   }
 
@@ -38,21 +38,21 @@ class Aircrafts extends Component {
       return res.json();
     }).then((location) => {
       this.setState({
-        airportName: location.airport_name,
-        locationId: locationId,
-        availableDateRange: this.generateCalendarDateRange(),
-        selectedMonth: new Date().getMonth(),
-        aircraftSchedule: SampleFlightSchedule.sampleFlights
-       })
-    });
+                      airportName:        location.airport_name,
+                      locationId:         locationId,
+                      availableDateRange: this.generateCalendarDateRange(),
+                      selectedMonth:      new Date().getMonth(),
+                      aircraftSchedule:   SampleFlightSchedule.sampleFlights
+                     })
+                  });
 
   }
 
   generateCalendarDateRange() {
     // generate all months for the next year for dropdown menu
-    let today = new Date();
+    let today     = new Date();
     let thisMonth = today.getMonth();
-    let thisYear = today.getFullYear();
+    let thisYear  = today.getFullYear();
     // still need to check if availableMonthsNextYear is empty:
     let availableMonthsThisYear = this.state.monthNames.slice(thisMonth)
     let availableMonthsNextYear = this.state.monthNames.slice(0, thisMonth)
@@ -64,10 +64,14 @@ class Aircrafts extends Component {
   }
 
   formatCalendar(months, year) {
+    // id will be the month's actual index in javascript Date, ex: January => 0, April => 3
     let result = months.map(month => {
-      // id will be the month's actual index in javascript Date, ex: January => 0, April => 3
-      return { id: this.state.monthNames.indexOf(month), name: `${ month } ${ year }`, year: year }
-    })
+                                        return {
+                                                  id:   this.state.monthNames.indexOf(month),
+                                                  name: `${ month } ${ year }`,
+                                                  year: year
+                                                }
+                                      })
     return result
   }
 
@@ -90,28 +94,28 @@ class Aircrafts extends Component {
 
   handleAircraftSelection(e) {
       this.setState({
-        // e.target.value returns a sting, aircraftId must be Integer!
-        aircraftId: parseInt(e.target.value),
-      });
+                      // e.target.value returns a sting, aircraftId must be Integer!
+                      aircraftId: parseInt(e.target.value),
+                    });
   }
 
   handleMonthSelection(e) {
     this.setState({
-      selectedMonth: parseInt(e.target.value),
-      showCalendar: true,
-    })
+                    selectedMonth: parseInt(e.target.value),
+                    showCalendar: true,
+                  })
   }
 
   handleDateSelection(date) {
     // date is a JS Date object
     // if there is an aircraftId && locationId:
     this.setState({
-      selectedFullDate: date,
-      showCalendar: false,
-      displayFlightSchedule: true,
-      alerts: "This is an upcoming feature that is currently under development. The information contained here is for testing purposes only",
-      alertStyle: "alert alert-danger"
-    });
+                    selectedFullDate:       date,
+                    showCalendar:           false,
+                    displayFlightSchedule:  true,
+                    alerts:                 "This is an upcoming feature that is currently under development. The information contained here is for testing purposes only",
+                    alertStyle:             "alert alert-danger"
+                  });
 
     // get aircraft schedules from backend
   }
@@ -122,7 +126,6 @@ class Aircrafts extends Component {
       <div className="container">
         { this.state.alerts ? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
-
               <div className="col-sm-12 col-md-10">
                 { this.state.displayFlightSchedule ?
                   <AircraftInfo

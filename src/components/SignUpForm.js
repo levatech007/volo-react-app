@@ -5,29 +5,29 @@ class SignupForm extends Component {
   constructor() {
       super();
       this.state = {
-        user: {
-          name: "",
-          email: "",
-          password: "",
-          password_confirmation: "",
-          recaptchaResponse: "",
-        }
-      }
-      this.onNameInputChange = this.onNameInputChange.bind(this);
-      this.onEmailInputChange = this.onEmailInputChange.bind(this);
-      this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
+                      user: {
+                              name:              "",
+                              email:             "",
+                              password:          "",
+                              confirmPswd:       "",
+                              recaptchaResponse: "",
+                            }
+                    }
+      this.onNameInputChange            = this.onNameInputChange.bind(this);
+      this.onEmailInputChange           = this.onEmailInputChange.bind(this);
+      this.onPasswordInputChange        = this.onPasswordInputChange.bind(this);
       this.onConfirmPasswordInputChange = this.onConfirmPasswordInputChange.bind(this);
-      this.onFormSubmit = this.onFormSubmit.bind(this);
-      this.onChange = this.onChange.bind(this);
+      this.onFormSubmit                 = this.onFormSubmit.bind(this);
+      this.onChange                     = this.onChange.bind(this);
     }
-
+    // below input changes need to be consolidate to single functions!
     onNameInputChange(e) {
       this.setState({
         user: {
           name: e.target.value,
           email: this.state.user.name,
           password: this.state.user.password,
-          password_confirmation: this.state.user.password_confirmation,
+          confirmPswd: this.state.user.confirmPswd,
         }
       })
     }
@@ -38,7 +38,7 @@ class SignupForm extends Component {
           name: this.state.user.name,
           email: e.target.value,
           password: this.state.user.password,
-          password_confirmation: this.state.user.password_confirmation,
+          confirmPswd: this.state.user.confirmPswd,
         }
       })
     }
@@ -49,7 +49,7 @@ class SignupForm extends Component {
           name: this.state.user.name,
           email: this.state.user.email,
           password: e.target.value,
-          password_confirmation: this.state.user.password_confirmation,
+          confirmPswd: this.state.user.confirmPswd,
         }
       })
     }
@@ -60,7 +60,7 @@ class SignupForm extends Component {
           name: this.state.user.name,
           email: this.state.user.email,
           password: this.state.user.password,
-          password_confirmation: e.target.value,
+          confirmPswd: e.target.value,
         }
       })
     }
@@ -70,21 +70,19 @@ class SignupForm extends Component {
       if (this.state.recaptchaResponse) {
         let user = this.state.user
         this.setState({
-          user: {
-            name: "",
-            email: "",
-            password: "",
-            password_confirmation: ""
-          }
-        })
+                        user: {
+                                name:        "",
+                                email:       "",
+                                password:    "",
+                                confirmPswd: ""
+                              }
+                      })
         this.props.processSignupForm(user)
       }
     }
 
     onChange(response) {
-      this.setState({
-      recaptchaResponse: response
-    });
+      this.setState({ recaptchaResponse: response });
   }
 
   render() {
@@ -97,49 +95,49 @@ class SignupForm extends Component {
           <form onSubmit={ this.onFormSubmit } className="forms">
             <div className="form-group">
               <input
-                type="name"
-                name="name"
-                className="form-control"
-                placeholder="Enter your name"
-                onChange={this.onNameInputChange}
+                type       = "name"
+                name       = "name"
+                className  = "form-control"
+                placeholder= "Enter your name"
+                onChange   = { this.onNameInputChange }
               />
             </div>
             <div className="form-group">
               <input
-                type="email"
-                name="email"
-                className="form-control"
-                placeholder="Enter email"
-                onChange={this.onEmailInputChange}
+                type       = "email"
+                name       = "email"
+                className  = "form-control"
+                placeholder= "Enter email"
+                onChange   = { this.onEmailInputChange }
               />
             </div>
             <div className="form-group">
               <input
-                type="password"
-                className="form-control"
-                placeholder="Password"
-                onChange={this.onPasswordInputChange}
+                type       = "password"
+                className  = "form-control"
+                placeholder= "Password"
+                onChange   = { this.onPasswordInputChange }
               />
             </div>
             <div className="form-group">
               <input
-                type="password"
-                className="form-control"
-                placeholder="Confirm password"
-                onChange={this.onConfirmPasswordInputChange}
+                type       = "password"
+                className  = "form-control"
+                placeholder= "Confirm password"
+                onChange   = { this.onConfirmPasswordInputChange }
               />
             </div>
             <div className="row justify-content-center">
               <ReCAPTCHA
-                ref="recaptcha"
-                sitekey={ process.env.REACT_APP_SITE_KEY }
-                onChange={ this.onChange }/>
+                ref     = "recaptcha"
+                sitekey = { process.env.REACT_APP_SITE_KEY }
+                onChange= { this.onChange }/>
             </div>
             <div className="row justify-content-md-center">
               <input
-                type="submit"
-                className="btn btn-light"
-                value="Create Account"
+                type     = "submit"
+                className= "btn btn-light"
+                value    = "Create Account"
               />
             </div>
           </form>

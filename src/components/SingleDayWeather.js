@@ -1,20 +1,22 @@
 import React, { Component } from "react";
-import { AccordionItem, AccordionItemTitle, AccordionItemBody, } from "react-accessible-accordion";
+import {
+          AccordionItem,
+          AccordionItemTitle,
+          AccordionItemBody,
+        } from "react-accessible-accordion";
 
 class SingleDayWeather extends Component {
   constructor() {
     super();
     this.state = {
-      notes: "",
-    }
+                    notes: "",
+                  }
     this.onNotesInputChange = this.onNotesInputChange.bind(this);
-    this.addCalendarEntry = this.addCalendarEntry.bind(this);
+    this.addCalendarEntry   = this.addCalendarEntry.bind(this);
   }
 
   onNotesInputChange(e) {
-      this.setState({
-        notes: e.target.value
-      })
+      this.setState({ notes: e.target.value })
   }
 
   addCalendarEntry(e) {
@@ -47,10 +49,10 @@ class SingleDayWeather extends Component {
                   <div className="row">
                     <div className="col-sm-6">
                       <textarea
-                        className="form-control"
-                        ref="notes"
-                        rows="3"
-                        onChange={this.onNotesInputChange}
+                        className= "form-control"
+                        ref      = "notes"
+                        rows     = "3"
+                        onChange = { this.onNotesInputChange }
                         />
                       <button onClick={ this.addCalendarEntry } className="btn btn-primary"> + </button>
                     </div>

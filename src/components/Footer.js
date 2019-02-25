@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import $ from "jquery";
-import ContactModal from "./ContactModal.js";
-import Alerts from "./Alerts.js"
+import { Link }             from "react-router-dom";
+import $                    from "jquery";
+import ContactModal         from "./ContactModal.js";
+import Alerts               from "./Alerts.js"
 // dynamic image loading with webpack & require, step 1:
 function importAll(r) {
   let images = {}
@@ -14,63 +14,57 @@ class Footer extends Component {
   constructor() {
     super();
     this.state = {
-      showContactModal: false,
-      email: "",
-      alert: false,
-      alertStyle: "",
-      alertMsg: "",
-      footerLinks: [
-                    {page: "Locations", route: "locations"},
-                    {page: "About", route: "about"},
-                    {page: "Log In", route: "login"},
-                    {page: "Sign Up", route: "signup"},
-                    {page: "API", route: "api"}
-                  ],
-      socialMedia: [
-                    {accountName: "instagram", url: "http://instagram.com"},
-                    {accountName: "twitter", url: "http://twitter.com"},
-                    {accountName: "facebook", url: "http://facebook.com"}
-                  ]
-    }
+                    showContactModal: false,
+                    email:            "",
+                    alert:            false,
+                    alertStyle:       "",
+                    alertMsg:         "",
+                    footerLinks:      [
+                                        {page: "Locations", route: "locations"},
+                                        {page: "About", route: "about"},
+                                        {page: "Log In", route: "login"},
+                                        {page: "Sign Up", route: "signup"},
+                                        {page: "API", route: "api"}
+                                      ],
+                    socialMedia:      [
+                                        {accountName: "instagram", url: "http://instagram.com"},
+                                        {accountName: "twitter", url: "http://twitter.com"},
+                                        {accountName: "facebook", url: "http://facebook.com"}
+                                      ]
+                  }
     this.toggleContactModal = this.toggleContactModal.bind(this);
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
-    this.onEmailListSubmit = this.onEmailListSubmit.bind(this);
+    this.onEmailListSubmit  = this.onEmailListSubmit.bind(this);
   }
 
   toggleContactModal() {
-    this.setState({
-      showContactModal: !this.state.showContactModal
-    })
+    this.setState({ showContactModal: !this.state.showContactModal })
   }
 
   onEmailInputChange(e) {
-    this.setState({
-        email: e.target.value,
-    })
+    this.setState({ email: e.target.value })
   }
 
   onEmailListSubmit(e) {
     e.preventDefault();
     $.post({
       url: `${process.env.REACT_APP_BACKEND_URL}/subscribe`,
-      data: {
-        email: this.state.email
-      },
+      data: { email: this.state.email },
       success: (data) => {
         this.setState({
-          email: "",
-          alert: true,
-          alertStyle: "alert alert-success",
-          alertMsg: "Thank you!",
-        })
+                        email:      "",
+                        alert:      true,
+                        alertStyle: "alert alert-success",
+                        alertMsg:   "Thank you!",
+                      })
       },
       error: (error) => {
         this.setState({
-          email: "",
-          alert: true,
-          alertStyle: "alert alert-danger",
-          alertMsg: "Oops...",
-        })
+                        email:      "",
+                        alert:      true,
+                        alertStyle: "alert alert-danger",
+                        alertMsg:   "Oops...",
+                      })
       }
     })
   }

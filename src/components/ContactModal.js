@@ -7,30 +7,29 @@ class ContactModal extends Component {
   constructor(){
     super();
     this.state = {
-      name: "",
-      email: "",
-      body: "",
-      recaptchaResponse: "",
-      alert: false,
-      alertMessage: "",
-      alertStyle: "",
-      submitted: false,
-      inputFields: ["name", "email"]
-    }
+                    name:               "",
+                    email:              "",
+                    body:               "",
+                    recaptchaResponse:  "",
+                    alert:              false,
+                    alertMessage:       "",
+                    alertStyle:         "",
+                    submitted:          false,
+                    inputFields:        ["name", "email"]
+                  }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.renderContactForm = this.renderContactForm.bind(this);
-    this.onFormSubmit= this.onFormSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.onFormSubmit      = this.onFormSubmit.bind(this);
+    this.onChange          = this.onChange.bind(this);
   }
 
   handleInputChange(e) {
     e.preventDefault()
     const target = e.target
-    const name = target.name
-    const value = target.value
-    this.setState({
-      [name]: value
-    })
+    const name   = target.name
+    const value  = target.value
+
+    this.setState({ [name]: value })
   }
   // add FE validations
 
@@ -65,7 +64,7 @@ class ContactModal extends Component {
                 rows="4"
                 name="body"
                 placeholder="Your message here"
-                onChange={this.handleInputChange}
+                onChange={ this.handleInputChange }
                 value={ this.state.body }
               >
               </textarea>
@@ -96,53 +95,48 @@ class ContactModal extends Component {
   onFormSubmit(e) {
     e.preventDefault();
     let message = {
-      name: this.state.name,
-      email: this.state.email,
-      body: this.state.body
-    }
-    console.log(message)
+                    name:   this.state.name,
+                    email:  this.state.email,
+                    body:   this.state.body
+                  }
     if (this.state.recaptchaResponse) {
       $.post({
         url: `${process.env.REACT_APP_BACKEND_URL}/message`,
         data: {
-          message: message
-        },
+                message: message
+              },
         success: (response) => {
-          console.log(response)
           this.setState({
-            name: "",
-            email: "",
-            body: "",
-            recaptchaResponse: "",
-            alert: true,
-            alertMessage: response.result,
-            alertStyle: "alert alert-success",
-            submitted: true,
-          })
+                          name:              "",
+                          email:             "",
+                          body:              "",
+                          recaptchaResponse: "",
+                          alert:             true,
+                          alertMessage:      response.result,
+                          alertStyle:        "alert alert-success",
+                          submitted:         true,
+                        })
         },
         error: (error) => {
-          console.log(error)
           this.setState({
-            name: "",
-            email: "",
-            body: "",
-            recaptchaResponse: "",
-            alert: true,
-            alertMessage: "Oops...",
-            alertStyle: "alert alert-danger",
-            submitted: false,
-          })
+                          name:              "",
+                          email:             "",
+                          body:              "",
+                          recaptchaResponse: "",
+                          alert:             true,
+                          alertMessage:      "Oops...",
+                          alertStyle:        "alert alert-danger",
+                          submitted:         false,
+                        })
         }
       })
     } else {
-      // handle ReCAPTCHA error 
+      // handle ReCAPTCHA error
     }
   }
 
   onChange(response) {
-    this.setState({
-    recaptchaResponse: response
-  });
+    this.setState({ recaptchaResponse: response });
 }
   render() {
     return (

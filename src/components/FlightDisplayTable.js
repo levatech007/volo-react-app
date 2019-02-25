@@ -23,7 +23,6 @@ class FlightDisplayTable extends Component {
       </table>
     )
   }
-
 }
 
 export default FlightDisplayTable;

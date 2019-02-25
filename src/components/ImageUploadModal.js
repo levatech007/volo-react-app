@@ -1,26 +1,24 @@
 import React, { Component } from "react";
-import $ from "jquery";
-import Auth from "j-toker";
-import Alert from "./Alerts.js";
+import $                    from "jquery";
+import Auth                 from "j-toker";
+import Alert                from "./Alerts.js";
 
 class ImageUploadModal extends Component {
   constructor() {
     super();
     this.state = {
-      selectedImage: null,
-      showAlert: false,
-      alertStyle: "",
-      alertMessage: ""
-    }
+                    selectedImage: null,
+                    showAlert:     false,
+                    alertStyle:    "",
+                    alertMessage:  ""
+                  }
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onFormSubmit      = this.onFormSubmit.bind(this);
   }
 
   handleInputChange(e) {
     e.preventDefault()
-    this.setState({
-      selectedImage: e.target.files[0]
-    })
+    this.setState({ selectedImage: e.target.files[0] })
   }
 
   onFormSubmit(e) {
@@ -37,24 +35,22 @@ class ImageUploadModal extends Component {
       url: `${process.env.REACT_APP_BACKEND_URL}/images`,
       processData: false,
       contentType: false,
-      data: formPayLoad,
+      data:        formPayLoad,
       success: (resp) => {
-        console.log(resp)
         this.setState({
-          selectedImage: null,
-          showAlert: true,
-          alertStyle: "alert alert-success",
-          alertMessage: "Photo uploaded successfully!"
-        })
+                        selectedImage: null,
+                        showAlert:     true,
+                        alertStyle:    "alert alert-success",
+                        alertMessage:  "Photo uploaded successfully!"
+                      })
       },
       error: (resp) => {
-        console.log(resp)
         this.setState({
-          selectedImage: null,
-          showAlert: true,
-          alertStyle: "alert alert-danger",
-          alertMessage: "Oops...something went wrong!"
-        })
+                        selectedImage: null,
+                        showAlert:     true,
+                        alertStyle:    "alert alert-danger",
+                        alertMessage:  "Oops...something went wrong!"
+                      })
       }
     });
   }

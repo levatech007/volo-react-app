@@ -1,55 +1,55 @@
 import React, { Component } from 'react';
-import $ from "jquery";
-import Auth from "j-toker";
-import Location from "../components/Location.js";
-import { Accordion } from "react-accessible-accordion";
-import SingleDayWeather from "../components/SingleDayWeather.js"
+import $                    from "jquery";
+import Auth                 from "j-toker";
+import Location             from "../components/Location.js";
+import { Accordion }        from "react-accessible-accordion";
+import SingleDayWeather     from "../components/SingleDayWeather.js";
+
 import "react-accessible-accordion/dist/minimal-example.css";
 
 class Weather extends Component {
   constructor(){
     super();
     this.state = {
-      location: {},
-      weatherForecast: [],
-      userId: 0,
-      reviewCount: 0,
-    }
+                    location:         {},
+                    weatherForecast:  [],
+                    userId:           0,
+                    reviewCount:      0,
+                  }
     this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }
 
   componentWillMount() {
     Auth.validateToken()
     .then((user) => {
-      this.setState({
-        userId: user.id,
-      })
+      this.setState({ userId: user.id })
     })
   }
 
   componentDidMount() {
     let locationId = this.props.match.params.id;
+
     fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
     .then((res) => {
       return res.json();
-    }).then ((location) => {
-      this.setState({
-        location: location,
-        reviewCount: location.reviews.length,
-       })
     })
+    .then ((location) => {
+      this.setState({
+                      location: location,
+                      reviewCount: location.reviews.length,
+                     })
+    })
+
     fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}/weather.json`)
     .then((res) => {
       return res.json();
-    }).then((forecast) => {
-      console.log(forecast)
+    })
+    .then((forecast) => {
       this.setState({ weatherForecast: forecast.forecast })
     })
   }
 
   createCalendarEntry(oneDay, notes) {
-    console.log(oneDay)
-    console.log(notes)
 
     $.ajaxSetup({
       beforeSend(xhr, settings) {
@@ -59,14 +59,14 @@ class Weather extends Component {
     $.post({ // still need be set up
       url: `${process.env.REACT_APP_BACKEND_URL}/calendars`,
       data: {
-        location: this.state.location.name,
-        weekday: oneDay.day_of_week,
-        day: oneDay.day,
-        month: oneDay.month,
-        notes: notes,
-      },
+              location: this.state.location.name,
+              weekday:  oneDay.day_of_week,
+              day:      oneDay.day,
+              month:    oneDay.month,
+              notes:    notes,
+            },
       success: (response) => {
-          this.props.history.push(`/users/${this.state.userId}`)
+        this.props.history.push(`/users/${this.state.userId}`)
       },
       error: (response) => {
         console.log("error")
@@ -76,7 +76,6 @@ class Weather extends Component {
   }
 
   render() {
-    console.log(this.state.weatherForecast)
     return (
       <div className="container">
         <div className="row background">

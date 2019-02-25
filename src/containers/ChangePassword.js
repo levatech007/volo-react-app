@@ -7,87 +7,86 @@ class ChangePassword extends Component {
   constructor() {
     super();
     this.state = {
-      newPassword: "",
-      confirmPassword: "",
-      alert: false,
-      alertStyle: "",
-      alertMessage: "",
-      recaptchaResponse: "",
-      userSignedIn: false,
-      userName: "",
-      userId: "",
-    }
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.onUpdatePassword = this.onUpdatePassword.bind(this);
-    this.onChange = this.onChange.bind(this);
+                    newPassword:        "",
+                    confirmPassword:    "",
+                    alert:              false,
+                    alertStyle:         "",
+                    alertMessage:       "",
+                    recaptchaResponse:  "",
+                    userSignedIn:       false,
+                    userName:           "",
+                    userId:             "",
+                  }
+    this.handleInputChange  = this.handleInputChange.bind(this);
+    this.onUpdatePassword   = this.onUpdatePassword.bind(this);
+    this.onChange           = this.onChange.bind(this);
   }
 
   componentDidMount() {
     Auth.validateToken()
     .then((user) => {
       this.setState({
-        userSignedIn: user.signedIn,
-        userName: user.name,
-        userId: user.id,
-      })
+                      userSignedIn: user.signedIn,
+                      userName:     user.name,
+                      userId:       user.id,
+                    })
     })
   }
 
   handleInputChange(e) {
     e.preventDefault()
-    const target = e.target
-    const name = target.name
-    const value = target.value
-    this.setState({
-      [name]: value
-    })
+    const target  = e.target
+    const name    = target.name
+    const value   = target.value
+    this.setState({ [name]: value })
   }
 
   onUpdatePassword(e) {
     e.preventDefault();
     if (this.state.recaptchaResponse) {
       Auth.updatePassword({
-        password: this.state.newPassword,
-        password_confirmation: this.state.confirmPassword,
+        password:               this.state.newPassword,
+        password_confirmation:  this.state.confirmPassword,
       })
       .then((resp) => {
         this.setState({
-          newPassword: "",
-          confirmPassword: "",
-          alert: true,
-          recaptchaResponse: "",
-          alertStyle: "alert alert-success",
-          alertMessage: resp.message,
-        });
-        //redirect user to login page? or profile? after a set time?
-      }).fail((resp) => {
+                        newPassword:        "",
+                        confirmPassword:    "",
+                        alert:              true,
+                        recaptchaResponse:  "",
+                        alertStyle:         "alert alert-success",
+                        alertMessage:       resp.message,
+                      });
+                                      //redirect user to login page? or profile? after a set time?
+      })
+      .fail((resp) => {
         this.setState({
-          newPassword: "",
-          confirmPassword: "",
-          alert: true,
-          recaptchaResponse: "",
-          alertStyle: "alert alert-danger",
-          alertMessage: resp.reason,
-        });
+                        newPassword:        "",
+                        confirmPassword:    "",
+                        alert:              true,
+                        recaptchaResponse:  "",
+                        alertStyle:         "alert alert-danger",
+                        alertMessage:       resp.reason,
+                      });
         //redirect user to login page?
       })
     } else {
       this.setState({
-        newPassword: "",
-        confirmPassword: "",
-        alert: true,
-        recaptchaResponse: "",
-        alertStyle: "alert alert-danger",
-        alertMessage: "Please try again",
-      });
+                      newPassword:        "",
+                      confirmPassword:    "",
+                      alert:              true,
+                      recaptchaResponse:  "",
+                      alertStyle:         "alert alert-danger",
+                      alertMessage:       "Please try again",
+                    });
     }
   }
 
   onChange(response) {
     this.setState({
-    recaptchaResponse: response
-  });
-}
+                    recaptchaResponse: response
+                  });
+  }
 
   render() {
     return (
