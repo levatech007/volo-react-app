@@ -74,7 +74,7 @@ class Footer extends Component {
     const images = importAll(require.context('../images/social_icons', false, /\.(png|jpe?g|svg)$/));
     return(
       <div className="row justify-content-center footer-background">
-        <div className="container">
+        <div className="container footer">
           { this.state.showContactModal ? <ContactModal toggleContactModal={ this.toggleContactModal }/> : null }
           <div className="row justify-content-center">
             <div className="col-lg-2 col-md-6">

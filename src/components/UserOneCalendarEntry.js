@@ -16,7 +16,6 @@ class UserOneCalendarEntry extends Component {
         </div>
         <div id={"collapse" + (this.props.number)} className="collapse" aria-labelledby={"heading" + (this.props.number)} data-parent="#accordion">
           <div className="card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life sustainable VHS.
             <input type="textarea" ref="notes"/>
           </div>
           <button onClick={ this.onSubmitEntry } className="btn btn-primary"> + </button>
