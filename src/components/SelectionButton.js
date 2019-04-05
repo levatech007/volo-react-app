@@ -13,7 +13,7 @@ class SelectionButton extends Component {
   render() {
     return(
       <div className="col-4 center-col-content">
-        <button type="button" className="btn btn-light selection-button" onClick={ this.handleClick }>
+        <button type="button" className="selection-button" onClick={ this.handleClick }>
           <img className="img-fluid" src={ require(`../images/button-icons/${ this.props.name }-icon.svg`) } alt={ `${ this.props.name }-icon` } />
           <p>{ this.props.title }</p>
         </button>

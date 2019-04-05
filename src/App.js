@@ -31,7 +31,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="gradient">
+      <div className="home-screen">
         <Header />
         { MyRoutes }
         <Footer />
