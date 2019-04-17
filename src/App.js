@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div className="home-screen">
         <div className="gradient">
-        <LoadingSpinner />
+        // <LoadingSpinner />
         <Header />
         { MyRoutes }
         </div>

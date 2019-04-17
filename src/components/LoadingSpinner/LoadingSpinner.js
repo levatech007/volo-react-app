@@ -9,7 +9,6 @@ class LoadingSpinner extends Component {
         currentScreenHeight:  window.innerHeight,
         currentScreenWidth:   window.innerWidth,
         marginTop: 0,
-        marginLeft: 0
       }
       this.handleScreenDimensionsChange = this.handleScreenDimensionsChange.bind(this)
     }
@@ -25,7 +24,9 @@ class LoadingSpinner extends Component {
   handleScreenDimensionsChange() {
       // get element width and height
       // get screen dimensions
-      // calculate margins (window w or h - element w or h)/2
+      // div has a fixed height
+      // calculate margins (window h - element h)/2
+
 
   }
 

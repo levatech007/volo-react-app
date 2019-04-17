@@ -14,13 +14,11 @@
 
 .window {
   text-align: center;
-  color: #666666;
+  color: #FFFFFF;
   width: 400px;
   height: 300px;
-  position: absolute;
   border-radius: 3px;
-  top: 25%;
-  left: 15%;
+  margin: 200px auto;
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -31,8 +29,8 @@
 
 .spinner {
     position: absolute;
-    top: 25%;
-    left: 30%;
+    top: 35%;
+    left: 43%;
     width: 200px;
     height: 200px;
     margin: -14px 0 0 -14px;
