@@ -5,6 +5,7 @@ import Auth from "j-toker";
 import MyRoutes from "./config/routes.js"
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner.js";
 
 class App extends Component {
   constructor() {
@@ -32,8 +33,11 @@ class App extends Component {
   render() {
     return (
       <div className="home-screen">
+        <div className="gradient">
+        <LoadingSpinner />
         <Header />
         { MyRoutes }
+        </div>
         <Footer />
       </div>
     );

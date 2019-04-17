@@ -1,0 +1,48 @@
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.screen {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.window {
+  text-align: center;
+  color: #666666;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  border-radius: 3px;
+  top: 25%;
+  left: 15%;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  background: #ADA996;
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2);
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2);
+}
+
+.spinner {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    width: 200px;
+    height: 200px;
+    margin: -14px 0 0 -14px;
+}
+
+.spinner img {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 200px;
+    height: 200px;
+    animation: spin 4s infinite linear;
+}
