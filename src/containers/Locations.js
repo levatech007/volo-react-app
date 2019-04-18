@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LocationMarkerLg     from "../images/location-marker-lg.svg";
 import SelectionButton      from "../components/SelectionButton.js";
 import Alerts               from "../components/Alerts.js";
+import LoadingSpinner       from "../components/LoadingSpinner/LoadingSpinner.js";
 
 class Locations extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class Locations extends Component {
                     selectedAirportCode:  "",
                     alerts:               "",
                     alertStyle:           "alert alert-danger",
+                    showLoadingSpinner:   true,
                     selectionButtons:     [
                                             {buttonName: "info", buttonTitle: "About location"},
                                             {buttonName: "aircraft", buttonTitle: "Select aircraft"},
@@ -64,6 +66,7 @@ class Locations extends Component {
   render() {
     return (
       <div className="container">
+        { this.state.showLoadingSpinner ? <LoadingSpinner /> : null }
         { this.state.alerts ? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
           <div className="col-12">

@@ -34,7 +34,7 @@ class Api extends Component {
             { this.state.documentation.current_routes &&
             <div className="col-12">
               <p>{ this.state.documentation.intro }</p>
-              <p>Base url for this api is { this.state.documentation.base_URL }</p>
+              <p>Base URL for this api is { this.state.documentation.base_URL }</p>
 
                 <Accordion>
                   {

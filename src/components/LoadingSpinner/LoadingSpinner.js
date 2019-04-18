@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import EngineSpinner from "../../images/engine-spinner.png";
+import EngineSpinner from "../../images/engine-spinner-with-fill.png";
 import "./loading-spinner.css";
 
 class LoadingSpinner extends Component {
