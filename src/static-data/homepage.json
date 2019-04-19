@@ -1,0 +1,14 @@
+{
+  "icons": [
+    { "name": "location",
+      "description": "Find locations near airports where you can watch planes land and take off."
+    },
+    { "name": "airplane",
+      "description": "Want to see an A380 take off or land? Find out when you can see it at your selected location."
+    },
+    { "name": "weather",
+      "description": "Thinking of going planespotting? Check out the weather forecast first!"
+    }
+  ]
+
+}
