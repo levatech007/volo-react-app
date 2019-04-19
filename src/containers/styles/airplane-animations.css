@@ -1,0 +1,56 @@
+.flight{
+  width:200px;
+  height:100px;
+  background:url(images/departure-icon.svg) center no-repeat;
+  background-size:100%;
+  position:absolute;
+  bottom:-8px;
+  right:0;
+  margin-bottom: 15px;
+}
+
+.run{
+    animation: takeOff linear 10s;
+  }
+
+/* .runway{
+  width:95%;
+  height:1px;
+  border-top:1px dashed #eee;
+  background:#333;
+  position:fixed;
+  bottom:5px;
+  right:0;
+} */
+
+@keyframes takeOff {
+    0% {
+      transform: translate(0,0) rotate(0deg);
+    }
+    15% {
+      transform: translate(-250px,-2px) rotate(0deg);
+    }
+    38% {
+      transform: translate(-500px,-5px) rotate(10deg);
+    }
+    39% {
+      transform: translate(-515px,-10px) rotate(15deg);
+    }
+    40% {
+      transform: translate(-530px,-12px) rotate(20deg);
+    }
+    45% {
+      transform: translate(-625px,-50px) rotate(20deg);
+    }
+    100% {
+      transform: translate(-2000px,-750px) rotate(20deg);
+    }
+}
+
+
+
+@media only screen and (max-width: 800px) {
+  .flight {
+    display: none;
+  }
+}
