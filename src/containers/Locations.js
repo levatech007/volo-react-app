@@ -13,7 +13,7 @@ class Locations extends Component {
                     selectedAirportCode:  "",
                     alerts:               "",
                     alertStyle:           "alert alert-danger",
-                    showLoadingSpinner:   true,
+                    showLoadingSpinner:   false,
                     selectionButtons:     [
                                             {buttonName: "info", buttonTitle: "About location"},
                                             {buttonName: "aircraft", buttonTitle: "Select aircraft"},
@@ -25,13 +25,15 @@ class Locations extends Component {
   }
 
   componentDidMount() {
+    this.setState({ showLoadingSpinner: true })
     fetch(`${process.env.REACT_APP_BACKEND_URL}/locations`)
         .then((res) => {
           return res.json();
         }).then((locations) => {
           this.setState({
                           locations:          locations,
-                          selectedLocationId: locations[0].id // set default location
+                          selectedLocationId: locations[0].id, // set default location
+                          showLoadingSpinner: false
                          })
     });
 

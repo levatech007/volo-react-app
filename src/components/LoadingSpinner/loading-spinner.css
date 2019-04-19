@@ -16,9 +16,9 @@
 .spinner {
     position: absolute;
     z-index: 15000;
-    top: 25%;
-    left: 30%;
     animation: spin 3s infinite linear;
+    top: calc(50vh - (300px / 2));
+    left: calc(50vw - (300px / 2));
 }
 
 .spinner, .spinner img {
