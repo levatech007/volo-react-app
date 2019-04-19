@@ -5,7 +5,6 @@ import Auth from "j-toker";
 import MyRoutes from "./config/routes.js"
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
-import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner.js";
 
 class App extends Component {
   constructor() {

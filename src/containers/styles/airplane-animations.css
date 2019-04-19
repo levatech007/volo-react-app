@@ -13,16 +13,6 @@
     animation: takeOff linear 10s;
   }
 
-/* .runway{
-  width:95%;
-  height:1px;
-  border-top:1px dashed #eee;
-  background:#333;
-  position:fixed;
-  bottom:5px;
-  right:0;
-} */
-
 @keyframes takeOff {
     0% {
       transform: translate(0,0) rotate(0deg);
