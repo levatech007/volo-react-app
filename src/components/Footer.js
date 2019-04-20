@@ -117,7 +117,7 @@ class Footer extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-8">
+                <div className="col-sm-8">
                   <input
                     type="email"
                     className="form-control"
@@ -125,7 +125,7 @@ class Footer extends Component {
                     placeholder="Join our email list"
                   />
                 </div>
-                <div className="col-4">
+                <div className="col-sm-4">
                   <button
                     type="submit"
                     className="btn btn-light"
