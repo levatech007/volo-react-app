@@ -7,11 +7,17 @@ class Modal extends Component {
     return(
       <div className="screen">
         <div className="modal-window">
-          MODAL
+          <div>
+            <h3>Modal box title</h3>
+          </div>
+          <hr></hr>
+          <div>
+            <p>This is the modal box content section</p>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-  export default Modal;
+export default Modal;
