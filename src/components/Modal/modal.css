@@ -14,10 +14,10 @@
     width: 50%;
     top: 10%;
     height: auto;
-    min-height: 300px;
+    min-height: 200px;
     right: 0;
     left: 0;
-    color: black;
+    color: #666666;
     padding: 20px;
     margin-right: auto;
     margin-left: auto;
@@ -31,6 +31,35 @@
 
 hr {
   border-top: 1px solid lightgray;
+}
+
+.close-btn {
+  border: none;
+  float: right;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: red;
+}
+
+.footer-btn {
+  border: 1px solid gray;
+  border-radius: 2px;
+  margin: 15px;
+  padding: 5px 15px;
+}
+
+.submit {
+  background: rgb(144, 244, 127);
+}
+
+.submit:hover {
+  background: rgb(25, 221, 25);
+}
+
+.cancel:hover {
+  background: lightgray;
 }
 
 @media (max-width: 900px) {
