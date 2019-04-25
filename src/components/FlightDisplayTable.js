@@ -11,7 +11,7 @@ class FlightDisplayTable extends Component {
               let icon = item.type.toLowerCase()
               return (
                 <tr key={ idx }>
-                  <td><img src={ require(`../images/table-icons/${ icon }-icon.svg`) }/></td>
+                  <td><img src={ require(`../images/table-icons/${ icon }-icon.svg`) } alt={ icon }/></td>
                   <td>{ item.route }</td>
                   <td>{ item.time }</td>
                   <td>{ item.airline }</td>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Auth from "j-toker";
-import Alerts from "../components/Alerts.js";
+import Alert from "../components/Alert/Alert.js";
 import ReCAPTCHA from "react-google-recaptcha";
 
 class ChangePassword extends Component {
@@ -54,7 +54,7 @@ class ChangePassword extends Component {
                         confirmPassword:    "",
                         alert:              true,
                         recaptchaResponse:  "",
-                        alertStyle:         "alert alert-success",
+                        alertStyle:         "alert-box ok",
                         alertMessage:       resp.message,
                       });
                                       //redirect user to login page? or profile? after a set time?
@@ -65,7 +65,7 @@ class ChangePassword extends Component {
                         confirmPassword:    "",
                         alert:              true,
                         recaptchaResponse:  "",
-                        alertStyle:         "alert alert-danger",
+                        alertStyle:         "alert-box error",
                         alertMessage:       resp.reason,
                       });
         //redirect user to login page?
@@ -76,7 +76,7 @@ class ChangePassword extends Component {
                       confirmPassword:    "",
                       alert:              true,
                       recaptchaResponse:  "",
-                      alertStyle:         "alert alert-danger",
+                      alertStyle:         "alert-box error",
                       alertMessage:       "Please try again",
                     });
     }
@@ -91,7 +91,7 @@ class ChangePassword extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.alert? <Alerts alert={ this.state.alertMessage } style={ this.state.alertStyle } /> : null }
+        { this.state.alert? <Alert alert={ this.state.alertMessage } style={ this.state.alertStyle } /> : null }
         <div className="row align-items-center background">
           <div className="row justify-content-md-center">
             <form onSubmit={ this.onUpdatePassword } className="forms">

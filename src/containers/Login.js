@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Auth                 from "j-toker";
 import LoginForm            from "../components/LoginForm.js";
 import SignupForm           from "../components/SignUpForm.js";
-import Alerts               from "../components/Alerts.js";
+import Alert               from "../components/Alert/Alert.js";
 
 class Login extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Login extends Component {
       this.setState({
                       showAlert:  true,
                       alerts:     resp.reason,
-                      alertStyle: "alert alert-danger"
+                      alertStyle: "alert-box error"
                     })
     })
   }
@@ -56,7 +56,7 @@ class Login extends Component {
         this.setState({
                         showAlert:  true,
                         alerts:     resp.data.errors.full_messages,
-                        alertStyle: "alert alert-danger"
+                        alertStyle: "alert-box error"
                       })
       })
     })
@@ -64,7 +64,7 @@ class Login extends Component {
         this.setState({
                         showAlert:  true,
                         alerts:     resp.data.errors.full_messages,
-                        alertStyle: "alert alert-danger"
+                        alertStyle: "alert-box error"
                       })
     })
   }
@@ -78,14 +78,14 @@ class Login extends Component {
       this.setState({
                       showAlert:  true,
                       alerts:     `Welcome ${ user.name }`,
-                      alertStyle: "alert alert-danger"
+                      alertStyle: "alert-box ok"
                     });
     })
     .fail((resp) => {
       this.setState({
                       showAlert:  true,
                       alerts:     `Auth failure: ${resp.errors}`,
-                      alertStyle: "alert alert-danger"
+                      alertStyle: "alert-box error"
                     });
     });
   }
@@ -93,7 +93,7 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.showAlert? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
+        { this.state.showAlert? <Alert alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         <div className="row background">
           <LoginForm processLoginForm={ this.processLoginForm } processOauthLogin={ this.processOauthLogin }/>
           <SignupForm processSignupForm={ this.processSignupForm } />

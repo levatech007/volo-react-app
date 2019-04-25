@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Auth                 from "j-toker";
-import Alert                from "./Alerts.js";
+import Alert                from "./Alert/Alert.js";
 
 class UpdateProfileModal extends Component {
   constructor() {
@@ -84,7 +84,7 @@ class UpdateProfileModal extends Component {
         name: "",
         email: "",
         showAlert: true,
-        alertStyle: "alert alert-success",
+        alertStyle: "alert-box ok",
         alertMessage: "Successfully updated account"
         // msg: `Updated info to ${ resp.data.email } ${ resp.data.name }`
       });
@@ -93,7 +93,7 @@ class UpdateProfileModal extends Component {
         name: "",
         email: "",
         showAlert: true,
-        alertStyle: "alert alert-danger",
+        alertStyle: "alert-box error",
         alertMessage: "Something went wrong"
       })
     });

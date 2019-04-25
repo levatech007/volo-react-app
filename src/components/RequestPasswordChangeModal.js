@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Auth from "j-toker";
-import Alerts from "../components/Alerts.js"
+import Alert from "../components/Alert/Alert.js"
 
 class RequestPasswordChangeModal extends Component {
   constructor(){
@@ -34,7 +34,7 @@ class RequestPasswordChangeModal extends Component {
                                      email:        "",
                                      submitted:    true,
                                      alert:        true,
-                                     alertStyle:   "alert alert-success",
+                                     alertStyle:   "alert-box ok",
                                      alertMessage: "Success!",
                                    });
      })
@@ -44,7 +44,7 @@ class RequestPasswordChangeModal extends Component {
                                        email:       "",
                                        submitted:   false,
                                        alert:       true,
-                                       alertStyle:  "alert alert-danger",
+                                       alertStyle:  "alert-box error",
                                        alertMessage: resp.data.errors,
                                      });
      })
@@ -108,7 +108,7 @@ class RequestPasswordChangeModal extends Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            { this.state.alert ? <Alerts style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
+            { this.state.alert ? <Alert style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
             <div className="modal-body">
               { this.state.submitted ? this.showSentConfirmation() : this.showPasswordChangeForm()}
             </div>

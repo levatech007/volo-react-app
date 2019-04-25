@@ -5,6 +5,7 @@ import Auth from "j-toker";
 import MyRoutes from "./config/routes.js"
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
+import Modal from "./components/Modal/Modal.js";
 
 class App extends Component {
   constructor() {
@@ -33,6 +34,7 @@ class App extends Component {
     return (
       <div className="home-screen">
         <div className="gradient">
+        {/* <Modal /> */}
         <Header />
         { MyRoutes }
         </div>

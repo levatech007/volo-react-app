@@ -13,7 +13,7 @@ class AircraftInfo extends Component {
             </ul>
           </div>
           <div className="col-6">
-            <img className="img-fluid" src={ require(`../images/aircraft-images/${ this.props.imageName }.jpg`) }/>
+            <img className="img-fluid" src={ require(`../images/aircraft-images/${ this.props.imageName }.jpg`) } alt={ this.props.imageName }/>
           </div>
         </div>
       )

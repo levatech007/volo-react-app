@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Calendar             from "react-calendar";
-import Alerts               from "../components/Alerts.js";
 import AircraftInfo         from "../components/AircraftInfo.js";
 import DropdownMenu         from "../components/DropdownMenu.js";
 import FlightDisplayTable   from "../components/FlightDisplayTable.js";
 import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
+import Alert                from "../components/Alert/Alert.js";
 
 class Aircrafts extends Component {
   constructor() {
@@ -50,6 +50,7 @@ class Aircrafts extends Component {
 
   generateCalendarDateRange() {
     // generate all months for the next year for dropdown menu
+    // REPLACE with dropdown for the next 7 days
     let today     = new Date();
     let thisMonth = today.getMonth();
     let thisYear  = today.getFullYear();
@@ -114,7 +115,7 @@ class Aircrafts extends Component {
                     showCalendar:           false,
                     displayFlightSchedule:  true,
                     alerts:                 "This is an upcoming feature that is currently under development. The information contained here is for testing purposes only",
-                    alertStyle:             "alert alert-danger"
+                    alertStyle:             "alert-box error"
                   });
 
     // get aircraft schedules from backend
@@ -124,7 +125,7 @@ class Aircrafts extends Component {
 
     return (
       <div className="container">
-        { this.state.alerts ? <Alerts alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
+        { this.state.alerts ? <Alert alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
               <div className="col-sm-12 col-md-10">
                 { this.state.displayFlightSchedule ?

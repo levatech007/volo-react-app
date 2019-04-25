@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import $                    from "jquery";
 import Auth                 from "j-toker";
-import Alert                from "./Alerts.js";
+import Alert                from "./Alert/Alert.js";
 
 class ImageUploadModal extends Component {
   constructor() {
@@ -40,7 +40,7 @@ class ImageUploadModal extends Component {
         this.setState({
                         selectedImage: null,
                         showAlert:     true,
-                        alertStyle:    "alert alert-success",
+                        alertStyle:    "alert-box ok",
                         alertMessage:  "Photo uploaded successfully!"
                       })
       },
@@ -48,7 +48,7 @@ class ImageUploadModal extends Component {
         this.setState({
                         selectedImage: null,
                         showAlert:     true,
-                        alertStyle:    "alert alert-danger",
+                        alertStyle:    "alert-box error",
                         alertMessage:  "Oops...something went wrong!"
                       })
       }

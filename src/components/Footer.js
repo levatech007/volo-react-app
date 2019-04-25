@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link }             from "react-router-dom";
 import $                    from "jquery";
 import ContactModal         from "./ContactModal.js";
-import Alerts               from "./Alerts.js"
+import Alert               from "./Alert/Alert.js"
 // dynamic image loading with webpack & require, step 1:
 function importAll(r) {
   let images = {}
@@ -54,7 +54,7 @@ class Footer extends Component {
         this.setState({
                         email:      "",
                         alert:      true,
-                        alertStyle: "alert alert-success",
+                        alertStyle: "alert-box ok",
                         alertMsg:   "Thank you!",
                       })
       },
@@ -62,7 +62,7 @@ class Footer extends Component {
         this.setState({
                         email:      "",
                         alert:      true,
-                        alertStyle: "alert alert-danger",
+                        alertStyle: "alert-box error",
                         alertMsg:   "Oops...",
                       })
       }
@@ -73,7 +73,7 @@ class Footer extends Component {
     // dynamic image loading with webpack & require, step 2:
     const images = importAll(require.context('../images/social_icons', false, /\.(png|jpe?g|svg)$/));
     return(
-      <div className="row justify-content-center footer-background">
+      <footer className="row justify-content-center footer-background">
         <div className="container footer">
           { this.state.showContactModal ? <ContactModal toggleContactModal={ this.toggleContactModal }/> : null }
           <div className="row justify-content-center">
@@ -112,7 +112,7 @@ class Footer extends Component {
               <div className="row">
                 <div className="col-12">
                   { this.state.alert ?
-                  <Alerts style={ this.state.alertStyle } alert={ this.state.alertMsg } /> : null
+                  <Alert style={ this.state.alertStyle } alert={ this.state.alertMsg } /> : null
                   }
                 </div>
               </div>
@@ -144,7 +144,7 @@ class Footer extends Component {
             <small>&copy; {(new Date()).getFullYear()} VOLO All rights reserved</small>
           </div>
         </div>
-      </div>
+      </footer>
     )
   }
 }

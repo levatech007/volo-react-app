@@ -2,9 +2,6 @@ import React, { Component } from "react";
 
 class DropdownMenu extends Component {
 
-  // should check if there needs to be table headers
-  // return table accordingly
-
   render() {
     return(
       <select onChange={ this.props.onchange } className="form-control form-control-lg">

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import ReCAPTCHA from "react-google-recaptcha";
-import Alert from "./Alerts"
+import Alert from "./Alert/Alert.js";
 
 class ContactModal extends Component {
   constructor(){
@@ -113,7 +113,7 @@ class ContactModal extends Component {
                           recaptchaResponse: "",
                           alert:             true,
                           alertMessage:      response.result,
-                          alertStyle:        "alert alert-success",
+                          alertStyle:        "alert-box ok",
                           submitted:         true,
                         })
         },
@@ -125,7 +125,7 @@ class ContactModal extends Component {
                           recaptchaResponse: "",
                           alert:             true,
                           alertMessage:      "Oops...",
-                          alertStyle:        "alert alert-danger",
+                          alertStyle:        "alert-box error",
                           submitted:         false,
                         })
         }
