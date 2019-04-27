@@ -21,7 +21,6 @@
     padding: 20px;
     margin-right: auto;
     margin-left: auto;
-    text-align: center;
     background: white;
     border-radius: 3px;
     -webkit-box-shadow: -7px 10px 20px 6px rgba(0,0,0,0.75);
@@ -59,7 +58,7 @@ hr {
 }
 
 .cancel:hover {
-  background: lightgray;
+  background: #ff9999;
 }
 
 @media (max-width: 900px) {

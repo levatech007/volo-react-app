@@ -9,15 +9,11 @@ class Modal extends Component {
         <div className="modal-window">
           <div>
             <button className="close-btn" type="submit">X</button>
-            <h3>Modal box title</h3>
+            <h3>{ this.props.title }</h3>
           </div>
           <hr></hr>
           <div className="modal-cont">
-            <p>This is the modal box content section</p>
-          </div>
-          <div>
-            <button className="footer-btn submit" type="submit">Send</button>
-            <button className="footer-btn cancel" type="submit">Cancel</button>
+            { this.props.form }
           </div>
         </div>
       </div>
