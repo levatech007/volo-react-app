@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Auth                 from "j-toker";
 import LoginForm            from "../components/Forms/LoginForm.js";
-import SignupForm           from "../components/SignUpForm.js";
+import SignupForm           from "../components/Forms/SignupForm.js";
 import Alert                from "../components/Alert/Alert.js";
-import Modal                from "../components/Modal/Modal.js";
+import PasswordResetForm   from "../components/Forms/PasswordResetForm.js";
 
 class LoginSignupPage extends Component {
   constructor(props) {
@@ -13,13 +13,13 @@ class LoginSignupPage extends Component {
                     alerts: "",
                     alertStyle: "",
                     showSignUpForm: false,
-                    showForgotPasswordForm: false,
+                    showPasswordResetForm: false,
                   }
-    this.processLogin              = this.processLogin.bind(this);
-    this.processSignup             = this.processSignup.bind(this);
-    this.processOauthLogin         = this.processOauthLogin.bind(this);
-    this.toggleSignUpForm          = this.toggleSignUpForm.bind(this);
-    this.toggleForgotPasswordForm = this.toggleForgotPasswordForm.bind(this);
+    this.processLogin            = this.processLogin.bind(this);
+    this.processSignup           = this.processSignup.bind(this);
+    this.processOauthLogin       = this.processOauthLogin.bind(this);
+    this.toggleSignUpForm        = this.toggleSignUpForm.bind(this);
+    this.togglePasswordResetForm = this.togglePasswordResetForm.bind(this);
     };
 
   componentDidMount() {
@@ -41,27 +41,6 @@ class LoginSignupPage extends Component {
                       alertStyle: "alert-box error"
                     })
     })
-  }
-
-  processOauthLogin(provider) {
-    Auth.oAuthSignIn({
-      provider: provider,
-      config:   "default",
-    })
-    .then((user) => {
-      this.setState({
-                      showAlert:  true,
-                      alerts:     `Welcome ${ user.name }`,
-                      alertStyle: "alert-box ok"
-                    });
-    })
-    .fail((resp) => {
-      this.setState({
-                      showAlert:  true,
-                      alerts:     `Auth failure: ${resp.errors}`,
-                      alertStyle: "alert-box error"
-                    });
-    });
   }
 
   processSignup(user) {
@@ -121,29 +100,48 @@ class LoginSignupPage extends Component {
     this.setState({ showSignUpForm: !this.state.showSignUpForm })
   }
 
-  toggleForgotPasswordForm() {
-    this.setState({ showForgotPasswordForm: !this.state.showForgotPasswordForm })
+  togglePasswordResetForm() {
+    this.setState({ showPasswordResetForm: !this.state.showPasswordResetForm })
   }
 
-  renderLoginPage() {
+  renderLoginForm() {
     return(
-      <div className="col-md-8 form-container">
-        <h2>Login</h2>
+      <div className="col-md-10 form-container">
+        <h2>Log In</h2>
         <LoginForm processLogin={ this.processLogin } />
-        <button className="plain-button" onClick={ this.toggleForgotPasswordForm }>Forgot your password?</button>
-        <p>Don't have an account?</p>
-          <button className="plain-button" onClick={ this.toggleSignUpForm }> Sign up!</button>
+        <div className="row justify-content-center">
+          <button
+            className="plain-button"
+            onClick={ this.togglePasswordResetForm }
+            >Forgot your password?</button>
+        </div>
+        <div className="row justify-content-center align-items-end">
+          <p>Don't have an account?
+              <button
+              className="plain-button"
+              onClick={ this.toggleSignUpForm }
+              >&nbsp;Sign Up
+            </button>
+          </p>
+        </div>
       </div>
     )
   }
 
-  renderSignUpPage() {
+  renderSignupForm() {
     return(
-      <div className="col-md-8 form-container">
+      <div className="col-md-10 form-container">
         <h2>Sign Up</h2>
-        {/* <SignUpForm processLogin={ this.processSignup } /> */}
-        <p>Already have an account?</p>
-        <button className="plain-button" onClick={ this.toggleSignUpForm }>Log in!</button>
+        <SignupForm processSignup={ this.processSignup } />
+        <div className="row justify-content-center align-items-end">
+          <p>Already have an account?
+              <button
+              className="plain-button"
+              onClick={ this.toggleSignUpForm }
+              >&nbsp;Log In
+            </button>
+          </p>
+        </div>
       </div>
     )
   }
@@ -152,9 +150,9 @@ class LoginSignupPage extends Component {
     return (
       <div className="container">
         { this.state.showAlert? <Alert alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
-        { this.state.showForgotPasswordForm ?  <Modal /> : null }
+        { this.state.showPasswordResetForm ?  <PasswordResetForm close={ this.togglePasswordResetForm } /> : null }
         <div className="row justify-content-center background">
-          { this.state.showSignUpForm ? this.renderSignUpPage() : this.renderLoginPage() }
+          { this.state.showSignUpForm ? this.renderSignupForm() : this.renderLoginForm() }
         </div>
       </div>
     );
