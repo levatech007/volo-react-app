@@ -1,6 +1,7 @@
 form {
   width: 80%;
   margin: 0 auto;
+  padding: 30px 0px;
 }
 
 input, textarea {
@@ -26,14 +27,3 @@ input:focus, textarea:focus {
 .red-text {
   color: red;
 }
-
-/* input error style */
-/* input, textarea {
-  border: none;
-  width: 100%;
-  padding: 12px;
-  border: 1px solid red;
-  box-sizing: border-box;
-  resize: vertical;
-  background: palevioletred;
-} */

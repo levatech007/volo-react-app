@@ -84,6 +84,13 @@ td, th {
   border-left: 1px solid white;
 }
 
+.form-container {
+  background: white;
+  color: #666666;
+  padding: 30px;
+  border-radius: 3px;
+}
+
 .review {
   margin-top: 40px;
 }
@@ -177,6 +184,15 @@ select {
   text-decoration: none;
   display: inline-block;
   padding: 0;
+  cursor: pointer;
+}
+
+.plain-button:hover {
+  color: black;
+}
+
+.form-container .plain-button {
+  color: #333333;
 }
 
 hr {
