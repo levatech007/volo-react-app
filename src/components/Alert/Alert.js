@@ -5,7 +5,13 @@ class Alert extends Component {
   render() {
     return(
       <div className={ this.props.style }>
-      <p>{ this.props.alert }</p>
+        <ul>
+          {
+            this.props.alert.map((alert, idx) => {
+              return(<li key={ idx }>{ alert }</li>)
+            })
+          }
+        </ul>
     </div>
     )
   }

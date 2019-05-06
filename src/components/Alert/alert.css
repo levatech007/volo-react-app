@@ -7,6 +7,11 @@
   text-align: center;
 }
 
+ul {
+  list-style: none;
+  margin-bottom: 0;
+}
+
 .error {
   background: #ff9999;
 }
