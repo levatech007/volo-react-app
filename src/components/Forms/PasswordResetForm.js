@@ -27,28 +27,52 @@ class PasswordResetForm extends Component {
 
   handlePasswordReset(e) {
     e.preventDefault();
-    Auth.requestPasswordReset({
-     email: this.state.email,
-    })
-    .then((resp) => {
-                       this.setState({
-                                       sentToEmail:   this.state.email,
-                                       email:         "",
-                                       formSubmitted: true,
-                                       alertStyle: "alert-box ok",
-                                       alertMessages: ["Thank you! Your request has been submitted. Please check your email for further instructions."]
-                                     });
-     })
-     .fail((resp) => {
-                       this.setState({
-                                       sentToEmail:   "",
-                                       email:         "",
-                                       formSubmitted: false,
-                                       alert:         true,
-                                       alertStyle:    "alert-box error",
-                                       alertMessages:  resp.data.errors,
-                                     });
-     })
+    const validEmailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if(this.state.email) {
+      if (validEmailPattern.test(this.state.email)) {
+
+        Auth.requestPasswordReset({
+         email: this.state.email,
+        })
+        .then((resp) => {
+                           this.setState({
+                                           sentToEmail:   this.state.email,
+                                           email:         "",
+                                           formSubmitted: true,
+                                           alertStyle: "alert-box ok",
+                                           alertMessages: ["Thank you! Your request has been submitted. Please check your email for further instructions."]
+                                         });
+         })
+         .fail((resp) => {
+                           this.setState({
+                                           sentToEmail:   "",
+                                           email:         "",
+                                           formSubmitted: false,
+                                           alert:         true,
+                                           alertStyle:    "alert-box error",
+                                           alertMessages:  resp.data.errors,
+                                         });
+          })
+        } else { // email not valid
+          this.setState({
+                          sentToEmail:   "",
+                          email:         "",
+                          formSubmitted: false,
+                          alert:         true,
+                          alertStyle:    "alert-box error",
+                          alertMessages:  ["The email you entered is not valid."],
+                        });
+        }
+    } else { // no email present
+      this.setState({
+                      sentToEmail:   "",
+                      email:         "",
+                      formSubmitted: false,
+                      alert:         true,
+                      alertStyle:    "alert-box error",
+                      alertMessages:  ["No email present."],
+                    });
+    }
    }
 
    showPasswordChangeForm() {
