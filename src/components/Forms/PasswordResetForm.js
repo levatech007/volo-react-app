@@ -11,7 +11,7 @@ class PasswordResetForm extends Component {
                     email:        "",
                     sentToEmail:  "",
                     alert:        false,
-                    alertMessage: "",
+                    alertMessages: [],
                     formSubmitted:    false,
                     alertStyle:   "",
                 }
@@ -35,9 +35,8 @@ class PasswordResetForm extends Component {
                                        sentToEmail:   this.state.email,
                                        email:         "",
                                        formSubmitted: true,
-                                       alert:         true,
-                                       alertStyle:    "alert-box ok",
-                                       alertMessage:  "Success!",
+                                       alertStyle: "alert-box ok",
+                                       alertMessages: ["Thank you! Your request has been submitted. Please check your email for further instructions."]
                                      });
      })
      .fail((resp) => {
@@ -47,7 +46,7 @@ class PasswordResetForm extends Component {
                                        formSubmitted: false,
                                        alert:         true,
                                        alertStyle:    "alert-box error",
-                                       alertMessage:  resp.data.errors,
+                                       alertMessages:  resp.data.errors,
                                      });
      })
    }
@@ -56,6 +55,7 @@ class PasswordResetForm extends Component {
      return(
            <form>
              <div className="row">
+               { this.state.alert ? <Alert alertStyle={ this.state.alertStyle } alert={this.state.alertMessages}/> : null }
                <div className="col-sm-4">
                  <label>Email<span className="red-text">*</span></label>
                </div>
@@ -74,24 +74,19 @@ class PasswordResetForm extends Component {
    showSentConfirmation() {
      return(
        <div className="row justify-content-center">
-         <div className="col-sm-10">
-           <p>Please check you email for further instructions on how you can change your password.</p>
-        </div>
+         <Alert alertStyle={ this.state.alertStyle } alert={this.state.alertMessages}/>
        </div>
      )
    }
 
   render() {
     return(
-      <div>
-        { this.state.alert ? <Alert alertStyle={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
         <Modal
           form={ this.state.formSubmitted ? this.showSentConfirmation() : this.showPasswordChangeForm()}
           title={ "Reset Your Password" }
           close={ this.props.close }
           submit={ this.handlePasswordReset }
         />
-      </div>
     )
   }
 }
