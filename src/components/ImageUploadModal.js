@@ -66,7 +66,7 @@ class ImageUploadModal extends Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              { this.state.showAlert ? <Alert style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
+              { this.state.showAlert ? <Alert alertStyle={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
               <div className="modal-body">
                 <div className="row justify-content-center">
                   <div className="col-md-12 contact-form">

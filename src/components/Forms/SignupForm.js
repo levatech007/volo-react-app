@@ -35,9 +35,6 @@ class SignupForm extends Component {
     }
 
     validateFormInputs() {
-      // name present
-      // valid email
-      // passwords match
       let alertMessages = []
       let formIsValid = true
       if (!this.state.name) {
@@ -53,9 +50,8 @@ class SignupForm extends Component {
         formIsValid = false
         alertMessages.push("Your passwords don't match.")
       }
-      this.setState({
-        alertMessages: alertMessages
-      })
+      this.setState({ alertMessages: alertMessages })
+
       return formIsValid
     }
 
@@ -69,7 +65,6 @@ class SignupForm extends Component {
                               password:        this.state.password,
                               confirmPassword: this.state.confirmPassword,
                             }
-          console.log(newUserInfo)
           this.setState({
                           name:           "",
                           email:          "",
@@ -77,15 +72,14 @@ class SignupForm extends Component {
                           confirmPassword:""
                         })
           this.props.processSignup(newUserInfo)
-        } else // recaptcha not valid{
+        } else {
           this.setState({
             showAlert: true,
             alertMessages: ["Something went wrong with Recaptcha. Please refresh the page and try again."]
           })
-        } else {
-        this.setState({
-          showAlert: true,
-        })
+        }
+      } else {
+        this.setState({ showAlert: true })
       }
     }
 
@@ -134,7 +128,7 @@ class SignupForm extends Component {
   render() {
     return (
       <div>
-        { this.state.showAlert ? <Alert alert={ this.state.alertMessages } style="alert-box error" /> : null}
+        { this.state.showAlert ? <Alert alert={ this.state.alertMessages } alertStyle="alert-box error" /> : null}
         { this.renderSignupForm() }
       </div>
     )

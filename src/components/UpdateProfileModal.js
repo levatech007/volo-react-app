@@ -110,7 +110,7 @@ class UpdateProfileModal extends Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              { this.state.showAlert ? <Alert style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
+              { this.state.showAlert ? <Alert alertStyle={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
               <div className="modal-body">
               { this.showUpdateProfileForm() }
               </div>

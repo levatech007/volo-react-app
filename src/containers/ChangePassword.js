@@ -91,7 +91,7 @@ class ChangePassword extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.alert? <Alert alert={ this.state.alertMessage } style={ this.state.alertStyle } /> : null }
+        { this.state.alert? <Alert alert={ this.state.alertMessage } alertStyle={ this.state.alertStyle } /> : null }
         <div className="row align-items-center background">
           <div className="row justify-content-md-center">
             <form onSubmit={ this.onUpdatePassword } className="forms">

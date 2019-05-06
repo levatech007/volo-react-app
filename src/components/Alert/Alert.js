@@ -4,7 +4,7 @@ import "./alert.css";
 class Alert extends Component {
   render() {
     return(
-      <div className={ this.props.style }>
+      <div className={ this.props.alertStyle }>
         <ul>
           {
             this.props.alert.map((alert, idx) => {

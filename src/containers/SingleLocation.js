@@ -127,7 +127,7 @@ class Locations extends Component {
                     { Auth.user.id ?
                       <div className="row justify-content-center">
                         <button onClick={ this.showReviewForm } className="btn btn-light button-margin">Add review</button>
-                      </div> 
+                      </div>
                       :
                       null
                     }

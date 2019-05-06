@@ -69,7 +69,7 @@ class Locations extends Component {
     return (
       <div className="container">
         { this.state.showLoadingSpinner ? <LoadingSpinner /> : null }
-        { this.state.alerts ? <Alert alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
+        { this.state.alerts ? <Alert alert={ this.state.alerts } alertStyle={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
           <div className="col-12">
             <div className="row justify-content-center">

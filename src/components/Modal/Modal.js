@@ -8,12 +8,16 @@ class Modal extends Component {
       <div className="screen">
         <div className="modal-window">
           <div>
-            <button className="close-btn" type="submit">X</button>
+            <button className="close-btn" type="submit" onClick={ this.props.close }>X</button>
             <h3>{ this.props.title }</h3>
           </div>
           <hr></hr>
           <div className="modal-cont">
             { this.props.form }
+          </div>
+          <div className="row justify-content-center">
+            <button className="footer-btn submit" type="submit" onClick={ this.props.submit }>Send</button>
+            <button className="footer-btn cancel" type="submit" onClick={ this.props.close }>Cancel</button>
           </div>
         </div>
       </div>

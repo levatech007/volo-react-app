@@ -12,11 +12,9 @@ class ContactForm extends Component {
         name:   "",
         email:  "",
         message:   "",
-        alerts: {
-          showAlert:    false,
-          alertMessage: "",
-          alertStyle:   "",
-        },
+        showAlert:    false,
+        alertMessages: [],
+        alertStyle:   "",
         recaptchaResponse: "",
         formSubmitted:     false,
         inputFields:       ["name", "email"],
@@ -24,71 +22,105 @@ class ContactForm extends Component {
       }
       this.renderContactForm    = this.renderContactForm.bind(this);
       this.handleInputChange    = this.handleInputChange.bind(this);
+      this.validateFormInputs   = this.validateFormInputs.bind(this);
       this.handleFormSubmission = this.handleFormSubmission.bind(this);
       this.onRecaptchaChange    = this.onRecaptchaChange.bind(this);
   }
 
   handleInputChange(e) {
     e.preventDefault()
-    const target = e.target
-    const name   = target.name
-    const value  = target.value
+    const name   = e.target.name
+    const value  = e.target.value
 
     this.setState({ [name]: value })
   }
 
+  validateFormInputs() {
+    let alertMessages = []
+    let formIsValid = true
+    if (!this.state.name) {
+      formIsValid = false
+      alertMessages.push("Name must be present.")
+    }
+    const validEmailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if(this.state.email) {
+      if (!validEmailPattern.test(this.state.email)) {
+        formIsValid = false
+        alertMessages.push("Email is not valid.")
+      }
+    } else {
+      formIsValid = false
+      alertMessages.push("Email must be present.")
+    }
+    if (!this.state.message) {
+      formIsValid = false
+      alertMessages.push("Message must be present.")
+    }
+    this.setState({ alertMessages: alertMessages })
+
+    return formIsValid
+  }
+
   handleFormSubmission(e) {
-    console.log(this.state.name)
-    console.log(this.state.email)
-    console.log(this.state.message)
     e.preventDefault();
     if (this.state.recaptchaResponse) {
-      $.post({
-        url: `${process.env.REACT_APP_BACKEND_URL}/message`,
-        data: {
+      if(this.validateFormInputs()) {
+        let message = {
           name:   this.state.name,
           email:  this.state.email,
-          message:   this.state.message
-              },
-        success: (response) => {
-          this.setState({
-                          name:   "",
-                          email:  "",
-                          message:   "",
-                          alerts: {
-                            showAlert:    true,
-                            alertMessage: response.result,
-                            alertStyle:   "alert-box ok",
-                          },
-                          recaptchaResponse: "",
-                          formSubmitted:     true,
-                        })
-        },
-        error: (error) => {
-          this.setState({
-                          name:   "",
-                          email:  "",
-                          message:   "",
-                          alerts: {
-                            showAlert:    true,
-                            alertMessage: "Something went wrong. Try again",
-                            alertStyle:   "alert-box error",
-                          },
-                          recaptchaResponse: "",
-                          formSubmitted:     false,
-                        })
+          body:   this.state.message
         }
-      })
-    } else {
+        $.post({
+          url: `${process.env.REACT_APP_BACKEND_URL}/message`,
+          data: { message: message },
+          success: (response) => {
+            console.log(response)
+            this.setState({
+                            name:   "",
+                            email:  "",
+                            message:   "",
+                            showAlert:    true,
+                            alertMessages: [response.result],
+                            alertStyle:   "alert-box ok",
+                            recaptchaResponse: "",
+                            formSubmitted:     true,
+                          })
+          },
+          error: (error) => {
+            console.log(error)
+            this.setState({
+                            name:   "",
+                            email:  "",
+                            message:   "",
+                            showAlert:    true,
+                            alertMessages: ["Something went wrong. Try again."],
+                            alertStyle:   "alert-box error",
+                            recaptchaResponse: "",
+                            formSubmitted:     false,
+                          })
+          }
+        })
+      } else { // form not valid
+        console.log("Form not valid")
+          this.setState({
+            name:   "",
+            email:  "",
+            message:   "",
+            showAlert:    true,
+            alertStyle:   "alert-box error",
+            recaptchaResponse: "",
+            formSubmitted:     false,
+          })
+      }
+    } else { // recaptcha not valid
+      console.log("Recaptcha error")
       this.setState({
                       name:   "",
                       email:  "",
                       message:   "",
-                      alerts: {
-                        showAlert:    true,
-                        alertMessage: "Something went wrong. Try again",
-                        alertStyle:   "alert-box error",
-                      },
+                      showAlert:    true,
+                      alertMessages: ["Please check the Recaptcha box."],
+                      alertStyle:   "alert-box error",
                       recaptchaResponse: "",
                       formSubmitted:     false,
                     })
@@ -102,6 +134,7 @@ class ContactForm extends Component {
   renderContactForm() {
     return(
         <form onSubmit={ this.handleFormSubmission }>
+          { this.state.showAlert ? <Alert alert={ this.state.alertMessages } alertStyle={ this.state.alertStyle } /> : null }
           {
             this.state.inputFields.map((field, idx) => {
               let labelName = `${ field.charAt(0).toUpperCase() }${ field.slice(1) }`
@@ -140,15 +173,11 @@ class ContactForm extends Component {
                 </textarea>
             </div>
         </div>
-        <div className="row">
+        <div className="row justify-content-center">
           <ReCAPTCHA
             ref="recaptcha"
             sitekey={ process.env.REACT_APP_SITE_KEY }
             onChange={ this.onRecaptchaChange }/>
-        </div>
-        <div className="row">
-          <button className="footer-btn submit" type="submit">Send</button>
-          <button className="footer-btn cancel" type="submit">Cancel</button>
         </div>
       </form>
     )
@@ -156,7 +185,11 @@ class ContactForm extends Component {
 
   render() {
     return(
-      <Modal form={ this.renderContactForm() } title="Contact Us"/>
+      <Modal
+        form={ this.renderContactForm() }
+        close={ this.props.close }
+        submit={ this.handleFormSubmission }
+        title="Contact Us"/>
     )
   }
 }

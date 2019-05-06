@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
-import Modal     from "../Modal/Modal.js";
-import Alert     from "../Alert/Alert.js";
 import "./form.css";
 
 
@@ -13,9 +10,9 @@ class LoginForm extends Component {
                       password:    "",
                       inputFields: ["email", "password"]
                     }
-      this.handleInputChange          = this.handleInputChange.bind(this);
-      this.handleLoginFormSubmission  = this.handleLoginFormSubmission.bind(this);
-      this.renderLoginForm            = this.renderLoginForm.bind(this);
+      this.handleInputChange = this.handleInputChange.bind(this);
+      this.processLoginForm  = this.processLoginForm.bind(this);
+      this.renderLoginForm   = this.renderLoginForm.bind(this);
   }
 
   handleInputChange(e) {
@@ -25,22 +22,22 @@ class LoginForm extends Component {
     this.setState({ [name]: value })
   }
 
-  handleLoginFormSubmission(e) {
-  e.preventDefault();
-  let user = {
-                email:    this.state.email,
-                password: this.state.password
-              }
-  this.props.processLoginForm(user)
-  this.setState({
-                  email:    "",
-                  password: "",
-                })
+  processLoginForm(e) {
+    e.preventDefault();
+    let user = {
+                  email:    this.state.email,
+                  password: this.state.password
+                }
+    this.props.processLogin(user)
+    this.setState({
+                    email:    "",
+                    password: "",
+                  })
   }
 
   renderLoginForm() {
     return(
-      <form onSubmit={ this.handleLoginFormSubmission }>
+      <form onSubmit={ this.processLoginForm }>
         {
           this.state.inputFields.map((field, idx) => {
             let labelName = `${ field.charAt(0).toUpperCase() }${ field.slice(1) }`
@@ -51,7 +48,7 @@ class LoginForm extends Component {
                 </div>
                 <div className="col-sm-8">
                   <input
-                    type={ (field === 'email') ? "email" : "password" }
+                    type={ field }
                     name={ field }
                     required="required"
                     placeholder={ `Your ${ field }` }

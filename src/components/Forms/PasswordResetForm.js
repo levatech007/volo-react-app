@@ -84,7 +84,7 @@ class PasswordResetForm extends Component {
   render() {
     return(
       <div>
-        { this.state.alert ? <Alert style={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
+        { this.state.alert ? <Alert alertStyle={ this.state.alertStyle } alert={this.state.alertMessage}/> : null }
         <Modal
           form={ this.state.formSubmitted ? this.showSentConfirmation() : this.showPasswordChangeForm()}
           title={ "Reset Your Password" }

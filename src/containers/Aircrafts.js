@@ -125,7 +125,7 @@ class Aircrafts extends Component {
 
     return (
       <div className="container">
-        { this.state.alerts ? <Alert alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
+        { this.state.alerts ? <Alert alert={ this.state.alerts } alertStyle={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
               <div className="col-sm-12 col-md-10">
                 { this.state.displayFlightSchedule ?

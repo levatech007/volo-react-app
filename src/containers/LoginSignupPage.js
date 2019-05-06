@@ -10,16 +10,16 @@ class LoginSignupPage extends Component {
     super(props);
     this.state = {
                     showAlert: false,
-                    alerts: "",
+                    alertMessages: [],
                     alertStyle: "",
                     showSignUpForm: false,
                     showPasswordResetForm: false,
                   }
     this.processLogin            = this.processLogin.bind(this);
     this.processSignup           = this.processSignup.bind(this);
-    this.processOauthLogin       = this.processOauthLogin.bind(this);
     this.toggleSignUpForm        = this.toggleSignUpForm.bind(this);
     this.togglePasswordResetForm = this.togglePasswordResetForm.bind(this);
+ // this.processOauthLogin       = this.processOauthLogin.bind(this);
     };
 
   componentDidMount() {
@@ -37,7 +37,7 @@ class LoginSignupPage extends Component {
     .fail((resp) => {
       this.setState({
                       showAlert:  true,
-                      alerts:     resp.reason,
+                      alertMessages: resp.data.errors,
                       alertStyle: "alert-box error"
                     })
     })
@@ -51,6 +51,7 @@ class LoginSignupPage extends Component {
       password_confirmation:  user.password_confirmation,
     })
     .then((resp) => {
+      console.log(resp)
       Auth.emailSignIn({
           email:    user.email,
           password: user.password,
@@ -61,7 +62,7 @@ class LoginSignupPage extends Component {
       .fail((resp) => {
         this.setState({
                         showAlert:  true,
-                        alerts:     resp.data.errors.full_messages,
+                        alertMessages: resp.data.errors,
                         alertStyle: "alert-box error"
                       })
       })
@@ -69,32 +70,32 @@ class LoginSignupPage extends Component {
     .fail((resp) => {
         this.setState({
                         showAlert:  true,
-                        alerts:     resp.data.errors.full_messages,
+                        alertMessages: resp.data.errors,
                         alertStyle: "alert-box error"
                       })
     })
   }
 
-  processOauthLogin(provider) {
-    Auth.oAuthSignIn({
-      provider: provider,
-      config:   "default",
-    })
-    .then((user) => {
-      this.setState({
-                      showAlert:  true,
-                      alerts:     `Welcome ${ user.name }`,
-                      alertStyle: "alert-box ok"
-                    });
-    })
-    .fail((resp) => {
-      this.setState({
-                      showAlert:  true,
-                      alerts:     `Auth failure: ${resp.errors}`,
-                      alertStyle: "alert-box error"
-                    });
-    });
-  }
+  // processOauthLogin(provider) {
+  //   Auth.oAuthSignIn({
+  //     provider: provider,
+  //     config:   "default",
+  //   })
+  //   .then((user) => {
+  //     this.setState({
+  //                     showAlert:  true,
+  //                     alertMessages:     `Welcome ${ user.name }`,
+  //                     alertStyle: "alert-box ok"
+  //                   });
+  //   })
+  //   .fail((resp) => {
+  //     this.setState({
+  //                     showAlert:  true,
+  //                     alertMessages:     `Auth failure: ${resp.errors}`,
+  //                     alertStyle: "alert-box error"
+  //                   });
+  //   });
+  // }
 
   toggleSignUpForm() {
     this.setState({ showSignUpForm: !this.state.showSignUpForm })
@@ -106,8 +107,7 @@ class LoginSignupPage extends Component {
 
   renderLoginForm() {
     return(
-      <div className="col-md-10 form-container">
-        <h2>Log In</h2>
+      <div>
         <LoginForm processLogin={ this.processLogin } />
         <div className="row justify-content-center">
           <button
@@ -130,8 +130,7 @@ class LoginSignupPage extends Component {
 
   renderSignupForm() {
     return(
-      <div className="col-md-10 form-container">
-        <h2>Sign Up</h2>
+      <div>
         <SignupForm processSignup={ this.processSignup } />
         <div className="row justify-content-center align-items-end">
           <p>Already have an account?
@@ -149,10 +148,13 @@ class LoginSignupPage extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.showAlert? <Alert alert={ this.state.alerts } style={ this.state.alertStyle } /> : null }
         { this.state.showPasswordResetForm ?  <PasswordResetForm close={ this.togglePasswordResetForm } /> : null }
         <div className="row justify-content-center background">
-          { this.state.showSignUpForm ? this.renderSignupForm() : this.renderLoginForm() }
+          <div className="col-md-10 form-container">
+            <h2>{ this.state.showSignUpForm ? "Sign Up" : "Log In" }</h2>
+            { this.state.showAlert? <Alert alert={ this.state.alertMessages } alertStyle={ this.state.alertStyle } /> : null }
+            { this.state.showSignUpForm ? this.renderSignupForm() : this.renderLoginForm() }
+          </div>
         </div>
       </div>
     );

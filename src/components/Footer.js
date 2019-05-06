@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link }             from "react-router-dom";
 import $                    from "jquery";
-import ContactModal         from "./ContactModal.js";
-import Alert               from "./Alert/Alert.js"
+import Alert                from "./Alert/Alert.js"
+import ContactForm          from "./Forms/ContactForm.js"
+
 // dynamic image loading with webpack & require, step 1:
 function importAll(r) {
   let images = {}
@@ -32,12 +33,12 @@ class Footer extends Component {
                                         {accountName: "facebook", url: "http://facebook.com"}
                                       ]
                   }
-    this.toggleContactModal = this.toggleContactModal.bind(this);
+    this.toggleContactForm  = this.toggleContactForm.bind(this);
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
     this.onEmailListSubmit  = this.onEmailListSubmit.bind(this);
   }
 
-  toggleContactModal() {
+  toggleContactForm() {
     this.setState({ showContactModal: !this.state.showContactModal })
   }
 
@@ -75,7 +76,7 @@ class Footer extends Component {
     return(
       <footer className="row justify-content-center footer-background">
         <div className="container footer">
-          { this.state.showContactModal ? <ContactModal toggleContactModal={ this.toggleContactModal }/> : null }
+          { this.state.showContactModal ? <ContactForm close={ this.toggleContactForm }/> : null }
           <div className="row justify-content-center">
             <div className="col-lg-2 col-md-6">
               <p>VOLO</p>
@@ -112,7 +113,7 @@ class Footer extends Component {
               <div className="row">
                 <div className="col-12">
                   { this.state.alert ?
-                  <Alert style={ this.state.alertStyle } alert={ this.state.alertMsg } /> : null
+                  <Alert alertStyle={ this.state.alertStyle } alert={ this.state.alertMsg } /> : null
                   }
                 </div>
               </div>
@@ -137,7 +138,7 @@ class Footer extends Component {
             <div className="col-lg-2 col-md-6 offset-md-1">
                 <p>CONTACT</p>
                 <br></br>
-                <button className="plain-button" onClick={ this.toggleContactModal }>Contact Us</button>
+                <button className="plain-button" onClick={ this.toggleContactForm }>Contact Us</button>
             </div>
           </div>
           <div className="row justify-content-center copyright">
