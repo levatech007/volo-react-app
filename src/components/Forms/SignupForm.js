@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
+import Alert     from "../Alert/Alert.js";
 import "./form.css";
 
 class SignupForm extends Component {
@@ -16,11 +17,14 @@ class SignupForm extends Component {
                                             { name: "email", type:"email", placeholder: "Your email" },
                                             { name: "password", type:"password", placeholder: "Select password" },
                                             { name: "confirmPassword", type:"password", placeholder: "Confirm your password" },
-                                          ]
+                                          ],
+                      showAlert: false,
+                      alertMessages: [],
                     }
-      this.handleInputChange = this.handleInputChange.bind(this);
-      this.processSignupForm = this.processSignupForm.bind(this);
-      this.onRecaptchaChange = this.onRecaptchaChange.bind(this);
+      this.handleInputChange  = this.handleInputChange.bind(this);
+      this.validateFormInputs = this.validateFormInputs.bind(this);
+      this.processSignupForm  = this.processSignupForm.bind(this);
+      this.onRecaptchaChange  = this.onRecaptchaChange.bind(this);
     }
 
     handleInputChange(e) {
@@ -30,23 +34,58 @@ class SignupForm extends Component {
       this.setState({ [name]: value })
     }
 
+    validateFormInputs() {
+      // name present
+      // valid email
+      // passwords match
+      let alertMessages = []
+      let formIsValid = true
+      if (!this.state.name) {
+        formIsValid = false
+        alertMessages.push("Name must be present.")
+      }
+      const validEmailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (!validEmailPattern.test(this.state.email)) {
+        formIsValid = false
+        alertMessages.push("Email is not valid.")
+      }
+      if (this.state.password !== this.state.confirmPassword) {
+        formIsValid = false
+        alertMessages.push("Your passwords don't match.")
+      }
+      this.setState({
+        alertMessages: alertMessages
+      })
+      return formIsValid
+    }
+
     processSignupForm(e) {
       e.preventDefault();
-      if (this.state.recaptchaResponse) {
-        let newUserInfo = {
-                            name:            this.state.name,
-                            email:           this.state.email,
-                            password:        this.state.password,
-                            confirmPassword: this.state.confirmPassword,
-                          }
-        console.log(newUserInfo)
+      if(this.validateFormInputs()) {
+        if (this.state.recaptchaResponse) {
+          let newUserInfo = {
+                              name:            this.state.name,
+                              email:           this.state.email,
+                              password:        this.state.password,
+                              confirmPassword: this.state.confirmPassword,
+                            }
+          console.log(newUserInfo)
+          this.setState({
+                          name:           "",
+                          email:          "",
+                          password:       "",
+                          confirmPassword:""
+                        })
+          this.props.processSignup(newUserInfo)
+        } else // recaptcha not valid{
+          this.setState({
+            showAlert: true,
+            alertMessages: ["Something went wrong with Recaptcha. Please refresh the page and try again."]
+          })
+        } else {
         this.setState({
-                        name:           "",
-                        email:          "",
-                        password:       "",
-                        confirmPassword:""
-                      })
-        this.props.processSignupForm(newUserInfo)
+          showAlert: true,
+        })
       }
     }
 
@@ -95,6 +134,7 @@ class SignupForm extends Component {
   render() {
     return (
       <div>
+        { this.state.showAlert ? <Alert alert={ this.state.alertMessages } style="alert-box error" /> : null}
         { this.renderSignupForm() }
       </div>
     )
