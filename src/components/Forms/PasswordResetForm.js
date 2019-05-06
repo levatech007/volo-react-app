@@ -28,8 +28,7 @@ class PasswordResetForm extends Component {
   handlePasswordReset(e) {
     e.preventDefault();
     const validEmailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if(this.state.email) {
-      if (validEmailPattern.test(this.state.email)) {
+    if(this.state.email && validEmailPattern.test(this.state.email)) {
 
         Auth.requestPasswordReset({
          email: this.state.email,
@@ -45,35 +44,21 @@ class PasswordResetForm extends Component {
          })
          .fail((resp) => {
                            this.setState({
-                                           sentToEmail:   "",
                                            email:         "",
-                                           formSubmitted: false,
                                            alert:         true,
                                            alertStyle:    "alert-box error",
                                            alertMessages:  resp.data.errors,
                                          });
           })
-        } else { // email not valid
-          this.setState({
-                          sentToEmail:   "",
-                          email:         "",
-                          formSubmitted: false,
-                          alert:         true,
-                          alertStyle:    "alert-box error",
-                          alertMessages:  ["The email you entered is not valid."],
-                        });
-        }
     } else { // no email present
       this.setState({
-                      sentToEmail:   "",
                       email:         "",
-                      formSubmitted: false,
                       alert:         true,
                       alertStyle:    "alert-box error",
-                      alertMessages:  ["No email present."],
+                      alertMessages:  ["Please enter a valid email."],
                     });
     }
-   }
+  }
 
    showPasswordChangeForm() {
      return(
