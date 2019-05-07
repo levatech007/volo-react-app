@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { Link }             from "react-router-dom";
 import $                    from "jquery";
-import Alert                from "./Alert/Alert.js"
-import ContactForm          from "./Forms/ContactForm.js"
+import Alert                from "./Alert/Alert.js";
+import ContactForm          from "./Forms/ContactForm.js";
+
+import "./Forms/form.css";
+import "./Modal/modal.css";
 
 // dynamic image loading with webpack & require, step 1:
 function importAll(r) {
@@ -19,12 +22,11 @@ class Footer extends Component {
                     email:            "",
                     alert:            false,
                     alertStyle:       "",
-                    alertMsg:         "",
+                    alertMessages:         "",
                     footerLinks:      [
                                         {page: "Locations", route: "locations"},
                                         {page: "About", route: "about"},
                                         {page: "Log In", route: "login"},
-                                        {page: "Sign Up", route: "signup"},
                                         {page: "API", route: "api"}
                                       ],
                     socialMedia:      [
@@ -56,7 +58,7 @@ class Footer extends Component {
                         email:      "",
                         alert:      true,
                         alertStyle: "alert-box ok",
-                        alertMsg:   "Thank you!",
+                        alertMessages:   ["Thank you!"],
                       })
       },
       error: (error) => {
@@ -64,7 +66,7 @@ class Footer extends Component {
                         email:      "",
                         alert:      true,
                         alertStyle: "alert-box error",
-                        alertMsg:   "Oops...",
+                        alertMessages:   ["Oops. Something went wrong. Please be sure that you entered a valid, existing email."],
                       })
       }
     })
@@ -113,27 +115,26 @@ class Footer extends Component {
               <div className="row">
                 <div className="col-12">
                   { this.state.alert ?
-                  <Alert alertStyle={ this.state.alertStyle } alert={ this.state.alertMsg } /> : null
+                  <Alert alertStyle={ this.state.alertStyle } alert={ this.state.alertMessages } /> : null
                   }
                 </div>
               </div>
               <div className="row">
-                <div className="col-sm-8">
                   <input
                     type="email"
-                    className="form-control"
                     onChange={this.onEmailInputChange}
                     placeholder="Join our email list"
                   />
                 </div>
-                <div className="col-sm-4">
+                <div className="row">
                   <button
                     type="submit"
-                    className="btn btn-light"
-                    onClick={ this.onEmailListSubmit }>Submit</button>
-                </div>
+                    className="footer-btn submit"
+                    onClick={ this.onEmailListSubmit }>Join</button>
               </div>
-              <small className="form-text text-muted">We'll never share your email with anyone else.</small>
+              <div className="row">
+                <small className="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
             </div>
             <div className="col-lg-2 col-md-6 offset-md-1">
                 <p>CONTACT</p>
