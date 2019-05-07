@@ -4,7 +4,7 @@ import $                from "jquery";
 import ArrowDn          from "../images/arrow-dn.svg";
 import ArrowUp          from "../images/arrow-up.svg";
 import LocationInfo     from "../components/Location.js";
-import CreateReviewForm from "../components/CreateReviewForm.js";
+import LocationReviewForm from "../components/Forms/LocationReviewForm.js";
 import ReactStars       from "react-stars";
 import {
           Accordion,
@@ -95,7 +95,7 @@ class Locations extends Component {
           <div className="col-md-12">
             { this.state.location.latitude && <LocationInfo location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
             { showReviewForm ?
-              <CreateReviewForm onSubmitReviewForm={ this.onSubmitReviewForm } locationId={ this.state.location.id } />
+              <LocationReviewForm onSubmitReviewForm={ this.onSubmitReviewForm } locationId={ this.state.location.id }/>
               :
               (
                 <div>
