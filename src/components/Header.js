@@ -40,7 +40,7 @@ class Header extends Component {
                   <Link to={ `/users/${ Auth.user.id }` } className="nav-link" >Profile</Link>
                 </li>
                 <li className="nav-item">
-                  <button onClick={ this.onUserLogOut } className="nav-link btn btn-outline-dark">Log Out, { Auth.user.name }</button>
+                  <button onClick={ this.onUserLogOut } className="nav-btn">Log Out, { Auth.user.name }</button>
                 </li>
               </ul>) : (
                 <ul className="navbar-nav">
