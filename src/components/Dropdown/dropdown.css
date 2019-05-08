@@ -1,0 +1,11 @@
+select {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;       /* remove default arrow */
+   padding: 10px 40px 10px 20px;
+   width: 100%;
+   font-size: 20px;
+   background-image: url("./Images/dropdown-arrow.svg");
+   background-repeat: no-repeat;
+   background-position: right;
+}
