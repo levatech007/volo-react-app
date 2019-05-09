@@ -24,10 +24,11 @@ class FlightsByAircraft extends Component {
                     alertMessages:       "",
                     alertStyle:          "",
                   }
-    this.handleAircraftSelection    = this.handleAircraftSelection.bind(this);
-    this.handleDateSelection        = this.handleDateSelection.bind(this);
-    this.generateAvailableDateRange = this.generateAvailableDateRange.bind(this);
-    this.formatDateForDropdown      = this.formatDateForDropdown.bind(this);
+    this.handleAircraftSelection     = this.handleAircraftSelection.bind(this);
+    this.handleDateSelection         = this.handleDateSelection.bind(this);
+    this.generateAvailableDateRange  = this.generateAvailableDateRange.bind(this);
+    this.formatDateForDropdown       = this.formatDateForDropdown.bind(this);
+    this.getMatchingFlights = this.getMatchingFlights.bind(this);
   }
 
   componentDidMount() {
@@ -47,21 +48,46 @@ class FlightsByAircraft extends Component {
   }
 
   handleAircraftSelection(e) {
-    console.log(e.target.value)
     this.setState({
                     aircraftId: parseInt(e.target.value), // e.target.value returns a sting, aircraftId must be Integer!
                   })
   }
 
   handleDateSelection(e) {
-    console.log(e.target.value)
     this.setState({
                     selectedDateId: parseInt(e.target.value),
                   })
   }
 
+  getMatchingFlights() {
+    console.log("Clicked")
+    if(this.state.aircraftId && this.state.selectedDateId) {
+
+        this.setState({
+          showFlightSchedule: true,
+          showAlert: true,
+          alertStyle: "alert-box error",
+          alertMessages: ["This is an upcoming feature that is currently under development. The information contained here is for testing purposes only"]
+        })
+    } else {
+      console.log("No aircraft selected")
+      let alertMessages = []
+      if (!this.state.aircraftId) {
+        alertMessages.push("No aircraft selected")
+      }
+      if (!this.state.selectedDateId) {
+        alertMessages.push("No date selected")
+      }
+      this.setState({
+        showAlert: true,
+        alertMessages: alertMessages,
+        alertStyle: "alert-box error"
+      })
+    }
+  }
+
   generateAvailableDateRange() {
-    // should return an array of objects with 'id': int and 'name': strings
+    // should return an array of objects with 'id': int, date: timestamp, and 'name': string
     // for today + 6 days in format "Weekday, Month 00, 0000")
     // available date range is currently 7 days
     let availableDaysCount = 7
@@ -81,7 +107,7 @@ class FlightsByAircraft extends Component {
   }
 
   formatDateForDropdown(unixDate) {
-    // unix timestamp to format:  "Weekday, Month 00, 0000"
+    // unix timestamp to format:  "Weekday, Month 00, 0000" to display in dropdown menu
     var fullDate = new Date(unixDate)
     let day   = this.state.dayNames[fullDate.getDay()]
     let date  = fullDate.getDate()
@@ -92,12 +118,18 @@ class FlightsByAircraft extends Component {
   }
 
   render() {
-    console.log(this.state.dateRange)
     return(
       <div className="container">
-        { this.state.alerts ? <Alert alert={ this.state.alertMessages } alertStyle={ this.state.alertStyle } /> : null }
         <div className="row justify-content-center background">
               <div className="col-sm-12 col-md-10">
+                { this.state.showFlightSchedule ?
+                  <AircraftInfo
+                    imageName={ this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId).name }
+                  />
+                  :
+                  null
+                }
+                { this.state.showAlert ? <Alert alert={ this.state.alertMessages } alertStyle={ this.state.alertStyle } /> : null }
                 <h3>Airport: { this.state.airportName }</h3>
                 <div className="row">
                   <div className="col-lg-6">
@@ -105,7 +137,7 @@ class FlightsByAircraft extends Component {
                     <Dropdown
                       onchange={ this.handleAircraftSelection }
                       dataArray={ this.state.aircraftTypes }
-                      defaultValue="Select aircraft"
+                      defaultValue="Select aircraft:"
                     />
                     </div>
                     <div className="col-lg-6">
@@ -115,12 +147,15 @@ class FlightsByAircraft extends Component {
                         dataArray={ this.state.dateRange }
                         defaultValue="Select date:"
                       />
-                      </div>
-
+                    </div>
                   </div>
+                  <div className="row justify-content-center">
+                    <button onClick={ this.getMatchingFlights } type="submit" className="footer-btn submit">Find flights</button>
+                  </div>
+
                 <div className="row justify-content-center">
                   {
-                    this.state.displayFlightSchedule ?
+                    this.state.showFlightSchedule ?
                     <FlightDisplayTable
                       aircraftSchedule={ this.state.aircraftSchedule.filter(schedule => schedule.aircraft === this.state.aircraftId) }
                     />

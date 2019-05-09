@@ -46,7 +46,15 @@ a:hover {
 }
 
 .nav-item {
+
   color: white;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 
 .button-margin {
@@ -215,6 +223,23 @@ hr {
 .oauth-button {
   width: 100%;
   margin-bottom: 15px;
+}
+
+.footer-btn {
+  border: 1px solid gray;
+  border-radius: 2px;
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-bottom: 30px;
+  padding: 5px 15px;
+}
+
+.submit {
+  background: rgb(144, 244, 127);
+}
+
+.submit:hover {
+  background: rgb(25, 221, 25);
 }
 
 /* ACCORDION */
