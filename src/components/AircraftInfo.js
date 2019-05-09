@@ -3,17 +3,15 @@ import React, { Component } from "react";
 class AircraftInfo extends Component {
 
   render() {
+    console.log(this.props.aircraftInfo)
     return(
       <div className="row aircraft-info">
         <div className="col-6">
-            <ul>
-              <li><p>Airplane introduction will be written here</p></li>
-              <li><p>Some stats here</p></li>
-              <li><p>... and here</p></li>
-            </ul>
+            <h1>{ this.props.aircraftInfo.fullName }</h1>
+            <p>{ this.props.aircraftInfo.description }</p>
           </div>
           <div className="col-6">
-            <img className="img-fluid" src={ require(`../images/aircraft-images/${ this.props.imageName }.jpg`) } alt={ this.props.imageName }/>
+            <img className="img-fluid" src={ require(`../images/aircraft-images/${ this.props.aircraftInfo.name }.jpg`) } alt={ this.props.aircraftInfo.name }/>
           </div>
         </div>
       )

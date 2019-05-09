@@ -3,6 +3,7 @@ import AircraftInfo         from "../components/AircraftInfo.js";
 import Dropdown             from "../components/Dropdown/Dropdown.js";
 import FlightDisplayTable   from "../components/FlightDisplayTable.js";
 import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
+import SampleAircraftInfo   from "../static-data/aircraft-info.json";
 import Alert                from "../components/Alert/Alert.js";
 
 class FlightsByAircraft extends Component {
@@ -17,7 +18,7 @@ class FlightsByAircraft extends Component {
                     dateRange:           [],
                     dayNames:            ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                     monthNames:          ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                    aircraftTypes:       [{id: 1, name: "A380"}, {id: 2, name: "B787"}, {id: 3, name: "B747"}, {id: 4, name: "B777"}],
+                    aircraftTypes:       [],
                     aircraftSchedule:    [],
                     showFlightSchedule:  false,
                     showAlert:           false,
@@ -28,7 +29,7 @@ class FlightsByAircraft extends Component {
     this.handleDateSelection         = this.handleDateSelection.bind(this);
     this.generateAvailableDateRange  = this.generateAvailableDateRange.bind(this);
     this.formatDateForDropdown       = this.formatDateForDropdown.bind(this);
-    this.getMatchingFlights = this.getMatchingFlights.bind(this);
+    this.getMatchingFlights          = this.getMatchingFlights.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +43,10 @@ class FlightsByAircraft extends Component {
                       airportIataCode:  location.airport,
                       locationId:       locationId,
                       dateRange:        this.generateAvailableDateRange(),
-                      aircraftSchedule: SampleFlightSchedule.sampleFlights
+                      aircraftSchedule: SampleFlightSchedule.sampleFlights,
+                      aircraftTypes:    SampleAircraftInfo.aircrafts,
+                      selectedDateId:   1, // give default values to Id-s in case nothing is selected
+                      aircraftId:       1,
                     })
                   })
   }
@@ -125,6 +129,7 @@ class FlightsByAircraft extends Component {
                 { this.state.showFlightSchedule ?
                   <AircraftInfo
                     imageName={ this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId).name }
+                    aircraftInfo= { this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) }
                   />
                   :
                   null
