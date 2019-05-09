@@ -74,7 +74,6 @@ class ContactForm extends Component {
           url: `${process.env.REACT_APP_BACKEND_URL}/message`,
           data: { message: message },
           success: (response) => {
-            console.log(response)
             this.setState({
                             name:   "",
                             email:  "",
@@ -87,7 +86,6 @@ class ContactForm extends Component {
                           })
           },
           error: (error) => {
-            console.log(error)
             this.setState({
                             name:   "",
                             email:  "",
@@ -101,19 +99,17 @@ class ContactForm extends Component {
           }
         })
       } else { // form not valid
-        console.log("Form not valid")
           this.setState({
-            name:   "",
-            email:  "",
-            message:   "",
-            showAlert:    true,
-            alertStyle:   "alert-box error",
-            recaptchaResponse: "",
-            formSubmitted:     false,
-          })
+                          name:   "",
+                          email:  "",
+                          message:   "",
+                          showAlert:    true,
+                          alertStyle:   "alert-box error",
+                          recaptchaResponse: "",
+                          formSubmitted:     false,
+                        })
       }
     } else { // recaptcha not valid
-      console.log("Recaptcha error")
       this.setState({
                       name:   "",
                       email:  "",
