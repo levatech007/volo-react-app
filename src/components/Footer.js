@@ -30,9 +30,9 @@ class Footer extends Component {
                                         {page: "API", route: "api"}
                                       ],
                     socialMedia:      [
-                                        {accountName: "instagram", url: "http://instagram.com"},
-                                        {accountName: "twitter", url: "http://twitter.com"},
-                                        {accountName: "facebook", url: "http://facebook.com"}
+                                        { accountName: "instagram", url: "http://instagram.com" },
+                                        { accountName: "twitter", url: "http://twitter.com" },
+                                        { accountName: "facebook", url: "http://facebook.com" }
                                       ]
                   }
     this.toggleContactForm  = this.toggleContactForm.bind(this);
@@ -136,7 +136,7 @@ class Footer extends Component {
                 <small className="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
             </div>
-            <div className="col-lg-2 col-md-6 offset-md-1">
+            <div className="col-lg-2 col-md-6">
                 <p>CONTACT</p>
                 <br></br>
                 <button className="plain-button" onClick={ this.toggleContactForm }>Contact Us</button>
