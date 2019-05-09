@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import LocationMarkerLg     from "../images/location-marker-lg.svg";
 import SelectionButton      from "../components/SelectionButton.js";
-import Alert               from "../components/Alert/Alert.js";
+import Alert                from "../components/Alert/Alert.js";
 import LoadingSpinner       from "../components/LoadingSpinner/LoadingSpinner.js";
+import Dropdown             from "../components/Dropdown/Dropdown.js";
 
 class Locations extends Component {
   constructor() {
@@ -77,16 +78,12 @@ class Locations extends Component {
             </div>
             <div className="row justify-content-center">
               <div className="col-sm-12 col-md-8">
-                <h3>Step 1: Select your spotting location:</h3>
-                <select onChange={ this.handleLocationChange } className="form-control form-control-lg">
-                  <option defaultValue disabled>Choose your location</option>
-                    { this.state.locations.map((location, idx) => {
-                      return(
-                        <option value={location.id} key={idx}>{location.name} @ {location.airport}</option>
-                        )
-                      })
-                    }
-                  </select>
+                <h3>Select your spotting location:</h3>
+                <Dropdown
+                  onchange={ this.handleLocationChange }
+                  dataArray={ this.state.locations }
+                  defaultValue="Select locations:"
+                />
                 </div>
               </div>
               <div className="row">

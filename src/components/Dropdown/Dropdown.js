@@ -10,7 +10,12 @@ class DropdownMenu extends Component {
           <option defaultValue disabled>{ this.props.defaultValue }</option>
           { this.props.dataArray.map((item, idx) => {
             return(
-              <option value={item.id} key={idx}>{item.name}</option>
+              <option
+              value={item.id}
+              key={idx}
+              >
+              {item.name} { item.airport ? `@ ${ item.airport }` : null }
+              </option>
               )
             })
           }

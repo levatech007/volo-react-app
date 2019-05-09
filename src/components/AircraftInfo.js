@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class AircraftInfo extends Component {
 
   render() {
-    console.log(this.props.aircraftInfo)
     return(
       <div className="row aircraft-info">
         <div className="col-6">
