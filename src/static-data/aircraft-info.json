@@ -1,28 +1,52 @@
 {
   "aircrafts":[
                 {
-                  "id": 1,
+                  "id": 38,
                   "name": "A380",
                   "fullName": "Airbus 380",
                   "description": "The Airbus A380 is the world's largest passenger airliner, a wide-body aircraft manufactured by Airbus. Airbus studies started in 1988 and the project was announced in 1990 to challenge the dominance of the Boeing 747 in the long haul market. "
                 },
                 {
-                  "id": 2,
-                  "name": "B787",
-                  "fullName": "Boeing 787",
-                  "description": "The Boeing 787 Dreamliner is an American long-haul, mid-size wide-body, twin-engine jet airliner manufactured by Boeing Commercial Airplanes. Its variants seat 242 to 335 passengers. It is the first airliner with an airframe constructed primarily of composite materials."
+                  "id": 35,
+                  "name": "A350",
+                  "fullName": "Airbus 350",
+                  "description": ""
                 },
                 {
-                  "id": 3,
+                  "id": 34,
+                  "name": "A340",
+                  "fullName": "Airbus 340",
+                  "description": ""
+                },
+                {
+                  "id": 33,
+                  "name": "A330",
+                  "fullName": "Airbus 330",
+                  "description": ""
+                },
+                {
+                  "id": 74,
                   "name": "B747",
                   "fullName": "Boeing 747",
                   "description": "The Boeing 747, dubbed a 'Jumbo Jet', is an American wide-body commercial jet airliner and cargo aircraft. Its distinctive hump upper deck along the forward part of the aircraft has made it one of the most recognizable aircraft. First flown commercially in 1970, the 747 held the passenger capacity record for 37 years."
                 },
                 {
-                  "id": 4,
+                  "id": 76,
+                  "name": "B767",
+                  "fullName": "Boeing 767",
+                  "description": ""
+                },
+                {
+                  "id": 77,
                   "name": "B777",
                   "fullName": "Boeing 777",
                   "description": "The Boeing 777 is an American long-range wide-body twin-engine jet airliner. It is the world's largest twinjet. Commonly referred to as the 'Triple Seven', its distinguishing features include long raked wings, six wheels on each main landing gear, fully circular fuselage cross-section, and a blade-shaped tail cone."
+                },
+                {
+                  "id": 78,
+                  "name": "B787",
+                  "fullName": "Boeing 787",
+                  "description": "The Boeing 787 Dreamliner is an American long-haul, mid-size wide-body, twin-engine jet airliner manufactured by Boeing Commercial Airplanes. Its variants seat 242 to 335 passengers. It is the first airliner with an airframe constructed primarily of composite materials."
                 }
               ]
 }
