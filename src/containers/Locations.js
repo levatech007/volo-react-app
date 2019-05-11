@@ -34,7 +34,7 @@ class Locations extends Component {
           this.setState({
                           locations:          locations,
                           selectedLocationId: locations[0].id, // set default location
-                          showLoadingSpinner: true
+                          showLoadingSpinner: false
                          })
     });
 
