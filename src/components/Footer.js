@@ -80,7 +80,7 @@ class Footer extends Component {
         <div className="container footer">
           { this.state.showContactModal ? <ContactForm close={ this.toggleContactForm }/> : null }
           <div className="row justify-content-center">
-            <div className="col-lg-2 col-md-6">
+            <div className="col-lg-2 col-md-6 col-10">
               <p>VOLO</p>
               <div className="row">
                 <ul>
@@ -94,7 +94,7 @@ class Footer extends Component {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-6 col-10">
               <p>CONNECT</p>
               <br></br>
               <div className="row">
@@ -109,7 +109,7 @@ class Footer extends Component {
                 }
               </div>
             </div>
-            <div className="col-lg-4 col-md-6">
+            <div className="col-lg-4 col-md-6 col-10">
               <p>STAY TUNED</p>
               <br></br>
               <div className="row">
@@ -136,7 +136,7 @@ class Footer extends Component {
                 <small className="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
             </div>
-            <div className="col-lg-2 col-md-6">
+            <div className="col-lg-2 col-md-6 col-10">
                 <p>CONTACT</p>
                 <br></br>
                 <button className="plain-button" onClick={ this.toggleContactForm }>Contact Us</button>
