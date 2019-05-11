@@ -29,6 +29,7 @@ class FlightsByAircraft extends Component {
     this.handleDateSelection         = this.handleDateSelection.bind(this);
     this.generateAvailableDateRange  = this.generateAvailableDateRange.bind(this);
     this.formatDateForDropdown       = this.formatDateForDropdown.bind(this);
+    this.formatDateForApi            = this.formatDateForApi.bind(this);
     this.getMatchingFlights          = this.getMatchingFlights.bind(this);
   }
 
@@ -46,7 +47,7 @@ class FlightsByAircraft extends Component {
                       aircraftSchedule: SampleFlightSchedule.sampleFlights,
                       aircraftTypes:    SampleAircraftInfo.aircrafts,
                       selectedDateId:   1, // give default values to Id-s in case nothing is selected
-                      aircraftId:       1,
+                      aircraftId:       38,
                     })
                   })
   }
@@ -64,9 +65,17 @@ class FlightsByAircraft extends Component {
   }
 
   getMatchingFlights() {
-    console.log("Clicked")
+    // aircraftId is first two numbers of aircraft IATA code
+    let date = this.state.dateRange[this.state.selectedDateId].apiDate
     if(this.state.aircraftId && this.state.selectedDateId) {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/nonstopflights/SFO/${ date }/${ this.state.aircraftId }.json`)
+      .then((res) => {
+        return res.json();
+      })
+      .then ((response) => {
+        console.log(response)
 
+      })
         this.setState({
           showFlightSchedule: true,
           showAlert: true,
@@ -74,7 +83,6 @@ class FlightsByAircraft extends Component {
           alertMessages: ["This is an upcoming feature that is currently under development. The information contained here is for testing purposes only"]
         })
     } else {
-      console.log("No aircraft selected")
       let alertMessages = []
       if (!this.state.aircraftId) {
         alertMessages.push("No aircraft selected")
@@ -91,19 +99,21 @@ class FlightsByAircraft extends Component {
   }
 
   generateAvailableDateRange() {
-    // should return an array of objects with 'id': int, date: timestamp, and 'name': string
+    // should return an array of objects with 'id': int, date: timestamp, 'name': string for Dropdown and apiDate: "YYYY-MM-DD" for api call
     // for today + 6 days in format "Weekday, Month 00, 0000")
     // available date range is currently 7 days
     let availableDaysCount = 7
     let dateArray = [...new Array(availableDaysCount)]
     let dateRange = dateArray.map((_, idx) => {
-      var day = new Date()
-      var dayUnix = day.setDate(day.getDate() + idx)
-      var formattedDate = this.formatDateForDropdown(dayUnix)
-      var result =  {
+      let day = new Date()
+      let dayUnix = day.setDate(day.getDate() + idx)
+      let formattedDate = this.formatDateForDropdown(dayUnix)
+      let formattedApiDate = this.formatDateForApi(dayUnix)
+      let result =  {
                       id: idx + 1,
                       date: dayUnix,
-                      name: formattedDate
+                      name: formattedDate,
+                      apiDate: formattedApiDate
                     }
       return result
     })
@@ -112,13 +122,24 @@ class FlightsByAircraft extends Component {
 
   formatDateForDropdown(unixDate) {
     // unix timestamp to format:  "Weekday, Month 00, 0000" to display in dropdown menu
-    var fullDate = new Date(unixDate)
-    let day   = this.state.dayNames[fullDate.getDay()]
-    let date  = fullDate.getDate()
-    let month = this.state.monthNames[fullDate.getMonth()]
-    let year  = fullDate.getFullYear()
-    let formattedDate = `${ day }, ${ month } ${ date }th, ${ year }`
-    return formattedDate
+    let fullDate  = new Date(unixDate)
+    let dayName   = this.state.dayNames[fullDate.getDay()]
+    let date      = fullDate.getDate()
+    let monthName = this.state.monthNames[fullDate.getMonth()]
+    let fullYear  = fullDate.getFullYear()
+    let formattedDateForDropdown = `${ dayName }, ${ monthName } ${ date }th, ${ fullYear }` // change for 1st & 2nd
+    return formattedDateForDropdown
+  }
+
+  formatDateForApi(unixDate) {
+    let fullDate    = new Date(unixDate)
+    let date        =  fullDate.getDate().toString()
+    let formatDate  = date.length === 1 ? `0${ date }` : `${ date }`
+    let month       = (fullDate.getMonth() + 1).toString()
+    let formatMonth = month.length === 1 ? `0${ month }` : `${ month }`
+    // month for Api date string: (month + 1) if single digit, add 0 to front
+    let formattedDateForApi = `${ fullDate.getFullYear() }-${ formatMonth }-${ formatDate }`
+    return formattedDateForApi
   }
 
   render() {
