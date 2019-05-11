@@ -7,7 +7,7 @@ import {
           AccordionItemTitle,
           AccordionItemBody,
         }                   from "react-accessible-accordion";
-import UpdateProfileModal   from "../components/UpdateProfileModal.js";
+import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
 import ImageUploadModal     from "../components/ImageUploadModal.js";
 import Profileimg           from "../images/profile-img.png";
 
@@ -19,12 +19,17 @@ class Profile extends Component {
                     reviews:                [],
                     profileImageUrl:        "",
                     date:                   null,
-                    menuTabs:               ["Upcoming events", "Past events", "My reviews"],
+                    menuTabs:               [
+                                              { name: "Upcoming events", type: "calendar" },
+                                              { name: "Past events", type: "calendar" },
+                                              { name: "My reviews", type: "reviews"}
+                                            ],
                     updateProfileModalOpen: false,
                     imageUploadModalOpen:   false
                   }
     this.toggleUpdateProfileModal = this.toggleUpdateProfileModal.bind(this);
     this.toggleImageUploadModal   = this.toggleImageUploadModal.bind(this);
+    this.showTabContent           = this.showTabContent.bind(this);
     this.onUpdateAccount          = this.onUpdateAccount.bind(this);
     this.onDeleteAccount          = this.onDeleteAccount.bind(this);
   }
@@ -62,14 +67,17 @@ class Profile extends Component {
     this.setState({ date: today})
   }
 
-
-
   toggleUpdateProfileModal() {
     this.setState({ updateProfileModalOpen: !this.state.updateProfileModalOpen });
   }
 
   toggleImageUploadModal() {
     this.setState({ imageUploadModalOpen: !this.state.imageUploadModalOpen });
+  }
+
+  showTabContent(tab) {
+    console.log(tab)
+
   }
 
   onUpdateAccount(newData) {
@@ -88,10 +96,12 @@ class Profile extends Component {
   }
 
   render(){
+    console.log(this.state.calendar)
+    console.log(this.state.reviews)
     return(
       <div className="container">
         <div className="row background">
-          { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.toggleImageUploadModal}  /> : null }
+          {/* { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.toggleImageUploadModal}  /> : null } */}
           <div className="col-4">
             <button onClick={ this.toggleImageUploadModal }>
               <img
@@ -99,14 +109,14 @@ class Profile extends Component {
                 alt="profile"/>
             </button>
           </div>
-          { this.state.updateProfileModalOpen ? <UpdateProfileModal close={ this.toggleUpdateProfileModal}  /> : null }
+          { this.state.updateProfileModalOpen ? <UpdateProfile close={ this.toggleUpdateProfileModal}  /> : null }
           <div className="col-8">
             {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
             <p> Today is { this.state.date }</p>
-            <button className="btn btn-outline-light" onClick={ this.onDeleteAccount }>
+            <button className="icon-btn" onClick={ this.onDeleteAccount }>
               <i className="far fa-trash-alt"></i>
             </button>
-            <button className="btn btn-outline-light" onClick={ this.toggleUpdateProfileModal }>
+            <button className="icon-btn" onClick={ this.toggleUpdateProfileModal }>
               <i className="far fa-edit"></i>
             </button>
           </div>
@@ -114,7 +124,7 @@ class Profile extends Component {
             <div className="row">
               {
                 this.state.menuTabs.map((tab, idx) => {
-                  return( <div className="col-md-4" key={ idx }><h3>{ tab }</h3></div> )
+                  return( <div className="col-md-4" key={ idx } onClick={ () => this.showTabContent(tab) }><h3>{ tab.name }</h3></div> )
                 })
               }
             </div>
