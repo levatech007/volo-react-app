@@ -19,14 +19,12 @@ class Weather extends Component {
     this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     Auth.validateToken()
     .then((user) => {
       this.setState({ userId: user.id })
     })
-  }
 
-  componentDidMount() {
     let locationId = this.props.match.params.id;
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
@@ -45,6 +43,7 @@ class Weather extends Component {
       return res.json();
     })
     .then((forecast) => {
+      console.log(forecast)
       this.setState({ weatherForecast: forecast.forecast })
     })
   }
@@ -76,6 +75,7 @@ class Weather extends Component {
   }
 
   render() {
+    console.log(this.state.userId)
     return (
       <div className="container">
         <div className="row background">

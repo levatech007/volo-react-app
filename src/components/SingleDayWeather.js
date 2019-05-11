@@ -27,6 +27,7 @@ class SingleDayWeather extends Component {
   }
 
   render() {
+    console.log(this.props.userId)
     return(
             <AccordionItem>
               <AccordionItemTitle>

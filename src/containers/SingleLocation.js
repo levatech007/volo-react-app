@@ -17,6 +17,7 @@ class Locations extends Component {
   constructor() {
     super();
     this.state = {
+                    userId:               0,
                     location:             {latitude: null, longitude: null},
                     reviews:              [],
                     reviewCount:          0,
@@ -32,6 +33,10 @@ class Locations extends Component {
   }
 
   componentWillMount() {
+    Auth.validateToken()
+    .then((user) => {
+      this.setState({ userId: user.id })
+    })
     let locationId = this.props.match.params.id;
     fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
     .then((res) => {
@@ -88,6 +93,7 @@ class Locations extends Component {
   }
 
   render() {
+    console.log(this.state.userId)
     let showReviewForm = this.state.showForm
     return(
       <div className="container">
@@ -113,7 +119,7 @@ class Locations extends Component {
                                       </div>
                                     </div>
                                     <div className="row justify-content-center">
-                                      <img src={ this.state.changeArrowDirction ? ArrowUp : ArrowDn } className="down-arrow" alt="down-arrow"/>
+                                      <img src={ ArrowDn } className="down-arrow" alt="down-arrow"/>
                                     </div>
                                   </div>
                                 </AccordionItemTitle>
@@ -124,9 +130,9 @@ class Locations extends Component {
                           })
                         }
                       </Accordion>
-                    { Auth.user.id ?
+                    { this.state.userId ?
                       <div className="row justify-content-center">
-                        <button onClick={ this.showReviewForm } className="btn btn-light button-margin">Add review</button>
+                        <button onClick={ this.showReviewForm } className="footer-btn submit button-margin">Add review</button>
                       </div>
                       :
                       null
