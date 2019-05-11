@@ -76,8 +76,10 @@ class Footer extends Component {
     // dynamic image loading with webpack & require, step 2:
     const images = importAll(require.context('../images/social_icons', false, /\.(png|jpe?g|svg)$/));
     return(
-      <footer className="row justify-content-center footer-background">
-        <div className="container footer">
+      <footer className="footer-background">
+        <div className="container">
+        <div className="row justify-content-center footer">
+          <div className="col-12">
           { this.state.showContactModal ? <ContactForm close={ this.toggleContactForm }/> : null }
           <div className="row justify-content-center">
             <div className="col-lg-2 col-md-6 col-10">
@@ -142,10 +144,12 @@ class Footer extends Component {
                 <button className="plain-button" onClick={ this.toggleContactForm }>Contact Us</button>
             </div>
           </div>
+        </div>
           <div className="row justify-content-center copyright">
             <small>&copy; {(new Date()).getFullYear()} VOLO All rights reserved</small>
           </div>
         </div>
+      </div>
       </footer>
     )
   }
