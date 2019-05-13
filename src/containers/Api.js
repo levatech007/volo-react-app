@@ -4,24 +4,29 @@ import {
           AccordionItem,
           AccordionItemTitle,
           AccordionItemBody
-        } from "react-accessible-accordion";
+        }                   from "react-accessible-accordion";
+import LoadingSpinner       from "../components/LoadingSpinner/LoadingSpinner.js";
+
 
 class Api extends Component {
   constructor() {
     super();
     this.state = {
-                    documentation: {}
+                    documentation: {},
+                    showLoadingSpinner:   false,
                   }
   }
 
   componentDidMount() {
     window.scrollTo(0, 0)
+    this.setState({ showLoadingSpinner: true })
     fetch(`${process.env.REACT_APP_BACKEND_URL}/documentation`)
         .then((res) => {
           return res.json();
         }).then((json_data) => {
           this.setState({
-                          documentation: json_data.documentation
+                          documentation: json_data.documentation,
+                          showLoadingSpinner: false
                         });
     });
   }
@@ -29,6 +34,7 @@ class Api extends Component {
   render() {
     return(
       <div className="container">
+      { this.state.showLoadingSpinner ? <LoadingSpinner /> : null }
         <div className="row justify-content-center background">
           <h3>VOLO API:</h3>
             { this.state.documentation.current_routes &&
