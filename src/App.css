@@ -8,9 +8,15 @@
     width: 100vw;
 }
 
+button:focus {
+  outline: 0;
+}
+
 .hero-animation {
   position: relative;
   margin-bottom: 30px;
+  height: 100%;
+  overflow: hidden;
 }
 
 a:hover {
@@ -44,9 +50,12 @@ a:hover {
   padding: 40px;
   border-radius: 5px;
 }
+.navbar-toggler {
+  border: none;
+  outline: 0;
+}
 
 .nav-item {
-
   color: white;
 }
 
@@ -68,7 +77,7 @@ a:hover {
 
 ul {
   list-style: none;
-  padding: 15px;
+  padding: 0;
 }
 
 table {
@@ -163,6 +172,12 @@ footer {
   padding-top: 30px;
   border-top: 1px solid white;
 }
+
+footer .row {
+  margin-left: 0;
+}
+
+
 
 .footer-background {
   background: #8e9eab;
