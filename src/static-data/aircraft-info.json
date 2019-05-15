@@ -10,19 +10,19 @@
                   "id": 35,
                   "name": "A350",
                   "fullName": "Airbus 350",
-                  "description": ""
+                  "description": "The Airbus A350 is a family of long-range, twin-engine wide-body jet airliners developed by European aerospace manufacturer Airbus. The A350 is the first Airbus aircraft with both fuselage and wing structures made primarily of carbon fibre reinforced polymer."
                 },
                 {
                   "id": 34,
                   "name": "A340",
                   "fullName": "Airbus 340",
-                  "description": ""
+                  "description": "The Airbus A340 is a long-range, four-engine, wide-body commercial passenger jet airliner that was developed and produced by the European aerospace company Airbus. The A340 was assembled in Toulouse, France. It seats up to 375 passengers in the standard variants and 440 in the stretched -600 series."
                 },
                 {
                   "id": 33,
                   "name": "A330",
                   "fullName": "Airbus 330",
-                  "description": ""
+                  "description": "The Airbus A330 is a medium- to long-range wide-body twin-engine jet airliner made by Airbus. Versions of the A330 have a range of 5,000 to 13,430 kilometres and can accommodate up to 335 passengers in a two-class layout or carry 70 tonnes of cargo."
                 },
                 {
                   "id": 74,
@@ -34,7 +34,7 @@
                   "id": 76,
                   "name": "B767",
                   "fullName": "Boeing 767",
-                  "description": ""
+                  "description": "The Boeing 767 is a mid- to large-size, mid- to long-range, wide-body twin-engine jet airliner built by Boeing Commercial Airplanes. It was Boeing's first wide-body twinjet and its first airliner with a two-crew glass cockpit."
                 },
                 {
                   "id": 77,
