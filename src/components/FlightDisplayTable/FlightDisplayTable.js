@@ -62,10 +62,12 @@ class FlightDisplay extends Component {
 }
 
   sortFlightsByTime(flights) {
-    flights.sort((a,b) => {
-  // Turn strings into dates, and then subtract them
-  // to get a value that is either negative, positive, or zero.
-      return new Date(b.timeAtAirport) - new Date(a.timeAtAirport);
+    flights.sort((day1,day2) => {
+      let selectedDay = new Date(day1.timeAtAirport)
+      let nextDay = new Date(day2.timeAtAirport)
+      // Turn strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return nextDay - selectedDay
     });
   }
 
