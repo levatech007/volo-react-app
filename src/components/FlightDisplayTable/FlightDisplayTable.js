@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./flight-display-table.css";
 
 class FlightDisplay extends Component {
   constructor() {
@@ -14,7 +15,6 @@ class FlightDisplay extends Component {
   }
 
   componentDidMount() {
-    let schedule = this.props.aircraftSchedule
     this.setState({
       airport: this.props.airport,
       aircraftSchedule: this.sortFlightData(this.props.aircraftSchedule)
@@ -28,8 +28,8 @@ class FlightDisplay extends Component {
          aircraftSchedule.push(this.formatFlightForTable(flight.flights))
        })
     })
-    console.log(aircraftSchedule)
-    return this.sortFlightsByTime(aircraftSchedule)
+    let sortedFlights = this.sortFlightsByTime(aircraftSchedule)
+    return sortedFlights
   }
 
   formatFlightForTable(flight) {
@@ -41,7 +41,7 @@ class FlightDisplay extends Component {
                             flightType: type,
                             timeAtAirport: timeAtAirport,
                             timeToDisplay: this.formatTimeToAMPM(timeAtAirport),
-                            aircraft_type: flight.aircraft_type,
+                            aircraftType: flight.aircraft_type,
                             airline: flight.operated_by,
                             route: `${ flight.departure_airport } to ${ flight.arrival_airport }`,
                             flightNumber: flight.flight_number,
@@ -50,7 +50,7 @@ class FlightDisplay extends Component {
   }
 
   formatTimeToAMPM(date) {
-    console.log(date)
+    // convert time to am/pm for display
     let time = date.split("T")[1]
     let hours = time.split(":")[0]
     let minutes = time.split(":")[1]
@@ -62,20 +62,29 @@ class FlightDisplay extends Component {
 }
 
   sortFlightsByTime(flights) {
-    flights.sort((day1,day2) => {
-      let selectedDay = new Date(day1.timeAtAirport)
-      let nextDay = new Date(day2.timeAtAirport)
-      // Turn strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return nextDay - selectedDay
-    });
+    let sortedFlights = flights.sort((day1,day2) => {
+                          let selectedDay = new Date(day1.timeAtAirport)
+                          let nextDay = new Date(day2.timeAtAirport)
+                          return nextDay - selectedDay
+                        });
+    return sortedFlights.reverse()
   }
-
   render() {
     return(
-      <div>
-      TABLE HERE
-
+      <div className="col-12 flight-table">
+        {
+          this.state.aircraftSchedule.map((flight, idx) => {
+            return(
+              <div className="row flight-row" key={ idx }>
+                <div className="col-2"><img src={ require(`./Images/${ flight.flightType }-icon.svg`) } alt={ flight.type }/></div>
+                <div className="col-2">{ flight.timeToDisplay }</div>
+                <div className="col-2">{ flight.route }</div>
+                <div className="col-3">{ flight.airline }</div>
+                <div className="col-3">{ flight.aircraftType }</div>
+              </div>
+            )
+          })
+        }
       </div>
     )
   }

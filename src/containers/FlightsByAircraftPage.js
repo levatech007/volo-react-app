@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AircraftInfo         from "../components/AircraftInfo.js";
 import Dropdown             from "../components/Dropdown/Dropdown.js";
-import FlightDisplayTable   from "../components/FlightDisplayTable.js";
+import FlightDisplayTable   from "../components/FlightDisplayTable/FlightDisplayTable.js";
 import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
 import SampleAircraftInfo   from "../static-data/aircraft-info.json";
 import Alert                from "../components/Alert/Alert.js";
@@ -55,12 +55,14 @@ class FlightsByAircraft extends Component {
   handleAircraftSelection(e) {
     this.setState({
                     aircraftId: parseInt(e.target.value), // e.target.value returns a sting, aircraftId must be Integer!
+                    showFlightSchedule: false,
                   })
   }
 
   handleDateSelection(e) {
     this.setState({
                     selectedDateId: parseInt(e.target.value),
+                    showFlightSchedule: false,
                   })
   }
 
@@ -74,14 +76,14 @@ class FlightsByAircraft extends Component {
       })
       .then ((response) => {
         console.log(response)
-
-      })
         this.setState({
+          aircraftSchedule: response.data,
           showFlightSchedule: true,
           showAlert: true,
           alertStyle: "alert-box error",
           alertMessages: ["This is an upcoming feature that is currently under development. The information contained here is for testing purposes only"]
         })
+      })
     } else {
       let alertMessages = []
       if (!this.state.aircraftId) {
@@ -133,7 +135,7 @@ class FlightsByAircraft extends Component {
 
   formatDateForApi(unixDate) {
     let fullDate    = new Date(unixDate)
-    let date        =  fullDate.getDate().toString()
+    let date        = fullDate.getDate().toString()
     let formatDate  = date.length === 1 ? `0${ date }` : `${ date }`
     let month       = (fullDate.getMonth() + 1).toString()
     let formatMonth = month.length === 1 ? `0${ month }` : `${ month }`
@@ -146,52 +148,52 @@ class FlightsByAircraft extends Component {
     return(
       <div className="container">
         <div className="row justify-content-center background">
-              <div className="col-sm-12 col-md-10">
-                { this.state.showFlightSchedule ?
-                  <AircraftInfo
-                    imageName={ this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId).name }
-                    aircraftInfo= { this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) }
-                  />
-                  :
-                  null
-                }
-                { this.state.showAlert ? <Alert alert={ this.state.alertMessages } alertStyle={ this.state.alertStyle } /> : null }
-                <h3>Airport: { this.state.airportName }</h3>
-                <div className="row">
-                  <div className="col-lg-6">
-                    <h3>Select aircraft:</h3>
-                    <Dropdown
-                      onchange={ this.handleAircraftSelection }
-                      dataArray={ this.state.aircraftTypes }
-                      defaultValue="Select aircraft:"
-                    />
-                    </div>
-                    <div className="col-lg-6">
-                      <h3>Select date:</h3>
-                      <Dropdown
-                        onchange={ this.handleDateSelection }
-                        dataArray={ this.state.dateRange }
-                        defaultValue="Select date:"
-                      />
-                    </div>
-                  </div>
-                  <div className="row justify-content-center">
-                    <button onClick={ this.getMatchingFlights } type="submit" className="footer-btn submit">Find flights</button>
-                  </div>
-
-                <div className="row justify-content-center">
-                  {
-                    this.state.showFlightSchedule ?
-                    <FlightDisplayTable
-                      aircraftSchedule={ this.state.aircraftSchedule.filter(schedule => schedule.aircraft === this.state.aircraftId) }
-                    />
-                    :
-                    null
-                  }
+          <div className="col-sm-12 col-md-10 centered-text">
+            { this.state.showAlert ? <Alert alert={ this.state.alertMessages } alertStyle={ this.state.alertStyle } /> : null }
+            <h1>{ this.state.airportName }</h1>
+            <div className="row">
+              <div className="col-lg-6 centered-text">
+                <h3>Select aircraft:</h3>
+                <Dropdown
+                  onchange={ this.handleAircraftSelection }
+                  dataArray={ this.state.aircraftTypes }
+                  defaultValue="Select aircraft:"
+                />
                 </div>
+                <div className="col-lg-6 centered-text">
+                  <h3>Select date:</h3>
+                  <Dropdown
+                    onchange={ this.handleDateSelection }
+                    dataArray={ this.state.dateRange }
+                    defaultValue="Select date:"
+                  />
+                </div>
+              </div>
+              <div className="row justify-content-center">
+                <button onClick={ this.getMatchingFlights } type="submit" className="footer-btn submit">Find flights</button>
+              </div>
+              { this.state.showFlightSchedule ?
+                <AircraftInfo
+                  imageName={ this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId).name }
+                  aircraftInfo= { this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) }
+                />
+                :
+                null
+              }
+              <div className="row justify-content-center">
+              {
+                this.state.showFlightSchedule ?
+                <FlightDisplayTable
+                  aircraftSchedule={ this.state.aircraftSchedule }
+                  airport={ this.state.airportIataCode }
+                />
+                :
+                null
+              }
             </div>
           </div>
         </div>
+      </div>
     )
   }
 }

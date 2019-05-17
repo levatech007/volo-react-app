@@ -12,6 +12,11 @@ button:focus {
   outline: 0;
 }
 
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 .hero-animation {
   position: relative;
   margin-bottom: 30px;
@@ -129,6 +134,10 @@ td, th {
   margin-bottom: 40px;
 }
 
+.centered-text {
+  text-align: center;
+}
+
 select {
   margin-bottom: 30px;
 }
@@ -168,6 +177,10 @@ select {
   margin-bottom: 30px;
 }
 
+.aircraft-title {
+  padding-bottom: 20px;
+}
+
 footer {
   padding-top: 30px;
   border-top: 1px solid white;
@@ -176,8 +189,6 @@ footer {
 footer .row {
   margin-left: 0;
 }
-
-
 
 .footer-background {
   background: #8e9eab;
@@ -272,6 +283,12 @@ hr {
 
 .submit:hover {
   background: rgb(25, 221, 25);
+}
+
+@media all and (max-width: 770px) {
+  .selection-button {
+    width: 100%;
+  }
 }
 
 /* ACCORDION */

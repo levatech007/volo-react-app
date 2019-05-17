@@ -21,7 +21,7 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="row justify-content-center">
+      <header className="row justify-content-center">
         <nav className="navbar navbar-expand-lg navbar-light">
           <Link to={ '/' } className="navbar-brand" >VOLO</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@ class Header extends Component {
             }
           </div>
         </nav>
-      </div>
+      </header>
     );
   }
 }
