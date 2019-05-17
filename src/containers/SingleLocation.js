@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Auth             from "j-toker";
 import $                from "jquery";
 import ArrowDn          from "../images/arrow-dn.svg";
-import ArrowUp          from "../images/arrow-up.svg";
+// import ArrowUp          from "../images/arrow-up.svg";
 import LocationInfo     from "../components/Location.js";
 import LocationReviewForm from "../components/Forms/LocationReviewForm.js";
 import ReactStars       from "react-stars";

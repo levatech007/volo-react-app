@@ -13,7 +13,6 @@ class Home extends Component {
 	           <div className="runway">
 	         </div>
         </div>
-
         <div className="row justify-content-center info">
           <div className="col-md-8 col-8">
             <div className="row justify-content-center intro">
@@ -33,7 +32,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
-      </div>
+    </div>
     );
   }
 }

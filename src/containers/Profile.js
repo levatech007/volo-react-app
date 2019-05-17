@@ -8,7 +8,7 @@ import {
           AccordionItemBody,
         }                   from "react-accessible-accordion";
 import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
-import ImageUploadModal     from "../components/ImageUploadModal.js";
+// import ImageUploadModal     from "../components/ImageUploadModal.js";
 import Profileimg           from "../images/profile-img.png";
 
 class Profile extends Component {
