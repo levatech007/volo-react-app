@@ -16,9 +16,9 @@ class Locations extends Component {
                     alertStyle:           "alert-box error",
                     showLoadingSpinner:   false,
                     selectionButtons:     [
-                                            {buttonName: "info", buttonTitle: "About location"},
-                                            {buttonName: "aircraft", buttonTitle: "Select aircraft"},
-                                            {buttonName: "weather", buttonTitle: "Location weather"},
+                                            {buttonName: "info", buttonTitle: "Info"},
+                                            {buttonName: "aircraft", buttonTitle: "Aircrafts"},
+                                            {buttonName: "weather", buttonTitle: "Weather"},
                                           ],
                   }
     this.handleLocationChange     = this.handleLocationChange.bind(this);
@@ -78,7 +78,7 @@ class Locations extends Component {
               <img className="marker-lg" src={ LocationMarkerLg } alt="location-marker"/>
             </div>
             <div className="row justify-content-center">
-              <div className="col-sm-12 col-md-8">
+              <div className="col-sm-12 col-md-8 centered-text">
                 <h3>Select your spotting location:</h3>
                 <Dropdown
                   onchange={ this.handleLocationChange }
