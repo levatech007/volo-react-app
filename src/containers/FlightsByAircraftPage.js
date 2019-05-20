@@ -20,6 +20,7 @@ class FlightsByAircraft extends Component {
                     monthNames:          ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                     aircraftTypes:       [],
                     aircraftSchedule:    [],
+                    totalFlights:        0,
                     showFlightSchedule:  false,
                     showAlert:           false,
                     alertMessages:       "",
@@ -67,6 +68,7 @@ class FlightsByAircraft extends Component {
   }
 
   getMatchingFlights() {
+    // handle errors if no flights match search criteria
     // aircraftId is first two numbers of aircraft IATA code
     let date = this.state.dateRange[this.state.selectedDateId].apiDate
     if(this.state.aircraftId && this.state.selectedDateId) {
@@ -76,14 +78,17 @@ class FlightsByAircraft extends Component {
       })
       .then ((response) => {
         console.log(response)
-        this.setState({
-          aircraftSchedule: response.data,
-          showFlightSchedule: true,
-          showAlert: true,
-          alertStyle: "alert-box error",
-          alertMessages: ["This is an upcoming feature that is currently under development. The information contained here is for testing purposes only"]
+          this.setState({
+            aircraftSchedule: response.data,
+            showFlightSchedule: true,
+            showAlert: true,
+            totalFlights: response.total_flights,
+            alertStyle: "alert-box error",
+            alertMessages: ["This is an upcoming feature that is currently under development. The information contained here is for testing purposes only"]
+          })
+
         })
-      })
+
     } else {
       let alertMessages = []
       if (!this.state.aircraftId) {
@@ -134,6 +139,7 @@ class FlightsByAircraft extends Component {
   }
 
   formatDateForApi(unixDate) {
+    // API expects "YYYY-MM-DD"
     let fullDate    = new Date(unixDate)
     let date        = fullDate.getDate().toString()
     let formatDate  = date.length === 1 ? `0${ date }` : `${ date }`
@@ -143,6 +149,8 @@ class FlightsByAircraft extends Component {
     let formattedDateForApi = `${ fullDate.getFullYear() }-${ formatMonth }-${ formatDate }`
     return formattedDateForApi
   }
+
+
 
   render() {
     return(
@@ -186,10 +194,12 @@ class FlightsByAircraft extends Component {
                 <FlightDisplayTable
                   aircraftSchedule={ this.state.aircraftSchedule }
                   airport={ this.state.airportIataCode }
+                  totalFlights={ this.state.totalFlights }
                 />
                 :
                 null
               }
+
             </div>
           </div>
         </div>

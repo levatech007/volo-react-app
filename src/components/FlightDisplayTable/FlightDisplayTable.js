@@ -6,18 +6,26 @@ class FlightDisplay extends Component {
     super();
     this.state = {
       airport: "",
-      aircraftSchedule: []
+      aircraftSchedule: [],
+      displaySchedule: [],
+      recordsPerPage: 10,
+      totalPages: [],
     }
     this.formatFlightForTable = this.formatFlightForTable.bind(this);
     this.sortFlightData       = this.sortFlightData.bind(this);
     this.sortFlightsByTime    = this.sortFlightsByTime.bind(this);
     this.formatTimeToAMPM     = this.formatTimeToAMPM.bind(this);
+    this.flightsToDisplay     = this.flightsToDisplay.bind(this);
   }
 
   componentDidMount() {
+    let pageCount = Math.ceil(this.props.totalFlights / this.state.recordsPerPage)
+    let aircraftSchedule = this.sortFlightData(this.props.aircraftSchedule)
     this.setState({
       airport: this.props.airport,
-      aircraftSchedule: this.sortFlightData(this.props.aircraftSchedule)
+      aircraftSchedule: aircraftSchedule,
+      totalPages: [...Array(pageCount).keys()],
+      displaySchedule: aircraftSchedule.slice(0, this.state.recordsPerPage)
     })
   }
 
@@ -50,7 +58,7 @@ class FlightDisplay extends Component {
   }
 
   formatTimeToAMPM(date) {
-    // convert time to am/pm for display
+    // convert time to am/pm to display in dropdown
     let time = date.split("T")[1]
     let hours = time.split(":")[0]
     let minutes = time.split(":")[1]
@@ -69,11 +77,29 @@ class FlightDisplay extends Component {
                         });
     return sortedFlights.reverse()
   }
+
+  flightsToDisplay(pageIndex) {
+    let displayPageData;
+    let beginIndex = pageIndex * this.state.recordsPerPage
+    let lastIdx = this.state.total_flights - 1
+    // if the last index of the new record list exceeds total records length,
+    // grab items from beginIndex to end on records array
+    if ((beginIndex + (this.state.recordsPerPage-1)) > lastIdx)
+      displayPageData = this.state.aircraftSchedule.slice(beginIndex)
+    else // get items starting at beginIndex, 
+      displayPageData = this.state.aircraftSchedule.slice(beginIndex, beginIndex + this.state.recordsPerPage)
+
+    this.setState({
+      displaySchedule: displayPageData
+    })
+
+  }
+
   render() {
     return(
       <div className="col-12 flight-table">
         {
-          this.state.aircraftSchedule.map((flight, idx) => {
+          this.state.displaySchedule.map((flight, idx) => {
             return(
               <div className="row flight-row" key={ idx }>
                 <div className="col-2"><img src={ require(`./Images/${ flight.flightType }-icon.svg`) } alt={ flight.type }/></div>
@@ -82,6 +108,13 @@ class FlightDisplay extends Component {
                 <div className="col-3">{ flight.airline }</div>
                 <div className="col-3">{ flight.aircraftType }</div>
               </div>
+            )
+          })
+        }
+        {
+          this.state.totalPages.map((_, idx) => {
+            return(
+              <button key={ idx } onClick={ () => this.flightsToDisplay(idx) }>{ idx+1}</button>
             )
           })
         }
