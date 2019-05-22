@@ -23,7 +23,7 @@ class FlightsByAircraft extends Component {
                     totalFlights:        0,
                     showFlightSchedule:  false,
                     showAlert:           false,
-                    alertMessages:       "",
+                    alertMessages:       [],
                     alertStyle:          "",
                   }
     this.handleAircraftSelection     = this.handleAircraftSelection.bind(this);
@@ -70,14 +70,24 @@ class FlightsByAircraft extends Component {
   getMatchingFlights() {
     // handle errors if no flights match search criteria
     // aircraftId is first two numbers of aircraft IATA code
-    let date = this.state.dateRange[this.state.selectedDateId].apiDate
+
+    let date = this.state.dateRange[this.state.selectedDateId - 1].apiDate
+    console.log(date)
     if(this.state.aircraftId && this.state.selectedDateId) {
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/nonstopflights/SFO/${ date }/${ this.state.aircraftId }.json`)
-      .then((res) => {
-        return res.json();
-      })
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/nonstopflights/${ this.state.airportIataCode }/${ date }/${ this.state.aircraftId }.json`)
+      .then( response => {
+          if (!response.ok) {
+            // no flights found
+            this.setState({
+              showAlert:     true,
+              alertMessages: ["No flight were found."],
+              alertStyle:    "alert-box error",
+            })
+            throw response
+          }
+          return response.json()  //we only get here if there is no error
+        })
       .then ((response) => {
-        console.log(response)
           this.setState({
             aircraftSchedule: response.data,
             showFlightSchedule: true,
@@ -86,7 +96,6 @@ class FlightsByAircraft extends Component {
             alertStyle: "alert-box error",
             alertMessages: ["This is an upcoming feature that is currently under development. The information contained here is for testing purposes only"]
           })
-
         })
 
     } else {
