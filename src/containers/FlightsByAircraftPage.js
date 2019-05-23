@@ -97,6 +97,9 @@ class FlightsByAircraft extends Component {
             alertMessages: ["This is an upcoming feature that is currently under development. The information contained here is for testing purposes only"]
           })
         })
+        .catch( err => {
+          console.log("error")
+        })
 
     } else {
       let alertMessages = []
@@ -166,8 +169,8 @@ class FlightsByAircraft extends Component {
       <div className="container">
         <div className="row justify-content-center background">
           <div className="col-sm-12 col-md-10 centered-text">
-            { this.state.showAlert ? <Alert alert={ this.state.alertMessages } alertStyle={ this.state.alertStyle } /> : null }
             <h1>{ this.state.airportName }</h1>
+            { this.state.showAlert ? <Alert alert={ this.state.alertMessages } alertStyle={ this.state.alertStyle } /> : null }
             <div className="row">
               <div className="col-lg-6 centered-text">
                 <h3>Select aircraft:</h3>
