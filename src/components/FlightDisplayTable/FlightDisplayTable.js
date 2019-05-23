@@ -10,6 +10,7 @@ class FlightDisplay extends Component {
       displaySchedule: [],
       recordsPerPage: 10,
       totalPages: [],
+      currentPage: 0,
     }
     this.formatFlightForTable = this.formatFlightForTable.bind(this);
     this.sortFlightData       = this.sortFlightData.bind(this);
@@ -79,6 +80,7 @@ class FlightDisplay extends Component {
   }
 
   flightsToDisplay(pageIndex) {
+    // content for current table
     let displayPageData;
     let beginIndex = pageIndex * this.state.recordsPerPage
     let lastIdx = this.state.total_flights - 1
@@ -86,16 +88,18 @@ class FlightDisplay extends Component {
     // grab items from beginIndex to end on records array
     if ((beginIndex + (this.state.recordsPerPage-1)) > lastIdx)
       displayPageData = this.state.aircraftSchedule.slice(beginIndex)
-    else // get items starting at beginIndex, 
+    else // get items starting at beginIndex,
       displayPageData = this.state.aircraftSchedule.slice(beginIndex, beginIndex + this.state.recordsPerPage)
 
     this.setState({
-      displaySchedule: displayPageData
+      displaySchedule: displayPageData,
+      currentPage: pageIndex
     })
 
   }
 
   render() {
+    console.log(this.state.currentPage)
     return(
       <div className="col-12 flight-table">
         {
@@ -114,7 +118,7 @@ class FlightDisplay extends Component {
         {
           this.state.totalPages.map((_, idx) => {
             return(
-              <button key={ idx } onClick={ () => this.flightsToDisplay(idx) }>{ idx+1}</button>
+              <button className={ this.state.currentPage === idx ? "page-number active" : "page-number" } key={ idx } onClick={ () => this.flightsToDisplay(idx) }>{ idx+1}</button>
             )
           })
         }

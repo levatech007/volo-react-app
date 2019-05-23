@@ -4,7 +4,26 @@
 }
 
 .flight-row {
-
   padding: 20px 0;
   color: black;
+}
+
+.page-number {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 3px;
+}
+
+.page-number:hover {
+  background: lightblue;
+  text-decoration: underline;
+}
+
+.active {
+  background: rgb(144, 244, 127);
+}
+
+.active:hover {
+  background: rgb(144, 244, 127);
 }
