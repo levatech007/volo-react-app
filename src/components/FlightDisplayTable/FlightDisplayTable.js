@@ -93,13 +93,12 @@ class FlightDisplay extends Component {
 
     this.setState({
       displaySchedule: displayPageData,
-      currentPage: pageIndex
+      currentPage: pageIndex,
     })
 
   }
 
   render() {
-    console.log(this.state.currentPage)
     return(
       <div className="col-12 flight-table">
         {

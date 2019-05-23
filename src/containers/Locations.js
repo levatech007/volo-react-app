@@ -67,7 +67,6 @@ class Locations extends Component {
   }
 
   render() {
-    console.log(this.state.showLoadingSpinner)
     return (
       <div className="container">
         { this.state.showLoadingSpinner ? <LoadingSpinner /> : null }
