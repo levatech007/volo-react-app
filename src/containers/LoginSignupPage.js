@@ -60,6 +60,7 @@ class LoginSignupPage extends Component {
         this.props.history.push(`/users/${resp.data.id}`)
       })
       .fail((resp) => {
+        console.log(resp)
         this.setState({
                         showAlert:  true,
                         alertMessages: resp.data.errors,
@@ -68,6 +69,7 @@ class LoginSignupPage extends Component {
       })
     })
     .fail((resp) => {
+      console.log(resp)
         this.setState({
                         showAlert:  true,
                         alertMessages: resp.data.errors,

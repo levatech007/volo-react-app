@@ -93,7 +93,6 @@ class Locations extends Component {
   }
 
   render() {
-    console.log(this.state.userId)
     let showReviewForm = this.state.showForm
     return(
       <div className="container">
