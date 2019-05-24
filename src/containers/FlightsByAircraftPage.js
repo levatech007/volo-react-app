@@ -5,6 +5,7 @@ import FlightDisplayTable   from "../components/FlightDisplayTable/FlightDisplay
 import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
 import SampleAircraftInfo   from "../static-data/aircraft-info.json";
 import Alert                from "../components/Alert/Alert.js";
+import Tabs                 from "../components/Tabs/Tabs.js";
 
 class FlightsByAircraft extends Component {
   constructor() {
@@ -25,6 +26,7 @@ class FlightsByAircraft extends Component {
                     showAlert:           false,
                     alertMessages:       [],
                     alertStyle:          "",
+                    tabs:                ["Flights", "Plane", "Location"]
                   }
     this.handleAircraftSelection     = this.handleAircraftSelection.bind(this);
     this.handleDateSelection         = this.handleDateSelection.bind(this);
@@ -32,6 +34,7 @@ class FlightsByAircraft extends Component {
     this.formatDateForDropdown       = this.formatDateForDropdown.bind(this);
     this.formatDateForApi            = this.formatDateForApi.bind(this);
     this.getMatchingFlights          = this.getMatchingFlights.bind(this);
+    this.handleTabsClick             = this.handleTabsClick.bind(this);
   }
 
   componentDidMount() {
@@ -70,9 +73,7 @@ class FlightsByAircraft extends Component {
   getMatchingFlights() {
     // handle errors if no flights match search criteria
     // aircraftId is first two numbers of aircraft IATA code
-
     let date = this.state.dateRange[this.state.selectedDateId - 1].apiDate
-    console.log(date)
     if(this.state.aircraftId && this.state.selectedDateId) {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/nonstopflights/${ this.state.airportIataCode }/${ date }/${ this.state.aircraftId }.json`)
       .then( response => {
@@ -162,6 +163,9 @@ class FlightsByAircraft extends Component {
     return formattedDateForApi
   }
 
+  handleTabsClick() {
+    console.log("Click")
+  }
 
 
   render() {
@@ -192,6 +196,10 @@ class FlightsByAircraft extends Component {
               <div className="row justify-content-center">
                 <button onClick={ this.getMatchingFlights } type="submit" className="footer-btn submit">Find flights</button>
               </div>
+                <Tabs
+                  handleTabsClick={ this.handleTabsClick }
+                  tabs={ this.state.tabs }
+                />
               { this.state.showFlightSchedule ?
                 <AircraftInfo
                   imageName={ this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId).name }
