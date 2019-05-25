@@ -1,6 +1,8 @@
 .flight-table {
-  border-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   background-color: #eef2f3;
+  padding-top: 30px;
 }
 
 .flight-row {

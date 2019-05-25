@@ -18,8 +18,7 @@ class Tabs extends Component {
     this.setState({
       activeTab: tabIdx
     })
-    console.log(tabIdx)
-    this.props.handleTabsClick()
+    this.props.handleTabsClick(tabIdx)
   }
 
   render() {

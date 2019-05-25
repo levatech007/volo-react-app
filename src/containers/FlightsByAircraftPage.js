@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import AircraftInfo         from "../components/AircraftInfo.js";
+import AirportInfo          from "../components/AirportInfo.js";
 import Dropdown             from "../components/Dropdown/Dropdown.js";
 import FlightDisplayTable   from "../components/FlightDisplayTable/FlightDisplayTable.js";
 import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
 import SampleAircraftInfo   from "../static-data/aircraft-info.json";
+import SampleAirportInfo   from "../static-data/airport-info.json";
 import Alert                from "../components/Alert/Alert.js";
 import Tabs                 from "../components/Tabs/Tabs.js";
 
@@ -34,6 +36,7 @@ class FlightsByAircraft extends Component {
     this.formatDateForDropdown       = this.formatDateForDropdown.bind(this);
     this.formatDateForApi            = this.formatDateForApi.bind(this);
     this.getMatchingFlights          = this.getMatchingFlights.bind(this);
+    this.renderTabs                  = this.renderTabs.bind(this);
     this.handleTabsClick             = this.handleTabsClick.bind(this);
   }
 
@@ -52,6 +55,7 @@ class FlightsByAircraft extends Component {
                       aircraftTypes:    SampleAircraftInfo.aircrafts,
                       selectedDateId:   1, // give default values to Id-s in case nothing is selected
                       aircraftId:       38,
+                      activeTabIndex:   0,
                     })
                   })
   }
@@ -163,8 +167,46 @@ class FlightsByAircraft extends Component {
     return formattedDateForApi
   }
 
-  handleTabsClick() {
-    console.log("Click")
+  renderTabs() {
+    return(
+      <Tabs
+        handleTabsClick={ this.handleTabsClick }
+        tabs={ this.state.tabs }
+      />
+    )
+  }
+
+  renderFlightSchedule() {
+    return(
+      <FlightDisplayTable
+        aircraftSchedule={ this.state.aircraftSchedule }
+        airport={ this.state.airportIataCode }
+        totalFlights={ this.state.totalFlights }
+      />
+    )
+  }
+
+  renderAircraftInfo() {
+    return(
+      <AircraftInfo
+        imageName={ this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId).name }
+        aircraftInfo= { this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) }
+      />
+    )
+  }
+
+  renderLocationInfo() {
+    return(
+      <AirportInfo
+        airportInfo={ SampleAirportInfo[this.state.airportIataCode] }
+      />
+    )
+  }
+
+  handleTabsClick(activeTabIdx) {
+    this.setState({
+      activeTabIndex: activeTabIdx
+    })
   }
 
 
@@ -196,34 +238,14 @@ class FlightsByAircraft extends Component {
               <div className="row justify-content-center">
                 <button onClick={ this.getMatchingFlights } type="submit" className="footer-btn submit">Find flights</button>
               </div>
-                <Tabs
-                  handleTabsClick={ this.handleTabsClick }
-                  tabs={ this.state.tabs }
-                />
-              { this.state.showFlightSchedule ?
-                <AircraftInfo
-                  imageName={ this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId).name }
-                  aircraftInfo= { this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) }
-                />
-                :
-                null
-              }
-              <div className="row justify-content-center">
-              {
-                this.state.showFlightSchedule ?
-                <FlightDisplayTable
-                  aircraftSchedule={ this.state.aircraftSchedule }
-                  airport={ this.state.airportIataCode }
-                  totalFlights={ this.state.totalFlights }
-                />
-                :
-                null
-              }
+              { this.state.showFlightSchedule ? this.renderTabs() : null }
+              { this.state.showFlightSchedule && this.state.activeTabIndex === 0 ? this.renderFlightSchedule() : null }
+              { this.state.showFlightSchedule && this.state.activeTabIndex === 1 ? this.renderAircraftInfo() : null }
+              { this.state.showFlightSchedule && this.state.activeTabIndex === 2 ? this.renderLocationInfo() : null }
 
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }
