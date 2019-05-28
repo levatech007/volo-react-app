@@ -6,7 +6,7 @@ class AirportInfo extends Component {
     console.log(this.props.airportInfo)
     return(
       <div className="row justify-content-center aircraft-info">
-        <div className="row aircraft-title"><h1>{ this.props.airportName }</h1></div>
+        <div className="row aircraft-title"><h1>{ this.props.airportInfo.airportName }</h1></div>
         <div className="row">
           <div className="col-12">
             <p>Location: { this.props.airportInfo.location }</p>

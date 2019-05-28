@@ -209,7 +209,6 @@ class FlightsByAircraft extends Component {
     })
   }
 
-
   render() {
     return(
       <div className="container">
