@@ -10,10 +10,6 @@ class Tabs extends Component {
     this.handleTabClick = this.handleTabClick.bind(this);
   }
 
-  componentDidMount() {
-
-  }
-
   handleTabClick(tabIdx) {
     this.setState({
       activeTab: tabIdx
