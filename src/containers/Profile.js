@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import $                    from "jquery";
 import Auth                 from "j-toker";
+import Tabs                 from "../components/Tabs/Tabs.js";
 import {
           Accordion,
           AccordionItem,
@@ -19,19 +20,17 @@ class Profile extends Component {
                     reviews:                [],
                     profileImageUrl:        "",
                     date:                   null,
-                    menuTabs:               [
-                                              { name: "Upcoming events", type: "calendar" },
-                                              { name: "Past events", type: "calendar" },
-                                              { name: "My reviews", type: "reviews"}
-                                            ],
+                    menuTabs:               ["Upcoming Events", "Past Events", "My Reviews"],
+                    activeTabIndex:         0,
                     updateProfileModalOpen: false,
                     imageUploadModalOpen:   false
                   }
     this.toggleUpdateProfileModal = this.toggleUpdateProfileModal.bind(this);
     this.toggleImageUploadModal   = this.toggleImageUploadModal.bind(this);
-    this.showTabContent           = this.showTabContent.bind(this);
     this.onUpdateAccount          = this.onUpdateAccount.bind(this);
     this.onDeleteAccount          = this.onDeleteAccount.bind(this);
+    this.handleTabsClick          = this.handleTabsClick.bind(this);
+    this.renderActiveTabContent   = this.renderActiveTabContent.bind(this);
   }
 
   componentDidMount() {
@@ -75,11 +74,6 @@ class Profile extends Component {
     this.setState({ imageUploadModalOpen: !this.state.imageUploadModalOpen });
   }
 
-  showTabContent(tab) {
-    console.log(tab)
-
-  }
-
   onUpdateAccount(newData) {
     Auth.updateAccount({
       name:   newData.name,
@@ -92,6 +86,28 @@ class Profile extends Component {
       Auth.destroyAccount();
       Auth.signOut();
       this.props.history.push("/")
+    }
+  }
+
+  handleTabsClick(activeTabIdx) {
+    this.setState({
+      activeTabIndex: activeTabIdx
+    })
+  }
+
+  renderActiveTabContent() {
+    if(this.state.activeTabIndex === 0) {
+      return(
+        <div>Upcoming Evenths here</div>
+      )
+    } else if (this.state.activeTabIndex === 1) {
+      return(
+        <div>Past Events</div>
+      )
+    } else if (this.state.activeTabIndex === 2) {
+      return(
+        <div>My Reviews</div>
+      )
     }
   }
 
@@ -121,14 +137,11 @@ class Profile extends Component {
             </button>
           </div>
           <div className="col-12">
-            <div className="row">
-              {
-                this.state.menuTabs.map((tab, idx) => {
-                  return( <div className="col-md-4" key={ idx } onClick={ () => this.showTabContent(tab) }><h3>{ tab.name }</h3></div> )
-                })
-              }
-            </div>
-
+            <Tabs
+              handleTabsClick={ this.handleTabsClick }
+              tabs={ this.state.menuTabs }
+            />
+            { this.renderActiveTabContent() }
             {this.state.calendar[0] ?
             <Accordion>
               {this.state.calendar.map((oneEntry, idx) => {
