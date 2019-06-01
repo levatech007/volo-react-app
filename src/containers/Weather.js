@@ -43,12 +43,15 @@ class Weather extends Component {
       return res.json();
     })
     .then((forecast) => {
+      console.log(forecast)
       this.setState({ weatherForecast: forecast.forecast })
     })
   }
 
   createCalendarEntry(oneDay, notes) {
-
+    console.log(oneDay)
+    let date = new Date(oneDay.date.replace(/-/g, '\/')) // "2019-06-02" gets converted to the day before; use "2019/06/02"
+    console.log(date)
     $.ajaxSetup({
       beforeSend(xhr, settings) {
         Auth.appendAuthHeaders(xhr, settings);
@@ -62,6 +65,7 @@ class Weather extends Component {
               day:      oneDay.day,
               month:    oneDay.month,
               notes:    notes,
+              date:     date,
             },
       success: (response) => {
         this.props.history.push(`/users/${this.state.userId}`)
