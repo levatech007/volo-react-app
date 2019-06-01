@@ -20,7 +20,7 @@ class Profile extends Component {
                     reviews:                [],
                     profileImageUrl:        "",
                     date:                   null,
-                    fullDate:               new Date(),
+                    todaysDate:               new Date(),
                     menuTabs:               ["Upcoming Events", "Past Events", "My Reviews"],
                     activeTabIndex:         0,
                     updateProfileModalOpen: false,
@@ -63,7 +63,7 @@ class Profile extends Component {
     let dates = this.getTodaysDates()
     this.setState({
       date: dates.todayForDisplay,
-      fullDate: dates.fullDate
+      todaysDate: dates.todaysDate
     })
   }
 
@@ -78,7 +78,7 @@ class Profile extends Component {
     let todayStr = `${ mm }/${ dd }/${ yyyy }`
     let dates = {
       todayForDisplay: todayStr,
-      fullDate: today,
+      todaysDate: today,
     }
     return dates
   }
@@ -87,11 +87,14 @@ class Profile extends Component {
     // separate current + past calendar events
     // sort each set by date
     let pastEvents = []
-    let currentEvants = []
+    let currentEvents = []
     calendar.map(entry => {
-      console.log(this.state.fullDate)
-      console.log(entry.date)
-      console.log(entry.date > this.state.fullDate)
+      let calendarEntryDate = new Date(entry.date)
+      if(calendarEntryDate >= this.state.todaysDate) {
+        currentEvents.push(entry)
+      } else {
+        pastEvents.push(entry)
+      }
     })
   }
 
@@ -174,6 +177,8 @@ class Profile extends Component {
     return(
       <div className="container">
         <div className="row background">
+          <div className="col-12">
+          <div className="row">
           {/* { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.toggleImageUploadModal}  /> : null } */}
           <div className="col-4">
             <button onClick={ this.toggleImageUploadModal }>
@@ -193,14 +198,17 @@ class Profile extends Component {
               <i className="far fa-edit"></i>
             </button>
           </div>
+        </div>
+        <div className="row">
           <div className="col-12">
             <Tabs
               handleTabsClick={ this.handleTabsClick }
               tabs={ this.state.menuTabs }
             />
             { this.renderActiveTabContent() }
-
           </div>
+        </div>
+      </div>
         </div>
       </div>
     )
