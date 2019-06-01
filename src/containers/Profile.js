@@ -16,7 +16,8 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = {
-                    calendar:               [],
+                    currentEvents:          [],
+                    pastEvents:             [],
                     reviews:                [],
                     profileImageUrl:        "",
                     date:                   null,
@@ -50,7 +51,8 @@ class Profile extends Component {
         //let avatar = images[images.length - 1].avatar.url
         let sortedCalendar = this.sortCalendar(data.calendars)
         this.setState({
-                        calendar: data.calendars,
+                        currentEvents: sortedCalendar.currentEvents,
+                        pastEvents: sortedCalendar.pastEvents,
                         reviews:  data.reviews,
                         //profileImageUrl: avatar, // currently selecting the last image added
                       })
@@ -96,6 +98,7 @@ class Profile extends Component {
         pastEvents.push(entry)
       }
     })
+    return { pastEvents: pastEvents, currentEvents: currentEvents }
   }
 
   sortCalendarEntriesByDate(entries) {
@@ -135,9 +138,9 @@ class Profile extends Component {
     if(this.state.activeTabIndex === 0) {
       return(
         <div>
-        {this.state.calendar[0] ?
+        {this.state.currentEvents[0] ?
         <Accordion>
-          {this.state.calendar.map((oneEntry, idx) => {
+          {this.state.currentEvents.map((oneEntry, idx) => {
               return(<AccordionItem key={ idx }>
                       <AccordionItemTitle>
                         <h4>{ oneEntry.weekday }, { oneEntry.day } { oneEntry.month } @ { oneEntry.location }</h4>
@@ -161,8 +164,32 @@ class Profile extends Component {
       </div>
       )
     } else if (this.state.activeTabIndex === 1) {
-      return(
-        <div>Past Events</div>
+        return(
+          <div>
+          {this.state.pastEvents[0] ?
+          <Accordion>
+            {this.state.pastEvents.map((oneEntry, idx) => {
+                return(<AccordionItem key={ idx }>
+                        <AccordionItemTitle>
+                          <h4>{ oneEntry.weekday }, { oneEntry.day } { oneEntry.month } @ { oneEntry.location }</h4>
+                          {/* <img src={ oneEntry.icon_url } alt = "" /> */}
+                        </AccordionItemTitle>
+                        <AccordionItemBody>
+                          <p>Weather conditions: </p>
+                          {/* <ul>
+                            <li>High: { oneEntry.high.fahrenheit }F/ Low: { oneEntry.low.fahrenheit }F</li>
+                            <li>Winds: { oneEntry.avewind.mph }mph</li>
+                          </ul> */}
+                          <p>{ oneEntry.notes }</p>
+                        </AccordionItemBody>
+                      </AccordionItem>)
+                })
+              }
+            </Accordion>
+            :
+            <p>You have no calendar entries yet!</p>
+          }
+        </div>
       )
     } else if (this.state.activeTabIndex === 2) {
       return(
