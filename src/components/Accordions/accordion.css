@@ -1,0 +1,7 @@
+.item-title h4 {
+  display: inline-block;
+}
+
+.item-title img {
+  float: right;
+}
