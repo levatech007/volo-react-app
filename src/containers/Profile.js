@@ -40,34 +40,44 @@ class Profile extends Component {
 
   componentDidMount() {
     let userId = this.props.match.params.id
-    $.ajaxSetup({
-      beforeSend(xhr, settings) {
-        Auth.appendAuthHeaders(xhr, settings);
-      }
-    });
-    $.get({
-      url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
-      success: (data) => {
-        //let images = data.images //array
-        //let avatar = images[images.length - 1].avatar.url
-        let sortedCalendar = this.sortCalendar(data.calendars)
-        this.setState({
-                        currentEvents: sortedCalendar.currentEvents,
-                        pastEvents: sortedCalendar.pastEvents,
-                        reviews:  data.reviews,
-                        //profileImageUrl: avatar, // currently selecting the last image added
-                      })
-      },
-      error: (data) => {
-        // show error msg
-      }
-    });
+    console.log(`User id is ${ userId }`)
+    // if there is a user id
+    if(userId) {
+      $.ajaxSetup({
+        beforeSend(xhr, settings) {
+          Auth.appendAuthHeaders(xhr, settings);
+        }
+      });
+      $.get({
+        url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
+        success: (data) => {
+          console.log("Success!")
+          console.log(data)
+          //let images = data.images //array
+          //let avatar = images[images.length - 1].avatar.url
+          let sortedCalendar = this.sortCalendar(data.calendars)
+          this.setState({
+                          currentEvents: sortedCalendar.currentEvents,
+                          pastEvents: sortedCalendar.pastEvents,
+                          reviews:  data.reviews,
+                          //profileImageUrl: avatar, // currently selecting the last image added
+                        })
+        },
+        error: (data) => {
+          this.props.history.push("/login")
+        }
+      });
 
-    let dates = this.getTodaysDates()
-    this.setState({
-      date: dates.todayForDisplay,
-      todaysDate: dates.todaysDate
-    })
+      let dates = this.getTodaysDates()
+      this.setState({
+        date: dates.todayForDisplay,
+        todaysDate: dates.todaysDate
+      })
+    } else {
+      // else return to login page
+      this.props.history.push("/login")
+
+    }
   }
 
   getTodaysDates() {
