@@ -11,6 +11,8 @@ import {
 import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
 // import ImageUploadModal     from "../components/ImageUploadModal.js";
 import Profileimg           from "../images/profile-img.png";
+import CalendarAccordion    from "../components/Accordions/CalendarAccordion.js";
+import ReviewsAccordion     from "../components/Accordions/ReviewsAccordion.js";
 
 class Profile extends Component {
   constructor() {
@@ -46,7 +48,6 @@ class Profile extends Component {
     $.get({
       url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
       success: (data) => {
-        console.log(data)
         //let images = data.images //array
         //let avatar = images[images.length - 1].avatar.url
         let sortedCalendar = this.sortCalendar(data.calendars)
@@ -139,27 +140,9 @@ class Profile extends Component {
       return(
         <div>
         {this.state.currentEvents[0] ?
-        <Accordion>
-          {this.state.currentEvents.map((oneEntry, idx) => {
-              return(<AccordionItem key={ idx }>
-                      <AccordionItemTitle>
-                        <h4>{ oneEntry.weekday }, { oneEntry.day } { oneEntry.month } @ { oneEntry.location }</h4>
-                        {/* <img src={ oneEntry.icon_url } alt = "" /> */}
-                      </AccordionItemTitle>
-                      <AccordionItemBody>
-                        <p>Weather conditions: </p>
-                        {/* <ul>
-                          <li>High: { oneEntry.high.fahrenheit }F/ Low: { oneEntry.low.fahrenheit }F</li>
-                          <li>Winds: { oneEntry.avewind.mph }mph</li>
-                        </ul> */}
-                        <p>{ oneEntry.notes }</p>
-                      </AccordionItemBody>
-                    </AccordionItem>)
-              })
-            }
-          </Accordion>
+          <CalendarAccordion calendarEvents={ this.state.currentEvents } />
           :
-          <p>You have no calendar entries yet!</p>
+          <p>You have no upcoming calendar entries yet!</p>
         }
       </div>
       )
@@ -167,75 +150,61 @@ class Profile extends Component {
         return(
           <div>
           {this.state.pastEvents[0] ?
-          <Accordion>
-            {this.state.pastEvents.map((oneEntry, idx) => {
-                return(<AccordionItem key={ idx }>
-                        <AccordionItemTitle>
-                          <h4>{ oneEntry.weekday }, { oneEntry.day } { oneEntry.month } @ { oneEntry.location }</h4>
-                          {/* <img src={ oneEntry.icon_url } alt = "" /> */}
-                        </AccordionItemTitle>
-                        <AccordionItemBody>
-                          <p>Weather conditions: </p>
-                          {/* <ul>
-                            <li>High: { oneEntry.high.fahrenheit }F/ Low: { oneEntry.low.fahrenheit }F</li>
-                            <li>Winds: { oneEntry.avewind.mph }mph</li>
-                          </ul> */}
-                          <p>{ oneEntry.notes }</p>
-                        </AccordionItemBody>
-                      </AccordionItem>)
-                })
-              }
-            </Accordion>
+            <CalendarAccordion calendarEvents={ this.state.pastEvents } />
             :
-            <p>You have no calendar entries yet!</p>
+            <p>You have no past calendar entries!</p>
           }
         </div>
       )
     } else if (this.state.activeTabIndex === 2) {
       return(
-        <div>My Reviews</div>
+        <div>
+        {this.state.reviews[0] ?
+          <ReviewsAccordion reviews={ this.state.reviews } />
+          :
+          <p>You have no reviews yet!</p>
+        }
+      </div>
       )
     }
   }
 
   render(){
-    console.log(this.state.calendar)
-    console.log(this.state.reviews)
     return(
       <div className="container">
         <div className="row background">
           <div className="col-12">
-          <div className="row">
-          {/* { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.toggleImageUploadModal}  /> : null } */}
-          <div className="col-4">
-            <button onClick={ this.toggleImageUploadModal }>
-              <img
-                src={ this.state.profileImageUrl ? this.state.profileImageUrl : Profileimg }
-                alt="profile"/>
-            </button>
+            <div className="row profile-box">
+              {/* { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.toggleImageUploadModal}  /> : null } */}
+              <div className="col-md-4">
+                <button onClick={ this.toggleImageUploadModal }>
+                  <img
+                    src={ this.state.profileImageUrl ? this.state.profileImageUrl : Profileimg }
+                    alt="profile"/>
+                </button>
+              </div>
+              { this.state.updateProfileModalOpen ? <UpdateProfile close={ this.toggleUpdateProfileModal}  /> : null }
+              <div className="col-md-8">
+                {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
+                <p> Today is { this.state.date }</p>
+                <button className="icon-btn" onClick={ this.onDeleteAccount }>
+                  <i className="far fa-trash-alt"></i>
+                </button>
+                <button className="icon-btn" onClick={ this.toggleUpdateProfileModal }>
+                  <i className="far fa-edit"></i>
+                </button>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <Tabs
+                  handleTabsClick={ this.handleTabsClick }
+                  tabs={ this.state.menuTabs }
+                />
+                { this.renderActiveTabContent() }
+              </div>
+            </div>
           </div>
-          { this.state.updateProfileModalOpen ? <UpdateProfile close={ this.toggleUpdateProfileModal}  /> : null }
-          <div className="col-8">
-            {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
-            <p> Today is { this.state.date }</p>
-            <button className="icon-btn" onClick={ this.onDeleteAccount }>
-              <i className="far fa-trash-alt"></i>
-            </button>
-            <button className="icon-btn" onClick={ this.toggleUpdateProfileModal }>
-              <i className="far fa-edit"></i>
-            </button>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <Tabs
-              handleTabsClick={ this.handleTabsClick }
-              tabs={ this.state.menuTabs }
-            />
-            { this.renderActiveTabContent() }
-          </div>
-        </div>
-      </div>
         </div>
       </div>
     )

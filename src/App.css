@@ -301,6 +301,10 @@ hr {
   }
 }
 
+.profile-box {
+  margin-bottom: 30px;
+}
+
 /* ACCORDION */
 
 .u-position-absolute {

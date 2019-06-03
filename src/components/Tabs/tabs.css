@@ -4,6 +4,7 @@
   border-top-left-radius: 3px;
   cursor: pointer;
   padding: 10px 0;
+  text-align: center;
 }
 
 .tab-active {
