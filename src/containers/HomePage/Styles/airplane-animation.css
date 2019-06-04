@@ -1,0 +1,65 @@
+.aircraft{
+  width:200px;
+  height:100px;
+  background:url(../Images/departure-icon.svg) center no-repeat;
+  background-size:100%;
+  position:absolute;
+  bottom:-8px;
+  left:0;
+  margin-bottom: 15px;
+}
+
+.animate{
+    animation: take-off linear 10s;
+  }
+
+@keyframes take-off {
+    0% {
+      transform: translate(0,0) rotate(0deg);
+    }
+    15% {
+      transform: translate(250px,-2px) rotate(0deg);
+    }
+    38% {
+      transform: translate(500px,-5px) rotate(-10deg);
+    }
+    39% {
+      transform: translate(515px,-10px) rotate(-15deg);
+    }
+    40% {
+      transform: translate(530px,-12px) rotate(-20deg);
+    }
+    45% {
+      transform: translate(625px,-50px) rotate(-20deg);
+    }
+    100% {
+      transform: translate(2000px,-750px) rotate(-20deg);
+    }
+}
+
+
+
+@media only screen and (max-width: 800px) {
+  .aircraft {
+    display: none;
+  }
+}
+
+@media all and (min-width:1200px){
+
+}
+@media all and (min-width: 960px) and (max-width: 1199px) {
+
+}
+@media all and (min-width: 768px) and (max-width: 959px) {
+
+}
+@media all and (min-width: 480px) and (max-width: 767px){
+
+}
+@media all and (max-width: 599px) {
+
+}
+@media all and (max-width: 479px) {
+
+}
