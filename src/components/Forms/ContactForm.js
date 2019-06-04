@@ -182,7 +182,7 @@ class ContactForm extends Component {
   render() {
     return(
       <Modal
-        form={ this.renderContactForm() }
+        content={ this.renderContactForm() }
         close={ this.props.close }
         submit={ this.handleFormSubmission }
         title="Contact Us"/>

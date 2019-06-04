@@ -97,7 +97,7 @@ class ProfileUpdateForm extends Component {
   render() {
     return(
       <Modal
-        form={ this.renderUpdateProfileForm() }
+        content={ this.renderUpdateProfileForm() }
         close={ this.props.close }
         submit={ this.onFormSubmit }
         title="Edit Profile"
