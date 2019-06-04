@@ -12,7 +12,7 @@ import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
 // import ImageUploadModal     from "../components/ImageUploadModal.js";
 import Profileimg           from "../images/profile-img.png";
 import CalendarAccordion    from "../components/Accordions/CalendarAccordion.js";
-import ReviewsAccordion     from "../components/Accordions/ReviewsAccordion.js";
+import ReviewsAccordion     from "../components/Accordions/UserReviewsAccordion.js";
 import Modal                from "../components/Modal/Modal.js";
 
 class Profile extends Component {
@@ -79,7 +79,6 @@ class Profile extends Component {
         todaysDate: dates.todaysDate
       })
     } else {
-      // else return to login page
       this.props.history.push("/login")
     }
   }
@@ -113,11 +112,20 @@ class Profile extends Component {
         pastEvents.push(entry)
       }
     })
-    return { pastEvents: pastEvents, currentEvents: currentEvents }
+    this.sortCalendarEntriesByDate(pastEvents)
+    return {
+      pastEvents: this.sortCalendarEntriesByDate(pastEvents),
+      currentEvents: this.sortCalendarEntriesByDate(currentEvents)
+    }
   }
 
   sortCalendarEntriesByDate(entries) {
-
+    let sortedCalendar = entries.sort((day1,day2) => {
+                          let selectedDay = new Date(day1.date)
+                          let nextDay = new Date(day2.date)
+                          return nextDay - selectedDay
+                        });
+    return sortedCalendar
   }
 
   toggleUpdateProfileModal() {
