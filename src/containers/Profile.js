@@ -13,6 +13,7 @@ import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
 import Profileimg           from "../images/profile-img.png";
 import CalendarAccordion    from "../components/Accordions/CalendarAccordion.js";
 import ReviewsAccordion     from "../components/Accordions/ReviewsAccordion.js";
+import Modal                from "../components/Modal/Modal.js";
 
 class Profile extends Component {
   constructor() {
@@ -27,20 +28,26 @@ class Profile extends Component {
                     menuTabs:               ["Upcoming Events", "Past Events", "My Reviews"],
                     activeTabIndex:         0,
                     updateProfileModalOpen: false,
-                    imageUploadModalOpen:   false
+                    imageUploadModalOpen:   false,
+                    deleteAcctWindow:       {
+                                              "content":  "Are you sure you want to delete your account?",
+                                              "title":    "Delete Account",
+                                              buttonText: "Yes, delete account"
+                                            },
+                    showDeleteAccountModal:  false,
                   }
-    this.toggleUpdateProfileModal = this.toggleUpdateProfileModal.bind(this);
-    this.toggleImageUploadModal   = this.toggleImageUploadModal.bind(this);
-    this.onUpdateAccount          = this.onUpdateAccount.bind(this);
-    this.onDeleteAccount          = this.onDeleteAccount.bind(this);
-    this.handleTabsClick          = this.handleTabsClick.bind(this);
-    this.renderActiveTabContent   = this.renderActiveTabContent.bind(this);
-    this.sortCalendar             = this.sortCalendar.bind(this);
+    this.toggleUpdateProfileModal      = this.toggleUpdateProfileModal.bind(this);
+    this.toggleImageUploadModal        = this.toggleImageUploadModal.bind(this);
+    this.toggleConfirmationWindowModal = this.toggleConfirmationWindowModal.bind(this);
+    this.onUpdateAccount               = this.onUpdateAccount.bind(this);
+    this.onDeleteAccount               = this.onDeleteAccount.bind(this);
+    this.handleTabsClick               = this.handleTabsClick.bind(this);
+    this.renderActiveTabContent        = this.renderActiveTabContent.bind(this);
+    this.sortCalendar                  = this.sortCalendar.bind(this);
   }
 
   componentDidMount() {
     let userId = this.props.match.params.id
-    console.log(`User id is ${ userId }`)
     // if there is a user id
     if(userId) {
       $.ajaxSetup({
@@ -51,8 +58,6 @@ class Profile extends Component {
       $.get({
         url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
         success: (data) => {
-          console.log("Success!")
-          console.log(data)
           //let images = data.images //array
           //let avatar = images[images.length - 1].avatar.url
           let sortedCalendar = this.sortCalendar(data.calendars)
@@ -76,7 +81,6 @@ class Profile extends Component {
     } else {
       // else return to login page
       this.props.history.push("/login")
-
     }
   }
 
@@ -124,6 +128,10 @@ class Profile extends Component {
     this.setState({ imageUploadModalOpen: !this.state.imageUploadModalOpen });
   }
 
+  toggleConfirmationWindowModal() {
+    this.setState({ showDeleteAccountModal: !this.state.showDeleteAccountModal });
+  }
+
   onUpdateAccount(newData) {
     Auth.updateAccount({
       name:   newData.name,
@@ -132,11 +140,9 @@ class Profile extends Component {
   }
 
   onDeleteAccount() {
-    if (window.confirm("Are you sure you wish to delete your account?")) {
-      Auth.destroyAccount();
-      Auth.signOut();
-      this.props.history.push("/")
-    }
+    Auth.destroyAccount();
+    Auth.signOut();
+    this.props.history.push("/")
   }
 
   handleTabsClick(activeTabIdx) {
@@ -183,6 +189,17 @@ class Profile extends Component {
     return(
       <div className="container">
         <div className="row background">
+          { this.state.showDeleteAccountModal ?
+            <Modal
+              content={ this.state.deleteAcctWindow.content }
+              title={ this.state.deleteAcctWindow.title }
+              buttonText={ this.state.deleteAcctWindow.buttonText }
+              close={ this.toggleConfirmationWindowModal }
+              submit={ this.onDeleteAccount }
+            />
+            :
+            null
+          }
           <div className="col-12">
             <div className="row profile-box">
               {/* { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.toggleImageUploadModal}  /> : null } */}
@@ -197,7 +214,7 @@ class Profile extends Component {
               <div className="col-md-8">
                 {Auth.user.name && <h2>Welcome, { Auth.user.name }!</h2>}
                 <p> Today is { this.state.date }</p>
-                <button className="icon-btn" onClick={ this.onDeleteAccount }>
+                <button className="icon-btn" onClick={ this.toggleConfirmationWindowModal }>
                   <i className="far fa-trash-alt"></i>
                 </button>
                 <button className="icon-btn" onClick={ this.toggleUpdateProfileModal }>
