@@ -13,10 +13,10 @@ class Modal extends Component {
           </div>
           <hr></hr>
           <div className="modal-cont">
-            { this.props.form }
+            { this.props.content }
           </div>
           <div className="row justify-content-center">
-            <button className="footer-btn submit" type="submit" onClick={ this.props.submit }>Send</button>
+            <button className="footer-btn submit" type="submit" onClick={ this.props.submit }>{ this.props.buttonText || "Send"}</button>
             <button className="footer-btn cancel" type="submit" onClick={ this.props.close }>Cancel</button>
           </div>
         </div>
