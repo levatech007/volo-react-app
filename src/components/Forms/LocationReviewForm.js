@@ -66,12 +66,6 @@ class LocationReviewForm extends Component {
   // }
 
   render() {
-    console.log(this.state.author)
-    console.log(this.state.title)
-    console.log(this.state.content)
-    console.log(this.state.rating)
-    console.log(this.state.locationId)
-
     return(
         <div className="col-12">
           <form onSubmit={ this.handleReviewFormSubmission } className="forms review">

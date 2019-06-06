@@ -91,9 +91,9 @@ class Profile extends Component {
     let yyyy  = today.getFullYear();
     if(dd<10) { dd = `0${ dd }`}
     if(mm<10) {mm = `0${ mm }`}
-    let todayStr = `${ mm }/${ dd }/${ yyyy }`
+    let todayAsStr = `${ mm }/${ dd }/${ yyyy }`
     let dates = {
-      todayForDisplay: todayStr,
+      todayForDisplay: todayAsStr,
       todaysDate: today,
     }
     return dates
@@ -115,7 +115,7 @@ class Profile extends Component {
     this.sortCalendarEntriesByDate(pastEvents)
     return {
       pastEvents: this.sortCalendarEntriesByDate(pastEvents),
-      currentEvents: this.sortCalendarEntriesByDate(currentEvents)
+      currentEvents: this.sortCalendarEntriesByDate(currentEvents),
     }
   }
 

@@ -59,7 +59,7 @@ class FlightDisplay extends Component {
   }
 
   formatTimeToAMPM(date) {
-    // convert time to am/pm to display in dropdown
+    // convert time to am/pm to display in table
     let time = date.split("T")[1]
     let hours = time.split(":")[0]
     let minutes = time.split(":")[1]
@@ -74,9 +74,9 @@ class FlightDisplay extends Component {
     let sortedFlights = flights.sort((day1,day2) => {
                           let selectedDay = new Date(day1.timeAtAirport)
                           let nextDay = new Date(day2.timeAtAirport)
-                          return nextDay - selectedDay
+                          return selectedDay - nextDay
                         });
-    return sortedFlights.reverse()
+    return sortedFlights
   }
 
   flightsToDisplay(pageIndex) {
@@ -95,7 +95,6 @@ class FlightDisplay extends Component {
       displaySchedule: displayPageData,
       currentPage: pageIndex,
     })
-
   }
 
   render() {
@@ -105,11 +104,11 @@ class FlightDisplay extends Component {
           this.state.displaySchedule.map((flight, idx) => {
             return(
               <div className="row flight-row" key={ idx }>
-                <div className="col-2"><img src={ require(`./Images/${ flight.flightType }-icon.svg`) } alt={ flight.type }/></div>
-                <div className="col-2">{ flight.timeToDisplay }</div>
-                <div className="col-2">{ flight.route }</div>
-                <div className="col-3">{ flight.airline }</div>
-                <div className="col-3">{ flight.aircraftType }</div>
+                <div className="col-2 row-icon"><img src={ require(`./Images/${ flight.flightType }-icon.svg`) } alt={ flight.type }/></div>
+                <div className="col-2"><p>{ flight.timeToDisplay }</p></div>
+                <div className="col-2 align-middle"><p>{ flight.route }</p></div>
+                <div className="col-3 align-middle"><p>{ flight.airline }</p></div>
+                <div className="col-3 align-middle"><p>{ flight.aircraftType }</p></div>
               </div>
             )
           })
