@@ -5,9 +5,11 @@ import Dropdown             from "../components/Dropdown/Dropdown.js";
 import FlightDisplayTable   from "../components/FlightDisplayTable/FlightDisplayTable.js";
 import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
 import SampleAircraftInfo   from "../static-data/aircraft-info.json";
-import SampleAirportInfo   from "../static-data/airport-info.json";
+import SampleAirportInfo    from "../static-data/airport-info.json";
 import Alert                from "../components/Alert/Alert.js";
 import Tabs                 from "../components/Tabs/Tabs.js";
+import LoadingSpinner       from "../components/LoadingSpinner/LoadingSpinner.js";
+
 
 class FlightsByAircraft extends Component {
   constructor() {
@@ -28,7 +30,8 @@ class FlightsByAircraft extends Component {
                     showAlert:           false,
                     alertMessages:       [],
                     alertStyle:          "",
-                    tabs:                ["Flights", "Plane", "Location"]
+                    tabs:                ["Flights", "Plane", "Location"],
+                    showLoadingSpinner:  false
                   }
     this.handleAircraftSelection     = this.handleAircraftSelection.bind(this);
     this.handleDateSelection         = this.handleDateSelection.bind(this);
@@ -79,6 +82,7 @@ class FlightsByAircraft extends Component {
     // aircraftId is first two numbers of aircraft IATA code
     let date = this.state.dateRange[this.state.selectedDateId - 1].apiDate
     if(this.state.aircraftId && this.state.selectedDateId) {
+      this.setState({ showLoadingSpinner: true })
       fetch(`${process.env.REACT_APP_BACKEND_URL}/nonstopflights/${ this.state.airportIataCode }/${ date }/${ this.state.aircraftId }.json`)
       .then( response => {
           if (!response.ok) {
@@ -87,6 +91,7 @@ class FlightsByAircraft extends Component {
               showAlert:     true,
               alertMessages: ["No flight were found."],
               alertStyle:    "alert-box error",
+              showLoadingSpinner: false,
             })
             throw response
           }
@@ -99,7 +104,8 @@ class FlightsByAircraft extends Component {
             showAlert: true,
             totalFlights: response.total_flights,
             alertStyle: "alert-box error",
-            alertMessages: ["This is an upcoming feature that is currently under development. The information contained here is for testing purposes only"]
+            alertMessages: ["This feature is still under development. The information is limited to Star Alliance flights only at the moment."],
+            showLoadingSpinner: false,
           })
         })
         .catch( err => {
@@ -212,6 +218,7 @@ class FlightsByAircraft extends Component {
   render() {
     return(
       <div className="container">
+        { this.state.showLoadingSpinner ? <LoadingSpinner /> : null }
         <div className="row justify-content-center background">
           <div className="col-sm-12 col-md-10 centered-text">
             <h1>{ this.state.airportName }</h1>
