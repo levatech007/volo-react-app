@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import $                    from "jquery";
 import Auth                 from "j-toker";
 import Tabs                 from "../components/Tabs/Tabs.js";
-import {
-          Accordion,
-          AccordionItem,
-          AccordionItemTitle,
-          AccordionItemBody,
-        }                   from "react-accessible-accordion";
 import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
 // import ImageUploadModal     from "../components/ImageUploadModal.js";
 import Profileimg           from "../images/profile-img.png";
