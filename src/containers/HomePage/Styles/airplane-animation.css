@@ -4,7 +4,8 @@
   background:url(../Images/departure-icon.svg) center no-repeat;
   background-size:100%;
   position:absolute;
-  bottom:-8px;
+  /* bottom:-8px; */
+  bottom: 70px;
   left:0;
   margin-bottom: 15px;
 }

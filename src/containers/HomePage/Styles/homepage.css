@@ -1,5 +1,5 @@
 .logo-div {
-  width: 60%;
+  width: 50%;
   margin: 0 auto;
   margin-top: 100px;
 }
@@ -10,7 +10,6 @@
 
 .animation-div {
   position: relative;
-  margin-bottom: 30px;
   height: 100%;
   overflow: hidden;
 }
@@ -19,8 +18,33 @@
   position: absolute;
   background-image: url(../Images/cityscape-lg.svg);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  background-position: bottom;
   height: 200px;
   width: 100%;
-  bottom: 0;
+  bottom: 100px;
+}
+
+.intro {
+  padding: 30px 0;
+  border-bottom: 1px solid gray;
+}
+
+.info {
+  background: #FFFFFF;
+  color: #666666;
+  padding: 50px 0;
+}
+
+.info img {
+  width: 100%;
+  padding: 20px;
+}
+
+@media (max-width: 900px) {
+
+}
+
+@media (max-width: 600px) {
+
 }
