@@ -46,5 +46,13 @@
 }
 
 @media (max-width: 600px) {
+  .logo-div {
+    width: 90%;
+  }
 
+  .skyline {
+    background-image: url(../Images/cityscape-small.svg);
+    bottom: 200px;
+    background-size: contain;
+  }
 }

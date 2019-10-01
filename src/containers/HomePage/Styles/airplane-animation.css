@@ -1,7 +1,7 @@
 .aircraft{
   width:200px;
   height:100px;
-  background:url(../Images/departure-icon.svg) center no-repeat;
+  background:url(../Images/animation-aircraft.svg) center no-repeat;
   background-size:100%;
   position:absolute;
   /* bottom:-8px; */
