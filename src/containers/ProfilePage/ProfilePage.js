@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import $                    from "jquery";
 import Auth                 from "j-toker";
+import HamburgerMenu        from "../../components/HamburgerMenu/HamburgerMenu.js"
 // import Tabs                 from "../components/Tabs/Tabs.js";
 // import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
 // import ImageUploadModal     from "../components/ImageUploadModal.js";
@@ -34,6 +35,8 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
+    // determine if the current user is the same as the profile page viewer
+    // to distinguish between public and personal profile
     let userId = this.props.match.params.id
     // if there is a user id
     if(userId) {
@@ -119,13 +122,15 @@ class ProfilePage extends Component {
                   <h4>354</h4>
                 </div>
               </div>
-
               <p>Feature</p>
               <p>Feature</p>
             </div>
             {/* RIGHT COLUMN */}
             <div className="profile-right-col">
-              <h3>Name Here</h3>
+              <HamburgerMenu/>
+              <div className="profile-header">
+                <div><h3>Name Here</h3></div>
+              </div>
               <h5>Location</h5>
               <div className="menu-bar-wrapper">
                   {
