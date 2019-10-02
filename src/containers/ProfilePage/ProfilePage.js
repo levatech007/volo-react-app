@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import $                    from "jquery";
 import Auth                 from "j-toker";
-import HamburgerMenu        from "../../components/HamburgerMenu/HamburgerMenu.js"
+import HamburgerMenu        from "../../components/HamburgerMenu/HamburgerMenu.js";
+import Tabs                 from "../../components/Tabs/Tabs.js";
+import CalendarAccordion    from "../../components/Accordions/CalendarAccordion.js";
+import ReviewsAccordion     from "../../components/Accordions/UserReviewsAccordion.js";
 // import Tabs                 from "../components/Tabs/Tabs.js";
 // import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
 // import ImageUploadModal     from "../components/ImageUploadModal.js";
@@ -15,12 +18,12 @@ class ProfilePage extends Component {
   constructor() {
     super()
     this.state = {
-      tabs: ["Feed", "Upcoming Events", "Past Events"],
+      tabs:                   ["Upcoming Events", "Past Events", "Feed"],
       currentEvents:          [],
       pastEvents:             [],
       reviews:                [],
       profileImageUrl:        "",
-      activeTabIndex:         0,
+      activeTabIndex:         1,
       updateProfileModalOpen: false,
       imageUploadModalOpen:   false,
       deleteAcctWindow:       {
@@ -30,8 +33,10 @@ class ProfilePage extends Component {
                               },
       showDeleteAccountModal:  false,
     }
-    this.sortCalendar = this.sortCalendar.bind(this)
+    this.sortCalendar              = this.sortCalendar.bind(this)
     this.sortCalendarEntriesByDate = this.sortCalendarEntriesByDate.bind(this)
+    this.handleTabsClick           = this.handleTabsClick.bind(this)
+    this.renderActiveTabContent    = this.renderActiveTabContent.bind(this)
   }
 
   componentDidMount() {
@@ -48,7 +53,6 @@ class ProfilePage extends Component {
       $.get({
         url: `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
         success: (data) => {
-          console.log(data)
           //let images = data.images //array
           //let avatar = images[images.length - 1].avatar.url
           let sortedCalendar = this.sortCalendar(data.calendars)
@@ -81,7 +85,6 @@ class ProfilePage extends Component {
         pastEvents.push(entry)
       }
     })
-    this.sortCalendarEntriesByDate(pastEvents)
     return {
       pastEvents: this.sortCalendarEntriesByDate(pastEvents),
       currentEvents: this.sortCalendarEntriesByDate(currentEvents),
@@ -95,6 +98,50 @@ class ProfilePage extends Component {
                           return nextDay - selectedDay
                         });
     return sortedCalendar
+  }
+
+  handleTabsClick(activeTabIdx) {
+    this.setState({
+      activeTabIndex: activeTabIdx
+    })
+  }
+
+  renderActiveTabContent() {
+
+    // console.log(this.state.pastEvents[0])
+    // console.log(this.state.currentEvents[0])
+
+    if(this.state.activeTabIndex === 0) {
+      return(
+        <div>
+        { this.state.currentEvents[0] ?
+          <CalendarAccordion calendarEvents={ this.state.currentEvents } />
+          :
+          <p>You have no upcoming calendar entries yet!</p>
+        }
+      </div>
+      )
+    } else if (this.state.activeTabIndex === 1) {
+        return(
+          <div>
+          {this.state.pastEvents[0] ?
+            <CalendarAccordion calendarEvents={ this.state.pastEvents } />
+            :
+            <p>You have no past calendar entries!</p>
+          }
+        </div>
+      )
+    } else if (this.state.activeTabIndex === 2) {
+      return(
+        <div>
+        {this.state.reviews[0] ?
+          <ReviewsAccordion reviews={ this.state.reviews } />
+          :
+          <p>You have no reviews yet!</p>
+        }
+      </div>
+      )
+    }
   }
 
   render() {
@@ -132,7 +179,7 @@ class ProfilePage extends Component {
                 <div><h3>Name Here</h3></div>
               </div>
               <h5>Location</h5>
-              <div className="menu-bar-wrapper">
+              {/* <div className="menu-bar-wrapper">
                   {
                     this.state.tabs.map((tab, idx) => {
                       return(
@@ -140,8 +187,12 @@ class ProfilePage extends Component {
                       )
                     })
                   }
-              </div>
-              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+              </div> */}
+              <Tabs
+                handleTabsClick={ this.handleTabsClick }
+                tabs={ this.state.tabs }
+              />
+              { this.renderActiveTabContent() }
             </div>
           </div>
         </div>
