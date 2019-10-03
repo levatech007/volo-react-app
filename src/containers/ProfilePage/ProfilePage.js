@@ -18,7 +18,7 @@ class ProfilePage extends Component {
   constructor() {
     super()
     this.state = {
-      tabs:                   ["Upcoming Events", "Past Events", "Feed"],
+      tabs:                   ["Upcoming Events", "Past Events", "My Reviews"],
       currentEvents:          [],
       pastEvents:             [],
       reviews:                [],
@@ -157,7 +157,7 @@ class ProfilePage extends Component {
               src={require('./Images/profile-img-placeholder.png')}
               alt="profile"/>
             </div>
-
+              <p>Upcoming features below:</p>
               <button className="follow-btn">+ Follow</button>
               <div className="followers">
                 <div className="follower-column">
@@ -169,25 +169,14 @@ class ProfilePage extends Component {
                   <h4>354</h4>
                 </div>
               </div>
-              <p>Feature</p>
-              <p>Feature</p>
             </div>
             {/* RIGHT COLUMN */}
             <div className="profile-right-col">
               <HamburgerMenu/>
               <div className="profile-header">
-                <div><h3>Name Here</h3></div>
+                <div><h3>Welcome, { Auth.user.name }</h3></div>
               </div>
-              <h5>Location</h5>
-              {/* <div className="menu-bar-wrapper">
-                  {
-                    this.state.tabs.map((tab, idx) => {
-                      return(
-                        <div className="menu-bar-tab" key={ idx }>{ tab }</div>
-                      )
-                    })
-                  }
-              </div> */}
+              <h5>My location</h5>
               <Tabs
                 handleTabsClick={ this.handleTabsClick }
                 tabs={ this.state.tabs }

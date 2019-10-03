@@ -2,7 +2,7 @@
   padding: 0;
   background-color: white;
   color: #404040;
-  max-height: 800px;
+  height: 800px;
   overflow: auto;
 }
 
@@ -24,6 +24,7 @@
   width: 30%;
   display: inline-block;
   background-color: #F8F8F8;
+  height: 100%;
 }
 
 .profile-right-col {
