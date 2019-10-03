@@ -1,3 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="-1.413043478260903 52.80434782608694 638.8260869565217 160.47826086956522" width="621.83" height="143.48"><defs><path d="M321 61.3L7.09 204.78" id="b7E5T1YK7e"></path><path d="M315 61.3L628.91 204.78" id="aEFjmVMZ2"></path></defs><g><g><use xlink:href="#b7E5T1YK7e" opacity="1" fill="#2e420d" fill-opacity="1"></use><g><use xlink:href="#b7E5T1YK7e" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="17" stroke-opacity="1"></use></g></g><g><use xlink:href="#aEFjmVMZ2" opacity="1" fill="#2e420d" fill-opacity="1"></use><g><use xlink:href="#aEFjmVMZ2" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="17" stroke-opacity="1"></use></g></g></g></svg>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="621.83px" height="143.48px" viewBox="0 0 621.83 143.48" enable-background="new 0 0 621.83 143.48" xml:space="preserve">
+<g>
+	<g>
+		<path id="b7E5T1YK7e" fill="#2E420D" stroke="#808080" stroke-width="0.9604" stroke-linecap="round" stroke-miterlimit="10" d="
+			M312.079,9.738L42.533,132.939"/>
+	</g>
+	<g>
+		<g>
+			<path id="b7E5T1YK7e_1_" fill-opacity="0" stroke="#808080" stroke-width="16.3268" stroke-linecap="round" d="M312.079,9.738
+				L42.533,132.939"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<path id="aEFjmVMZ2" fill="#2E420D" stroke="#808080" stroke-width="0.9604" stroke-linecap="round" stroke-miterlimit="10" d="
+			M312.927,9.738l269.545,123.201"/>
+	</g>
+	<g>
+		<g>
+			<path id="aEFjmVMZ2_1_" fill-opacity="0" stroke="#808080" stroke-width="16.3268" stroke-linecap="round" d="M312.927,9.738
+				l269.545,123.201"/>
+		</g>
+	</g>
+</g>
+</svg>

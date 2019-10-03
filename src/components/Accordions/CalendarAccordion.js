@@ -7,7 +7,7 @@ import {
           AccordionItemTitle,
           AccordionItemBody,
         }                   from "react-accessible-accordion";
-import "react-accessible-accordion/dist/minimal-example.css";
+// import "react-accessible-accordion/dist/minimal-example.css";
 import "./accordion.css";
 
 class CalendarAccordion extends Component {
