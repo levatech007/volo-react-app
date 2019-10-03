@@ -20,14 +20,14 @@ class HamburgerMenu extends Component {
     return(
       <div className="nav-menu">
         <div className="menu-link" onClick={ this.toggleNavMenu }>
-          <Link to={ "" }>
+          <div onClick={ this.props.onUpdate }>
             <img src={ require('./Images/edit-icon.svg') }/>
-          </Link>
+          </div>
         </div>
         <div className="menu-link" onClick={ this.toggleNavMenu }>
-          <Link to={ "" }>
+          <div onClick={ this.props.onDelete }>
             <img src={ require('./Images/delete-icon.svg') }/>
-          </Link>
+          </div>
         </div>
 
       </div>

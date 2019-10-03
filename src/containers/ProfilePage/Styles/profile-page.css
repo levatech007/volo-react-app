@@ -4,6 +4,7 @@
   color: #404040;
   height: 800px;
   overflow: auto;
+  /* max-width: 1000px; */
 }
 
 /* LEFT COLUMN */

@@ -5,38 +5,39 @@ import HamburgerMenu        from "../../components/HamburgerMenu/HamburgerMenu.j
 import Tabs                 from "../../components/Tabs/Tabs.js";
 import CalendarAccordion    from "../../components/Accordions/CalendarAccordion.js";
 import ReviewsAccordion     from "../../components/Accordions/UserReviewsAccordion.js";
-// import Tabs                 from "../components/Tabs/Tabs.js";
-// import UpdateProfile        from "../components/Forms/ProfileUpdateForm.js";
+import UpdateProfile        from "../../components/Forms/ProfileUpdateForm.js";
 // import ImageUploadModal     from "../components/ImageUploadModal.js";
 // import Profileimg           from "../images/profile-img.png";
-// import CalendarAccordion    from "../components/Accordions/CalendarAccordion.js";
-// import ReviewsAccordion     from "../components/Accordions/UserReviewsAccordion.js";
-// import Modal                from "../components/Modal/Modal.js";
+import Modal                from "../../components/Modal/Modal.js";
 import "./Styles/profile-page.css";
 
 class ProfilePage extends Component {
   constructor() {
     super()
     this.state = {
-      tabs:                   ["Upcoming Events", "Past Events", "My Reviews"],
+      tabsDisplayTitles:      ["Upcoming Events", "Past Events", "My Reviews"], // order is important!!!
+      tabs:                   ["currentEvents", "pastEvents"],
       currentEvents:          [],
       pastEvents:             [],
       reviews:                [],
       profileImageUrl:        "",
-      activeTabIndex:         1,
-      updateProfileModalOpen: false,
-      imageUploadModalOpen:   false,
+      activeTabIndex:         0,
+      showUpdateProfileWindow: false,
+      showImageUploadWindowOpen:   false,
       deleteAcctWindow:       {
                                 "content":  "Are you sure you want to delete your account?",
                                 "title":    "Delete Account",
                                 buttonText: "Yes, delete account"
                               },
-      showDeleteAccountModal:  false,
+      showDeleteAccountWindow:  false,
     }
     this.sortCalendar              = this.sortCalendar.bind(this)
     this.sortCalendarEntriesByDate = this.sortCalendarEntriesByDate.bind(this)
     this.handleTabsClick           = this.handleTabsClick.bind(this)
     this.renderActiveTabContent    = this.renderActiveTabContent.bind(this)
+    this.toggleUpdateProfileWindow = this.toggleUpdateProfileWindow.bind(this)
+    this.toggleDeleteConfirmWindow = this.toggleDeleteConfirmWindow.bind(this)
+
   }
 
   componentDidMount() {
@@ -107,34 +108,21 @@ class ProfilePage extends Component {
   }
 
   renderActiveTabContent() {
-
-    // console.log(this.state.pastEvents[0])
-    // console.log(this.state.currentEvents[0])
-
-    if(this.state.activeTabIndex === 0) {
+    if(this.state.activeTabIndex == 0 || this.state.activeTabIndex == 1) {
+      let tab = this.state.tabs[this.state.activeTabIndex]
       return(
-        <div>
-        { this.state.currentEvents[0] ?
-          <CalendarAccordion calendarEvents={ this.state.currentEvents } />
-          :
-          <p>You have no upcoming calendar entries yet!</p>
-        }
-      </div>
-      )
-    } else if (this.state.activeTabIndex === 1) {
-        return(
           <div>
-          {this.state.pastEvents[0] ?
-            <CalendarAccordion calendarEvents={ this.state.pastEvents } />
+          { tab.length ?
+            <CalendarAccordion calendarEvents={ this.state[tab] } />
             :
-            <p>You have no past calendar entries!</p>
+            <p>You have no calendar entries to show yet!</p>
           }
         </div>
-      )
-    } else if (this.state.activeTabIndex === 2) {
+        )
+    } else {
       return(
         <div>
-        {this.state.reviews[0] ?
+        {this.state.reviews.length ?
           <ReviewsAccordion reviews={ this.state.reviews } />
           :
           <p>You have no reviews yet!</p>
@@ -144,9 +132,35 @@ class ProfilePage extends Component {
     }
   }
 
+  toggleUpdateProfileWindow() {
+    this.setState({ showUpdateProfileWindow: !this.state.showUpdateProfileWindow });
+  }
+
+  toggleDeleteConfirmWindow() {
+    this.setState({ showDeleteAccountWindow: !this.state.showDeleteAccountWindow });
+  }
+
   render() {
     return(
       <div className="container">
+        { this.state.showDeleteAccountWindow ?
+          <Modal
+            content={ this.state.deleteAcctWindow.content }
+            title={ this.state.deleteAcctWindow.title }
+            buttonText={ this.state.deleteAcctWindow.buttonText }
+            close={ this.toggleDeleteConfirmWindow }
+            submit={ this.onDeleteAccount }
+          />
+          :
+          null
+        }
+        { this.state.showUpdateProfileWindow ?
+          <UpdateProfile
+            close={ this.toggleUpdateProfileWindow }
+          />
+          :
+            null
+          }
         <div className="profile-background">
           <div className="profile-header-img">
           </div>
@@ -172,14 +186,17 @@ class ProfilePage extends Component {
             </div>
             {/* RIGHT COLUMN */}
             <div className="profile-right-col">
-              <HamburgerMenu/>
+              <HamburgerMenu
+                onUpdate={ this.toggleUpdateProfileWindow }
+                onDelete={ this.toggleDeleteConfirmWindow }
+              />
               <div className="profile-header">
                 <div><h3>Welcome, { Auth.user.name }</h3></div>
               </div>
               <h5>My location</h5>
               <Tabs
                 handleTabsClick={ this.handleTabsClick }
-                tabs={ this.state.tabs }
+                tabs={ this.state.tabsDisplayTitles }
               />
               { this.renderActiveTabContent() }
             </div>
