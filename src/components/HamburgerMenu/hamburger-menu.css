@@ -7,7 +7,6 @@ nav {
   position: absolute;
   right: 50px;
   width: 200px;
-  /* background: rgba(0, 0, 0, 0.6); */
   opacity: 1;
   animation-name: fadeIn;
   animation-iteration-count: 1;
@@ -19,9 +18,9 @@ nav {
   cursor: pointer;
   display: block;
   position: relative;
+  padding: 0;
   color: white;
   text-decoration: none;
-  padding: 20px 0;
   transition: all .3s ease-in-out;
 }
 
@@ -42,7 +41,7 @@ nav {
 .hamburger-menu {
   width: 40px;
   height: 25px;
-  position: fixed;
+  position: relative;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
