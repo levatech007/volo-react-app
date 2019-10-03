@@ -1,6 +1,6 @@
 import React              from "react";
 import { Switch, Route }  from "react-router-dom";
-import HomePage       from "../containers/HomePage/HomePage.js";
+import HomePage           from "../containers/HomePage/HomePage.js";
 import About              from "../containers/About.js";
 import LoginSignupPage    from "../containers/LoginSignupPage.js";
 import Profile            from "../containers/Profile.js";
@@ -11,14 +11,14 @@ import ChangePassword     from "../containers/ChangePassword.js";
 import Api                from "../containers/Api.js";
 import PageNotFound       from "../containers/PageNotFound.js";
 import FlightsByAircraft  from "../containers/FlightsByAircraftPage.js";
-import TestHomePage       from "../containers/HomePage/HomePage.js";
+import ProfilePage        from "../containers/ProfilePage/ProfilePage.js";
 
 export default (
   <Switch>
       <Route exact path="/" component={ HomePage }/>
       <Route exact path="/about" component={ About }/>
       <Route exact path="/login" component={ LoginSignupPage }/>
-      <Route exact path="/users/:id" component={ Profile }/>
+      <Route exact path="/users/:id" component={ ProfilePage }/>
       <Route exact path="/locations" component={ Locations }/>
       <Route exact path="/locations/:id" component={ SingleLocation }/>
       <Route exact path="/locations/:id/aircrafts" component={ FlightsByAircraft }/>
