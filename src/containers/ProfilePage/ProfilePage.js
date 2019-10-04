@@ -21,6 +21,7 @@ class ProfilePage extends Component {
       pastEvents:             [],
       reviews:                [],
       profileImageUrl:        "",
+      bannerImageName:        "building-plane.jpg",
       activeTabIndex:         0,
       showUpdateProfileWindow: false,
       showImageUploadWindowOpen:   false,
@@ -29,7 +30,8 @@ class ProfilePage extends Component {
                                 "title":    "Delete Account",
                                 buttonText: "Yes, delete account"
                               },
-      showDeleteAccountWindow:  false,
+      showDeleteAccountWindow: false,
+      onHover:                 false,
     }
     this.sortCalendar              = this.sortCalendar.bind(this)
     this.sortCalendarEntriesByDate = this.sortCalendarEntriesByDate.bind(this)
@@ -37,6 +39,7 @@ class ProfilePage extends Component {
     this.renderActiveTabContent    = this.renderActiveTabContent.bind(this)
     this.toggleUpdateProfileWindow = this.toggleUpdateProfileWindow.bind(this)
     this.toggleDeleteConfirmWindow = this.toggleDeleteConfirmWindow.bind(this)
+    this.toggleOnHoverClass        = this.toggleOnHoverClass.bind(this)
 
   }
 
@@ -108,12 +111,12 @@ class ProfilePage extends Component {
   }
 
   renderActiveTabContent() {
-    if(this.state.activeTabIndex == 0 || this.state.activeTabIndex == 1) {
-      let tab = this.state.tabs[this.state.activeTabIndex]
+    if(this.state.activeTabIndex === 0 || this.state.activeTabIndex === 1) {
+      let displayTab = this.state.tabs[this.state.activeTabIndex]
       return(
           <div>
-          { tab.length ?
-            <CalendarAccordion calendarEvents={ this.state[tab] } />
+          { displayTab.length ?
+            <CalendarAccordion calendarEvents={ this.state[displayTab] } />
             :
             <p>You have no calendar entries to show yet!</p>
           }
@@ -140,7 +143,13 @@ class ProfilePage extends Component {
     this.setState({ showDeleteAccountWindow: !this.state.showDeleteAccountWindow });
   }
 
+  toggleOnHoverClass() {
+    this.setState({ onHover: !this.state.onHover })
+  }
+
   render() {
+    console.log(this.state.onHover)
+    let bannerImage = require(`./Images/${ this.state.bannerImageName }`)
     return(
       <div className="container">
         { this.state.showDeleteAccountWindow ?
@@ -162,13 +171,21 @@ class ProfilePage extends Component {
             null
           }
         <div className="profile-background">
-          <div className="profile-header-img">
+          <div className="profile-header-img"
+            style={{ backgroundImage: `url(${ bannerImage })` }}
+            onMouseEnter={this.toggleOnHoverClass}
+            onMouseLeave={this.toggleOnHoverClass}
+            >
+            <img
+              className={ this.state.onHover ? "icon-show" : "icon-hide"  }
+              onClick={ this.toggleUpdateProfileWindow }
+              src={ require("./Images/edit-icon.svg") }/>
           </div>
           {/* LEFT COLUMN */}
           <div className="profile-left-col">
               <div className="profile-image">
               <img
-              src={require('./Images/profile-img-placeholder.png')}
+              src={ require('./Images/profile-img-placeholder.png') }
               alt="profile"/>
             </div>
               <p>Upcoming features below:</p>

@@ -9,7 +9,7 @@
 
 /* LEFT COLUMN */
 .profile-header-img {
-  background-image: url(../Images/temp-background.jpg);
+  /* background-image: url(../Images/temp-background.jpg); */
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
@@ -17,6 +17,27 @@
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+.profile-header-img img {
+  float: right;
+  margin: 20px;
+}
+
+.icon-hide {
+  display: none;
+}
+
+.icon-show {
+  display: block;
+  cursor: pointer;
+}
+
+.icon-show:hover {
+  transform: scale(1.1);
+}
+
+.profile-header-img:hover {
 }
 
 .profile-left-col {
