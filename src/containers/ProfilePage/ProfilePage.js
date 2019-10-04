@@ -39,7 +39,8 @@ class ProfilePage extends Component {
     this.renderActiveTabContent    = this.renderActiveTabContent.bind(this)
     this.toggleUpdateProfileWindow = this.toggleUpdateProfileWindow.bind(this)
     this.toggleDeleteConfirmWindow = this.toggleDeleteConfirmWindow.bind(this)
-    this.toggleOnHoverClass        = this.toggleOnHoverClass.bind(this)
+    this.onHoverEnterClass         = this.onHoverEnterClass.bind(this)
+    this.onHoverLeaveClass         = this.onHoverLeaveClass.bind(this)
 
   }
 
@@ -136,19 +137,31 @@ class ProfilePage extends Component {
   }
 
   toggleUpdateProfileWindow() {
-    this.setState({ showUpdateProfileWindow: !this.state.showUpdateProfileWindow });
+    this.setState({
+      showUpdateProfileWindow: !this.state.showUpdateProfileWindow,
+      onHover: false,
+    });
   }
 
   toggleDeleteConfirmWindow() {
-    this.setState({ showDeleteAccountWindow: !this.state.showDeleteAccountWindow });
+    this.setState({
+      showDeleteAccountWindow: !this.state.showDeleteAccountWindow,
+    });
   }
 
-  toggleOnHoverClass() {
-    this.setState({ onHover: !this.state.onHover })
+  // Simplytoggling the class does not work properly when modals open
+  // and throw off the class. The class usually reversed.
+  // For this reason the hover class has to be explicitly
+  // to true/false at mouse enter and leave!!!
+  onHoverEnterClass() {
+    this.setState({ onHover: true})
+  }
+
+  onHoverLeaveClass() {
+    this.setState({ onHover: false})
   }
 
   render() {
-    console.log(this.state.onHover)
     let bannerImage = require(`./Images/${ this.state.bannerImageName }`)
     return(
       <div className="container">
@@ -173,8 +186,8 @@ class ProfilePage extends Component {
         <div className="profile-background">
           <div className="profile-header-img"
             style={{ backgroundImage: `url(${ bannerImage })` }}
-            onMouseEnter={this.toggleOnHoverClass}
-            onMouseLeave={this.toggleOnHoverClass}
+            onMouseEnter={this.onHoverEnterClass}
+            onMouseLeave={this.onHoverLeaveClass}
             >
             <img
               className={ this.state.onHover ? "icon-show" : "icon-hide"  }

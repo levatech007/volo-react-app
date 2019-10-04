@@ -1,0 +1,13 @@
+.banner-img-options {
+  text-align: center;
+}
+
+.banner-img-options img {
+  margin: 10px;
+  border-radius: 3px;
+}
+
+.banner-img-options img:hover {
+  transform: scale(1.2);
+  transition: all .3s ease-in-out;
+}
