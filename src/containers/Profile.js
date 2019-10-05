@@ -18,7 +18,7 @@ class Profile extends Component {
                     reviews:                [],
                     profileImageUrl:        "",
                     date:                   null,
-                    todaysDate:               new Date(),
+                    todaysDate:             new Date(),
                     menuTabs:               ["Upcoming Events", "Past Events", "My Reviews"],
                     activeTabIndex:         0,
                     updateProfileModalOpen: false,
@@ -205,12 +205,12 @@ class Profile extends Component {
           <div className="col-12">
             <div className="row profile-box">
               {/* { this.state.imageUploadModalOpen ? <ImageUploadModal close={ this.toggleImageUploadModal}  /> : null } */}
-              <div className="col-md-4">
-                <button onClick={ this.toggleImageUploadModal }>
+              <div className="col-md-4 profile-img">
+                {/* <button onClick={ this.toggleImageUploadModal }> */}
                   <img
                     src={ this.state.profileImageUrl ? this.state.profileImageUrl : Profileimg }
                     alt="profile"/>
-                </button>
+                {/* </button> */}
               </div>
               { this.state.updateProfileModalOpen ? <UpdateProfile close={ this.toggleUpdateProfileModal}  /> : null }
               <div className="col-md-8">
