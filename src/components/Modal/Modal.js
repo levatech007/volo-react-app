@@ -16,8 +16,14 @@ class Modal extends Component {
             { this.props.content }
           </div>
           <div className="row justify-content-center">
-            <button className="footer-btn submit" type="submit" onClick={ this.props.submit }>{ this.props.buttonText || "Send"}</button>
-            <button className="footer-btn cancel" type="submit" onClick={ this.props.close }>Cancel</button>
+            <button
+              className="footer-btn submit"
+              type="submit"
+              onClick={ this.props.submit }>{ this.props.buttonText || "Send"}</button>
+            <button
+              className="footer-btn cancel"
+              type="submit"
+              onClick={ this.props.close }>Cancel</button>
           </div>
         </div>
       </div>

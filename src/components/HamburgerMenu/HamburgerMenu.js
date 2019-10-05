@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link }             from "react-router-dom";
 import "./hamburger-menu.css";
 
 class HamburgerMenu extends Component {
@@ -21,12 +20,12 @@ class HamburgerMenu extends Component {
       <div className="nav-menu">
         <div className="menu-link" onClick={ this.toggleNavMenu }>
           <div onClick={ this.props.onUpdate }>
-            <img src={ require('./Images/edit-icon.svg') }/>
+            <img src={ require('./Images/edit-icon.svg') } alt="edit-button"/>
           </div>
         </div>
         <div className="menu-link" onClick={ this.toggleNavMenu }>
           <div onClick={ this.props.onDelete }>
-            <img src={ require('./Images/delete-icon.svg') }/>
+            <img src={ require('./Images/delete-icon.svg') } alt="delete-button"/>
           </div>
         </div>
 
@@ -37,7 +36,6 @@ class HamburgerMenu extends Component {
   render() {
     return(
         <nav>
-
           <div
           className={ this.state.showNavMenu ? "hamburger-menu open" : "hamburger-menu" }
           onClick={ this.toggleNavMenu }>

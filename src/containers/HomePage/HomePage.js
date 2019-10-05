@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Logo     from "./Images/volo-logo.svg";
-import Navbar   from "../../components/Navbar/Navbar.js";
 import HomeData from "../../static-data/homepage.json";
 import "./Styles/airplane-animation.css";
 import "./Styles/homepage.css";
