@@ -21,13 +21,13 @@ class ProfilePage extends Component {
       reviews:                   [],
       todaysDate:                new Date(),
       profileImageUrl:           "",
-      bannerImageName:           "building-plane.jpg",
+      bannerImageName:           "building-plane",
       activeTabIndex:            0,
       showUpdateProfileWindow:   false,
       showImageUploadWindowOpen: false,
       deleteAcctWindow:          {
-                                    "content":  "Are you sure you want to delete your account?",
-                                    "title":    "Delete Account",
+                                    content:  "Are you sure you want to delete your account?",
+                                    title:    "Delete Account",
                                     buttonText: "Yes, delete account"
                                   },
       showDeleteAccountWindow:    false,
@@ -43,17 +43,17 @@ class ProfilePage extends Component {
     this.onHoverEnterClass         = this.onHoverEnterClass.bind(this)
     this.onHoverLeaveClass         = this.onHoverLeaveClass.bind(this)
     this.toggleUpdateBannerWindow  = this.toggleUpdateBannerWindow.bind(this)
-    this.handleBannerImageChange   = this.handleBannerImageChange.bind(this)
-    this.onUpdateAccount           = this.onUpdateAccount.bind(this);
-    this.onDeleteAccount           = this.onDeleteAccount.bind(this);
+    this.onUpdateAccount           = this.onUpdateAccount.bind(this)
+    this.onDeleteAccount           = this.onDeleteAccount.bind(this)
   }
 
   componentDidMount() {
     // determine if the current user is the same as the profile page viewer
     // to distinguish between public and personal profile
-    // make sure user has given permission for showing public profile 
+    // make sure user has given permission for showing public profile
     let userId = this.props.match.params.id
     // if there is a user id
+    console.log(Auth.user)
     if(userId) {
       $.ajaxSetup({
         beforeSend(xhr, settings) {
@@ -70,6 +70,7 @@ class ProfilePage extends Component {
                           currentEvents: sortedCalendar.currentEvents,
                           pastEvents: sortedCalendar.pastEvents,
                           reviews:  data.reviews,
+                          bannerImageName: Auth.user.banner
                           //profileImageUrl: avatar, // currently selecting the last image added
                         })
         },
@@ -141,11 +142,6 @@ class ProfilePage extends Component {
     }
   }
 
-  handleBannerImageChange(imageName) {
-    console.log(imageName)
-    // update account
-  }
-
   toggleUpdateProfileWindow() {
     this.setState({
       showUpdateProfileWindow: !this.state.showUpdateProfileWindow,
@@ -175,13 +171,12 @@ class ProfilePage extends Component {
     this.setState({ onHover: false })
   }
 
-  onUpdateAccount(newData) {
-    // Auth.updateAccount({
-    //   name:          newData.name,
-    //   location:
-    //   image:         newData.image,
-    //   banner_image:
-    // })
+  onUpdateAccount(banner) {
+    Auth.updateAccount({
+      banner: banner
+    })
+    this.toggleUpdateBannerWindow()
+    this.setState({ bannerImageName: banner })
   }
 
   onDeleteAccount() {
@@ -191,7 +186,7 @@ class ProfilePage extends Component {
   }
 
   render() {
-    let bannerImage = require(`./Images/${ this.state.bannerImageName }`)
+    let bannerImage = require(`./Images/${ this.state.bannerImageName }.jpg`)
     return(
       <div className="container">
         { this.state.showDeleteAccountWindow ?
@@ -208,14 +203,14 @@ class ProfilePage extends Component {
         { this.state.showUpdateProfileWindow ?
           <UpdateProfile
             close={ this.toggleUpdateProfileWindow }
-            submit={ this.onUpdateAccount }
+            // submit={ this.onUpdateAccount }
           />
           :
             null
           }
         { this.state.showBannerUpdateWindow ?
           <ImageUpload
-            submit={ this.handleBannerImageChange }
+            submit={ this.onUpdateAccount }
             close={ this.toggleUpdateBannerWindow }
            />
           :

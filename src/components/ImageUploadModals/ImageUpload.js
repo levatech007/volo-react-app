@@ -10,25 +10,33 @@ class ImageUpload extends Component {
       availableImages: ["building-plane", "plane-hills", "plane-stars", "qatar-plane", "winglet", ]
     }
 
-    this.renderBannerImageOptions = this.renderBannerImageOptions.bind(this)
-    this.handleBannerImageChange  = this.handleBannerImageChange.bind(this)
+    this.renderBannerImageOptions  = this.renderBannerImageOptions.bind(this)
+    this.handleBannerImageChange   = this.handleBannerImageChange.bind(this)
+    this.updateSelectedBannerImage = this.updateSelectedBannerImage.bind(this)
   }
 
-  handleBannerImageChange(imageName) {
-    this.props.submit(imageName)
+  handleBannerImageChange() {
+    this.props.submit(this.state.selectedImage)
+  }
+
+  updateSelectedBannerImage(img) {
+    this.setState({ selectedImage: img })
   }
 
   renderBannerImageOptions() {
     return(
       <div className="banner-img-options">
-        { this.state.availableImages.map((imageName, idx) => {
-          return(
-            <img
-              key={ idx }
-              src={ require(`./Images/${ imageName }-thumb.jpg`) }
-              alt={ imageName }
-              onClick={ () => this.handleBannerImageChange(imageName) }
-            />)
+        {
+          this.state.availableImages.map((imageName, idx) => {
+            return(
+              <img
+                className={ imageName === this.state.selectedImage ? "banner-selected" : null }
+                key={ idx }
+                src={ require(`./Images/${ imageName }-thumb.jpg`) }
+                alt={ imageName }
+                onClick={ () => this.updateSelectedBannerImage(imageName) }
+              />
+            )
           })
         }
     </div>
@@ -44,7 +52,7 @@ class ImageUpload extends Component {
         content={ this.renderBannerImageOptions() }
         buttonText="Update Image"
         close={ this.props.close }
-        submit={ this.props.submit }
+        submit={ this.handleBannerImageChange }
       />
     )
   }

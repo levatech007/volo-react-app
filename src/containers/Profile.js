@@ -134,18 +134,18 @@ class Profile extends Component {
     this.setState({ showDeleteAccountModal: !this.state.showDeleteAccountModal });
   }
 
-  onUpdateAccount(newData) {
-    Auth.updateAccount({
-      name:   newData.name,
-      image:  newData.image
-    })
-  }
-
-  onDeleteAccount() {
-    Auth.destroyAccount();
-    Auth.signOut();
-    this.props.history.push("/")
-  }
+  // onUpdateAccount(newData) {
+  //   Auth.updateAccount({
+  //     name:   newData.name,
+  //     image:  newData.image
+  //   })
+  // }
+  //
+  // onDeleteAccount() {
+  //   Auth.destroyAccount();
+  //   Auth.signOut();
+  //   this.props.history.push("/")
+  // }
 
   handleTabsClick(activeTabIdx) {
     this.setState({

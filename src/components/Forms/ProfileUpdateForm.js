@@ -8,12 +8,13 @@ class ProfileUpdateForm extends Component {
   constructor() {
     super();
     this.state = {
-                    inputFields:  ["email", "name"],
-                    email:        "",
-                    name:         "",
+                    inputFields:  ["email", "name", "location"],
                     showAlert:    false,
                     alertStyle:   "",
-                    alertMessages: ""
+                    alertMessages: "",
+                    email:        "",
+                    name:         "",
+                    location:     "",
                   }
     this.handleInputChange       = this.handleInputChange.bind(this);
     this.renderUpdateProfileForm = this.renderUpdateProfileForm.bind(this);
@@ -56,15 +57,18 @@ class ProfileUpdateForm extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    Auth.updateAccount({
-      name: this.state.name,
-      email: this.state.email,
+    let user = new Object()
+    this.state.inputFields.map(input => {
+      if(this.state[input])
+        user[input] = this.state[input]
     })
+    Auth.updateAccount(user)
     .then((resp) => {
       console.log(resp)
       this.setState({
         name: "",
         email: "",
+        location: "",
         showAlert: true,
         alertStyle: "alert-box ok",
         alertMessages: ["Successfully updated account"]
@@ -72,21 +76,22 @@ class ProfileUpdateForm extends Component {
       });
     }).fail((resp) => {
       console.log(resp)
-      // need error handling if the email user wants to change to already exists in db.
-      // currently return error:
-      // {reason: "Failed to update user account", data: {…}}
-      //   data:
-      //   error: "Internal Server Error"
-      //   exception: "#<ActiveRecord::RecordNotUnique: PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"↵DETAIL:  Key (email)=(evaliisagalen@gmail.com) already exists.↵: UPDATE "users" SET "email" = $1, "uid" = $2, "updated_at" = $3 WHERE "users"."id" = $4>"
-      //   status: 500
-      //   traces: {Application Trace: Array(0), Framework Trace: Array(117), Full Trace: Array(117)}
-      //   __proto__: Object
-      //   reason: "Failed to update user account"
-      //   __proto__: Object
-      // }
+                                        // need error handling if the email user wants to change to already exists in db.
+                                        // currently return error:
+                                        // {reason: "Failed to update user account", data: {…}}
+                                        //   data:
+                                        //   error: "Internal Server Error"
+                                        //   exception: "#<ActiveRecord::RecordNotUnique: PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"↵DETAIL:  Key (email)=(evaliisagalen@gmail.com) already exists.↵: UPDATE "users" SET "email" = $1, "uid" = $2, "updated_at" = $3 WHERE "users"."id" = $4>"
+                                        //   status: 500
+                                        //   traces: {Application Trace: Array(0), Framework Trace: Array(117), Full Trace: Array(117)}
+                                        //   __proto__: Object
+                                        //   reason: "Failed to update user account"
+                                        //   __proto__: Object
+                                        // }
       this.setState({
         name: "",
         email: "",
+        location: "",
         showAlert: true,
         alertStyle: "alert-box error",
         alertMessages: ["Something went wrong"]
