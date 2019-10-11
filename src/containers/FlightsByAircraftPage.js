@@ -9,7 +9,7 @@ import SampleAirportInfo    from "../static-data/airport-info.json";
 import Alert                from "../components/Alert/Alert.js";
 import Tabs                 from "../components/Tabs/Tabs.js";
 import LoadingSpinner       from "../components/LoadingSpinner/LoadingSpinner.js";
-
+import WeatherBanner        from "../components/WeatherBanner/WeatherBanner.js";
 
 class FlightsByAircraft extends Component {
   constructor() {
@@ -218,7 +218,7 @@ class FlightsByAircraft extends Component {
   render() {
     return(
       <div className="container">
-        { this.state.showLoadingSpinner ? <LoadingSpinner /> : null }
+        { this.state.showLoadingSpinner && <LoadingSpinner /> }
         <div className="row justify-content-center background">
           <div className="col-sm-12 col-md-10 centered-text">
             <h1>{ this.state.airportName }</h1>
@@ -244,7 +244,8 @@ class FlightsByAircraft extends Component {
               <div className="row justify-content-center">
                 <button onClick={ this.getMatchingFlights } type="submit" className="footer-btn submit">Find flights</button>
               </div>
-              { this.state.showFlightSchedule ? this.renderTabs() : null }
+              {/* <WeatherBanner /> */}
+              { this.state.showFlightSchedule && this.renderTabs() }
               { this.state.showFlightSchedule && this.state.activeTabIndex === 0 ? this.renderFlightSchedule() : null }
               { this.state.showFlightSchedule && this.state.activeTabIndex === 1 ? this.renderAircraftInfo() : null }
               { this.state.showFlightSchedule && this.state.activeTabIndex === 2 ? this.renderLocationInfo() : null }

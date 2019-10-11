@@ -53,7 +53,6 @@ class ProfilePage extends Component {
     // make sure user has given permission for showing public profile
     let userId = this.props.match.params.id
     // if there is a user id
-    console.log(Auth.user)
     if(userId) {
       $.ajaxSetup({
         beforeSend(xhr, settings) {
@@ -172,9 +171,7 @@ class ProfilePage extends Component {
   }
 
   onUpdateAccount(banner) {
-    Auth.updateAccount({
-      banner: banner
-    })
+    Auth.updateAccount({ banner })
     this.toggleUpdateBannerWindow()
     this.setState({ bannerImageName: banner })
   }
