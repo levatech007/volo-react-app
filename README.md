@@ -1,7 +1,5 @@
 # VOLO - the app for plane spotters
 
-Please note that this is a public example of the app's codebase.
-
 Volo (Italian for flight) is an app for plane spotters. You can find information about plane spotting locations with user reviews of each location. The app also lets you create an account, check weather forecast for chosen location as well as add a select day to your calendar. You can select an aircraft and see when your chose aircraft can be seen at selected airport.
 
 Spotting a specific aircraft is a plane spotter’s most important goal. As an avid plane spotter, myself, that information was not always so easy to find if you wanted to plan your sighting trips ahead of time. That’s why I decided to build VOLO - the world’s first application meant for plane spotters. It helps users plan their sighting trips ahead of time. Users can search for aircraft landings and take-offs at select airports by aircraft type up to a week ahead.
