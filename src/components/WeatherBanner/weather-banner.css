@@ -5,12 +5,17 @@
   padding: 20px;
   height: 120px;
   position: relative;
+  margin-bottom: 20px;
 }
 
 .weather-banner div {
   display: inline-block;
   vertical-align: middle;
   margin: 0 20px;
+}
+
+.extended-weather-banner div {
+  display: inline-block;
 }
 
 .weather-icon {
@@ -26,7 +31,7 @@
   font-size: 30px;
 }
 
-.add-btn {
+.expand-btn {
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -36,9 +41,25 @@
   font-size: 30px;
 }
 
-.add-btn:hover {
+.expand-btn:hover {
   text-decoration: none;
   color: gray;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  background: rgb(144, 244, 127);
+}
+
+.add-btn:hover {
+  background: rgb(25, 221, 25);
+}
+
+.extended-left textarea {
+  margin-top: 40px;
 }
 
 /* ANIMATIONS */
