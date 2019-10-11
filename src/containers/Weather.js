@@ -4,8 +4,9 @@ import Auth                 from "j-toker";
 import Location             from "../components/Location.js";
 import { Accordion }        from "react-accessible-accordion";
 import SingleDayWeather     from "../components/SingleDayWeather.js";
+import WeatherBanner        from "../components/WeatherBanner/WeatherBanner.js";
 
-import "react-accessible-accordion/dist/minimal-example.css";
+// import "react-accessible-accordion/dist/minimal-example.css";
 
 class Weather extends Component {
   constructor(){
@@ -82,18 +83,25 @@ class Weather extends Component {
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
-            { this.state.location.latitude && <Location location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
+            { this.state.location.latitude &&
+              <Location
+                location={ this.state.location }
+                reviewCount={ this.state.reviewCount}
+              />
+            }
             { this.state.weatherForecast[0] &&
-              <Accordion>
-                {this.state.weatherForecast.map((oneDay, idx) => {
+                this.state.weatherForecast.map((oneDay, idx) => {
                   if (idx < 5) {
                     return (
-                       <SingleDayWeather userId={this.state.userId} oneDay={ oneDay } idx={ idx } createCalendarEntry={ this.createCalendarEntry } key={ idx }/>
+                       <WeatherBanner
+                         userId={ this.state.userId }
+                         oneDay={ oneDay }
+                         idx={ idx }
+                         createCalendarEntry={ this.createCalendarEntry }
+                         key={ idx }/>
                      )
                    }
-                    })
-                  }
-                </Accordion>
+                 })
               }
             </div>
           </div>
