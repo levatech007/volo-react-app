@@ -69,7 +69,7 @@ class ProfilePage extends Component {
                           currentEvents: sortedCalendar.currentEvents,
                           pastEvents: sortedCalendar.pastEvents,
                           reviews:  data.reviews,
-                          bannerImageName: Auth.user.banner
+                          bannerImageName: Auth.user.banner || "building-plane"
                           //profileImageUrl: avatar, // currently selecting the last image added
                         })
         },
