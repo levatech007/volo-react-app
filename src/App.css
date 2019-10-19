@@ -177,7 +177,7 @@ select {
   height: 15px;
 }
 
-.aircraft-info {
+/* .aircraft-info {
   min-height: 500px;
   margin-bottom: 30px;
   background: #eef2f3;
@@ -189,7 +189,7 @@ select {
 
 .aircraft-title {
   padding-bottom: 20px;
-}
+} */
 
 .profile-img img {
   border-radius: 50%;

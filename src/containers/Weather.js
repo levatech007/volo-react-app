@@ -16,6 +16,9 @@ class Weather extends Component {
                     weatherForecast:  [],
                     userId:           0,
                     reviewCount:      0,
+                    showAlert:        false,
+                    alertMessage:     "",
+                    alertStyle:       "",
                   }
     this.createCalendarEntry = this.createCalendarEntry.bind(this);
   }
@@ -44,15 +47,12 @@ class Weather extends Component {
       return res.json();
     })
     .then((forecast) => {
-      console.log(forecast)
       this.setState({ weatherForecast: forecast.forecast })
     })
   }
 
   createCalendarEntry(oneDay, notes) {
-    console.log(oneDay)
     let date = new Date(oneDay.date.replace(/-/g, '\/')) // "2019-06-02" gets converted to the day before; use "2019/06/02"
-    console.log(date)
     $.ajaxSetup({
       beforeSend(xhr, settings) {
         Auth.appendAuthHeaders(xhr, settings);
@@ -74,6 +74,11 @@ class Weather extends Component {
       error: (response) => {
         console.log("error")
         // ADD ALERT that user must be logged in
+        this.setState({
+                        showAlert: true,
+                        alertMessage: "You must be logged in!",
+                        alertStyle: "",
+        })
       }
     })
   }
