@@ -1,16 +1,22 @@
 {
   "SFO": {
-    "airportName": "San Francisco International Airport",
+    "name": "SFO",
+    "imageAttribution": "attribution here",
+    "title": "San Francisco International Airport",
     "location": "San Francisco, CA 94128",
     "description": "San Francisco International Airport is an international airport 13 miles south of downtown San Francisco, California, United States, near Millbrae and San Bruno in unincorporated San Mateo County. It has flights to points throughout North America and is a major gateway to Europe and Asia. It is the seventh-busiest airport in North America by passengers (55,822,129)."
   },
   "LAX": {
-    "airportName": "Los Angeles International Airport",
+    "name": "LAX",
+    "imageAttribution": "attribution here",
+    "title": "Los Angeles International Airport",
     "location": "1 World Way, Los Angeles, CA 90045",
     "description": "Los Angeles International Airport, locally referred to as LAX, is the primary international airport serving Los Angeles, California, United States, and its surrounding metropolitan area. It is the second-busiest airport in North America by passengers (84,557,968)."
   },
   "SXM": {
-    "airportName": "Princess Juliana International Airport",
+    "name": "SXM",
+    "imageAttribution": "attribution here",
+    "title": "Princess Juliana International Airport",
     "location": "Sint Maarten (Saint-Martin)",
     "description": "It is the main airport on the Caribbean island of Saint Martin/Sint Maarten. The airport is located on the Dutch side of the island, in the country of Sint Maarten. In 2015, the airport handled 1,829,543 passengers and around 60,000 aircraft movements. The airport serves as a hub for Windward Islands Airways and is the major gateway for the smaller Leeward Islands, including Anguilla, Saba, St. Barthélemy and St. Eustatius."
   }
