@@ -3,7 +3,6 @@ import { Switch, Route }  from "react-router-dom";
 import HomePage           from "../containers/HomePage/HomePage.js";
 import About              from "../containers/About.js";
 import LoginSignupPage    from "../containers/LoginSignupPage.js";
-import Profile            from "../containers/Profile.js";
 import Locations          from "../containers/Locations.js";
 import Weather            from "../containers/Weather.js";
 import SingleLocation     from "../containers/SingleLocation.js";
