@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import AircraftInfo         from "../components/AircraftInfo.js";
-import AirportInfo          from "../components/AirportInfo.js";
 import Dropdown             from "../components/Dropdown/Dropdown.js";
 import FlightDisplayTable   from "../components/FlightDisplayTable/FlightDisplayTable.js";
 import SampleFlightSchedule from "../static-data/schedule-for-testing.json";
@@ -10,6 +8,7 @@ import Alert                from "../components/Alert/Alert.js";
 import Tabs                 from "../components/Tabs/Tabs.js";
 import LoadingSpinner       from "../components/LoadingSpinner/LoadingSpinner.js";
 import WeatherBanner        from "../components/WeatherBanner/WeatherBanner.js";
+import TabContentBox        from "../components/TabContentBox/TabContentBox.js";
 
 class FlightsByAircraft extends Component {
   constructor() {
@@ -30,8 +29,8 @@ class FlightsByAircraft extends Component {
                     showAlert:           false,
                     alertMessages:       [],
                     alertStyle:          "",
-                    tabs:                ["Flights", "Plane", "Location"],
-                    showLoadingSpinner:  false
+                    tabs:                ["Flights", "Aircraft", "Airport"],
+                    showLoadingSpinner:  false,
                   }
     this.handleAircraftSelection     = this.handleAircraftSelection.bind(this);
     this.handleDateSelection         = this.handleDateSelection.bind(this);
@@ -41,6 +40,7 @@ class FlightsByAircraft extends Component {
     this.getMatchingFlights          = this.getMatchingFlights.bind(this);
     this.renderTabs                  = this.renderTabs.bind(this);
     this.handleTabsClick             = this.handleTabsClick.bind(this);
+    this.renderTabContent            = this.renderTabContent.bind(this);
   }
 
   componentDidMount() {
@@ -79,7 +79,7 @@ class FlightsByAircraft extends Component {
 
   getMatchingFlights() {
     // handle errors if no flights match search criteria
-    // aircraftId is first two numbers of aircraft IATA code
+    // aircraftId is first two numbers of the aircraft IATA code
     let date = this.state.dateRange[this.state.selectedDateId - 1].apiDate
     if(this.state.aircraftId && this.state.selectedDateId) {
       this.setState({ showLoadingSpinner: true })
@@ -151,7 +151,7 @@ class FlightsByAircraft extends Component {
   }
 
   formatDateForDropdown(unixDate) {
-    // unix timestamp to format:  "Weekday, Month 00, 0000" to display in dropdown menu
+    // unix timestamp to format to  "Weekday, Month 00, 0000" to display in dropdown menu
     let fullDate  = new Date(unixDate)
     let dayName   = this.state.dayNames[fullDate.getDay()]
     let date      = fullDate.getDate()
@@ -182,37 +182,31 @@ class FlightsByAircraft extends Component {
     )
   }
 
-  renderFlightSchedule() {
-    return(
-      <FlightDisplayTable
-        aircraftSchedule={ this.state.aircraftSchedule }
-        airport={ this.state.airportIataCode }
-        totalFlights={ this.state.totalFlights }
-      />
-    )
-  }
-
-  renderAircraftInfo() {
-    return(
-      <AircraftInfo
-        imageName={ this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId).name }
-        aircraftInfo= { this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) }
-      />
-    )
-  }
-
-  renderLocationInfo() {
-    return(
-      <AirportInfo
-        airportInfo={ SampleAirportInfo[this.state.airportIataCode] }
-      />
-    )
-  }
-
   handleTabsClick(activeTabIdx) {
     this.setState({
       activeTabIndex: activeTabIdx
     })
+  }
+
+  renderTabContent() {
+    if(this.state.activeTabIndex == 0) {
+      return(
+        <FlightDisplayTable
+          aircraftSchedule={ this.state.aircraftSchedule }
+          airport={ this.state.airportIataCode }
+          totalFlights={ this.state.totalFlights }
+        />
+      )
+    } else {
+      let content = this.state.activeTabIndex == 1 ? this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) : SampleAirportInfo[this.state.airportIataCode]
+      let type = this.state.activeTabIndex == 1 ? "aircraft" : "airport"
+      return(
+        <TabContentBox
+          content={ content }
+          type={ type }
+        />
+      )
+    }
   }
 
   render() {
@@ -242,13 +236,18 @@ class FlightsByAircraft extends Component {
                 </div>
               </div>
               <div className="row justify-content-center">
-                <button onClick={ this.getMatchingFlights } type="submit" className="footer-btn submit">Find flights</button>
+                <button
+                  onClick={ this.getMatchingFlights }
+                  type="submit"
+                  className="footer-btn submit"
+                  >
+                  Find flights
+                </button>
               </div>
               {/* <WeatherBanner /> */}
               { this.state.showFlightSchedule && this.renderTabs() }
-              { this.state.showFlightSchedule && this.state.activeTabIndex === 0 ? this.renderFlightSchedule() : null }
-              { this.state.showFlightSchedule && this.state.activeTabIndex === 1 ? this.renderAircraftInfo() : null }
-              { this.state.showFlightSchedule && this.state.activeTabIndex === 2 ? this.renderLocationInfo() : null }
+
+              { this.state.showFlightSchedule && this.renderTabContent() }
 
             </div>
           </div>

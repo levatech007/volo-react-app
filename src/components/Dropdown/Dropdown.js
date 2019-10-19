@@ -14,7 +14,7 @@ class DropdownMenu extends Component {
               value={item.id}
               key={idx}
               >
-              {item.name} { item.airport ? `@ ${ item.airport }` : null }
+              { item.name } { item.airport ? `@ ${ item.airport }` : null }
               </option>
               )
             })

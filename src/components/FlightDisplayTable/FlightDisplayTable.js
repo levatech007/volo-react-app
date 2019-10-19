@@ -31,6 +31,7 @@ class FlightDisplay extends Component {
   }
 
   sortFlightData(schedule) {
+    console.log(schedule)
     let aircraftSchedule = []
     Object.keys(schedule).forEach((aircraft, flights) => {
        schedule[aircraft].map(flight => {
@@ -98,6 +99,7 @@ class FlightDisplay extends Component {
   }
 
   render() {
+    console.log(this.props)
     return(
       <div className="col-12 flight-table">
         {
