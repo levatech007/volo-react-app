@@ -1,50 +1,50 @@
 {
     "thunderstorms": {
       "backgroundFallback": "#bdc3c7",
-      "backgroundWebkit": "-webkit-linear-gradient(to right, #bdc3c7, #2c3e50)",
-      "background": "linear-gradient(to right, #bdc3c7, #2c3e50)",
+      "backgroundWebkit": "-webkit-linear-gradient(to bottom right, #bdc3c7, #2c3e50)",
+      "background": "linear-gradient(to bottom right, #bdc3c7, #2c3e50)",
       "fontColor": "white"
     },
     "rain": {
       "backgroundFallback": "#7c8a93",
-      "backgroundWebkit": "-webkit-linear-gradient(to right, #7c8a93, #c0c7cc)",
-      "background": "linear-gradient(to right, #7c8a93, #c0c7cc)",
+      "backgroundWebkit": "-webkit-linear-gradient(to bottom right, #7c8a93, #c0c7cc)",
+      "background": "linear-gradient(to bottom right, #7c8a93, #c0c7cc)",
       "fontColor": "white"
     },
     "snow": {
       "backgroundFallback": "F1F1F1",
-      "backgroundWebkit": "-webkit-linear-gradient(to right, #F1F1F1, #d7dde8)",
-      "background": "linear-gradient(to right, #F1F1F1, #d7dde8)",
+      "backgroundWebkit": "-webkit-linear-gradient(to bottom right, #F1F1F1, #d7dde8)",
+      "background": "linear-gradient(to bottom right, #F1F1F1, #d7dde8)",
       "fontColor": "gray"
     },
     "fog": {
       "backgroundFallback": "F1F1F1",
-      "backgroundWebkit": "-webkit-linear-gradient(to right, #F1F1F1, #d7dde8)",
-      "background": "linear-gradient(to right, #F1F1F1, #d7dde8)",
+      "backgroundWebkit": "-webkit-linear-gradient(to bottom right, #F1F1F1, #d7dde8)",
+      "background": "linear-gradient(to bottom right, #F1F1F1, #d7dde8)",
       "fontColor": "gray"
     },
     "clear": {
       "backgroundFallback": "#7DBCDE",
-      "backgroundWebkit": "-webkit-linear-gradient(to right, #7DBCDE, #3798CC)",
-      "background": "linear-gradient(to right, #7DBCDE, #3798CC)",
+      "backgroundWebkit": "-webkit-linear-gradient(to bottom right, #ffeb3b, #7DBCDE, #3798CC)",
+      "background": "linear-gradient(to bottom right, #ffeb3b, #7DBCDE, #3798CC)",
       "fontColor": "white"
     },
     "fewclouds": {
       "backgroundFallback": "#7DBCDE",
-      "backgroundWebkit": "-webkit-linear-gradient(to right, #7DBCDE, #3798CC)",
-      "background": "linear-gradient(to right, #7DBCDE, #3798CC)",
+      "backgroundWebkit": "-webkit-linear-gradient(to bottom right, #7DBCDE, #3798CC)",
+      "background": "linear-gradient(to bottom right, #7DBCDE, #3798CC)",
       "fontColor": "white"
     },
     "partlycloudy": {
       "backgroundFallback": "#3798CC",
-      "backgroundWebkit": "-webkit-linear-gradient(to right, #c0c7cc, #3798CC)",
-      "background": "linear-gradient(to right, #c0c7cc, #3798CC)",
+      "backgroundWebkit": "-webkit-linear-gradient(to bottom right, #c0c7cc, #3798CC)",
+      "background": "linear-gradient(to bottom right, #c0c7cc, #3798CC)",
       "fontColor": "white"
     },
     "overcast": {
       "backgroundFallback": "#7c8a93",
-      "backgroundWebkit": "-webkit-linear-gradient(to right, #7c8a93, #c0c7cc)",
-      "background": "linear-gradient(to right, #7c8a93, #c0c7cc)",
+      "backgroundWebkit": "-webkit-linear-gradient(to bottom right, #7c8a93, #c0c7cc)",
+      "background": "linear-gradient(to bottom right, #7c8a93, #c0c7cc)",
       "fontColor": "white"
     }
 }
