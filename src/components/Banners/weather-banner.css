@@ -1,0 +1,12 @@
+.weather-icon {
+  width: 75px;
+  height: 75px;
+}
+
+.weather-icon img {
+  width: inherit;
+}
+
+.temp {
+  font-size: 30px;
+}
