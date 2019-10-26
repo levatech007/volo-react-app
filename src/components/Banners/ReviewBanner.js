@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactStars           from "react-stars";
 import "./banner.css";
 import "./review-banner.css";
 
@@ -48,9 +49,22 @@ class ReviewBanner extends Component {
 
   render() {
     return(
-      <div className={ this.state.reviewsBannerClass } style={{ background: "blue" }}>
-        <h3>REVIEW TITLE</h3>
-        <p>by USER</p>
+      <div className={ `${ this.state.reviewsBannerClass } review-banner` }>
+        <div className="top-content">
+          <div className="review-title">
+            <h3>REVIEW TITLE</h3>
+            <p>by USER</p>
+          </div>
+          <div className="review-rating">
+            <ReactStars
+              count={5}
+              value={ parseFloat(this.props.review.rating) }
+              edit={ false }
+              size={24}
+              color2={"#ffd700"}
+            />
+          </div>
+        </div>
         <div className="expand-button">
           <button onClick={ this.toggleExtendedContent } className="plain-button expand-btn">
             { this.state.showExtendedContent ? "-" : "+" }

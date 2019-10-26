@@ -2,16 +2,18 @@
   width: 100%;
   text-align: left;
   border-radius: 5px;
-  padding: 20px;
+  padding: 20px 40px;
   height: 120px;
   position: relative;
   margin-bottom: 20px;
+  -webkit-box-shadow: 13px 14px 31px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 13px 14px 31px -9px rgba(0,0,0,0.75);
+  box-shadow: 13px 14px 31px -9px rgba(0,0,0,0.75);
 }
 
 .banner div {
   display: inline-block;
   vertical-align: middle;
-  margin: 0 20px;
 }
 
 .extended-banner div {

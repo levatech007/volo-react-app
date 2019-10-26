@@ -1,0 +1,25 @@
+.review-banner {
+  background: #FFFFFF;
+  color: grey;
+}
+
+.expand-btn {
+  color: grey;
+}
+
+.top-content {
+  width: 100%;
+
+}
+
+.top-content div {
+  display: inline-block;
+}
+
+.review-title h3 {
+  display: inline-block;
+}
+
+.review-rating {
+  float: right;
+}
