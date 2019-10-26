@@ -7,7 +7,7 @@ import SampleAirportInfo    from "../static-data/airport-info.json";
 import Alert                from "../components/Alert/Alert.js";
 import Tabs                 from "../components/Tabs/Tabs.js";
 import LoadingSpinner       from "../components/LoadingSpinner/LoadingSpinner.js";
-import WeatherBanner        from "../components/WeatherBanner/WeatherBanner.js";
+import WeatherBanner        from "../components/Banners/WeatherBanner.js";
 import TabContentBox        from "../components/TabContentBox/TabContentBox.js";
 
 class FlightsByAircraft extends Component {
@@ -41,6 +41,8 @@ class FlightsByAircraft extends Component {
     this.renderTabs                  = this.renderTabs.bind(this);
     this.handleTabsClick             = this.handleTabsClick.bind(this);
     this.renderTabContent            = this.renderTabContent.bind(this);
+    this.getWeatherForecast          = this.getWeatherForecast.bind(this);
+    this.getFlightAndWeatherFromApi  = this.getFlightAndWeatherFromApi.bind(this);
   }
 
   componentDidMount() {
@@ -128,6 +130,23 @@ class FlightsByAircraft extends Component {
     }
   }
 
+// will replace getMatchingFlights when completed
+// 2 fetch requests: aircrafts and selected day's weather for WeatherBanner
+  getFlightAndWeatherFromApi() {
+    let selectedDate = this.state.dateRange[this.state.selectedDateId - 1].apiDate
+    if(this.state.aircraftId && selectedDate) {
+      this.setState({ showLoadingSpinner: true })
+      Promise.all([
+        fetch(""),
+        fetch(""),
+      ]).then(([flights, weather]) => {
+        //setState({})
+        console.log("Flights: ", flights)
+        console.log("Weather", weather)
+      })
+    }
+  }
+
   generateAvailableDateRange() {
     // should return an array of objects with 'id': int, date: timestamp, 'name': string for Dropdown and apiDate: "YYYY-MM-DD" for api call
     // for today + 6 days in format "Weekday, Month 00, 0000")
@@ -188,8 +207,12 @@ class FlightsByAircraft extends Component {
     })
   }
 
+  getWeatherForecast(day) {
+    // get weather forecast for the selected day
+  }
+
   renderTabContent() {
-    if(this.state.activeTabIndex == 0) {
+    if(this.state.activeTabIndex === 0) {
       return(
         <FlightDisplayTable
           aircraftSchedule={ this.state.aircraftSchedule }
@@ -198,8 +221,8 @@ class FlightsByAircraft extends Component {
         />
       )
     } else {
-      let content = this.state.activeTabIndex == 1 ? this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) : SampleAirportInfo[this.state.airportIataCode]
-      let type = this.state.activeTabIndex == 1 ? "aircraft" : "airport"
+      let content = this.state.activeTabIndex === 1 ? this.state.aircraftTypes.find(aircraft => aircraft.id === this.state.aircraftId) : SampleAirportInfo[this.state.airportIataCode]
+      let type = this.state.activeTabIndex === 1 ? "aircraft" : "airport"
       return(
         <TabContentBox
           content={ content }
@@ -210,6 +233,8 @@ class FlightsByAircraft extends Component {
   }
 
   render() {
+
+    console.log(this.state.dateRange[this.state.selectedDateId])
     return(
       <div className="container">
         { this.state.showLoadingSpinner && <LoadingSpinner /> }

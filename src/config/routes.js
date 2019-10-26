@@ -11,6 +11,7 @@ import Api                from "../containers/Api.js";
 import PageNotFound       from "../containers/PageNotFound.js";
 import FlightsByAircraft  from "../containers/FlightsByAircraftPage.js";
 import ProfilePage        from "../containers/ProfilePage/ProfilePage.js";
+import NewReviewsPage     from "../containers/LocationReviewsPage/LocationReviewsPage.js";
 
 export default (
   <Switch>
@@ -24,6 +25,7 @@ export default (
       <Route exact path="/weather/:id" component={ Weather }/>
       <Route exact path="/password" component={ ChangePassword } />
       <Route exact path="/api" component={ Api } />
+      <Route exact path="/test/:id" component={ NewReviewsPage }/>
       <Route path="*" component={ PageNotFound } />
     </Switch>
 )

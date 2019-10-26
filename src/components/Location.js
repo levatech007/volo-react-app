@@ -7,7 +7,7 @@ class Location extends Component {
 
   render() {
     return(
-      <div className="row">
+      <div className="row info-section">
         <div className="col-6">
           <ul>
             <li>
