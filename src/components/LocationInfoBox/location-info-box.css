@@ -1,0 +1,15 @@
+.info-box {
+  background-color: white;
+  border-radius: 5px;
+  padding: 50px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.info-box a {
+  color: gray;
+}
+
+.info-box a:hover {
+  color: #303030;
+}
