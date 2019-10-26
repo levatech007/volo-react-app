@@ -4,6 +4,7 @@ import $                    from "jquery";
 import LocationInfo         from "../../components/Location.js";
 import ReviewBanner         from "../../components/Banners/ReviewBanner.js";
 import LocationReviewForm   from "../../components/Forms/LocationReviewForm.js";
+import LocationInfoBox      from "../../components/LocationInfoBox/LocationInfoBox.js";
 import ReactStars           from "react-stars";
 import "./reviews-page.css"
 
@@ -25,27 +26,27 @@ class ReviewsPage extends Component {
     this.renderLocationReviews  = this.renderLocationReviews.bind(this);
   }
 
-  // componentWillMount() {
-  //   Auth.validateToken()
-  //   .then((user) => {
-  //     this.setState({ userId: user.id })
-  //   })
-  //   let locationId = this.props.match.params.id;
-  //   fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
-  //   .then((res) => {
-  //     return res.json();
-  //   })
-  //   .then((location) => {
-  //     this.setState({
-  //                     location:     location,
-  //                     reviewCount:  location.reviews.length,
-  //                     reviews:      location.reviews.reverse(),
-  //                     latitude:     location.latitude,
-  //                     longitude:    location.longitude,
-  //                   })
-  //   });
-  //   // .fail(resp)
-  // }
+  componentWillMount() {
+    Auth.validateToken()
+    .then((user) => {
+      this.setState({ userId: user.id })
+    })
+    let locationId = this.props.match.params.id;
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${locationId}.json`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((location) => {
+      this.setState({
+                      location:     location,
+                      reviewCount:  location.reviews.length,
+                      reviews:      location.reviews.reverse(),
+                      latitude:     location.latitude,
+                      longitude:    location.longitude,
+                    })
+    });
+
+  }
 
   showReviewForm(e) {
     e.preventDefault();
@@ -81,31 +82,55 @@ class ReviewsPage extends Component {
   }
 
   renderLocationReviews() {
-    return(
-      <ReviewBanner />
-    )
+    console.log("Reviews runing")
+      this.state.reviews.map((oneReview, idx) => {
+        console.log(oneReview)
+        return(
+          <ReviewBanner
+            key={ idx }
+            review={ oneReview }
+          />
+        )
+      })
   }
 
-
   render() {
+    console.log(this.state.reviews)
     let showReviewForm = this.state.showForm
     return(
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
-            { this.state.location.latitude && <LocationInfo location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
-            { showReviewForm ?
+            { this.state.location.latitude && <LocationInfoBox location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
+            { showReviewForm &&
               <LocationReviewForm
                 onSubmitReviewForm={ this.onSubmitReviewForm }
                 locationId={ this.state.location.id }
               />
-              :
-              this.renderLocationReviews()
             }
-            { this.state.userId &&
-              <div className="row justify-content-center">
-                <button onClick={ this.showReviewForm } className="footer-btn submit button-margin">Add review</button>
+            { this.state.userId && !this.state.showForm ?
+              <div className="row add-review">
+                <div className="add-review-btn">
+                  <button
+                    className="box-shadow"
+                    onClick={ this.showReviewForm }><i class="fas fa-plus"></i></button>
+                </div>
+                <div className="review-btn-label">
+                  <p>Add a review</p>
+                </div>
               </div>
+              :
+              null
+            }
+            {
+              this.state.reviews.map((oneReview, idx) => {
+                return(
+                  <ReviewBanner
+                    key={ idx }
+                    review={ oneReview }
+                  />
+                )
+              })
             }
           </div>
         </div>
