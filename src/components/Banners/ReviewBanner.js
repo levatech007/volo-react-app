@@ -16,15 +16,11 @@ class ReviewBanner extends Component {
       this.toggleExtendedContent = this.toggleExtendedContent.bind(this)
   }
 
-  componentDidMount() {
-    // get reviews this.setState({  })
-  }
-
   renderExtendedContent() {
     return(
       <div className={ this.state.extendedContentClass }>
         <div className="extended-full-width">
-          <p>Lorem ipsum review here</p>
+          <p>{ this.props.review.content }</p>
         </div>
       </div>
     )
@@ -52,16 +48,16 @@ class ReviewBanner extends Component {
       <div className={ `${ this.state.reviewsBannerClass } review-banner` }>
         <div className="top-content">
           <div className="review-title">
-            <h3>REVIEW TITLE</h3>
-            <p>by USER</p>
+            <h3>{ this.props.review.title }</h3>
+            <p>by { this.props.review.author }</p>
           </div>
           <div className="review-rating">
             <ReactStars
-              count={5}
+              count={ 5 }
               value={ parseFloat(this.props.review.rating) }
               edit={ false }
-              size={24}
-              color2={"#ffd700"}
+              size={ 24 }
+              color2={ "#ffd700" }
             />
           </div>
         </div>

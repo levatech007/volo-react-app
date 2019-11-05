@@ -1,4 +1,4 @@
-.add-review-btn button {
+.review-btn button {
   margin-bottom: 20px;
   display: inline-block;
   text-decoration: none;
@@ -17,16 +17,16 @@
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
 }
 
-.add-review-btn .fa {
-    line-height: 70px;
+.review-btn .fa {
+  line-height: 70px;
 }
 
-.add-review-btn button:active {
-    background-image: -webkit-linear-gradient(#efefef 0%, #d6d6d6 100%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
+.review-btn button:hover {
+  background-image: -webkit-linear-gradient(#efefef 0%, #d6d6d6 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
 }
 
-.add-review div {
-  /* display: inline-block; */
-  /* vertical-align: middle; */
+.review-btn-label {
+  padding-top: 25px;
+  padding-left: 15px;
 }

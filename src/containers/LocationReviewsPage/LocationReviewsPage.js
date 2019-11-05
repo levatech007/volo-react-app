@@ -12,18 +12,16 @@ class ReviewsPage extends Component {
   constructor() {
     super();
     this.state = {
-                    userId:               0,
-                    location:             {latitude: null, longitude: null},
-                    reviews:              [],
-                    reviewCount:          0,
-                    showForm:             false,
-                    latitude:             0,
-                    longitude:            0,
-                    errors:               "",
+                    userId:         0,
+                    location:       { latitude: null, longitude: null },
+                    reviews:        [],
+                    reviewCount:    0,
+                    showForm:       false,
+                    latitude:       0,
+                    longitude:      0,
                   }
-    this.showReviewForm         = this.showReviewForm.bind(this);
-    this.onSubmitReviewForm     = this.onSubmitReviewForm.bind(this);
-    this.renderLocationReviews  = this.renderLocationReviews.bind(this);
+    this.toggleReviewForm   = this.toggleReviewForm.bind(this);
+    this.onSubmitReviewForm = this.onSubmitReviewForm.bind(this);
   }
 
   componentWillMount() {
@@ -44,13 +42,11 @@ class ReviewsPage extends Component {
                       latitude:     location.latitude,
                       longitude:    location.longitude,
                     })
-    });
-
+    })
   }
 
-  showReviewForm(e) {
-    e.preventDefault();
-    this.setState({ showForm: true })
+  toggleReviewForm() {
+    this.setState({ showForm: !this.state.showForm })
   }
 
   onSubmitReviewForm(review) {
@@ -59,9 +55,9 @@ class ReviewsPage extends Component {
       beforeSend(xhr, settings) {
         Auth.appendAuthHeaders(xhr, settings);
       }
-    });
+    })
     $.post({
-      url: `${process.env.REACT_APP_BACKEND_URL}/reviews`,
+      url: `${ process.env.REACT_APP_BACKEND_URL }/reviews`,
       data: {
               author:       review.author,
               title:        review.title,
@@ -77,48 +73,41 @@ class ReviewsPage extends Component {
                         reviewCount:  this.state.reviewCount + 1
                       })
       },
-    });
-    this.setState({ showForm: false})
-  }
-
-  renderLocationReviews() {
-    console.log("Reviews runing")
-      this.state.reviews.map((oneReview, idx) => {
-        console.log(oneReview)
-        return(
-          <ReviewBanner
-            key={ idx }
-            review={ oneReview }
-          />
-        )
-      })
+    })
+    this.setState({ showForm: false })
   }
 
   render() {
-    console.log(this.state.reviews)
     let showReviewForm = this.state.showForm
     return(
       <div className="container">
         <div className="row background">
           <div className="col-md-12">
-            { this.state.location.latitude && <LocationInfoBox location={ this.state.location } reviewCount={ this.state.reviewCount}/> }
-            { showReviewForm &&
+            { this.state.location.latitude &&
+              <LocationInfoBox
+                location={ this.state.location }
+                reviewCount={ this.state.reviewCount}
+              />
+            }
+            {
+              showReviewForm &&
               <LocationReviewForm
                 onSubmitReviewForm={ this.onSubmitReviewForm }
                 locationId={ this.state.location.id }
               />
             }
-            { this.state.userId && !this.state.showForm ?
-              <div className="row add-review">
-                <div className="add-review-btn">
-                  <button
-                    className="box-shadow"
-                    onClick={ this.showReviewForm }><i class="fas fa-plus"></i></button>
+            {
+              this.state.userId ?
+                <div className="row">
+                  <div className="review-btn">
+                    <button
+                      className="box-shadow"
+                      onClick={ this.toggleReviewForm }
+                    >
+                      <i className="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
-                <div className="review-btn-label">
-                  <p>Add a review</p>
-                </div>
-              </div>
               :
               null
             }

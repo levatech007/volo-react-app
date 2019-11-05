@@ -19,7 +19,7 @@ class LocationReviewForm extends Component {
   }
 
   componentDidMount() {
-    this.setState({ locationId: this.props.locationId });
+    this.setState({ locationId: this.props.locationId })
   }
 
   handleInputChange(e) {
@@ -56,14 +56,6 @@ class LocationReviewForm extends Component {
                     locationId: 0,
                   })
   }
-
-  // renderLocationReviewForm() {
-  //   return(
-  //     <form onSubmit={ this.handleReviewFormSubmission }>
-  //
-  //     </form>
-  //   )
-  // }
 
   render() {
     return(
