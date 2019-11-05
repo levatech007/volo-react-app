@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import $                    from "jquery";
 import Auth                 from "j-toker";
-import Location             from "../components/Location.js";
-import { Accordion }        from "react-accessible-accordion";
-import SingleDayWeather     from "../components/SingleDayWeather.js";
-import WeatherBanner        from "../components/Banners/WeatherBanner.js";
+import LocationInfoBox      from "../../components/LocationInfoBox/LocationInfoBox.js";
+import WeatherBanner        from "../../components/Banners/WeatherBanner.js";
+import "./location-weather-page.css";
 
-// import "react-accessible-accordion/dist/minimal-example.css";
 
 class Weather extends Component {
   constructor(){
@@ -89,7 +87,7 @@ class Weather extends Component {
         <div className="row background">
           <div className="col-md-12">
             { this.state.location.latitude &&
-              <Location
+              <LocationInfoBox
                 location={ this.state.location }
                 reviewCount={ this.state.reviewCount}
               />
