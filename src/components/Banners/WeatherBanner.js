@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import WeatherData          from "./weather-data.json"
+import Alert                from "../Alert/Alert.js"
 import "./banner.css";
 import "./weather-banner.css";
 
@@ -7,32 +8,71 @@ class WeatherBanner extends Component {
   constructor() {
       super();
       this.state = {
-        weatherStyles: {},
-        showExtendedContent: false,
-        weatherBannerClass: "banner",
-        extendedContentClass: "extended-banner",
+        weatherStyles:          {},
+        showExtendedContent:    false,
+        weatherBannerClass:     "banner",
+        extendedContentClass:   "extended-banner",
+        calendarNotesField:     "",
+        calendarEntrySubmitted: false,
+        alertMessages:          [],
+        alertStyle:             "",
       }
+      this.onNotesChange         = this.onNotesChange.bind(this)
       this.renderExtendedContent = this.renderExtendedContent.bind(this)
       this.toggleExtendedContent = this.toggleExtendedContent.bind(this)
+      this.onCalendarEntrySubmit = this.onCalendarEntrySubmit.bind(this)
   }
 
   componentDidMount() {
     this.setState({ weatherStyles: WeatherData[this.props.oneDay.conditions_icon] })
   }
 
+  onNotesChange(e) {
+    e.preventDefault()
+    this.setState({ calendarNotesField: e.target.value })
+  }
+
+  onCalendarEntrySubmit() {
+    this.props.submitEntry(this.props.oneDay, this.state.calendarNotesField)
+    this.setState({
+      calendarEntrySubmitted: true,
+      alertMessages: ["Added to your calendar"],
+      alertStyle: "alert-box ok"
+    })
+  }
+
   renderExtendedContent() {
-    return(
-      <div className={ this.state.extendedContentClass }>
-        <div className="extended-left">
-          <textarea
-            placeholder="Add notes..."
-          />
+    if(this.state.calendarEntrySubmitted) {
+      return(
+        <Alert
+          alert={ this.state.alertMessages }
+          alertStyle={ this.state.alertStyle }
+        />
+      )
+    } else {
+      return(
+        <div className={ this.state.extendedContentClass }>
+          <div className="extended-left">
+            <textarea
+              name="calendarNotesField"
+              rows="3"
+              placeholder="Your notes here"
+              required="required"
+              onChange={ this.onNotesChange}
+              value={ this.state.calendarNotesField }
+            />
+          </div>
+          <div className="extended-right">
+            <button
+              className="add-btn"
+              onClick={ this.onCalendarEntrySubmit }
+            >
+              Add to my calendar
+            </button>
+          </div>
         </div>
-        <div className="extended-right">
-          <button className="add-btn">Add to my calendar</button>
-        </div>
-      </div>
-    )
+      )
+    }
   }
 
   toggleExtendedContent() {
@@ -64,7 +104,10 @@ class WeatherBanner extends Component {
         }}
       >
         <div className="weather-icon">
-          <img src={ require(`./weather-icons/${ this.props.oneDay.conditions_icon }.svg`) }/>
+          <img
+            src={ require(`./weather-icons/${ this.props.oneDay.conditions_icon }.svg`) }
+            alt={ this.props.oneDay.conditions_icon }
+          />
         </div>
         <div className="temp">{ this.props.oneDay.high_temp}F/{ this.props.oneDay.low_temp }F</div>
         <div className="weather-details">

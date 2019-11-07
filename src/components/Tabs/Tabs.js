@@ -20,7 +20,7 @@ class Tabs extends Component {
   render() {
     // for upto 3 tabs
     return(
-      <div className="row justify-content-center">
+      <div className="row justify-content-center tabs">
         {
           this.props.tabs.map((tab, idx) => {
             return(

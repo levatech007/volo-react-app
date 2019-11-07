@@ -44,6 +44,7 @@ class ReviewBanner extends Component {
   }
 
   render() {
+    console.log(this.props.review)
     return(
       <div className={ `${ this.state.reviewsBannerClass } review-banner` }>
         <div className="top-content">
