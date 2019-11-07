@@ -8,6 +8,8 @@ import ReviewsAccordion     from "../../components/Accordions/UserReviewsAccordi
 import UpdateProfile        from "../../components/Forms/ProfileUpdateForm.js";
 import Modal                from "../../components/Modal/Modal.js";
 import ImageUpload          from "../../components/ImageUploadModals/ImageUpload.js"
+import CalendarBanner       from "../../components/Banners/CalendarBanner.js"
+import ReviewBanner         from "../../components/Banners/ReviewBanner.js"
 import "./Styles/profile-page.css";
 
 class ProfilePage extends Component {
@@ -78,7 +80,7 @@ class ProfilePage extends Component {
         }
       })
     } else {
-      console.log("No user found")
+      this.props.history.push("/login")
     }
   }
 
@@ -118,11 +120,18 @@ class ProfilePage extends Component {
 
   renderActiveTabContent() {
     if(this.state.activeTabIndex === 0 || this.state.activeTabIndex === 1) {
-      let displayTab = this.state.tabs[this.state.activeTabIndex]
+      let activeTab = this.state.tabs[this.state.activeTabIndex]
       return(
           <div>
-          { displayTab.length ?
-            <CalendarAccordion calendarEvents={ this.state[displayTab] } />
+          { activeTab.length ?
+            this.state[activeTab].map((entry, idx) => {
+              return(
+                <CalendarBanner
+                  entry={ entry }
+                  key={ idx }
+                />
+              )
+            })
             :
             <p>You have no calendar entries to show yet!</p>
           }
@@ -131,8 +140,16 @@ class ProfilePage extends Component {
     } else {
       return(
         <div>
-        {this.state.reviews.length ?
-          <ReviewsAccordion reviews={ this.state.reviews } />
+        {
+          this.state.reviews.length ?
+          this.state.reviews.map((entry, idx) => {
+            return(
+              <ReviewBanner
+                review={ entry }
+                key={ idx }
+              />
+            )
+          })
           :
           <p>You have no reviews yet!</p>
         }

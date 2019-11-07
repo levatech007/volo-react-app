@@ -4,12 +4,10 @@
   color: #404040;
   height: 800px;
   overflow: auto;
-  /* max-width: 1000px; */
 }
 
 /* LEFT COLUMN */
 .profile-header-img {
-  /* background-image: url(../Images/temp-background.jpg); */
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
