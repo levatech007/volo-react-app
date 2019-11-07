@@ -101,7 +101,9 @@ class Weather extends Component {
                          oneDay={ oneDay }
                          idx={ idx }
                          createCalendarEntry={ this.createCalendarEntry }
-                         key={ idx }/>
+                         key={ idx }
+                         submitEntry={ this.createCalendarEntry }
+                       />
                      )
                    }
                  })
