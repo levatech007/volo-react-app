@@ -33,9 +33,11 @@ hr {
 }
 
 .close-btn {
+  position: absolute;
+  right: 20px;
   border: none;
-  float: right;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .close-btn:hover {
