@@ -30,6 +30,11 @@
 .intro {
   padding: 30px 0;
   border-bottom: 1px solid gray;
+  text-align: center;
+}
+
+.intro h4 {
+  line-height: 1.5;
 }
 
 .info {
@@ -43,6 +48,22 @@
   padding: 20px;
 }
 
+.join-btn {
+  color: #FFFFFF;
+  font-size: 30px;
+  font-weight: 900;
+  background: #000066;
+  padding: 20px 50px;
+  margin: 20px 0;
+  border-radius: 5px;
+  transition: transform 1s ease-in-out;
+}
+
+.join-btn:hover {
+  color: #FFFFFF;
+  transform: scale(1.2);
+}
+
 @media (max-width: 900px) {
 
 }
@@ -54,7 +75,7 @@
 
   .skyline {
     background-image: url(../Images/cityscape-small.svg);
-    bottom: 200px;
-    background-size: contain;
+    bottom: 150px;
+    background-size: cover;
   }
 }

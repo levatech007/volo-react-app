@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Logo     from "./Images/volo-logo.svg";
-import HomeData from "../../static-data/homepage.json";
+import { Link }             from "react-router-dom";
+import Logo                 from "./Images/volo-logo.svg";
+import HomeData             from "../../static-data/homepage.json";
 import "./Styles/airplane-animation.css";
 import "./Styles/homepage.css";
 
@@ -16,9 +17,12 @@ class HomePage extends Component {
           </div>
         </div>
           <div className="row justify-content-center info">
-            <div className="col-md-8 col-8">
-              <div className="row justify-content-center intro">
-                  <p>{ HomeData.title }</p>
+            <div className="col-md-8 col-10">
+              <div className="row justify-content-center">
+                <div className="col-12 intro">
+                  <h4>{ HomeData.title }</h4>
+                  <div className="row justify-content-center"><Link to={ "/login" } className="join-btn">JOIN NOW</Link></div>
+                </div>
               </div>
               <div className="row justify-content-center">
                 {
