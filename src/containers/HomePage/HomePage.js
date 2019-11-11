@@ -11,7 +11,9 @@ class HomePage extends Component {
       <div className="hero-page">
         <div className="home-screen">
           <div className="animation-div">
-            <div className="logo-div"><img src={ Logo } alt="logo"/></div>
+            <div className="logo-div">
+              <img src={ Logo } alt="logo"/>
+            </div>
             <div className="skyline"></div>
             <div className="aircraft animate"></div>
           </div>
