@@ -86,7 +86,7 @@ class ProfilePage extends Component {
 
   sortCalendar(calendar) {
     // separate current + past calendar events
-    // sort each set by date
+    // sort each set by date (descending)
     let pastEvents = []
     let currentEvents = []
     calendar.map(entry => {
@@ -123,7 +123,7 @@ class ProfilePage extends Component {
       let activeTab = this.state.tabs[this.state.activeTabIndex]
       return(
           <div>
-          { activeTab.length ?
+          { this.state[activeTab].length ?
             this.state[activeTab].map((entry, idx) => {
               return(
                 <CalendarBanner
@@ -194,9 +194,9 @@ class ProfilePage extends Component {
   }
 
   onDeleteAccount() {
-    // Auth.destroyAccount();
-    // Auth.signOut();
-    // this.props.history.push("/")
+    Auth.destroyAccount();
+    Auth.signOut();
+    this.props.history.push("/")
   }
 
   render() {
