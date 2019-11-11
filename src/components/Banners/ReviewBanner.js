@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import ReactStars           from "react-stars";
+import Auth                 from "j-toker";
+import Modal                from "../../components/Modal/Modal.js"
 import "./banner.css";
 import "./review-banner.css";
 
@@ -11,9 +13,31 @@ class ReviewBanner extends Component {
         showExtendedContent: false,
         reviewsBannerClass: "banner",
         extendedContentClass: "extended-banner",
+        confirmDeleteReview: false,
+        deleteReviewModal: {
+          title: "Delete Review",
+          content: "Are you sure you want to delete this review?",
+          buttonText: "Delete review"
+        }
       }
-      this.renderExtendedContent = this.renderExtendedContent.bind(this)
-      this.toggleExtendedContent = this.toggleExtendedContent.bind(this)
+      this.renderExtendedContent   = this.renderExtendedContent.bind(this)
+      this.toggleExtendedContent   = this.toggleExtendedContent.bind(this)
+      this.onEditReview            = this.onEditReview.bind(this)
+      this.toggleDeleteReviewModal = this.toggleDeleteReviewModal.bind(this)
+      this.onDeleteReview          = this.onDeleteReview.bind(this)
+  }
+
+  onEditReview() {
+
+  }
+
+  toggleDeleteReviewModal() {
+    this.setState({ confirmDeleteReview: !this.state.confirmDeleteReview })
+  }
+
+  onDeleteReview() {
+    console.log("Delete review")
+
   }
 
   renderExtendedContent() {
@@ -21,6 +45,16 @@ class ReviewBanner extends Component {
       <div className={ this.state.extendedContentClass }>
         <div className="extended-full-width">
           <p>{ this.props.review.content }</p>
+          {
+            Auth.user.id === this.props.review.user_id &&
+            <div className="edit-icons">
+              <i className="fas fa-pen"></i>
+              <i
+                className="fas fa-trash"
+                onClick={ this.toggleDeleteReviewModal }
+              ></i>
+            </div>
+          }
         </div>
       </div>
     )
@@ -44,9 +78,18 @@ class ReviewBanner extends Component {
   }
 
   render() {
-    console.log(this.props.review)
     return(
       <div className={ `${ this.state.reviewsBannerClass } review-banner` }>
+        {
+          this.state.confirmDeleteReview &&
+            <Modal
+              content={ this.state.deleteReviewModal.content }
+              title={ this.state.deleteReviewModal.title }
+              buttonText={ this.state.deleteReviewModal.buttonText }
+              close={ this.toggleDeleteReviewModal }
+              submit={ this.onDeleteReview }
+            />
+        }
         <div className="top-content">
           <div className="review-title">
             <h3>{ this.props.review.title }</h3>
@@ -57,7 +100,7 @@ class ReviewBanner extends Component {
               count={ 5 }
               value={ parseFloat(this.props.review.rating) }
               edit={ false }
-              size={ 24 }
+              size={ 18 }
               color2={ "#ffd700" }
             />
           </div>

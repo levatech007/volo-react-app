@@ -41,13 +41,12 @@ class CalendarBanner extends Component {
   }
 
   render() {
-    console.log(this.props.entry)
     return(
       <div className={ `${ this.state.calendarBannerClass } calendar-banner` }>
         <div className="top-content">
           <div className="review-title">
-            <h4>{ this.props.entry.location }</h4>
-            <p>{ this.props.entry.day } { this.props.entry.month }</p>
+            <h4>{ this.props.entry.day } { this.props.entry.month }</h4>
+            <p>{ this.props.entry.location }</p>
           </div>
         </div>
         <div className="expand-button">

@@ -46,8 +46,7 @@ class LocationReviewForm extends Component {
                     rating:     this.state.rating,
                     locationId: this.state.locationId
                   }
-    console.log(review)
-    this.props.onSubmitReviewForm(review);
+    this.props.onSubmitReviewForm(review)
     this.setState({
                     author:     "",
                     title:      "",

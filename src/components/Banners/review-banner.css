@@ -21,5 +21,21 @@
 }
 
 .review-rating {
-  float: right;
+  position: absolute;
+  right: 10px;
+}
+
+.edit-icons {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.edit-icons i {
+  margin-right: 10px;
+  transition: transform 1s;
+}
+
+.edit-icons i:hover {
+  transform: scale(1.5);
 }
